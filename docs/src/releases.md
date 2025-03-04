@@ -4,6 +4,10 @@
 
 ### Version 1.0
 
+#### Version 1.0.1 (in progress)
+
+- Implement the pure bosonic models.
+
 #### Version 1.0.0 (1 March, 2025)
 
 - Release together with the documentation.

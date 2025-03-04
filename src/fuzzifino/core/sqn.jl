@@ -40,6 +40,63 @@ end
 
 
 """
+    SQNDiag(qnd :: QNDiag, nob :: Int64) :: SQNDiag
+
+converts a pure fermionic QNDiag to a SQNDiag with the boson charges set to empty, implemented as 
+
+    SQNDiag(qnd.name, qnd.charge, fill(0, nob), qnd.modul)
+"""
+SQNDiag(qnd :: QNDiag, nob :: Int64) = SQNDiag(qnd.name, qnd.charge, fill(0, nob), qnd.modul)
+
+
+"""
+    *(fac :: Int64, qnd :: SQNDiag) :: SQNDiag 
+    *(qnd :: SQNDiag, fac :: Int64) :: SQNDiag 
+    ÷(qnd :: SQNDiag, fac :: Int64) :: SQNDiag 
+    -(qnd :: SQNDiag) :: SQNDiag
+
+returns the SQNDiag multiplied or divided by an integer factor, where the charge is multiplied or integer-divided by the factor. For ``ℤ_p`` quantum numbers, their modulus will be multiplied or integer-divided by the absolute value. If `qnd.modul ÷ abs(fac) ≤ 1`, a trivial SQNDiag will be returned.  
+"""
+function Base.:*(fac :: Int64, qnd :: SQNDiag)
+    return SQNDiag(qnd.name, qnd.chargef .* fac, qnd.chargeb .* fac, qnd.modul == 1 ? 1 : (qnd.modul * abs(fac)))
+end
+function Base.:*(qnd :: SQNDiag, fac :: Int64)
+    return fac * qnd
+end
+function Base.:÷(qnd :: SQNDiag, fac :: Int64)
+    if (qnd.modul > 1 && qnd.modul ÷ fac ≤ 1)
+        return SQNDiag(qnd.name, qnd.chargef .* 0, qnd.chargeb .* 0, 1)
+    else
+        return SQNDiag(qnd.name, qnd.chargef .÷ fac, qnd.chargeb .÷ fac, qnd.modul == 1 ? 1 : (qnd.modul ÷ abs(fac)))
+    end
+end
+function Base.:-(qnd :: SQNDiag)
+    return (-1) * qnd
+end
+
+"""
+    +(qnd1 :: SQNDiag, qnd2 :: SQNDiag) :: SQNDiag 
+    -(qnd1 :: SQNDiag, qnd2 :: SQNDiag) :: SQNDiag 
+
+returns the sum or substraction of two SQNDiags, whose name is the samea as `qnd1`, charge is the same as `qnd1 ± qnd2`, and modulus is the GCD of `qnd1` and `qnd2`. If `qnd1` and `qnd2` are both ``ℤ_p`` quantum numbers and their modulus are coprime, a trivial SQNDiag will be returned. 
+"""
+function Base.:+(qnd1 :: SQNDiag, qnd2 :: SQNDiag)
+    if (qnd1.modul == 1)
+        modul = qnd2.modul 
+    elseif (qnd2.modul == 1)
+        modul = qnd1.modul
+    else
+        modul = gcd(qnd1.modul, qnd2.modul)
+        if (modul == 1) return SQNDiag(qnd1.name, qnd1.chargef .* 0, qnd1.chargeb .* 0, 1) end
+    end
+    return SQNDiag(qnd1.name, qnd1.chargef .+ qnd2.chargef, qnd1.chargeb .+ qnd2.chargeb, modul)
+end
+function Base.:-(qnd1 :: SQNDiag, qnd2 :: SQNDiag)
+    return qnd1 + (-1) * qnd2
+end
+
+
+"""
     SQNOffd
 
 The mutable type `SQNOffd` records the information of an off-diagonal ``ℤ_p`` quantum number in the form of a discrete transformation
@@ -78,4 +135,30 @@ mutable struct SQNOffd
     SQNOffd(permf :: Vector{Int64}, permb :: Vector{Int64}, facf :: Vector{ComplexF64}, facb :: Vector{ComplexF64}, cyc :: Int64 = 2) = new(permf, permb, [0 for o in permf], facf, facb, cyc)
     SQNOffd(permf :: Vector{Int64}, permb :: Vector{Int64}, cyc :: Int64) = new(permf, permb, [0 for o in permf], [ComplexF64(1) for o in permf], [ComplexF64(1) for o in permb], cyc)
     SQNOffd(permf :: Vector{Int64}, permb :: Vector{Int64}, phf_q :: Bool, facf :: Vector{ComplexF64} = [ComplexF64(1) for o in permf], facb :: Vector{ComplexF64} = [ComplexF64(1) for o in permb]) = new(permf, permb, [phf_q ? 1 : 0 for o in permf], facf, facb, 2)
+end
+
+
+"""
+    SQNOffd(qnf :: QNOffd, nob :: Int64) :: SQNOffd
+
+converts a pure fermionic QNOffd to a SQNOffd with the boson transformations set to identity, implemented as 
+
+    SQNOffd(qnf.perm, collect(1 : nob), qnf.ph, qnf.fac, fill(ComplexF64(1), nob), qnf.cyc)
+"""
+SQNOffd(qnf :: QNOffd, nob :: Int64) = SQNOffd(qnf.perm, collect(1 : nob), qnf.ph, qnf.fac, fill(ComplexF64(1), nob), qnf.cyc)
+
+
+"""
+    *(qnf1 :: SQNOffd, qnf2 :: SQNOffd) :: SQNOffd 
+
+returns the composition of two SQNOffd transformations. The cycle is set to be the LCM of two QNOffds.
+"""
+function Base.:*(qnf1 :: SQNOffd, qnf2 :: SQNOffd)
+    permf1 = [ qnf1.permf[qnf2.permf[o]] for o in eachindex(qnf1.permf)]
+    permb1 = [ qnf1.permb[qnf2.permb[o]] for o in eachindex(qnf1.permb)]
+    phf1 = [ qnf1.phf[qnf2.permf[o]] ⊻ qnf2.phf[o] for o in eachindex(qnf1.permf) ]
+    facf1 = [ (qnf2.phf[o] == 0 ? qnf1.facf[qnf2.permf[o]] : conj(qnf1.facf[qnf2.permf[o]])) * qnf2.facf[o] for o in eachindex(qnf1.permf) ]
+    facb1 = [ qnf1.facb[qnf2.permb[o]] * qnf2.facb[o] for o in eachindex(qnf1.permb) ]
+    cyc1 = lcm(qnf1.cyc, qnf2.cyc)
+    return SQNOffd(permf1, permb1, phf1, facf1, facb1, cyc1)
 end
