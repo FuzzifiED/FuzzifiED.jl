@@ -278,21 +278,21 @@
 %Erratum or addendum
 \if!\@xtum!\else\noindent{\@xtum}\afterXtumSpace\fi
 % Abstract
-\if!\@abstract!\else\noindent{\textit{Abstract}}~:~\@abstract\afterAbstractSpace\fi
+\if!\@abstract!\else\noindent{\textit{Abstract}}~: \@abstract\afterAbstractSpace\fi
 % Rapid update
-\if!\@rapidupdate!\else\noindent{\textit{Rapid update}}~:~\@rapidupdate\afterAbstractSpace\fi
+\if!\@rapidupdate!\else\noindent{\textit{Rapid update}}~: \@rapidupdate\afterAbstractSpace\fi
 % To-discuss
-\if!\@todiscuss!\else\noindent{\textit{To discuss}}~:~\@todiscuss\afterAbstractSpace\fi
+\if!\@todiscuss!\else\noindent{\textit{To discuss}}~: \@todiscuss\afterAbstractSpace\fi
 % To-do list
-\if!\@todolist!\else\noindent{\textit{To-do list}}~:~\@todolist\afterAbstractSpace\fi
+\if!\@todolist!\else\noindent{\textit{To-do list}}~: \@todolist\afterAbstractSpace\fi
 % Questions
-\if!\@questions!\else\noindent{\textit{Questions}}~:~\@questions\afterAbstractSpace\fi
+\if!\@questions!\else\noindent{\textit{Questions}}~: \@questions\afterAbstractSpace\fi
 % Keywords
-\if!\@keywords!\else\noindent{\textit{Keywords}}~:~\@keywords\afterKeywordsSpace\fi
+\if!\@keywords!\else\noindent{\textit{Keywords}}~: \@keywords\afterKeywordsSpace\fi
 % Extra
-\if!\@extra!\else\noindent\@extra\afterAbstractSpace\fi
+\if!\@extra!\else\noindent\@extra\vskip 0pt\fi
 % Arxivnumber
-\if!\@arxivnumber!\else\noindent{\textit{ArXiv ePrint}}~:~\href{http://arxiv.org/abs/\@arxivnumber}{\@arxivnumber}\afterArxivSpace\fi
+\if!\@arxivnumber!\else\noindent{\textit{ArXiv ePrint}}~: \href{http://arxiv.org/abs/\@arxivnumber}{\@arxivnumber}\afterArxivSpace\fi
 % Dedication
 \if!\@dedicated!\else\vbox{\small\it\raggedleft\@dedicated}\afterDedicatedSpace\fi
 %
