@@ -15,13 +15,16 @@ define path of the Fortran library `libfuzzifino.so`. You do not need to modify 
 """
 Libpathino :: String = FuzzifiED_jll.LibpathFuzzifino
 
-include("sqn.jl")
-include("sconfs.jl")
-include("sbasis.jl")
-include("sterm.jl")
-include("soperator.jl")
-include("sopmat.jl")
-include("stransf.jl")
-include("sentangle.jl")
+include("core/sqn.jl")
+include("core/sconfs.jl")
+include("core/sbasis.jl")
+include("core/sterm.jl")
+include("core/soperator.jl")
+include("core/sopmat.jl")
+include("core/stransf.jl")
+include("core/sentangle.jl")
+
+include("model/boson_sqn.jl")
+include("model/boson_opsterms.jl")
 
 end

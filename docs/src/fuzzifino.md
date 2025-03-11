@@ -5,21 +5,34 @@ Fuzzifino is a module for exact diagonalisation (ED) calculation on the fuzzy sp
 using FuzzifiED.Fuzzifino
 ```
 
-## Environment parameter
+## Core functions
+
+### Environment parameter
 
 ```@docs
 FuzzifiED.Fuzzifino.Libpathino
 ```
 
-## Quantum numbers
+### Quantum numbers
 
 The diagonal and off-diagonal quantum numbers are implemented as
 ```@docs
 SQNDiag
 SQNOffd
 ```
+The SQNs can be converted from the fermionic QNs by setting the bosonic part to identity. 
+```@docs
+SQNDiag(qnd :: QNDiag, nob :: Int64)
+SQNOffd(qnf :: QNOffd, nob :: Int64)
+```
+Several operations of the SQNs are supported.
+```@docs
+*(fac :: Int64, qnd :: SQNDiag)
++(qnd1 :: SQNDiag, qnd2 :: SQNDiag)
+*(qnf1 :: SQNOffd, qnf2 :: SQNOffd)
+```
 
-## Configurations
+### Configurations
 ```@docs
 SConfs
 ```
@@ -28,7 +41,7 @@ It can be generated from the QNDiags.
 SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}, qnd :: Vector{SQNDiag} ; num_th :: Int64 = NumThreads, disp_std :: Bool = !SilentStd)
 ```
 
-## Basis
+### Basis
 ```@docs
 SBasis
 ```
@@ -38,7 +51,7 @@ SBasis(cfs :: SConfs, secf :: Vector{<:Number}, qnf :: Vector{SQNOffd} ; num_th 
 SBasis(cfs :: SConfs)
 ```
 
-## Term
+### Term
 
 ```@docs
 STerm
@@ -57,7 +70,7 @@ NormalOrder(tm :: STerm)
 SimplifyTerms(tms :: STerms)
 ```
 
-## Operator
+### Operator
 
 ```@docs
 SOperator
@@ -72,7 +85,7 @@ The product of an operator on a state and the inner product of a final state, an
 *(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Vector{ComplexF64}}, op :: SOperator, st_d :: Vector{ComplexF64} ; num_th = NumThreads, disp_std = !SilentStd)
 ```
 
-## Sparse matrix
+### Sparse matrix
 
 The OpMat can be generated from `SOperator` by the following methods.
 ```@docs
@@ -80,19 +93,36 @@ OpMat(op :: SOperator)
 ```
 After the generation of sparse matrix, the diagonalisation can be condicted with FuzzifiED. 
 
-## Entanglement
+### Entanglement
 
 ```@docs
 StateDecompMat(st::Vector{<:Number}, bs0::SBasis, bsa::SBasis, bsb::SBasis, amp_ofa::Vector{<:Number}, amp_oba::Vector{<:Number}, amp_ofb::Vector{<:Number}, amp_obb::Vector{<:Number})
 GetEntSpec(st::Vector{<:Number}, bs0::SBasis, secd_lst::Vector{Vector{Vector{Int64}}}, secf_lst::Union{Vector{Vector{Vector{ComplexF64}}}, Vector{Vector{Vector{Float64}}}, Vector{Vector{Vector{Int64}}}}; qnd_a, qnd_b, qnf_a, qnf_b, amp_ofa, amp_oba, amp_ofb, amp_obb, disp_std)
 ```
 
-## Transformation
+### Transformation
 
 ```@docs
 STransf
 STransf(bsd :: SBasis, bsf :: SBasis, qnf :: SQNOffd)
 *(trs :: STransf, st_d :: Vector{ComplexF64} ; num_th = NumThreads)
+```
+
+## Pure bosonic models
+
+Several quantum numbers and operator terms for the pure bosonic models are built-in.
+
+```@docs
+GetNeSQNDiag
+GetBosonLz2SQNDiag
+GetBosonFlavSQNDiag
+GetBosonFlavPermSQNOffd
+GetBosonRotySQNOffd
+GetBosonDenIntSTerms
+GetBosonPairIntSTerms
+GetBosonPolSTerms
+GetBosonL2STerms
+GetBosonC2STerms
 ```
 
 ## Related examples
