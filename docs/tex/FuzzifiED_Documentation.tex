@@ -8,7 +8,7 @@
 
 \title{FuzzifiED}
 \subtitle{Julia package for numerics on the fuzzy sphere}
-\date{11 March, 2025}
+\date{21 March, 2025}
 \author{Zheng Zhou 周正}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
 \affiliation{Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
@@ -275,7 +275,7 @@ Here, the matrix insertion $M$ puts the density operators in a certain represent
     n_S(\hat{\mathbf{n}})&=\psi_{c}^\dagger(\hat{\mathbf{n}})\psi^c(\hat{\mathbf{n}})\nonumber\\
     n_a{}^b(\hat{\mathbf{n}})&=\psi_{a}^\dagger(\hat{\mathbf{n}})\psi^b(\hat{\mathbf{n}})-\tfrac{1}{N}\delta_{a}{}^b\psi_c^\dagger(\hat{\mathbf{n}})\psi^c(\hat{\mathbf{n}}).
 \end{align}
-Like the fermion operator, the density operator can also be expressed in the orbital space\footnote{Under this convention, the action of $n_{M,lm}$ will decrease the angular momentum $L^z$ by $m$.}
+Like the fermion operator, the density operator can also be expressed in the orbital space\footnote{Under this convention, the action of $n_{M,lm}$ will decrease the angular momentum $L^z$ by $m$. Our convention of $n_{lm}$ differs from Ref.~\cite{Hu2023Mar} by a factor of $R^2$. We take this convension in alignment with the implementation in the code.}
 \begin{equation}
     n_M(\hat{\mathbf{n}})=\sum_{lm}Y_{lm}(\hat{\mathbf{n}})n_{M,lm}.
     \label{eq:den_decomp}
@@ -315,10 +315,10 @@ where $\mathbf{r}_{12}=\hat{\mathbf{n}}_1-\hat{\mathbf{n}}_2$ and $|\mathbf{r}_{
 \begin{equation}
     \tilde{U}_l=\int\sin\theta_{12}\mathrm{d}\theta_{12}\,\frac{2l+1}{2}U(|\mathbf{r}_{12}|)P_l(\cos\theta_{12}).
 \end{equation}
-Specifically, for local and super-local interactions
+Specifically, for local and super-local interactions\footnote{Usually, to keep the interaction Hamiltonian extensive, the factors scale with system size as $g_0\propto R^{-2}$ and $g_1\propto R^{-4}$}
 \begin{align}
-    U(|\mathbf{r}_{12}|)&=\delta(\mathbf{r}_{12}),&\tilde{U}_l&=2l+1\nonumber\\
-    U(|\mathbf{r}_{12}|)&=\nabla^2\delta(\mathbf{r}_{12}),&\tilde{U}_l&=-l(l+1)(2l+1).
+    U(|\mathbf{r}_{12}|)&=g_0\delta(\mathbf{r}_{12}),&\tilde{U}_l&=g_0(2l+1)\nonumber\\
+    U(|\mathbf{r}_{12}|)&=g_1\nabla^2\delta(\mathbf{r}_{12}),&\tilde{U}_l&=-g_1l(l+1)(2l+1).
 \end{align}
 By expanding the density operators into the orbital space and completing the integrals,
 \begin{equation}
@@ -520,7 +520,7 @@ It is worth noting that acting a primary $\Phi_2(\hat{\mathbf{n}})$ on the vacuu
 
 In the example of Ising CFT, we first use the insertion of a single operator to determine the coefficients $\lambda_0,\lambda_\epsilon,\lambda_\sigma$
 \begin{equation}
-    \lambda_0=\frac{1}{\sqrt{4\pi}}\langle 0|n^x_{00}|0\rangle,\quad\lambda_\epsilon=\frac{R^{\Delta_\epsilon}}{\sqrt{4\pi}}\langle \epsilon|n^x_{00}|0\rangle,\quad\lambda_\sigma=\frac{R^{\Delta_\sigma}}{\sqrt{4\pi}}\langle \sigma|n^z_{00}|0\rangle.
+    \lambda_0=\frac{R^{-2}}{\sqrt{4\pi}}\langle 0|n^x_{00}|0\rangle,\quad\lambda_\epsilon=\frac{R^{\Delta_\epsilon-2}}{\sqrt{4\pi}}\langle \epsilon|n^x_{00}|0\rangle,\quad\lambda_\sigma=\frac{R^{\Delta_\sigma-2}}{\sqrt{4\pi}}\langle \sigma|n^z_{00}|0\rangle.
 \end{equation}
 Take the OPE coefficient $f_{\sigma\sigma\epsilon}$ as an example. It can be expressed either as an inner product of $\sigma$ or $\epsilon$
 \begin{align}

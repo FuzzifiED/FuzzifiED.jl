@@ -1,4 +1,4 @@
-# FuzzifiED.jl
+# FuzzifiED.jl Version 1.0.1
 
 Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features : 
 
@@ -25,7 +25,7 @@ To obtain the documentation for an interface, type `?` followed by the keyword i
 
 If this package is helpful in your research, please cite the package as : 
 
-> FuzzifiED -- Toolkit for numerics on the fuzzy sphere, Zheng Zhou, [arXiv:2503.00100](https://arxiv.org/abs/2503.00100).
+> FuzzifiED : Julia package for numerics on the fuzzy sphere, Zheng Zhou, [arXiv:2503.00100](https://arxiv.org/abs/2503.00100).
 
 We have also provided a BibTeX file that includes all the works on the fuzzy sphere works at [this link](https://docs.fuzzified.world/assets/bib_fuzzy.bib).
 

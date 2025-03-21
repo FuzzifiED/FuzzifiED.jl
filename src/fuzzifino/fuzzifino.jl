@@ -9,7 +9,7 @@ using LinearAlgebra
 import FuzzifiED: NumThreads, SilentStd, ElementType
 
 """
-    FuzzifiED.Fuzzifino.Libpathino :: String = FuzzifiED_jll.LibpathFuzzifino
+    Fuzzifino.Libpathino :: String = FuzzifiED_jll.LibpathFuzzifino
 
 define path of the Fortran library `libfuzzifino.so`. You do not need to modify that by yourself. However, if you compile the Fortran codes by yourself, you need to point this to your compiled library. 
 """
