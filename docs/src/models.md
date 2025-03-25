@@ -58,10 +58,16 @@ adjoint(obs :: SphereObs)
 *(obs1 :: SphereObs, obs2 :: SphereObs)
 Laplacian(obs :: SphereObs)
 ```
-The observables can be evaluated either at an angular component or at a real-space point.
+Here, a parameter `ObsNormRadSq` is used to specify the normalisation of the observables
+```@docs
+FuzzifiED.ObsNormRadSq
+```
+One can evaluate an angular component, the value at one point, the uniform spatial integral of an observable, or filter a specific set of components.
 ```@docs
 GetComponent(obs :: SphereObs, l :: Number, m :: Number)
 GetPointValue(obs :: SphereObs, θ :: Float64, ϕ :: Float64)
+GetIntegral(obs :: SphereObs)
+FilterComponent(obs :: SphereObs, flt) 
 ```
 Three types of operators, _viz._ electrons and density operators, and pairing operators are built-in.
 ```@docs

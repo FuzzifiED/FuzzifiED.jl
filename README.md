@@ -1,4 +1,4 @@
-# FuzzifiED.jl Version 1.0.1
+# FuzzifiED.jl Version 1.0.2
 
 The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) and density matrix renormalisation group (DMRG) calculations. FuzzifiED can also apply to generic fermionic and bosonic models.
 

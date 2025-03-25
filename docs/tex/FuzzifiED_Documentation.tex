@@ -8,13 +8,13 @@
 
 \title{FuzzifiED}
 \subtitle{Julia package for numerics on the fuzzy sphere}
-\date{21 March, 2025}
+\date{28 March, 2025}
 \author{Zheng Zhou 周正}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
 \affiliation{Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
 \emailAdd{physics@zhengzhou.page}
 \abstract{The Julia package \emph{FuzzifiED} aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) and density matrix renormalisation group (DMRG) calculations. FuzzifiED can also apply to generic fermionic and bosonic models. This documentation provides a review of the fuzzy sphere regularisation and an instruction for using FuzzifiED for numerical calculations.}
-\extra{\textit{Documentation}~: \url{https://docs.fuzzified.world}\\\textit{Source code}~: \url{https://github.com/FuzzifiED/FuzzifiED.jl}\\\textit{Version}~: 1.0.1}
+\extra{\textit{Documentation}~: \url{https://docs.fuzzified.world}\\\textit{Source code}~: \url{https://github.com/FuzzifiED/FuzzifiED.jl}\\\textit{Version}~: 1.0.2}
 \arxivnumber{2503.00100}
 
 \begin{document}
@@ -1125,10 +1125,12 @@ Their adjoint, addition and multiplication are supported. The related functions 
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.Laplacian-Tuple{SphereObs}}{\lstinline|Laplacian(obs)|} takes the Laplacian of an observable.
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetComponent-Tuple{SphereObs,\%20Number,\%20Number}}{\lstinline|GetComponent(obs, l, m)|} returns a spherical component of the observable $\mathcal{O}_{lm}$.
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPointValue-Tuple{SphereObs,\%20Float64,\%20Float64}}{\lstinline|GetPointValue(obs, theta, phi)|} returns an observable at one point $\mathcal{O}(\hat{\mathbf{n}})$.
+    \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetIntegral-Tuple{SphereObs}}{\lstinline|GetIntegral(obs)|} returns the uniform spatial integral of an observable. 
+    \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.FilterComponent-Tuple{SphereObs,\%20Any}}{\lstinline|FilterComponent(obs, flt)|} filters a certain set of modes ofan observable.
 \end{itemize}
 \end{block}
 
-Several important types of spherical observables are built-in in FuzzifiED
+Several important types of spherical observables are built-in in FuzzifiED\footnote{By default, the operators are normalised by angular coordinate. A parameter \href{https://docs.fuzzified.world/core/\#FuzzifiED.ObsNormRadSq}{\lstinline[basicstyle=\ttfamily\scriptsize]|ObsNormRadSq|} is used to normalise the observables on a sphere with radius $R$.}
 \begin{itemize}
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetElectronObs-Tuple{Int64,\%20Int64,\%20Int64}}{\lstinline|GetElectronObs(nm, nf, f)|} --- electron annihilation operator $\psi_f(\hat{\mathbf{n}})$.
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetDensityObs-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetDensityObs(nm, nf[, mat])|} --- density operator $n_M(\hat{\mathbf{n}})=\sum_{ff'}\psi^\dagger_{f}(\hat{\mathbf{n}})M_{ff'}\psi_{f'}(\hat{\mathbf{n}})$.
@@ -1908,7 +1910,7 @@ In this appendix, we collect the full version of the codes, including
     \href{https://docs.fuzzified.world/extension/\#CUDA.CUSPARSE.CuSparseMatrixCSC-Tuple{OpMat{ComplexF64}}}{\lstinline|CuSparseMatrixCSC|}\\
     \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.EasySweep-Tuple{String,\%20MPO,\%20MPS}}{\lstinline|EasySweep|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.ElementType}{\lstinline|FuzzifiED.ElementType|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.FilterComponent-Tuple{AngModes,\%20Any}}{\lstinline|FilterComponent|}\\
+    \href{https://docs.fuzzified.world/models/\#FuzzifiED.FilterComponent-Tuple{SphereObs,\%20Any}}{\lstinline|FilterComponent|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.FilterL2-Tuple{AngModes,\%20Number}}{\lstinline|FilterL2|}\\
     \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonC2STerms}{\lstinline|GetBosonC2STerms|}\\
     \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonDenIntSTerms}{\lstinline|GetBosonDenIntSTerms|}\\
@@ -1934,6 +1936,7 @@ In this appendix, we collect the full version of the codes, including
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.GetEntSpec-Tuple{Vector{\%3C:Number},\%20Basis,\%20Vector{Vector{Vector{Int64}}},\%20Vector{Vector{Vector{Int64}}}}}{\lstinline|GetEntSpec|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetFlavPermQNOffd}{\lstinline|GetFlavPermQNOffd|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetFlavQNDiag}{\lstinline|GetFlavQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetIntegral-Tuple{SphereObs}}{\lstinline|GetIntegral|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetIntMatrix-Tuple{Int64,\%20Vector{\%3C:Number}}}{\lstinline|GetIntMatrix|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetL2Terms-Tuple{Int64,\%20Int64}}{\lstinline|GetL2Terms|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetLz2QNDiag|}\\
@@ -1962,6 +1965,7 @@ In this appendix, we collect the full version of the codes, including
     \href{https://docs.fuzzified.world/extension/\#Base.Matrix-Tuple{OpMat}}{\lstinline|Matrix|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.NormalOrder-Tuple{Term}}{\lstinline|NormalOrder|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.NumThreads}{\lstinline|FuzzifiED.NumThreads|}\\
+    \href{https://docs.fuzzified.world/core/\#FuzzifiED.ObsNormRadSq}{\lstinline|FuzzifiED.ObsNormRadSq|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.OpenHelp!-Tuple{}}{\lstinline|FuzzifiED.OpenHelp!|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.Operator}{\lstinline|Operator|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.OpMat}{\lstinline|OpMat|}\\
