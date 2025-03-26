@@ -8,6 +8,7 @@
 
 - Enable the normalisation of the observables. 
 - Add uniform spatial integral and component filter of the observables. 
+- Add conversion from Term to STerm.
 
 #### Version 1.0.1 (11 March, 2025)
 
