@@ -1,12 +1,19 @@
-export SphereObs, StoreComps!, StoreComps, Laplacian, GetComponent, GetPointValue, GetElectronObs, GetDensityObs, GetPairingObs
+export SphereObs, StoreComps!, StoreComps, Laplacian, GetComponent, GetPointValue,  GetIntegral, FilterComponent, GetElectronObs, GetDensityObs, GetPairingObs
+
+"""
+    FuzzifiED.ObsNormRadSq :: Float64
+
+The default radius squared ``R^2`` that is used to normalise the observables, 1 by default. In the convention of He2025, ``R^2=N_m``.
+"""
+ObsNormRadSq :: Float64 = 1.0
 
 
 """
     SphereObs
 
-The mutable type `SphereObs` stores the information of a local observable (or local operator) ``\\Phi`` that can be decomposed into angular components.
+The mutable type `SphereObs` stores the information of a local observable (or local operator) ``𝒪`` that can be decomposed into angular components.
 ```math 
-    \\Phi(\\Omega)=∑_{lm}\\Phi_{lm}Y^{(s)}_{lm}
+    𝒪(\\Omega)=∑_{lm}𝒪_{lm}Y^{(s)}_{lm}
 ```
 
 # Fields
@@ -29,7 +36,7 @@ end
 """
     SphereObs(s2 :: Int64, l2m :: Int64, get_comp :: Function) :: SphereObs
 
-initialises the observable from ``2s``, ``2l_{\\max}`` and the function ``(l,m)↦\\Phi_{lm}``.
+initialises the observable from ``2s``, ``2l_{\\max}`` and the function ``(l,m)↦𝒪_{lm}``.
 
 # Arguments
 
@@ -45,7 +52,7 @@ end
 """
     SphereObs(s2 :: Int64, l2m :: Int64, comps :: Dict{Tuple{Int64, Int64}, Terms}) :: SphereObs
 
-initialises the observable from ``2s``, ``2l_{\\max}`` and a list of ``\\Phi_{lm}`` specified by a dictionary. 
+initialises the observable from ``2s``, ``2l_{\\max}`` and a list of ``𝒪_{lm}`` specified by a dictionary. 
 
 # Arguments
 
@@ -148,8 +155,8 @@ end
 enables the Hermitian conjugate of a spherical observable.
 ```math
 \\begin{aligned}
-    Φ^†(Ω)&=∑_{lm}(Φ_{lm})^†\\bar{Y}^{(s)}_{lm}(Ω)=∑_{lm}(Φ_{lm})^†(-1)^{s+m}Y^{(-s)}_{l,-m}(Ω)\\\\
-    (Φ^†)_{lm}&=(-1)^{s-m}(Φ_{l,-m})^†
+    𝒪^†(Ω)&=∑_{lm}(𝒪_{lm})^†\\bar{Y}^{(s)}_{lm}(Ω)=∑_{lm}(𝒪_{lm})^†(-1)^{s+m}Y^{(-s)}_{l,-m}(Ω)\\\\
+    (𝒪^†)_{lm}&=(-1)^{s-m}(𝒪_{l,-m})^†
 \\end{aligned}
 ```
 """
@@ -187,22 +194,40 @@ end
 
 
 """
-    Laplacian(obs :: SphereObs) :: SphereObs
+    Laplacian(obs :: SphereObs[ ; norm_r2 :: Float64]) :: SphereObs
     
 Takes the Laplacian of an observable
 ```math
-    (∇^2Φ)_{lm}=-l(l+1)Φ_{lm}
+    (∇^2𝒪)_{lm}=-l(l+1)𝒪_{lm}
 ```
+
+# Arguments
+
+* `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R^2`` is included. 
 """
-function Laplacian(obs :: SphereObs)
-    return SphereObs(obs.s2, obs.l2m, (l2, m2) -> -l2 / 2 * (l2 / 2 + 1) * obs.get_comp(l2, m2))
+function Laplacian(obs :: SphereObs ; norm_r2 :: Float64 = ObsNormRadSq)
+    return SphereObs(obs.s2, obs.l2m, (l2, m2) -> -l2 / 2 * (l2 / 2 + 1) * obs.get_comp(l2, m2) / norm_r2)
+end
+
+
+"""
+    GetIntegral(obs :: SphereObs[ ; norm_r2 :: Float64]) :: Terms
+
+returns the uniform spatial integral ``∫\\mathrm{d}^2𝐫\\,𝒪(𝐫)`` in the format of a list of terms.
+
+# Arguments
+
+* `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``R^2`` is included. 
+"""
+function GetIntegral(obs :: SphereObs ; norm_r2 :: Float64 = ObsNormRadSq)
+    return obs.get_comp(0, 0) * norm_r2 * √(4π)
 end
 
 
 """
     GetComponent(obs :: SphereObs, l :: Number, m :: Number) :: Terms
 
-returns an angular component ``Φ_{lm}`` of an observable in the format of a list of terms.
+returns an angular component ``𝒪_{lm}`` of an observable in the format of a list of terms.
 """
 function GetComponent(obs :: SphereObs, l :: Number, m :: Number)
     return obs.get_comp(Int64(2 * l), Int64(2 * m))
@@ -210,9 +235,26 @@ end
 
 
 """
+    FilterComponent(obs :: SphereObs, flt) :: AngModes 
+
+returns an observable object with certain modes filtered out.
+
+# Arguments 
+
+* `obs :: SphereObs` is the original observable
+* `flt` is the filter function whose input is the pair ``(l,m)`` and output is a logical that indicates whether this mode is chosen. E.g., if one wants to filter out the components with ``L^z=0``, one should put `(l, m) -> m == 0`.
+"""
+function FilterComponent(obs :: SphereObs, flt) 
+    l2m = obs.l2m
+    s2 = obs.s2
+    return SphereObs(s2, l2m, (l2, m2) -> flt(l2 / 2, m2 / 2) ? obs.get_comp(l2, m2) : Term[])
+end
+
+
+"""
     GetPointValue(obs :: SphereObs, θ :: Float64, ϕ :: Float64) :: Terms
 
-evaluates an observable at one point ``Φ(θ,ϕ)`` in the format of a list of terms.
+evaluates an observable at one point ``𝒪(θ,ϕ)`` in the format of a list of terms.
 """
 function GetPointValue(obs :: SphereObs, θ :: Float64, ϕ :: Float64)
     if (obs.s2 ≠ 0) 
@@ -232,7 +274,7 @@ end
 
 
 """
-    GetElectronObs(nm :: Int64, nf :: Int64, f :: Int64) :: SphereObs
+    GetElectronObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64]) :: SphereObs
 
 returns the electron annihilation operator ``ψ_f``.
 
@@ -241,15 +283,16 @@ returns the electron annihilation operator ``ψ_f``.
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
+* `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R`` is included. 
 """
-function GetElectronObs(nm :: Int64, nf :: Int64, f :: Int64)
-    gc = (l2, m2) -> (l2 == nm - 1) ? Terms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : Term[]
+function GetElectronObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq)
+    gc = (l2, m2) -> (l2 == nm - 1) ? Terms(1 / √norm_r2, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : Term[]
     return SphereObs(nm - 1, nm - 1, gc)
 end
 
 
 """
-    GetDensityObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}]) :: SphereObs
+    GetDensityObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64]) :: SphereObs
 
 returns the density operator ``n=∑_{ff'}ψ^†_{f}M_{ff'}ψ_{f'}``
 
@@ -258,9 +301,10 @@ returns the density operator ``n=∑_{ff'}ψ^†_{f}M_{ff'}ψ_{f'}``
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``\\mathbb{I}`` by default.
+* `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R^2`` is included. 
 """
-function GetDensityObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = Matrix{Float64}(I, nf, nf))
-    el = [ StoreComps(GetElectronObs(nm, nf, f)) for f = 1 : nf ]
+function GetDensityObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = Matrix{Float64}(I, nf, nf) ; norm_r2 :: Float64 = ObsNormRadSq)
+    el = [ StoreComps(GetElectronObs(nm, nf, f ; norm_r2)) for f = 1 : nf ]
     obs = SphereObs(0, 0, Dict{Tuple{Int64, Int64}, Terms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
@@ -271,7 +315,7 @@ end
 
 
 """
-    GetPairingObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SphereObs
+    GetPairingObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; norm_r2 :: Float64]) :: SphereObs
 
 returns the pair operator ``Δ=∑_{ff'}ψ_{f}M_{ff'}ψ_{f'}``.
 
@@ -280,9 +324,10 @@ returns the pair operator ``Δ=∑_{ff'}ψ_{f}M_{ff'}ψ_{f'}``.
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
+* `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R^2`` is included. 
 """
-function GetPairingObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetElectronObs(nm, nf, f)) for f = 1 : nf ]
+function GetPairingObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; norm_r2 :: Float64 = ObsNormRadSq)
+    el = [ StoreComps(GetElectronObs(nm, nf, f ; norm_r2)) for f = 1 : nf ]
     obs = SphereObs(2 * (nm - 1), 2 * (nm - 1), Dict{Tuple{Int64, Int64}, Terms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
