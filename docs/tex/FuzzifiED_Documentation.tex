@@ -8,7 +8,7 @@
 
 \title{FuzzifiED}
 \subtitle{Julia package for numerics on the fuzzy sphere}
-\date{28 March, 2025}
+\date{2 April, 2025}
 \author{Zheng Zhou 周正}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
 \affiliation{Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
@@ -23,7 +23,7 @@
 
 \section{Purpose and outline}
 
-Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs~\cite{Zhu2022,Hu2023Mar,Han2023Jun,Zhou2023,Lao2023,Hu2023Aug,Hofmann2023,Han2023Dec,Zhou2024Jan,Hu2024,Cuomo2024,Zhou2024Jul,Dedushenko2024,Fardelli2024,Fan2024,Zhou2024Oct,Voinea2024,Yang2025,Han2025}. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor~\cite{ITensor} library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features~:
+Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs~\cite{Zhu2022,Hu2023Mar,Han2023Jun,Zhou2023,Lao2023,Hu2023Aug,Hofmann2023,Han2023Dec,Zhou2024Jan,Hu2024,Cuomo2024,Zhou2024Jul,Dedushenko2024,Fardelli2024,Fan2024,Zhou2024Oct,Voinea2024,Yang2025,Han2025,Laeuchli2025}. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor~\cite{ITensor} library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features~:
 \begin{enumerate}
     \item Versatility~: FuzzifiED can reproduce nearly all the ED and DMRG results from fuzzy sphere research. Its flexible design also makes it straightforward to adapt to new models.
     \item Usability~: The expressive Julia interface~\cite{Julia} simplifies coding and comprehension. To help users get started, we provide a collection of examples.
@@ -184,11 +184,11 @@ Apart from line defects, boundaries are also important extended objects in CFT. 
 
 Besides the three directions of works, several other works push the frontier of our knowledge of and techniques for the fuzzy sphere.
 
-\paragraph{Conformal perturbation~\cite{Lao2023}}
+\paragraph{Conformal perturbation~\cite{Laeuchli2025}}
 
 The energy spectrum calculated numerically at a finite size does not coincide with that of the CFT. Part of the finite-size correction comes from the higher irrelevant operators that are not precisely tuned to zero (\textit{e.g.}, in the Ising CFT, the irrelevant operators include $\epsilon', C_{\mu\nu\rho\sigma}, T'_{\mu\nu}$, \textit{etc.}, and the lowest singlets $\epsilon$ and $\epsilon'$ are tuned away through the two parameters). These irrelevant operators exert perturbations on the states and their energies. This paper captures this kind of correction using the conformal perturbation theory. By making use of the fact that the corrections from an irrelevant operator on the energy of the primary and its descendants are not independent, the coefficients of the irrelevant operators can be fitted and their corrections can be removed.
 
-Although this work is not exactly a study on the fuzzy sphere, it opens up a new route to improving the precision of scaling dimensions on the fuzzy sphere by making better use of the existing data. The method to partly remove the finite-size correction through conformal perturbation theory is widely used by the following works.
+The conformal perturbation theory is first studied to the icosahedron~\cite{Lao2023} and then applied to the fuzzy sphere. This work opens up a new route to improving the precision of scaling dimensions on the fuzzy sphere by making better use of the existing data. The method to partly remove the finite-size correction through conformal perturbation theory is widely used by the following works.
 
 \paragraph{Quantum Monte Carlo on fuzzy sphere~\cite{Hofmann2023}}
 
@@ -1466,6 +1466,7 @@ Z.~Z.~acknowledges support from the Natural Sciences and Engineering Research Co
 
 \cleardoublepage
 \appendix
+\addcontentsline{toc}{part}{Appendix}
 
 \section{Data structures in exact diagonalisation}
 \label{app:data}

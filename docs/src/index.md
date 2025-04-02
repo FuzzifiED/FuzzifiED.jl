@@ -75,7 +75,6 @@ Depth = 2
 * __[Hu 2023Mar]__ Operator product expansion coefficients of the 3d Ising criticality via quantum fuzzy sphere, Liangdong Hu, Yin-Chen He, and Wei Zhu, [arXiv:2303.08844](https://arxiv.org/abs/2303.08844), [Phys. Rev. Lett __131__, 031601 (2023)](https://doi.org/10.1103/PhysRevLett.131.031601).
 * __[Han 2023Jun]__ Conformal four-point correlators of the 3d Ising transition via the quantum fuzzy sphere, Chao Han, Liangdong Hu, Wei Zhu, and Yin-Chen He, [arXiv:2306.04681](https://arxiv.org/abs/2306.04681), [Phys. Rev. B __108__, 235123 (2023)](https://doi.org/10.1103/PhysRevB.108.235123).
 * __[Zhou 2023]__ The ``\mathrm{SO}(5)`` deconfined phase transition under the fuzzy sphere microscope: approximate conformal symmetry, pseudo-criticality, and operator spectrum, Zheng Zhou, Liangdong Hu, Wei Zhu, and Yin-Chen He, [arXiv:2306.16435](https://arxiv.org/abs/2306.16435), [Phys. Rev. X __14__, 021044 (2024)](https://doi.org/10.1103/PhysRevX.14.021044).
-* __[Lao 2023]__ 3d Ising CFT and exact diagonalisation on icosahedron : the power of conformal perturbation theory, Bing-Xin Lao, and Slava Rychkov [arXiv:2307.02540](https://arxiv.org/abs/2307.02540), [SciPost Phys. __15__, 243 (2023)](https://doi.org/10.21468/SciPostPhys.15.6.243).
 * __[Hu 2023Aug]__ Solving conformal defects in 3d conformal field theory using fuzzy sphere regularisation, Liangdong Hu, Yin-Chen He, and Wei Zhu, [arXiv:2308.01903](https://arxiv.org/abs/2308.01903), [Nat. Commun. __15__, 3659 (2024)](https://doi.org/10.1038/s41467-024-47978-y).
 * __[Hofmann 2024]__ Quantum Monte Carlo simulation of the 3d Ising transition on the fuzzy sphere, Johannes S. Hofmann, Florian Goth, Wei Zhu, Yin-Chen He, and Emilie Huffman, [arXiv:2310.19880](https://arxiv.org/abs/2310.19880), [SciPost Phys. Core __7__, 028 (2024)](https://doi.org/10.21468/SciPostPhysCore.7.2.028).
 * __[Han 2023Dec]__ Conformal operator content of the Wilson-Fisher transition on fuzzy sphere bilayers, Chao Han, Liangdong Hu, and Wei Zhu, [arXiv:2312.04047](https://arxiv.org/abs/2312.04047), [Phys. Rev. B __110__, 115113 (2024)](https://doi.org/10.1103/PhysRevB.110.115113).
@@ -88,8 +87,9 @@ Depth = 2
 * __[Fan 2024]__ Note on explicit construction of conformal generators on the fuzzy sphere, Ruihua Fan, [arXiv:2409.08257](https://arxiv.org/abs/2409.08257).
 * __[Zhou 2024Oct]__ A new series of 3d CFTs with ``\mathrm{Sp}(N)`` global symmetry on fuzzy sphere, Zheng Zhou, and Yin-Chen He, [arXiv:2410.00087](https://arxiv.org/abs/2410.00087).
 * __[Voinea 2024]__ Regularising 3d conformal field theories via anyons on the fuzzy sphere, [arXiv:2411.15299](https://arxiv.org/abs/2411.15299).
-* __[Han 2025]__ Quantum phase transitions on the noncommutative circle, Chao Han, and Wei Zhu, [Phys. Rev. B __111__, 085113 (2025)](https://doi.org/10.1103/PhysRevB.111.085113)
-* __[Yang 2025]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320)
+* __[Han 2025]__ Quantum phase transitions on the noncommutative circle, Chao Han, and Wei Zhu, [Phys. Rev. B __111__, 085113 (2025)](https://doi.org/10.1103/PhysRevB.111.085113).
+* __[Yang 2025]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320).
+* __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, Slava Rychkov [arXiv:2504.00842](https://arxiv.org/abs/2504.00842).
 
 ## Index 
 
