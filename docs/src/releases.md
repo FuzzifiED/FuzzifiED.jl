@@ -4,6 +4,10 @@
 
 ### Version 1.0
 
+#### Version 1.0.3 (Under development)
+
+- Allow negative QNDiag and particle non-conservation. 
+
 #### Version 1.0.2 (28 March, 2025)
 
 - Enable the normalisation of the observables. 
