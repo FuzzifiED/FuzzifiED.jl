@@ -1,5 +1,15 @@
-export GetNeSQNDiag, GetBosonLz2SQNDiag, GetBosonFlavSQNDiag
+export GetBosonNeSQNDiag, GetNeSQNDiag, GetBosonLz2SQNDiag, GetBosonFlavSQNDiag
 export GetBosonFlavPermSQNOffd, GetBosonRotySQNOffd
+
+""" 
+    GetBosonNeSQNDiag(nof :: Int64, nob :: Int64) :: SQNDiag 
+
+Return the SQNDiag of the number of particles, implemented as 
+```julia
+SQNDiag("Neb", fill(0, nof), fill(1, nob))
+```
+"""
+GetBosonNeSQNDiag(nof :: Int64, nob :: Int64) = SQNDiag("Neb", fill(0, nof), fill(1, nob))
 
 
 """ 

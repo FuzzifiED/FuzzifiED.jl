@@ -70,7 +70,7 @@ function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}
     qndbp = zeros(Int64, nob)
     negf = zeros(Int64, nof)
     negb = zeros(Int64, nob)
-    for i = 1 : qnd 
+    for i = 1 : nqnd 
         (modul[i] > 1) && continue
         if (all(>=(0), [qnd[i].chargef ; qnd[i].chargeb]))
             secp += secd[i]
@@ -93,90 +93,24 @@ function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}
         if (negb[o] == 1 && qndbp[o] == 0) posq = false end
     end
 
-    if (posq)
-        # Turn positive
-        for i = 1 : nqnd 
-            if (modul[i] > 1 || all(>=(0), [qnd[i].chargef ; qnd[i].chargeb])) 
-                push!(secd1, secd[i]) 
-                push!(qndf1, qnd[i].chargef)
-                push!(qndb1, qnd[i].chargeb)
-                continue
-            end
-            qm = minimum([ [ fld(qnd[i].chargef[o], qndfp[o]) for o = 1 : nof if qndfp[o] ≠ 0 ] ;
-                [ fld(qnd[i].chargeb[o], qndbp[o]) for o = 1 : nob if qndbp[o] ≠ 0 ]])
-            push!(secd1, secd[i] - qm * secp)
-            push!(qndf1, qnd[i].chargef .- qm .* qndfp)
-            push!(qndb1, qnd[i].chargeb .- qm .* qndbp)
-        end
-        qndf1_mat = hcat(qndf1...)
-        qndb1_mat = hcat(qndb1...)
+    posq || @error "Error"
 
-        @ccall Libpathino.__scfs_MOD_count_scfs(
-            nof :: Ref{Int64}, nob :: Ref{Int64}, norf :: Ref{Int64}, norb :: Ref{Int64}, nebm :: Ref{Int64},
-            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, qndf1_mat :: Ref{Int64}, qndb1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
-            ref_ncf :: Ref{Int64}, lid :: Ref{Int64}, binom :: Ref{Int64},
-            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
-        ) :: Nothing
-        ncf = ref_ncf[]
-        rid = Vector{Int64}(undef, 2 ^ norf * (binom[nebm + 1, nob - norb + 1] + 1))
-        conff = Vector{Int64}(undef, ncf)
-        confb = Vector{Int64}(undef, ncf)
-        @ccall Libpathino.__scfs_MOD_generate_scfs(
-            nof :: Ref{Int64}, nob :: Ref{Int64}, norf :: Ref{Int64}, norb :: Ref{Int64}, nebm :: Ref{Int64},
-            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, qndf1_mat :: Ref{Int64}, qndb1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
-            ncf :: Ref{Int64}, lid :: Ref{Int64}, rid :: Ref{Int64}, 
-            conff :: Ref{Int64}, confb :: Ref{Int64}, binom :: Ref{Int64},
-            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
-        ) :: Nothing
-    else 
-        # Not turn positive
-        secd1 = secd
-        qndf1_mat = [qnd[i].chargef[o] for o = 1 : nof, i = 1 : nqnd]
-        qndb1_mat = [qnd[i].chargeb[o] for o = 1 : nob, i = 1 : nqnd]
-
-        @ccall Libpathino.__scfs_neg_MOD_count_scfs_neg(
-            nof :: Ref{Int64}, nob :: Ref{Int64}, norf :: Ref{Int64}, norb :: Ref{Int64}, nebm :: Ref{Int64},
-            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, qndf1_mat :: Ref{Int64}, qndb1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
-            ref_ncf :: Ref{Int64}, lid :: Ref{Int64}, binom :: Ref{Int64},
-            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
-        ) :: Nothing
-        ncf = ref_ncf[]
-        rid = Vector{Int64}(undef, 2 ^ norf * (binom[nebm + 1, nob - norb + 1] + 1))
-        conff = Vector{Int64}(undef, ncf)
-        confb = Vector{Int64}(undef, ncf)
-        @ccall Libpathino.__scfs_neg_MOD_generate_scfs_neg(
-            nof :: Ref{Int64}, nob :: Ref{Int64}, norf :: Ref{Int64}, norb :: Ref{Int64}, nebm :: Ref{Int64},
-            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, qndf1_mat :: Ref{Int64}, qndb1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
-            ncf :: Ref{Int64}, lid :: Ref{Int64}, rid :: Ref{Int64}, 
-            conff :: Ref{Int64}, confb :: Ref{Int64}, binom :: Ref{Int64},
-            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
-        ) :: Nothing
-    end
-
-    #### UNDER CONSTRUCTION
-
-    
-    id_ne = 0
-    for i = 1 : nqnd
-        if (maximum([qnd[i].chargef ; qnd[i].chargeb]) == 1 && minimum([qnd[i].chargef ; qnd[i].chargeb]) == 1)
-            id_ne = i
-            break
-        end 
-    end
-    for i = 1 : nqnd
-        if (modul[i] > 1 || (minimum(qnd[i].chargef) ≥ 0 && minimum(qnd[i].chargeb) ≥ 0)) 
+    # Turn positive
+    for i = 1 : nqnd 
+        if (modul[i] > 1 || all(>=(0), [qnd[i].chargef ; qnd[i].chargeb])) 
             push!(secd1, secd[i]) 
             push!(qndf1, qnd[i].chargef)
             push!(qndb1, qnd[i].chargeb)
             continue
         end
-        qm = minimum([qnd[i].chargef ; qnd[i].chargeb])
-        push!(secd1, secd[i] .- secd[id_ne] * qm)
-        push!(qndf1, qnd[i].chargef .- qm)
-        push!(qndb1, qnd[i].chargeb .- qm)
+        qm = minimum([ [ fld(qnd[i].chargef[o], qndfp[o]) for o = 1 : nof if qndfp[o] ≠ 0 ] ;
+            [ fld(qnd[i].chargeb[o], qndbp[o]) for o = 1 : nob if qndbp[o] ≠ 0 ]])
+        push!(secd1, secd[i] - qm * secp)
+        push!(qndf1, qnd[i].chargef .- qm .* qndfp)
+        push!(qndb1, qnd[i].chargeb .- qm .* qndbp)
     end
-    qndf1_mat = Matrix{Int64}(reduce(hcat, qndf1))
-    qndb1_mat = Matrix{Int64}(reduce(hcat, qndb1))
+    qndf1_mat = hcat(qndf1...)
+    qndb1_mat = hcat(qndb1...)
 
     @ccall Libpathino.__scfs_MOD_count_scfs(
         nof :: Ref{Int64}, nob :: Ref{Int64}, norf :: Ref{Int64}, norb :: Ref{Int64}, nebm :: Ref{Int64},
@@ -195,5 +129,6 @@ function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}
         conff :: Ref{Int64}, confb :: Ref{Int64}, binom :: Ref{Int64},
         num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
     ) :: Nothing
+        
     return SConfs(nof, nob, norf, norb, nebm, ncf, conff, confb, lid, rid)
 end
