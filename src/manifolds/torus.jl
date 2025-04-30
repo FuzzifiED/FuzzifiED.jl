@@ -1,4 +1,4 @@
-export GetTorusLz2QNDiag, GetTorusIntMatrix, GetTorusTranlQNOffd, GetTorusDenIntTerms, GetTorusPairIntTerms
+export GetTorusLz2QNDiag, GetTorusIntMatrix, GetTorusTranslQNOffd, GetTorusDenIntTerms, GetTorusPairIntTerms
 
 
 """ 
@@ -13,7 +13,7 @@ GetTorusLz2QNDiag(nm :: Int64, nf :: Int64) = QNDiag("Lz", [2 * m - 1 + mod(nm, 
 
 
 """ 
-    GetTorusTranlQNOffd(nm :: Int64, nf :: Int64, Δ :: Int64 = 1) :: QNOffd
+    GetTorusTranslQNOffd(nm :: Int64, nf :: Int64, Δ :: Int64 = 1) :: QNOffd
 
 Return the QNOffd of translation 
 ```math 
@@ -24,7 +24,7 @@ on the torus, implemented as
     QNOffd([((m - 1 + Δ) % nm) * nf + f for m = 1 : nm for f = 1 : nf], nm)
 ```
 """
-GetTorusTranlQNOffd(nm :: Int64, nf :: Int64, Δ :: Int64 = 1) = QNOffd([((m - 1 + Δ) % nm) * nf + f for m = 1 : nm for f = 1 : nf], nm)
+GetTorusTranslQNOffd(nm :: Int64, nf :: Int64, Δ :: Int64 = 1) = QNOffd([((m - 1 + Δ) % nm) * nf + f for m = 1 : nm for f = 1 : nf], nm)
 
 function LaguerrePsPot(ps_pot :: Vector{<:Number}, q2 :: Number)
     lag = zeros(Float64, length(ps_pot))

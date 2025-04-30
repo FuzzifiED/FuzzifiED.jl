@@ -19,7 +19,7 @@ qnd = [
 ]
 qnf = [ 
     GetFlavPermQNOffd(nm, 2, [2, 1]),
-    GetTorusTranlQNOffd(nm, 2)
+    GetTorusTranslQNOffd(nm, 2)
 ]
 
 cfs = Dict{Int64, Confs}()

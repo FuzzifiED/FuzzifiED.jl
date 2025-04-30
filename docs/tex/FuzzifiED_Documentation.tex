@@ -8,13 +8,13 @@
 
 \title{FuzzifiED}
 \subtitle{Julia package for numerics on the fuzzy sphere}
-\date{2 April, 2025}
+\date{30 April, 2025}
 \author{Zheng Zhou 周正}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
 \affiliation{Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
 \emailAdd{physics@zhengzhou.page}
 \abstract{The Julia package \emph{FuzzifiED} aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) and density matrix renormalisation group (DMRG) calculations. FuzzifiED can also apply to generic fermionic and bosonic models. This documentation provides a review of the fuzzy sphere regularisation and an instruction for using FuzzifiED for numerical calculations.}
-\extra{\textit{Documentation}~: \url{https://docs.fuzzified.world}\\\textit{Source code}~: \url{https://github.com/FuzzifiED/FuzzifiED.jl}\\\textit{Version}~: 1.0.2}
+\extra{\textit{Documentation}~: \url{https://docs.fuzzified.world}\\\textit{Source code}~: \url{https://github.com/FuzzifiED/FuzzifiED.jl}\\\textit{Version}~: 1.0.3}
 \arxivnumber{2503.00100}
 
 \begin{document}
@@ -188,7 +188,7 @@ Besides the three directions of works, several other works push the frontier of 
 
 The energy spectrum calculated numerically at a finite size does not coincide with that of the CFT. Part of the finite-size correction comes from the higher irrelevant operators that are not precisely tuned to zero (\textit{e.g.}, in the Ising CFT, the irrelevant operators include $\epsilon', C_{\mu\nu\rho\sigma}, T'_{\mu\nu}$, \textit{etc.}, and the lowest singlets $\epsilon$ and $\epsilon'$ are tuned away through the two parameters). These irrelevant operators exert perturbations on the states and their energies. This paper captures this kind of correction using the conformal perturbation theory. By making use of the fact that the corrections from an irrelevant operator on the energy of the primary and its descendants are not independent, the coefficients of the irrelevant operators can be fitted and their corrections can be removed.
 
-The conformal perturbation theory is first studied to the icosahedron~\cite{Lao2023} and then applied to the fuzzy sphere. This work opens up a new route to improving the precision of scaling dimensions on the fuzzy sphere by making better use of the existing data. The method to partly remove the finite-size correction through conformal perturbation theory is widely used by the following works.
+The conformal perturbation theory is first studied on the 2d CFTs~\cite{Reinicke1987Perturbation1,Reinicke1987Perturbation2} and the icosahedron~\cite{Lao2023} and then applied to the fuzzy sphere. This work opens up a new route to improving the precision of scaling dimensions on the fuzzy sphere by making better use of the existing data. The method to partly remove the finite-size correction through conformal perturbation theory is widely used by the following works.
 
 \paragraph{Quantum Monte Carlo on fuzzy sphere~\cite{Hofmann2023}}
 
@@ -1266,8 +1266,8 @@ Fuzzifino is a module for ED calculation on the fuzzy sphere for systems with bo
 
 Apart from the sphere, FuzzifiED also supports the calculation for interacting particles on the lowest Landau level on a torus. The procedure is similar to sphere, except for two differences~:
 \begin{itemize}
-    \item The orbitals are now labelled by a $\mathbb{Z}_{N_m}$ number $m=1,\dots,N_m$, and $m$ and $m+N_m$ are identified. Correspondingly, the conservation of angular momentum $L^z$ is now modified into a $\mathbb{Z}_{N_m}$ translation symmetry with $\sum_{mf}mN_{mf}\mod N_m$ conserved. The \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusLz2QNDiag|} function constructs the corresponding QNDiag.
-    \item The interacting potentials are still parametrised by the pseudopotentials in a similar sense, but the matrix $C_{m_1m_2m_3m_4}^l$ is different. The functions \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusDenIntTerms}{\lstinline|GetTorusDenIntTerms|} and \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusPairIntTerms}{\lstinline|GetTorusPairIntTerms |} generate the density-density interaction terms and the pair-pair interaction terms from the pseudopotentials.
+    \item The orbitals are now labelled by a $\mathbb{Z}_{N_m}$ number $m=1,\dots,N_m$, and $m$ and $m+N_m$ are identified. Correspondingly, the conservation of angular momentum $L^z$ is now modified into a $\mathbb{Z}_{N_m}$ translation symmetry with $\sum_{mf}mN_{mf}\mod N_m$ conserved. The \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusLz2QNDiag|} function implemented the corresponding QNDiag. The translation in the other direction permutes $m$ and is implemented in \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusTranslQNOffd-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusTranslQNOffd|}.
+    \item The interacting potentials are still parametrised by the pseudopotentials in a similar sense, but the matrix $C_{m_1m_2m_3m_4}^l$ is different. The functions \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusDenIntTerms}{\lstinline|GetTorusDenIntTerms|} and \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusPairIntTerms}{\lstinline|GetTorusPairIntTerms|} generate the density-density interaction terms and the pair-pair interaction terms from the pseudopotentials.
 \end{itemize}
 
 The detail of the setup is given in Appendix~\ref{app:manifolds}.
@@ -1460,7 +1460,7 @@ FuzzifiED can help reproduce almost all the ED and DMRG results in fuzzy sphere 
 \clearpage
 \acknowledgments
 
-We extend our deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Liangdong Hu, Wenhan Guo, Andrew Liam Fitzpatrick, Christian Voinea, Xiang Li, and Wei Zhu for their suggestions and contributions to the package.
+We extend our deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Liangdong Hu, Wenhan Guo, Andrew Liam Fitzpatrick, Christian Voinea, Xiang Li, Shuai Yang, and Wei Zhu for their suggestions and contributions to the package.
 
 Z.~Z.~acknowledges support from the Natural Sciences and Engineering Research Council of Canada (NSERC) through Discovery Grants. Research at Perimeter Institute is supported in part by the Government of Canada through the Department of Innovation, Science and Industry Canada and by the Province of Ontario through the Ministry of Colleges and Universities.
 
@@ -1955,10 +1955,11 @@ In this appendix, we collect the full version of the codes, including
     \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.GetQNDiags-Tuple{Vector{Index{Vector{Pair{QN,\%20Int64}}}}}}{\lstinline|GetQNDiags|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetRotyQNOffd-Tuple{Int64,\%20Int64}}{\lstinline|GetRotyQNOffd|}\\
     \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.GetSites-Tuple{Vector{QNDiag}}}{\lstinline|GetSites|}\\
-    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusDenIntTerms}{\lstinline|GetTorusDenIntTerms|}\\
-    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusIntMatrix-Tuple{Int64,\%20Number,\%20Vector{\%3C:Number}}}{\lstinline|GetTorusIntMatrix|}\\
-    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusLz2QNDiag|}\\
-    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusPairIntTerms}{\lstinline|GetTorusPairIntTerms|}\\
+    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusDenIntTerms}{\lstinline|GetTorusDenIntTerms|}\\
+    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusIntMatrix-Tuple{Int64,\%20Number,\%20Vector{\%3C:Number}}}{\lstinline|GetTorusIntMatrix|}\\
+    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusLz2QNDiag|}\\
+    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusTranslQNOffd-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusTranslQNOffd|}\\
+    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusPairIntTerms}{\lstinline|GetTorusPairIntTerms|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetZnfChargeQNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetZnfChargeQNDiag|}\\
     \href{https://docs.fuzzified.world/models/\#FuzzifiED.Laplacian-Tuple{SphereObs}}{\lstinline|Laplacian|}\\
     \href{https://docs.fuzzified.world/core/\#FuzzifiED.Libpath}{\lstinline|FuzzifiED.Libpath|}\\
