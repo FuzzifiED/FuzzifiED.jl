@@ -1,6 +1,6 @@
 # This example calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. 
 # This example reproduces Figure 4 and Tables I--III in Phys. Rev. B 111, 085113 (2025)
-# On my table computer, this calculation takes 2.324 s
+# On my table computer, this calculation takes 3.498 s
 # We acknowlege Wei Zhu for his help in reproducing the results. 
 
 using FuzzifiED
@@ -11,13 +11,16 @@ const σ2 = [  0  0 ;  0  1 ]
 const σx = [  0  1 ;  1  0 ]
 
 nf = 2
-nm = 10
+nm = 12
 no = nf * nm
 qnd = [
     GetNeQNDiag(no),
     GetTorusLz2QNDiag(nm, nf)
 ]
-qnf = [ GetFlavPermQNOffd(nm, 2, [2, 1]) ]
+qnf = [ 
+    GetFlavPermQNOffd(nm, 2, [2, 1]),
+    GetTorusTranlQNOffd(nm, 2)
+]
 
 cfs = Dict{Int64, Confs}()
 for lz = 0 : 3
@@ -34,7 +37,7 @@ tms_hmt = SimplifyTerms(
 
 result = []
 for lz = 0 : 3, Z in [1, -1]
-    bs = Basis(cfs[lz], [Z], qnf)
+    bs = Basis(cfs[lz], [Z, -(-1)^nm], qnf)
     hmt = Operator(bs, tms_hmt)
     hmt_mat = OpMat(hmt)
     enrg, st = GetEigensystem(hmt_mat, 20)

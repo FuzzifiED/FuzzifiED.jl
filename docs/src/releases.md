@@ -4,9 +4,10 @@
 
 ### Version 1.0
 
-#### Version 1.0.3 (Under development)
+#### Version 1.0.3 (30 April, 2025)
 
-- Allow negative QNDiag and particle non-conservation. 
+- Relax constraint on negative QNDiag and particle conservation. 
+- Add GetTorusTranlQNOffd for torus. (We acknowledge Shuai Yang for the suggestion.)
 
 #### Version 1.0.2 (28 March, 2025)
 
