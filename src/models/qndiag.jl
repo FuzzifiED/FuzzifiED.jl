@@ -2,14 +2,15 @@ export GetNeQNDiag, GetLz2QNDiag, GetFlavQNDiag, GetZnfChargeQNDiag, GetPinOrbQN
 
 
 """ 
-    GetNeQNDiag(no :: Int64) :: QNDiag 
+    GetNeQNDiag(no :: Int64[, modul :: Int64 = 1]) :: QNDiag 
 
 Return the QNDiag of the number of electrons, implemented as 
 ```julia
-QNDiag("Ne", fill(1, no))
+QNDiag("Ne", fill(1, no), modul)
 ```
+If `modul = 2`, parity is returned.
 """
-GetNeQNDiag(no :: Int64) = QNDiag("Ne", fill(1, no))
+GetNeQNDiag(no :: Int64, modul :: Int64 = 1) = QNDiag("Ne", fill(1, no), modul)
 
 
 """ 

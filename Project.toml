@@ -1,7 +1,7 @@
 name = "FuzzifiED"
 uuid = "b45b6d2d-92f2-400f-a7df-d2d897927e5f"
 authors = ["Zheng Zhou"]
-version = "1.0.2"
+version = "1.0.3"
 
 [deps]
 FuzzifiED_jll = "0fc6ce7e-a225-5ad5-93a0-97260cfa1513"
@@ -26,7 +26,7 @@ FuzzifiEDSparseArraysExt = ["SparseArrays"]
 FuzzifiEDCUDAExt = ["CUDA", "KrylovKit", "SparseArrays"]
 
 [compat]
-FuzzifiED_jll = "1.0.0"
+FuzzifiED_jll = "1.0.3"
 LinearAlgebra = "1"
 SparseArrays = "1"
 SphericalHarmonics = "0.1"

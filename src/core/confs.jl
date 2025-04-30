@@ -52,42 +52,85 @@ function Confs(no :: Int64, secd :: Vector{Int64}, qnd :: Vector{QNDiag} ; nor :
     secd1 = Int64[]
     qnd1 = Vector{Int64}[]
     modul = [ qnd_i.modul for qnd_i in qnd]
-    id_ne = 0
+    
+    # Check positivity 
+    secp = 0
+    qndp = zeros(Int64, no)
+    neg = zeros(Int64, no)
     for i = 1 : nqnd 
-        if (maximum(qnd[i].charge) == 1 && minimum(qnd[i].charge) == 1)
-            id_ne = i
-            break
-        end 
-    end
-    for i = 1 : nqnd
-        if (modul[i] > 1 || minimum(qnd[i].charge) ≥ 0) 
-            push!(secd1, secd[i]) 
-            push!(qnd1, qnd[i].charge)
-            continue
+        (modul[i] > 1) && continue
+        if (all(>=(0), qnd[i].charge))
+            secp += secd[i]
+            qndp += qnd[i].charge
+        else
+            for o = 1 : no 
+                if (qnd[i].charge[o] < 0) neg[o] = 1 end
+            end
         end
-        qm = minimum(qnd[i].charge)
-        push!(secd1, secd[i] .- secd[id_ne] * qm)
-        push!(qnd1, qnd[i].charge .- qm)
     end
-    qnd1_mat = Matrix{Int64}(reduce(hcat, qnd1))
+    posq = true 
+    for o = 1 : no 
+        if (neg[o] == 1 && qndp[o] == 0) 
+            posq = false
+        end
+    end
 
-    @ccall Libpath.__cfs_MOD_count_cfs(
-        no :: Ref{Int64}, nor :: Ref{Int64}, 
-        nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, 
-        qnd1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
-        ref_ncf :: Ref{Int64}, lid :: Ref{Int64}, 
-        num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
-    ) :: Nothing
-    ncf = ref_ncf[]
-    rid = Vector{Int64}(undef, 2 ^ nor + 1)
-    conf = Vector{Int64}(undef, ncf)
-    @ccall Libpath.__cfs_MOD_generate_cfs(
-        no :: Ref{Int64}, nor :: Ref{Int64}, 
-        nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, 
-        qnd1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
-        ncf :: Ref{Int64}, lid :: Ref{Int64}, rid :: Ref{Int64}, conf :: Ref{Int64}, 
-        num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
-    ) :: Nothing
+
+    if (posq)
+        # Turn positive
+        for i = 1 : nqnd 
+            if (modul[i] > 1 || all(>=(0), qnd[i].charge)) 
+                push!(secd1, secd[i]) 
+                push!(qnd1, qnd[i].charge)
+                continue
+            end
+            qm = minimum([ fld(qnd[i].charge[o], qndp[o]) for o = 1 : no if qndp[o] ≠ 0 ])
+            push!(secd1, secd[i] - qm * secp)
+            push!(qnd1, qnd[i].charge .- qm .* qndp)
+        end
+        qnd1_mat = hcat(qnd1...)
+
+        @ccall Libpath.__cfs_MOD_count_cfs(
+            no :: Ref{Int64}, nor :: Ref{Int64}, 
+            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, 
+            qnd1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
+            ref_ncf :: Ref{Int64}, lid :: Ref{Int64}, 
+            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
+        ) :: Nothing
+        ncf = ref_ncf[]
+        rid = Vector{Int64}(undef, 2 ^ nor)
+        conf = Vector{Int64}(undef, ncf)
+        @ccall Libpath.__cfs_MOD_generate_cfs(
+            no :: Ref{Int64}, nor :: Ref{Int64}, 
+            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, 
+            qnd1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
+            ncf :: Ref{Int64}, lid :: Ref{Int64}, rid :: Ref{Int64}, conf :: Ref{Int64}, 
+            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
+        ) :: Nothing
+    else 
+        # Not turn positive
+        secd1 = secd
+        qnd1_mat = [qnd[i].charge[o] for o = 1 : no, i = 1 : nqnd]
+
+        @ccall Libpath.__cfs_neg_MOD_count_cfs_neg(
+            no :: Ref{Int64}, nor :: Ref{Int64}, 
+            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, 
+            qnd1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
+            ref_ncf :: Ref{Int64}, lid :: Ref{Int64}, 
+            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
+        ) :: Nothing
+        ncf = ref_ncf[]
+        rid = Vector{Int64}(undef, 2 ^ nor)
+        conf = Vector{Int64}(undef, ncf)
+        @ccall Libpath.__cfs_neg_MOD_generate_cfs_neg(
+            no :: Ref{Int64}, nor :: Ref{Int64}, 
+            nqnd :: Ref{Int64}, secd1 :: Ref{Int64}, 
+            qnd1_mat :: Ref{Int64}, modul :: Ref{Int64}, 
+            ncf :: Ref{Int64}, lid :: Ref{Int64}, rid :: Ref{Int64}, conf :: Ref{Int64}, 
+            num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
+        ) :: Nothing
+    end
+
     return Confs(no, nor, ncf, conf, lid, rid)
 end
 

@@ -159,9 +159,9 @@ Apart from line defects, boundaries are also important extended objects in CFT. 
 
 Besides the three directions of works, several other works push the boundary of our knowledge of and techniques for the fuzzy sphere. 
 
-##### [Conformal perturbation](@id Lao2023)
+##### [Conformal perturbation](@id Laeuchli2025)
 
-> __[Lao 2023]__ 3d Ising CFT and exact diagonalisation on icosahedron : the power of conformal perturbation theory, Bing-Xin Lao, and Slava Rychkov [arXiv:2307.02540](https://arxiv.org/abs/2307.02540), [SciPost Phys. __15__, 243 (2023)](https://doi.org/10.21468/SciPostPhys.15.6.243).
+> __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, Slava Rychkov [arXiv:2504.00842](https://arxiv.org/abs/2504.00842)
 
 The energy spectrum calculated numerically at finite size does not coincide with that of the CFT. Part of the finite-size correction comes from the higher irrelavant operators that are not exactly tuned to zero (_e.g._, in the Ising CFT, the irrelavent operators include $\epsilon', C_{\mu\nu\rho\sigma}, T'_{\mu\nu}$, _etc._, and the lowest singlets $\epsilon$ and $\epsilon'$ are tuned away through the two parameters). These irrelevant operators exert perturbations on the states and their energy. This paper captures this kind of correction by the conformal perturbation theory. By making use of the fact that the corrections from an irrelevant operator on the energy of the primary and its descendants are not independent, the coefficients of the irrelevant operators can be fitted.
 
