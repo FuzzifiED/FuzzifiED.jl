@@ -4,6 +4,11 @@
 
 ### Version 1.0
 
+#### Version 1.0.4 (15 May, 2025)
+
+- Add example of Yang-Lee CFT.
+- Update compat for ITensor.
+
 #### Version 1.0.3 (30 April, 2025)
 
 - Relax constraint on negative QNDiag and particle conservation. 

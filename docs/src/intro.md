@@ -121,6 +121,18 @@ Several candidate Chern-Simons-matter theories are known to exist on its phase d
 
 The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\mathbb{Z}$ is known as the number of states. In 2d, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs, while $Q>Q_c$ are first order. Specifically, 2d 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity in a similar manner with $\mathrm{SO}(5)$ DQCP. In 3d, the 3-state Potts model is found to be first-order. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry between layers. The interacting Hamiltonian resembles the Ising model. Interestingly, this work finds out that the transition point of the 3d 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite size effect.
 
+#### [Yang-Lee non-unitary CFT](@id Fan2025)
+
+> __[Fan 2025]__ Simulating the non-unitary Yang-Lee conformal field
+theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXiv:2505.06342](https://arxiv.org/abs/2505.06342).
+
+> __[Arguello Cruz 2025]__ Yang-Lee quantum criticality in various dimensions, Erick Arguello Cruz, Igor R. Klebanov, Grigory Tarnopolsky, and Yuan Xin, [arXiv:2505.06369](https://arxiv.org/abs/2505.06369).
+
+> __[Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d
+Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
+
+The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2d Yang-Lee theory is described by $M(2,5)$ minimal model and 3d Yang-Lee CFT can be solved perturbatively up to five-loops, Fan _et al._, Arguello Cruz _et al._, and Miro _et al._ presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
+
 ### Studying conformal defects and boundaries
 
 Apart from the bulk CFTs, fuzzy sphere can also be used to study their conformal defects and boundaries. Deforming a CFT with interactions living on a sub-dimensional defect may trigger a RG flow towards a non-trivial interacting IR fixed point. A defect IR theory that own a smaller conformal symmetry is called a defect CFT. The dCFTs own rich physical structure such as defect operators and bulk-to-defect correlation functions. Moreover, a bulk CFT can flow to several different dCFTs. So far, the accessible defects/boundaries include the magnetic line defect of 3d Ising CFT, including its defect operator spectrum, correlators, $g$-function, defect changing operators, its cusp, and the conformal boundaries of 3d Ising CFT.

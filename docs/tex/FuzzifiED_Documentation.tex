@@ -23,7 +23,7 @@
 
 \section{Purpose and outline}
 
-Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs~\cite{Zhu2022,Hu2023Mar,Han2023Jun,Zhou2023,Lao2023,Hu2023Aug,Hofmann2023,Han2023Dec,Zhou2024Jan,Hu2024,Cuomo2024,Zhou2024Jul,Dedushenko2024,Fardelli2024,Fan2024,Zhou2024Oct,Voinea2024,Yang2025,Han2025,Laeuchli2025}. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor~\cite{ITensor} library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features~:
+Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs~\cite{Zhu2022,Hu2023Mar,Han2023Jun,Zhou2023,Lao2023,Hu2023Aug,Hofmann2023,Han2023Dec,Zhou2024Jan,Hu2024,Cuomo2024,Zhou2024Jul,Dedushenko2024,Fardelli2024,Fan2024,Zhou2024Oct,Voinea2024,Yang2025,Han2025,Laeuchli2025,Fan2025,ArguelloCruz2025,Miro2025}. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor~\cite{ITensor} library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features~:
 \begin{enumerate}
     \item Versatility~: FuzzifiED can reproduce nearly all the ED and DMRG results from fuzzy sphere research. Its flexible design also makes it straightforward to adapt to new models.
     \item Usability~: The expressive Julia interface~\cite{Julia} simplifies coding and comprehension. To help users get started, we provide a collection of examples.
@@ -155,6 +155,10 @@ Several candidate Chern-Simons-matter theories are known to exist on its phase d
 \paragraph{The 3-state Potts model~\cite{Yang2025}}
 
 The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\mathbb{Z}$ is known as the number of states. In 2d, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs~\cite{Dotsenko1984Potts}, while $Q>Q_c$ are first order. Specifically, 2d 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity~\cite{Tang2024Potts} in a similar manner with the conjectured $\mathrm{SO}(5)$ DQCP. In 3d, the 3-state Potts model is found to be first-order~\cite{Barkema1991Potts,Chester2022Potts}. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry among flavours. The interacting Hamiltonian resembles the Ising model. Interestingly, Yang \textit{et al.}~find out that the transition point of the 3d 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite-size effect.
+
+\paragraph{Yang-Lee non-unitary CFT~\cite{Fan2025,ArguelloCruz2025,Miro2025}} 
+
+The Yang-Lee singularity~\cite{Yang1952Singularity,Lee1952Singularity,Cardy2023Singularity} is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2d Yang-Lee theory is described by $M(2,5)$ minimal model and 3d Yang-Lee CFT can be solved perturbatively up to five-loops, Fan \textit{et~al.}, Arguello Cruz \textit{et~al.}, and Miro \textit{et~al.}~presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
 
 \subsection{Studying conformal defects and boundaries}
 
@@ -1453,6 +1457,7 @@ FuzzifiED can help reproduce almost all the ED and DMRG results in fuzzy sphere 
     \item \linkexample{ising\_frac\_boson.jl} calculates the spectrum of the 3d Ising model on the fuzzy sphere for bosons at fractional filling $\nu = 1/2$ with the module Fuzzifino. This example reproduces Figure~12a,~b in Ref.~\cite{Voinea2024}.
     \item \linkexample{potts\_spectrum.jl} calculates the spectrum of 3d Potts model on the fuzzy sphere. This example reproduces Table I and Figure 4 in Ref.~\cite{Yang2025}.
     \item \linkexample{circle\_ising.jl} calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I--III in Ref.~\cite{Han2025}.
+    \item \linkexample{yang\_lee\_spectrum.jl} calculates the spectrum of 3d non-unitary Yang-Lee CFT on fuzzy sphere. This example reproduces Figure 3c in Ref.~\cite{Fan2025}.
     \item \linkexample{ising\_spectrum\_krylov.jl} calculates the spectrum of the 3d Ising model on the fuzzy sphere by calling the \lstinline|eigsolve| function in \lstinline|KrylovKit.jl| instead of Arpack.
     \item \linkexample{ising\_spectrum\_cuda.jl} calculates the spectrum of the 3d Ising model on the fuzzy sphere for one sector by performing the sparse matrix multiplication on CUDA.
 \end{enumerate}

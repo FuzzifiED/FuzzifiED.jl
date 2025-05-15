@@ -1,6 +1,6 @@
 # FuzzifiED.jl 
 
-[![Version](https://img.shields.io/badge/Version-1.0.3-orange)](https://juliahub.com/ui/Packages/General/FuzzifiED/1.0.3)
+[![Version](https://img.shields.io/badge/Version-1.0.4-orange)](https://juliahub.com/ui/Packages/General/FuzzifiED/1.0.4)
 [![Documentation online](https://img.shields.io/badge/Documentation-Online-8e8eff)](https://docs.fuzzified.world/)
 [![Documentation PDF](https://img.shields.io/badge/Documentation-PDF-8e8eff)](https://docs.fuzzified.world/assets/FuzzifiED_Documentation.pdf)
 [![arXiv](https://img.shields.io/badge/arXiv-2503.00100-b31b1b)](https://arxiv.org/abs/2503.00100)
@@ -89,7 +89,12 @@ Depth = 2
 * __[Voinea 2024]__ Regularising 3d conformal field theories via anyons on the fuzzy sphere, [arXiv:2411.15299](https://arxiv.org/abs/2411.15299).
 * __[Han 2025]__ Quantum phase transitions on the noncommutative circle, Chao Han, and Wei Zhu, [Phys. Rev. B __111__, 085113 (2025)](https://doi.org/10.1103/PhysRevB.111.085113).
 * __[Yang 2025]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320).
-* __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, Slava Rychkov [arXiv:2504.00842](https://arxiv.org/abs/2504.00842).
+* __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, and Slava Rychkov, [arXiv:2504.00842](https://arxiv.org/abs/2504.00842).
+* __[Fan 2025]__ Simulating the non-unitary Yang-Lee conformal field
+theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXiv:2505.06342](https://arxiv.org/abs/2505.06342).
+* __[Arguello Cruz 2025]__ Yang-Lee quantum criticality in various dimensions, Erick Arguello Cruz, Igor R. Klebanov, Grigory Tarnopolsky, and Yuan Xin, [arXiv:2505.06369](https://arxiv.org/abs/2505.06369).
+* __[Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d
+Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
 
 ## Index 
 
