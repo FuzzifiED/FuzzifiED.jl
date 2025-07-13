@@ -9,6 +9,7 @@
 - Add the removal and relabelling of orbitals for Terms. 
 - Include SphereObs and AngModes for Fuzzifino.
 - Add Contract for AngModes. 
+- Fix the normalisation of Casimir normalisation.
 - Update the reference and examples. 
 
 ### Version 1.0

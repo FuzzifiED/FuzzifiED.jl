@@ -42,7 +42,7 @@ Converts a `Sites` object in the `ITensors` package to the `Confs` object
 # Arguments 
 
 * `sites :: Vector{<:Index}` is a `Sites` object. Only `Fermion` site type is supported, and the quantum numbers of the `0` state must be all zero. Note that this will subject to the limitation in ITensors that the number of conserved quantities must be less than 4. 
-* `sec_qn :: QN` is a `QN` object that specifies the the quantum number of the selected configuration. Alternatively, `cf_ref :: Vector{Int64})` is a reference configuration composed of `0` and `1`.
+* `sec_qn :: QN` is a `QN` object that specifies the the quantum number of the selected configuration. Alternatively, `cf_ref :: Vector{Int64}` is a reference configuration composed of `0` and `1`.
 """
 function Confs(sites :: Vector{<:Index}, sec_qn :: QN)
     no = length(sites)
