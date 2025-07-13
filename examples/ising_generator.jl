@@ -1,8 +1,8 @@
 # This example examines the quality of conformal symmetry at nm = 12
 # by examining the matrix elements of conformal generators P^z + K^z
 # and compare the states (P^z + K^z)|Φ⟩ with the CFT expectations. 
-# This example reproduces Figure 7 in arXiv : 2409.02998.
-# On my table computer, this calculation takes 2.490 s
+# This example reproduces Figure 7 in SciPost Phys. 18, 086 (2025).
+# On my portable computer, this calculation takes 2.490 s
 
 using FuzzifiED
 using LinearAlgebra

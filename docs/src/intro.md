@@ -71,7 +71,7 @@ In addition to the OPE coefficients, the local observables can also be used to c
 
 ##### [Entropic $F$-function](@id Hu2024)
 
-> __[Hu 2024]__ Entropic ``F``-function of 3d Ising conformal field theory via the fuzzy sphere regularisation, Liangdong Hu, Wei Zhu, and Yin-Chen He, [arXiv:2401.17362](https://arxiv.org/abs/2401.17362).
+> __[Hu 2024]__ Entropic ``F``-function of 3d Ising conformal field theory via the fuzzy sphere regularisation, Liangdong Hu, Wei Zhu, and Yin-Chen He, [arXiv:2401.17362](https://arxiv.org/abs/2401.17362), [Phys. Rev. B __111__, 155151 (2025)](https://doi.org/10.1103/PhysRevB.111.155151).
 
 Beyond the correlators of local operators, a wealth of information can be learnt from the entanglement entropy and entanglement spectrum. A remarkable quantity is called the $F$-function, which is defined through the scaling behaviour of the entanglement entropy. Specifically, consider a quantum system that lives on $\mathbb{R}^2$. A circle with radius $R_d$ divides the system into inner part $A$ and outer part $B$. The entanglement entropy is defined and expected to scale with $R_d$ as 
 ```math
@@ -81,7 +81,7 @@ where $\delta$ is a UV-regulator. The constant part is known as the $F$-function
 
 ##### [Conformal generators](@id Fardelli2024)
 
-> __[Fardelli 2024]__ Constructing the infrared conformal generators on the fuzzy sphere, Giulia Fardelli, A. Liam Fitzpatrick, and Emanuel Katz, [arXiv:2409.02998](https://arxiv.org/abs/2409.02998).
+> __[Fardelli 2024]__ Constructing the infrared conformal generators on the fuzzy sphere, Giulia Fardelli, A. Liam Fitzpatrick, and Emanuel Katz, [arXiv:2409.02998](https://arxiv.org/abs/2409.02998), [SciPost Phys. __18__, 086 (2025)](https://doi.org/10.21468/SciPostPhys.18.3.086).
 
 > __[Fan 2024]__ Note on explicit construction of conformal generators on the fuzzy sphere, Ruihua Fan, [arXiv:2409.08257](https://arxiv.org/abs/2409.08257).
 
@@ -107,7 +107,7 @@ The $\mathrm{O}(N)$ Wilson-Fisher theories are probably one of the most studied 
 
 ##### [A series of new $\mathrm{Sp}(N)$-symmetric CFTs](@id Zhou2024Oct)
 
-> __[Zhou 2024Oct]__ A new series of 3d CFTs with ``\mathrm{Sp}(N)`` global symmetry on fuzzy sphere, Zheng Zhou, and Yin-Chen He, [arXiv:2410.00087](https://arxiv.org/abs/2410.00087).
+> __[Zhou 2024Oct]__ A new series of 3d CFTs with ``\mathrm{Sp}(N)`` global symmetry on fuzzy sphere, Zheng Zhou, and Yin-Chen He, [arXiv:2410.00087](https://arxiv.org/abs/2410.00087), [Phys. Rev. Lett. __135__, 026504 (2025)](https://doi.org/10.1103/xstj-xvcy).
 
 The quest to discover new 3d CFTs has been intriguing for physicists. A virgin land on this quest is the parity-breaking CFTs. In 3d, the Chern-Simons-matter theories stand out as the most well known and possibly the only known type of parity-breaking CFTs. Fuzzy sphere is a promising platform to study these theories. This work makes a concrete construction by generalising the DQCP to the WZW-NLσM on the target space of a general symplectic Grassmannian
 ```math
@@ -115,9 +115,9 @@ The quest to discover new 3d CFTs has been intriguing for physicists. A virgin l
 ```
 Several candidate Chern-Simons-matter theories are known to exist on its phase diagram which have $N$ flavour of gapless bosons or fermions coupled to a non-Abelian (_viz._ $\mathrm{Sp}(1)$, $\mathrm{Sp}(2)$, etc.) Chern-Simons gauge field. On the fuzzy sphere, this WZW-NLσM can be realised by a $2N$ layer model with $\mathrm{Sp}(N)$ global symmetry, and $2M$ out of the $2N$ layers are filled. This work numerically verifies the emergent conformal symmetry by observing the integer-spaced conformal multiplets and studying the finite-size scaling of the conformality. 
 
-##### [The 3-state Potts model](@id Yang2025)
+##### [The 3-state Potts model](@id Yang2025Jan)
 
-> __[Yang 2025]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320)
+> __[Yang 2025Jan]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320)
 
 The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\mathbb{Z}$ is known as the number of states. In 2d, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs, while $Q>Q_c$ are first order. Specifically, 2d 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity in a similar manner with $\mathrm{SO}(5)$ DQCP. In 3d, the 3-state Potts model is found to be first-order. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry between layers. The interacting Hamiltonian resembles the Ising model. Interestingly, this work finds out that the transition point of the 3d 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite size effect.
 
@@ -128,10 +128,19 @@ theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXi
 
 > __[Arguello Cruz 2025]__ Yang-Lee quantum criticality in various dimensions, Erick Arguello Cruz, Igor R. Klebanov, Grigory Tarnopolsky, and Yuan Xin, [arXiv:2505.06369](https://arxiv.org/abs/2505.06369).
 
-> __[Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d
-Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
+> __[Elias Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
 
-The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2d Yang-Lee theory is described by $M(2,5)$ minimal model and 3d Yang-Lee CFT can be solved perturbatively up to five-loops, Fan _et al._, Arguello Cruz _et al._, and Miro _et al._ presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
+The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2d Yang-Lee theory is described by $M(2,5)$ minimal model and 3d Yang-Lee CFT can be solved perturbatively up to five-loops, Fan _et al._, Arguello Cruz _et al._, and Elias Miro _et al._ presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
+
+#### [The free real scalar theory](@id He2025Jun)
+
+> __[He 2025]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
+
+> __[Taylor 2025]__ Conformal scalar field theory from Ising tricriticality on the fuzzy sphere, Joseph Taylor, Cristian Voinea, Zlatko Papić, Ruihua Fan, [arXiv:2506.22539](https://arxiv.org/abs/2506.22539).
+
+#### [The $\mathrm{O}(4)$ deconfined criticality](@id Yang2025Jul)
+
+> __[Yang 2025Jul]__ Conformal Operator Flows of the Deconfined Quantum Criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
 
 ### Studying conformal defects and boundaries
 
@@ -155,7 +164,7 @@ This work realises the defect creation and changing operators for the Ising mang
 
 ##### [Cusp](@id Cuomo2024)
 
-> __[Cuomo 2024]__ Impurities with a cusp : general theory and 3d Ising, Gabriel Cuomo, Yin-Chen He, Zohar Komargodski, [arXiv:2406.10186](https://arxiv.org/abs/2406.10186), [J. High Energy Phys. __11__ (2024) 061](https://doi.org/10.1007/JHEP11(2024)061). 
+> __[Cuomo 2024]__ Impurities with a cusp : general theory and 3d Ising, Gabriel Cuomo, Yin-Chen He, Zohar Komargodski, [arXiv:2406.10186](https://arxiv.org/abs/2406.10186), [JHEP __11__ (2024) 061](https://doi.org/10.1007/JHEP11(2024)061). 
 
 A cusp is two semi-infinite defect lines joined at one point at an angle. This can be realised on fuzzy sphere through pinning fields at two points at an angle. This work studies the cusps through various theoretical and numerical approaches. In particular, on fuzzy sphere, this paper calculates the cusp anomalous dimension as a function of the angle for the Ising magnetic line defects, and verifies its relation with the Zamolodchikov norm of the displacement operator. 
 
@@ -187,7 +196,7 @@ Up to the time of this work, the numerical methods that has been applied to fuzz
 
 ##### [Ising CFT on top of FQHE state](@id Voinea2024)
 
-> __[Voinea 2024]__ Regularising 3d conformal field theories via anyons on the fuzzy sphere, [arXiv:2411.15299](https://arxiv.org/abs/2411.15299).
+> __[Voinea 2024]__ Regularising 3d conformal field theories via anyons on the fuzzy sphere, [arXiv:2411.15299](https://arxiv.org/abs/2411.15299), [Phys. Rev. X __15__, 031007 (2025)](https://doi.org/10.1103/bf4k-phl9).
 
 Up to the time of this work, all the constructions of CFTs on fuzzy sphere are based on the quantum Hall ferromagnet. Specifically, before the interaction is added, an integer number of the lowest Landau levels are fully occupied. This state has a finite charge gap that guarentees that the gapless spin degree of freedom do not strongly couple with the charge degree of freedom when one adds the interactions. 
 

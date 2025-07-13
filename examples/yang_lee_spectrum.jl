@@ -1,6 +1,6 @@
 # This example calculates the spectrum of 3d non-unitary Yang-Lee CFT on fuzzy sphere at nm = 12.
-# This example reproduces Figure 3c in arXiv:2505.06342
-# On my table computer, this calculation takes 14.307 s
+# This example reproduces the finite size data of Figure 11 in arXiv : 2505.06369.
+# On my portable computer, this calculation takes 10.714 s
 
 using FuzzifiED
 const σ1 = [  1  0 ;  0  0 ]
@@ -19,9 +19,9 @@ qnf = [
     GetRotyQNOffd(nm, 2) ]
 
 tms_hmt = SimplifyTerms(
-    GetDenIntTerms(nm, 2, 4 .* [0.2532, 0.0999, -0.0461, -0.0228], σ1, σ2)
-    - GetPolTerms(nm, 2, σx) 
-    + 0.313im * GetPolTerms(nm, 2, σz))
+    GetDenIntTerms(nm, 2, 2 .* [4.75, 1.0], σ1, σ2)
+    - 10.0 * GetPolTerms(nm, 2, σx) 
+    + 4.41im * GetPolTerms(nm, 2, σz))
 tms_l2 = GetL2Terms(nm, 2)
 
 cfs = Confs(2 * nm, [nm, 0], qnd)

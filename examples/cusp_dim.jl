@@ -1,7 +1,7 @@
 # This example calculates the scaling dimension of the cusp of the magnetic line defect 
 # in 3d Ising model as a function of the angle θ.
-# This example reproduces Table 2, upper panel in arXiv : 2406.10186
-# On my table computer, this calculation takes 33.841 s
+# This example reproduces Table 2, upper panel in JHEP 11 (2024) 061
+# On my portable computer, this calculation takes 33.841 s
 
 using FuzzifiED
 const σ1 = [  1  0 ;  0  0 ]

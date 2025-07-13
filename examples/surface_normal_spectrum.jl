@@ -1,7 +1,7 @@
 # This example calculates the spectrum of ordinary surface CFT in 3d Ising model
 # calibrated by surface displacement operator D in the orbital boundary scheme.
-# This example reproduces Figure 5 in arXiv:2407.15914
-# On my table computer, this calculation takes 2.213 s
+# This example reproduces Figure 5 in  SciPost Phys. 18, 031 (2025).
+# On my portable computer, this calculation takes 2.213 s
 
 using FuzzifiED
 const σ1 = [  1  0 ;  0  0 ]

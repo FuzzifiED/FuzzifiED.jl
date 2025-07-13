@@ -1,7 +1,7 @@
 # This example calculates the spectrum of 3d Ising model on fuzzy sphere
 # for fermions at fractional filling ν = 1/3.
-# This example reproduces Figure 10 in arXiv:2411.15299.
-# On my table computer, this calculation takes 33.527 s.
+# This example reproduces Figure 10 in Phys. Rev. X 15, 031007 (2025).
+# On my portable computer, this calculation takes 33.527 s.
 # We acknowlege Cristian Voinea for his help in reproducing the results. 
 
 using FuzzifiED
