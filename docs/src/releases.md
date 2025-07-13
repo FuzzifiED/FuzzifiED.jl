@@ -2,6 +2,15 @@
 
 ## Version 1.x
 
+### Version 1.1
+
+#### Version 1.1.0 (14 July, 2025)
+
+- Add the removal and relabelling of orbitals for Terms. 
+- Include SphereObs and AngModes for Fuzzifino.
+- Add Contract for AngModes. 
+- Update the reference and examples. 
+
 ### Version 1.0
 
 #### Version 1.0.4 (15 May, 2025)
