@@ -245,11 +245,11 @@ where ``G_i`` are the generator matrices, and ``T_i`` are the trace matrices.
 # Arguments
 * `nm :: Int64` is the number of orbitals.
 * `nf :: Int64` is the number of flavours.
-* `mat_gen :: Vector{Matrix{Number}})` is a list of the matrices that gives the generators. It will automatically be normalised such that its square traces to unity. 
+* `mat_gen :: Vector{Matrix{Number}})` is a list of the matrices that gives the generators. It will automatically be normalised such that its square traces to \$1/2\$. 
 * `mat_tr :: Vector{Matrix{Number}})` is a list of trace matrices that will be normalised automatically and substracted. Facultative.
 """
 function GetC2Terms(nm :: Int64, nf :: Int64, mat_gen :: Vector{<:AbstractMatrix{<:Number}}, mat_tr :: Vector{<:AbstractMatrix{<:Number}} = Matrix{Float64}[])
     return SimplifyTerms(
-        sum([GetPolTerms(nm, nf, Matrix(mati')) * GetPolTerms(nm, nf, mati) / tr(mati' * mati) for mati in mat_gen])
-         - (isempty(mat_tr) ? Term[] : sum([GetPolTerms(nm, nf, Matrix(mati')) * GetPolTerms(nm, nf, mati) / tr(mati' * mati) for mati in mat_tr])))
+        sum([GetPolTerms(nm, nf, Matrix(mati')) * GetPolTerms(nm, nf, mati) / tr(mati' * mati) * 0.5 for mati in mat_gen])
+         - (isempty(mat_tr) ? Term[] : sum([GetPolTerms(nm, nf, Matrix(mati')) * GetPolTerms(nm, nf, mati) / tr(mati' * mati) * 0.5 for mati in mat_tr])))
 end 

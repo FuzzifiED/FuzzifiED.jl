@@ -42,7 +42,7 @@ tms_hmt = SimplifyTerms(
     4 * π * 0.225 * GetPolTerms(nm, nf, σx⊗σ0)
 )
 tms_l2 = GetL2Terms(nm, nf)
-tms_c2 = GetC2Terms(nm, nf, [σ0⊗σx,σ0⊗σy,σ0⊗σz])
+tms_c2 = GetC2Terms(nm, nf, [σ0⊗σx,σ0⊗σy,σ0⊗σz]) * 2
 
 result = []
 for P in (1,-1), Z in (1,-1), X in (1,-1), R in (1,-1)
