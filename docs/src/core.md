@@ -75,6 +75,12 @@ NormalOrder(tm :: Term)
 SimplifyTerms(tms :: Terms)
 ```
 
+We allow the removal or relabelling of orbitals by 
+```@docs
+RemoveOrbs(tms :: Terms, o_rm :: Vector{Int64})
+RelabelOrbs(tms :: Terms, dict_o :: Dict{Int64, Int64})
+```
+
 ## Operator
 
 ```@docs

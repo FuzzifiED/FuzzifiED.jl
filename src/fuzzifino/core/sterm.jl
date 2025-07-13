@@ -1,4 +1,4 @@
-import FuzzifiED: NormalOrder, SimplifyTerms
+import FuzzifiED: NormalOrder, SimplifyTerms, RemoveOrbs, RelabelOrbs
 export STerm, STerms
 
 
@@ -211,4 +211,38 @@ function SimplifyTerms(tms :: STerms ; cutoff :: Float64 = eps(Float64)) :: STer
         for (cstr_i, coeff_i) in dict_tms_i if abs(coeff_i) > cutoff
     ]
     return tms_f
+end
+
+"""
+    RemoveOrbs(tms :: STerms, o_rm :: Vector{Int64}) :: STerms
+
+remove all the terms that has creation or annihilation operators of sites in the set `o_rm`.
+"""
+function RemoveOrbs(tms :: STerms, o_rm :: Vector{Int64})
+    return filter(tm -> all([o ∉ o_rm for o in tm.cstr[2 : 2 : end]]), tms)
+end
+
+"""
+    RelabelOrbs(tms :: STerms, dict_o :: Dict{Int64, Int64})
+
+Relabel all the orbitals. Terms that has operators on the sites that are not in the keys of `dict_o` are removed. 
+"""
+function RelabelOrbs(tms :: STerms, dict_o :: Dict{Int64, Int64})
+    tms1 = Term[]
+    for tm in tms
+        coeff1 = tm.coeff
+        cstr1 = deepcopy(tm.cstr)
+        flag = true
+        for i = 2 : 2 : length(cstr1)
+            if (!haskey(dict_o, cstr1[i]))
+                flag = false 
+                break
+            end
+            cstr1[i] = dict_o[cstr1[i]]
+        end
+        if flag 
+            push!(tms1, Term(coeff1, cstr1))
+        end
+    end
+    return tms1
 end

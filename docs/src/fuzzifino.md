@@ -64,10 +64,12 @@ The product of terms with a number, the sum and product of terms, adjoint and pa
 *(tms1 :: STerms, tms2 :: STerms)
 adjoint(tms :: STerms)
 ```
-The terms can be simplified by 
+The terms can be simplified and manipulated by 
 ```@docs
 NormalOrder(tm :: STerm)
 SimplifyTerms(tms :: STerms)
+RemoveOrbs(tms :: STerms, o_rm :: Vector{Int64})
+RelabelOrbs(tms :: STerms, dict_o :: Dict{Int64, Int64})
 ```
 
 ### Operator
