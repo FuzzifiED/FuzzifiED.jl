@@ -6,6 +6,7 @@
 using FuzzifiED
 const σ1 = [  1  0 ;  0  0 ]
 const σ2 = [  0  0 ;  0  1 ]
+const σz = [  1  0 ;  0 -1 ]
 const σx = [  0  1 ;  1  0 ]
 FuzzifiED.ElementType = Float64
 ≈(x, y) = abs(x - y) < eps(Float32)
@@ -23,7 +24,8 @@ int_mat = GetIntMatrix(2 * nm, ps_pot)
 fld_pin = [ sum([ int_mat[m1, m2, m2] for m2 = nm + 1 : 2 * nm]) for m1 = 1 : nm ]
 
 tms_hmt = SimplifyTerms(
-    GetDenIntTerms(nm * 2, 2, 2 .* [4.75, 1.], σ1, σ2 ; m_kept = collect(1 : nm))
+    RemoveOrbs(GetDenIntTerms(nm * 2, 2, 2 .* [4.75, 1.], σ1, σ2), collect(2 * nm + 1 : 4 * nm))
+    # GetDenIntTerms(nm * 2, 2, 2 .* [4.75, 1.], σ1, σ2 ; m_kept = collect(1 : nm))
     + GetPolTerms(nm, 2, σ1 ; fld_m = fld_pin)
     - 3.16 * GetPolTerms(nm, 2, σx) 
 )

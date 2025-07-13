@@ -24,7 +24,7 @@ int_mat = GetIntMatrix(2 * nm, ps_pot)
 fld_pin = [ sum([ int_mat[m1, m2, m2] for m2 = nm + 1 : 2 * nm]) for m1 = 1 : nm ]
 
 tms_hmt = SimplifyTerms(
-    GetDenIntTerms(nm * 2, 2, 2 .* [4.75, 1.], σ1, σ2 ; m_kept = collect(1 : nm))
+    RemoveOrbs(GetDenIntTerms(nm * 2, 2, 2 .* [4.75, 1.], σ1, σ2), collect(2 * nm + 1 : 4 * nm))
     + GetPolTerms(nm, 2 ; fld_m = fld_pin) / 2
     - 3.16 * GetPolTerms(nm, 2, σx) 
 )
