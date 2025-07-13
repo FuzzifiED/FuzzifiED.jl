@@ -1,4 +1,4 @@
-import FuzzifiED: FilterL2
+import FuzzifiED: FilterL2, ContractMod
 export SAngModes, GetFermionSMod, GetBosonSMod, GetFerPairingSMod, GetBosPairingSMod, GetFerDensitySMod, GetBosDensitySMod
 
 """
@@ -116,17 +116,17 @@ end
 
 
 """
-    +(obs1 :: SAngModes, obs2 :: SAngModes) :: SAngModes
-    -(obs1 :: SAngModes, obs2 :: SAngModes) :: SAngModes
+    +(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
+    -(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
     
 enables the addition of two modes.
 """
-function Base.:+(obs1 :: SAngModes, obs2 :: SAngModes) 
-    l2m = max(obs1.l2m, obs2.l2m)
-    return SAngModes(l2m, (l2, m2) -> obs1.get_comp(l2, m2) + obs2.get_comp(l2, m2))
+function Base.:+(amd1 :: SAngModes, amd2 :: SAngModes) 
+    l2m = max(amd1.l2m, amd2.l2m)
+    return SAngModes(l2m, (l2, m2) -> amd1.get_comp(l2, m2) + amd2.get_comp(l2, m2))
 end
-function Base.:-(obs1 :: SAngModes, obs2 :: SAngModes)
-    return obs1 + (-1) * obs2
+function Base.:-(amd1 :: SAngModes, amd2 :: SAngModes)
+    return amd1 + (-1) * amd2
 end
 
 
@@ -142,28 +142,28 @@ enables the Hermitian conjugate of a spherical mode.
 """
 function Base.adjoint(amd :: SAngModes)
     l2m = amd.l2m
-    obs1 = SAngModes(l2m, (l2, m2) -> (iseven((l2 + m2) ÷ 2) ? 1 : -1) * amd.get_comp(l2, -m2)')
-    return obs1
+    amd1 = SAngModes(l2m, (l2, m2) -> (iseven((l2 + m2) ÷ 2) ? 1 : -1) * amd.get_comp(l2, -m2)')
+    return amd1
 end
 
 
 """
-    *(obs1 :: SAngModes, obs2 :: SAngModes) :: SAngModes
+    *(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
     
 enables the multiplication of two modes in the rule of CG coefficients. 
 ```math 
     Φ_{lm}=∑_{l_1l_2m_1m_2}δ_{m,m_1+m_2}⟨l_1m_1,l_2m_2|lm⟩Φ_{l_1m_1}Φ_{l_2m_2}
 ```
 """
-function Base.:*(obs1 :: SAngModes, obs2 :: SAngModes)
-    l2m1 = obs1.l2m
-    l2m2 = obs2.l2m
+function Base.:*(amd1 :: SAngModes, amd2 :: SAngModes)
+    l2m1 = amd1.l2m
+    l2m2 = amd2.l2m
     l2m = l2m1 + l2m2
     gc = ((l2, m2) -> sum(STerms[sum(STerms[sum(STerms[
             (iseven((-l21 + l22 + m2) ÷ 2) ? 1 : -1) *
             sqrt(l2 + 1) *
             wigner3j(l21/2, l22/2, l2/2, m21/2, (m2-m21)/2, -m2/2) *
-            obs1.get_comp(l21, m21) * obs2.get_comp(l22, m2 - m21)
+            amd1.get_comp(l21, m21) * amd2.get_comp(l22, m2 - m21)
         for m21 = max(-l21, -l22 + m2) : 2 : min(l21, l22 + m2)])
         for l21 = max(l2m1 % 2, abs(l2 - l22)) : 2 : min(l2m1, l2 + l22)])
         for l22 = l2m2 % 2 : 2 : l2m2]))
@@ -179,6 +179,25 @@ returns an angular component ``Φ_{lm}`` of a modes object in the format of a li
 function GetComponent(amd :: SAngModes, l :: Number, m :: Number)
     return amd.get_comp(Int64(2 * l), Int64(2 * m))
 end
+
+
+"""
+    ContractMod(amd1 :: SAngModes, amd2 :: amd2, comps :: Dict) :: STerms
+    ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, l0 :: Number) :: STerms
+
+Return the contraction of two angular modes 
+```math 
+    ∑_{l}U_l∑_{m=-l}^l(-1)^{l+m}Φ_{1,l}Φ_{2,l(-m)}
+```
+where the list of ``U_l`` is given by a dictionary, or
+```math 
+    U_{l₀}∑_{m=-l₀}^{l₀}(-1)^{l₀+m}Φ_{1,l₀m}Φ_{2,l₀(-m)}.
+```
+"""
+function ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, comps :: Dict)
+    return SimplifyTerms(sum([ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (iseven((Int64(2 * l) + m2) ÷ 2) ? 1 : -1) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
+end
+ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, l0 :: Number) = ContractMod(amd1, amd2, Dict([l0 => 1]))
 
 
 """

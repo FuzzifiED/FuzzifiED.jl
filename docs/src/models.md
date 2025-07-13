@@ -99,11 +99,12 @@ The multiplication, addition and conjugate of an observable is supported
 adjoint(amd :: AngModes)
 *(obs1 :: AngModes, obs2 :: AngModes)
 ```
-One can take out either one or a set of components
+One can take out either one or a set of components, or contract two angular modes. 
 ```@docs
 GetComponent(amd :: AngModes, l :: Number, m :: Number)
 FilterL2(amd :: AngModes, l :: Number) 
 FilterComponent(amd :: AngModes, flt) 
+ContractMod(amd1 :: AngModes, amd2 :: AngModes, comps :: Dict)
 ```
 Three types of operators, _viz._ electrons and density operators, and pairing operators are built-in.
 ```@docs
