@@ -110,7 +110,7 @@ STransf(bsd :: SBasis, bsf :: SBasis, qnf :: SQNOffd)
 *(trs :: STransf, st_d :: Vector{ComplexF64} ; num_th = NumThreads)
 ```
 
-## Pure bosonic models
+## Models
 
 Several quantum numbers and operator terms for the pure bosonic models are built-in.
 
@@ -126,8 +126,12 @@ GetBosonPolSTerms
 GetBosonL2STerms
 GetBosonC2STerms
 ```
+The types `SSphereObs` and `SAngModes` are similarly defined as their fermionic counterparts
+```@docs
+SSphereObs
+SAngModes
+```
 
 ## Related examples
 
-* [`test_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/test_boson.jl) tests the nearest-neighbour tight-binding model $H=\sum_i(b^\dagger_ib_{i+1}+f^\dagger_if_{i+1}+\mathrm{h.c.})$. The example diagonalises the sector with the number of bosons and fermions both $N_o/2$, and even under the reflection with respect to a bond center $i\mapsto N_o+1-i$, and measures the total particle number squared $\left[\sum_i(b_i^\dagger b_i+f^\dagger_if_i)\right]^2$.
 * [`ising_frac_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_boson.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for bosons at fractional filling ``ν = 1/2``. This example reproduces Figure 12a,b in [Voinea 2024](@ref Voinea2024).

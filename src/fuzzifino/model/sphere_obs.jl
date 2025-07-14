@@ -17,6 +17,27 @@ The mutable type `SSphereObs` stores the information of a local observable (or l
 * `get_comp :: Function` is a function `get_comp(l2 :: Int64, m2 :: Int64) :: STerms` that sends the component specified by a tuple of integers ``(2l,2m)`` where ``|s|\\leq l\\leq l_{\\max}, -l\\leq m\\leq l`` to a list of terms that specifies the expression of the component. 
 * `stored_q :: Bool` is a boolean that specifies whether or not each component of the observable is stored.
 * `comps :: Dict{Tuple{Int64, Int64}, STerms}` stores each component of the observable in the format of a dictionary whose keys are the tuples of integers ``(2l,2m)`` and values are the lists of terms that specifies the expression of the component. 
+
+# Methods 
+
+The methods for this type is similarly defined as in SphereObs.
+
+    SSphereObs(s2 :: Int64, l2m :: Int64, get_comp :: Function) :: SSphereObs
+    SSphereObs(s2 :: Int64, l2m :: Int64, comps :: Dict{Tuple{Int64, Int64}, STerms}) :: SSphereObs
+    StoreComps(obs :: SSphereObs) :: SSphereObs
+    *(fac :: Number, obs :: SSphereObs) :: SSphereObs
+    +(obs1 :: SSphereObs, obs2 :: SSphereObs) :: SSphereObs
+    adjoint(obs :: SSphereObs) :: SSphereObs
+    *(obs1 :: SSphereObs, obs2 :: SSphereObs) :: SSphereObs
+    Laplacian(obs :: SSphereObs[ ; norm_r2 :: Float64]) :: SSphereObs
+    GetIntegral(obs :: SSphereObs[ ; norm_r2 :: Float64]) :: STerms
+    GetComponent(obs :: SSphereObs, l :: Number, m :: Number) :: STerms
+    FilterComponent(obs :: SSphereObs, flt) :: AngModes 
+    GetPointValue(obs :: SSphereObs, θ :: Float64, ϕ :: Float64) :: STerms
+    GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64]) :: SSphereObs
+    GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64]) :: SSphereObs
+    GetFerDensitySObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64]) :: SSphereObs
+    GetBosDensitySObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64]) :: SSphereObs
 """
 mutable struct SSphereObs
     s2 :: Int64

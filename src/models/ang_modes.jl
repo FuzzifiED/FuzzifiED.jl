@@ -195,7 +195,7 @@ where the list of ``U_l`` is given by a dictionary, or
 ```
 """
 function ContractMod(amd1 :: AngModes, amd2 :: AngModes, comps :: Dict)
-    return SimplifyTerms(sum([ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (iseven((Int64(2 * l) + m2) ÷ 2) ? 1 : -1) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
+    return SimplifyTerms(sum(Terms[ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (iseven((Int64(2 * l) + m2) ÷ 2) ? 1 : -1) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
 end
 ContractMod(amd1 :: AngModes, amd2 :: AngModes, l0 :: Number) = ContractMod(amd1, amd2, Dict([l0 => 1]))
 

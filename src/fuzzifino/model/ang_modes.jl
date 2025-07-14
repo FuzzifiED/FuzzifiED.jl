@@ -12,6 +12,30 @@ The mutable type `SAngModes` stores angular momentum components of an operator o
 * `get_comp :: Function` is a function `get_comp(l2 :: Int64, m2 :: Int64) :: STerms` that sends the component specified by a tuple of integers ``(2l,2m)`` where ``|s|\\leq l\\leq l_{\\max}, -l\\leq m\\leq l`` to a list of terms that specifies the expression of the component. 
 * `stored_q :: Bool` is a boolean that specifies whether or not each component of the modes object is stored.
 * `comps :: Dict{Tuple{Int64, Int64}, STerms}` stores each component of the modes object in the format of a dictionary whose keys are the tuples of integers ``(2l,2m)`` and values are the lists of terms that specifies the expression of the component. 
+
+# Methods 
+
+The methods for this type is similarly defined as in AngModes.
+
+    SAngModes(l2m :: Int64, get_comp :: Function) :: SAngModes
+    SAngModes(l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64}, STerms}) :: SAngModes
+    StoreComps!(amd :: SAngModes)
+    StoreComps(amd :: SAngModes) :: SAngModes
+    *(fac :: Number, amd :: SAngModes) :: SAngModes
+    +(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
+    adjoint(amd :: SAngModes) :: SAngModes
+    *(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
+    GetComponent(amd :: SAngModes, l :: Number, m :: Number) :: STerms
+    ContractMod(amd1 :: SAngModes, amd2 :: amd2, comps :: Dict) :: STerms
+    ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, l0 :: Number) :: STerms
+    FilterComponent(amd :: SAngModes, flt) :: SAngModes 
+    FilterL2(amd :: SAngModes, l :: Number) :: SAngModes 
+    GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64) :: SAngModes
+    GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64) :: SAngModes
+    GetFerPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetBosPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
 """
 mutable struct SAngModes
     l2m :: Int64
@@ -37,7 +61,7 @@ end
 
 
 """
-    SAngModes(l2m :: Int64, get_comp :: Function) :: SAngModes
+    SAngModes(l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64}, STerms}) :: SAngModes
 
 initialises the modes object from ``2l_{\\max}`` and a list of ``\\Phi_{lm}`` specified by a dictionary. 
 
@@ -195,7 +219,7 @@ where the list of ``U_l`` is given by a dictionary, or
 ```
 """
 function ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, comps :: Dict)
-    return SimplifyTerms(sum([ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (iseven((Int64(2 * l) + m2) ÷ 2) ? 1 : -1) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
+    return SimplifyTerms(sum(STerms[ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (iseven((Int64(2 * l) + m2) ÷ 2) ? 1 : -1) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
 end
 ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, l0 :: Number) = ContractMod(amd1, amd2, Dict([l0 => 1]))
 
