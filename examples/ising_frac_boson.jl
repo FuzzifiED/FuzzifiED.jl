@@ -34,7 +34,7 @@ tms_hmt = SimplifyTerms(
     + GetBosonDenIntSTerms(nm, 2, 2 .* [0.0, 0.53, 0.09],  σ1, σ2)
     - 0.25 * GetBosonPolSTerms(nm, 2, σx) 
 )
-tms_l2 = GetBosonL2STerms(nm, nf) ; 
+tms_l2 = GetL2STerms(0, 0, nm, nf) ; 
 
 result = []
 for Z in [1, -1], R in [1, -1]

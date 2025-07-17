@@ -1,4 +1,4 @@
-export GetBosonDenIntSTerms, GetBosonPairIntSTerms, GetBosonPolSTerms, GetBosonL2STerms, GetBosonC2STerms
+export GetBosonDenIntSTerms, GetBosonPairIntSTerms, GetBosonPolSTerms, GetBosonL2STerms, GetBosonC2STerms, GetL2STerms
 
 
 """
@@ -151,6 +151,31 @@ function GetBosonPolSTerms(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = M
     return SimplifyTerms(tms)
 end
 
+"""
+    GetL2STerms(nmf :: Int64, nff :: Int64, nmb :: Int64, nfb :: Int64) :: STerms
+
+Return the terms for the total angular momentum for bosons and .
+
+# Arguments
+* `nmf :: Int64` is the number of fermion orbitals.
+* `nff :: Int64` is the number of fermion flavours.
+* `nmb :: Int64` is the number of boson orbitals.
+* `nfb :: Int64` is the number of boson flavours.
+"""
+function GetL2STerms(nmf :: Int64, nff :: Int64, nmb :: Int64, nfb :: Int64)
+    tms_lzf = [ STerm(m - (nmf + 1) / 2, [1, (m - 1) * nff + f, 0, (m - 1) * nff + f]) for m = 1 : nmf for f = 1 : nff ]
+    tms_lzb = [ STerm(m - (nmb + 1) / 2, [1, -((m - 1) * nfb + f), 0, -((m - 1) * nfb + f)]) for m = 1 : nmb for f = 1 : nfb ]
+
+    tms_lpf = [ STerm(sqrt((nmf - m) * m), [1, m * nff + f, 0, (m - 1) * nff + f]) for m = 1 : nmf - 1 for f = 1 : nff ]
+    tms_lpb = [ STerm(sqrt((nmb - m) * m), [1,-(m * nfb + f), 0,-((m - 1) * nfb + f)]) for m = 1 : nmb - 1 for f = 1 : nfb ]
+
+    tms_lz = tms_lzf + tms_lzb
+    tms_lp = tms_lpf + tms_lpb
+    tms_lm = tms_lp'
+    
+    return SimplifyTerms(tms_lz * tms_lz - tms_lz + tms_lp * tms_lm)
+end ;
+
 
 """
     GetBosonL2STerms(nm :: Int64, nf :: Int64) :: STerms
@@ -161,22 +186,7 @@ Return the terms for the total angular momentum for bosons.
 * `nm :: Int64` is the number of orbitals.
 * `nf :: Int64` is the number of flavours.
 """
-function GetBosonL2STerms(nm :: Int64, nf :: Int64)
-    s = (nm - 1) / 2.0
-    no = nm * nf
-    tms_lz = 
-        [ begin m = div(o - 1, nf)
-            STerm(m - s, [1, -o, 0, -o])
-        end for o = 1 : no ]
-    tms_lp = 
-        [ begin m = div(o - 1, nf)
-            STerm(sqrt(m * (nm - m)), [1, -o, 0, -(o - nf)])
-        end for o = nf + 1 : no ]
-    tms_lm = tms_lp' 
-    tms_l2 = tms_lz * tms_lz - tms_lz + tms_lp * tms_lm
-    # Initialise the L2 operator
-    return SimplifyTerms(tms_l2)
-end
+GetBosonL2STerms(nm :: Int64, nf :: Int64) = GetL2STerms(0, 0, nm, nf)
 
 
 """
