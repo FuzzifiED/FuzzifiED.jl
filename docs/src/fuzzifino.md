@@ -123,7 +123,7 @@ GetBosonRotySQNOffd
 GetBosonDenIntSTerms
 GetBosonPairIntSTerms
 GetBosonPolSTerms
-GetBosonL2STerms
+GetL2STerms
 GetBosonC2STerms
 ```
 The types `SSphereObs` and `SAngModes` are similarly defined as their fermionic counterparts
