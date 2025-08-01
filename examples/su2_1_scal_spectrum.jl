@@ -54,10 +54,8 @@ for Z in [1, -1], R in [-1, 1]
     c2 = SOperator(bs, tms_c2)
     c2_mat = OpMat(c2)
     c2_val = [ st[:, i]' * c2_mat * st[:, i] for i in eachindex(enrg)]
-    @show c2_val
 
     for i in eachindex(enrg)
-        (st[:, i]' * st[:, i] ≈ 1) || continue
         push!(result, round.([enrg[i], l2_val[i], c2_val[i]] .+ √eps(Float64), digits = 7))
     end
 end
