@@ -253,3 +253,46 @@ function GetC2Terms(nm :: Int64, nf :: Int64, mat_gen :: Vector{<:AbstractMatrix
         sum([GetPolTerms(nm, nf, Matrix(mati')) * GetPolTerms(nm, nf, mati) / tr(mati' * mati) * 0.5 for mati in mat_gen])
          - (isempty(mat_tr) ? Term[] : sum([GetPolTerms(nm, nf, Matrix(mati')) * GetPolTerms(nm, nf, mati) / tr(mati' * mati) * 0.5 for mati in mat_tr])))
 end 
+
+
+"""
+    GetC2Terms(nm :: Int64, nf :: Int64, group :: Symbol) :: Terms
+
+Return the terms for the quadratic Casimir of the flavour symmetry for a built-in Lie-group
+
+# Arguments
+* `nm :: Int64` is the number of orbitals.
+* `nf :: Int64` is the number of flavours.
+* `group :: Symbol' specifies the built-in Lie group. 
+    - ':Sp' gives the Casimir of \$\\mathrm{Sp}(N_f)/2\$
+```math
+    C_2=-\\frac{1}{4}(c^†_{m_1f_1}c_{m_1f_2})(c^†_{m_2f_3}c_{m_2f_4})Ω_{f_1f_3}Ω_{f_2f_4}+\\frac{1}{4}(c^†_{m_1f_1}c_{m_1f_2})(c^†_{m_2f_2}c_{m_2f_1})
+```
+
+"""
+function GetC2Terms(nm :: Int64, nf :: Int64, group :: Symbol)
+    # (1/2)(c_{m1,f1}^†c_{m1,f2})(c_{m2,f3}^†c_{m2,f4})Ω_{f1f3}Ω_{f2f4}+(1/2)(c_{m1,f1}^†c_{m1,f2})(c_{m2,f2}^†c_{m2,f1})
+    if (group == :Sp)
+        tms_c2 = Term[]
+        for m1 = 1 : nm, m2 = 1 : nm 
+            for f1 = 1 : nf, f2 = 1 : nf 
+                ΩΩ = (f1 ≤ nf ÷ 2 ? 1 : -1) * (f2 ≤ nf ÷ 2 ? 1 : -1)
+                f3 = mod1(f1 + nf ÷ 2, nf)
+                f4 = mod1(f2 + nf ÷ 2, nf)
+
+                o1 = f1 + nf * (m1 - 1)
+                o2 = f2 + nf * (m1 - 1)
+                o3 = f3 + nf * (m2 - 1)
+                o4 = f4 + nf * (m2 - 1)
+                tms_c2 -= Terms(ΩΩ / 4, [1, o1, 0, o2, 1, o3, 0, o4])
+
+                o1 = f1 + nf * (m1 - 1)
+                o2 = f2 + nf * (m1 - 1)
+                o3 = f2 + nf * (m2 - 1)
+                o4 = f1 + nf * (m2 - 1)
+                tms_c2 += Terms(1 / 4, [1, o1, 0, o2, 1, o3, 0, o4])
+            end
+        end
+        return SimplifyTerms(tms_c2)
+    end
+end

@@ -34,12 +34,7 @@ tms_hmt = SimplifyTerms(
     GetPairIntTerms(nm, nf, ps_pot_v, Ω)
 )
 tms_l2 = GetL2Terms(nm, nf)
-tms_c2 = SimplifyTerms(
-    GetDenIntTerms(nm, 4, [isodd(m) ? -.5 : 0 for m = 1 : nm]) + 
-    GetPairIntTerms(nm, 4, [isodd(m) ? -1.0 : 0 for m = 1 : nm], Ω)
-)
-push!(tms_c2, Term(ne + .25 * ne ^ 2, [-1, -1]))
-tms_c2 = SimplifyTerms(tms_c2)
+tms_c2 = GetC2Terms(nm, nf, :Sp)
 
 result = []
 for P in (1,-1), (Z1, Z2, X) in ((1, 1, 1), (1, 1,-1), (1,-1, 0), (-1,-1, 1), (-1,-1,-1)), R in (1,-1)
