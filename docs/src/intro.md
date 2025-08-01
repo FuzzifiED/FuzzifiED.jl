@@ -123,8 +123,7 @@ The Potts models describe transitions that spontaneously break $S_Q$ symmetries 
 
 #### [Yang-Lee non-unitary CFT](@id Fan2025)
 
-> __[Fan 2025]__ Simulating the non-unitary Yang-Lee conformal field
-theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXiv:2505.06342](https://arxiv.org/abs/2505.06342).
+> __[Fan 2025]__ Simulating the non-unitary Yang-Lee conformal field theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXiv:2505.06342](https://arxiv.org/abs/2505.06342).
 
 > __[Arguello Cruz 2025]__ Yang-Lee quantum criticality in various dimensions, Erick Arguello Cruz, Igor R. Klebanov, Grigory Tarnopolsky, and Yuan Xin, [arXiv:2505.06369](https://arxiv.org/abs/2505.06369).
 
@@ -134,13 +133,17 @@ The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natura
 
 #### [The free real scalar theory](@id He2025Jun)
 
-> __[He 2025]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
+> __[He 2025Jun]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
 
 > __[Taylor 2025]__ Conformal scalar field theory from Ising tricriticality on the fuzzy sphere, Joseph Taylor, Cristian Voinea, Zlatko Papić, Ruihua Fan, [arXiv:2506.22539](https://arxiv.org/abs/2506.22539).
 
 #### [The $\mathrm{O}(4)$ deconfined criticality](@id Yang2025Jul)
 
 > __[Yang 2025Jul]__ Conformal Operator Flows of the Deconfined Quantum Criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
+
+#### [The confinement transition of $\nu=1/2$ bosonic Laughlin state](@id Zhou2025Jul)
+
+> __[Zhou 2025Jul]__ Chern-Simons-matter conformal field theory on fuzzy sphere: Confinement transition of Kalmeyer-Laughlin chiral spin liquid, Zheng Zhou, Chong Wang, Yin-Chen He, [arXiv:2507.19580](https://arxiv.org/abs/2507.19580).
 
 ### Studying conformal defects and boundaries
 

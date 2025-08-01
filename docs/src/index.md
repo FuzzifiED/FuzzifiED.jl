@@ -89,14 +89,15 @@ Depth = 2
 * __[Zhou 2024Oct]__ A new series of 3d CFTs with ``\mathrm{Sp}(N)`` global symmetry on fuzzy sphere, Zheng Zhou, and Yin-Chen He, [arXiv:2410.00087](https://arxiv.org/abs/2410.00087), [Phys. Rev. Lett. __135__, 026504 (2025)](https://doi.org/10.1103/xstj-xvcy).
 * __[Voinea 2024]__ Regularising 3d conformal field theories via anyons on the fuzzy sphere, [arXiv:2411.15299](https://arxiv.org/abs/2411.15299), [Phys. Rev. X __15__, 031007 (2025)](https://doi.org/10.1103/bf4k-phl9).
 * __[Han 2025]__ Quantum phase transitions on the noncommutative circle, Chao Han, and Wei Zhu, [Phys. Rev. B __111__, 085113 (2025)](https://doi.org/10.1103/PhysRevB.111.085113).
-* __[Yang 2025Jan]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320).
+* __[Yang 2025Jan]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320), [Phys. Rev. B __112__, 024436 (2025)](https://doi.org/10.1103/x1qn-x6xb).
 * __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, and Slava Rychkov, [arXiv:2504.00842](https://arxiv.org/abs/2504.00842).
 * __[Fan 2025]__ Simulating the non-unitary Yang-Lee conformal field theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXiv:2505.06342](https://arxiv.org/abs/2505.06342).
 * __[Arguello Cruz 2025]__ Yang-Lee quantum criticality in various dimensions, Erick Arguello Cruz, Igor R. Klebanov, Grigory Tarnopolsky, and Yuan Xin, [arXiv:2505.06369](https://arxiv.org/abs/2505.06369).
 * __[Elias Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
-* __[He 2025]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
+* __[He 2025Jun]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
 * __[Taylor 2025]__ Conformal scalar field theory from Ising tricriticality on the fuzzy sphere, Joseph Taylor, Cristian Voinea, Zlatko Papić, Ruihua Fan, [arXiv:2506.22539](https://arxiv.org/abs/2506.22539).
 * __[Yang 2025Jul]__ Conformal Operator Flows of the Deconfined Quantum Criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
+* __[Zhou 2025Jul]__ Chern-Simons-matter conformal field theory on fuzzy sphere: Confinement transition of Kalmeyer-Laughlin chiral spin liquid, Zheng Zhou, Chong Wang, Yin-Chen He, [arXiv:2507.19580](https://arxiv.org/abs/2507.19580).
 
 ## Index 
 
