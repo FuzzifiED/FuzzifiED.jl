@@ -31,7 +31,7 @@ GetDenIntTerms(nm :: Int64, nf :: Int64, ps_pot :: Vector{<:Number}, mats_a :: V
 GetPairIntTerms(nm :: Int64, nf :: Int64, ps_pot :: Vector{<:Number}, mat_a :: Matrix{<:Number}, mat_b :: Matrix{<:Number} = Matrix(mat_a'))
 GetPolTerms(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
 GetL2Terms(nm :: Int64, nf :: Int64)
-GetC2Terms(nm :: Int64, nf :: Int64, mat_gen :: Vector{<:AbstractMatrix{<:Number}})
+GetC2Terms
 ```
 
 ## Spherical observables

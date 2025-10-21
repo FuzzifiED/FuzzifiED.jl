@@ -5,7 +5,7 @@
 [![Documentation PDF](https://img.shields.io/badge/Documentation-PDF-8e8eff)](https://docs.fuzzified.world/assets/FuzzifiED_Documentation.pdf)
 [![Source GitHub](https://img.shields.io/badge/Source-GitHub-silver)](https://github.com/FuzzifiED/FuzzifiED.jl)
 [![arXiv](https://img.shields.io/badge/arXiv-2503.00100-b31b1b)](https://arxiv.org/abs/2503.00100)
-[![Contact](https://img.shields.io/badge/Contact-Zheng_Zhou_周正-2e63b8)](mailto:physics@zhengzhou.page)
+[![Contact](https://img.shields.io/badge/Contact-Zheng_Zhou_周正-2e63b8)](mailto:Zheng%20Zhou%20%E5%91%A8%E6%AD%A3%20<physics@zhengzhou.page>)
 
 Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features : 
 
@@ -14,7 +14,7 @@ Since its proposal, the fuzzy sphere regularisation has made significant contrib
 * Efficiency : FuzzifiED produces results on reasonable system sizes within minutes.
 * Open source : The FuzzifiED codebase is freely available under the MIT License, welcoming reviews and contributions from the wider community.
 
-A PDF version of the documentation is provided at [this link](https://docs.fuzzified.world/assets/FuzzifiED_Documentation.pdf). If you have any questions, please contact Zheng Zhou (周正) at [physics@zhengzhou.page](mailto:physics@zhengzhou.page).
+A PDF version of the documentation is provided at [this link](https://docs.fuzzified.world/assets/FuzzifiED_Documentation.pdf). If you have any questions, please contact Zheng Zhou (周正) at [physics@zhengzhou.page](mailto:Zheng%20Zhou%20%E5%91%A8%E6%AD%A3%20<physics@zhengzhou.page>).
 
 ## Installation
 
@@ -86,7 +86,7 @@ Depth = 2
 * __[Dedushenko 2024]__ Ising BCFTs from the fuzzy hemisphere, Mykola Dedushenko, [arXiv:2407.15948](https://arxiv.org/abs/2407.15948).
 * __[Fardelli 2024]__ Constructing the infrared conformal generators on the fuzzy sphere, Giulia Fardelli, A. Liam Fitzpatrick, and Emanuel Katz, [arXiv:2409.02998](https://arxiv.org/abs/2409.02998), [SciPost Phys. __18__, 086 (2025)](https://doi.org/10.21468/SciPostPhys.18.3.086).
 * __[Fan 2024]__ Note on explicit construction of conformal generators on the fuzzy sphere, Ruihua Fan, [arXiv:2409.08257](https://arxiv.org/abs/2409.08257).
-* __[Zhou 2024Oct]__ A new series of 3d CFTs with ``\mathrm{Sp}(N)`` global symmetry on fuzzy sphere, Zheng Zhou, and Yin-Chen He, [arXiv:2410.00087](https://arxiv.org/abs/2410.00087), [Phys. Rev. Lett. __135__, 026504 (2025)](https://doi.org/10.1103/xstj-xvcy).
+* __[Zhou 2024Oct]__ 3D conformal field theories with ``\mathrm{Sp}(N)`` global symmetry on fuzzy sphere, Zheng Zhou, and Yin-Chen He, [arXiv:2410.00087](https://arxiv.org/abs/2410.00087), [Phys. Rev. Lett. __135__, 026504 (2025)](https://doi.org/10.1103/xstj-xvcy).
 * __[Voinea 2024]__ Regularising 3d conformal field theories via anyons on the fuzzy sphere, [arXiv:2411.15299](https://arxiv.org/abs/2411.15299), [Phys. Rev. X __15__, 031007 (2025)](https://doi.org/10.1103/bf4k-phl9).
 * __[Han 2025]__ Quantum phase transitions on the noncommutative circle, Chao Han, and Wei Zhu, [Phys. Rev. B __111__, 085113 (2025)](https://doi.org/10.1103/PhysRevB.111.085113).
 * __[Yang 2025Jan]__ Microscopic study of 3d Potts phase transition via fuzzy sphere regularisation, Shuai Yang, Yan-Guang Yue, Yin Tang, Chao Han, Wei Zhu, and Yan Chen, [arXiv:2501.14320](https://arxiv.org/abs/2501.14320), [Phys. Rev. B __112__, 024436 (2025)](https://doi.org/10.1103/x1qn-x6xb).
