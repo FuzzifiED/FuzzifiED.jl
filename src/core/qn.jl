@@ -18,7 +18,7 @@ where ``i=1,…,N_U`` is the index of quantum number, ``o`` is the index of site
 
 * `name :: String` is the name of the diagonal quantum number.
 * `charge :: Vector{Int64}` is the symmetry charge ``q_o`` of each site.
-* `modul :: Vector{Int64}` is the modulus ``p``, set to 1 for ``\\mathrm{U}(1)`` QNDiags. 
+* `modul ::Int64` is the modulus ``p``, set to 1 for ``\\mathrm{U}(1)`` QNDiags. 
 
 # Initialisation 
 
