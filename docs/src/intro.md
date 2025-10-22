@@ -24,7 +24,7 @@ In addition to these existing approaches, the _« fuzzy sphere regularisation »
 ```
 where $R$ is the radius of the sphere. This conformal transformation maps each time slice of the cylinder to a cocentric sphere in the the flat spacetime. 
 
-Thanks to the conformal flatness that is not owned by other manifolds (_e.g._, a lattice model with periodic boundary condition lives on the torus $T^2$ which is not conformally flat), we can make use of some nice properties of conformal field theories, the most important one of which is the state-operator correspondance. Specifically, there is a one-to-one correspondence between the eigenstates of the critical Hamiltonian on the sphere and the CFT operators. 
+Thanks to the conformal flatness that is not owned by other manifolds (_e. g._, a lattice model with periodic boundary condition lives on the torus $T^2$ which is not conformally flat), we can make use of some nice properties of conformal field theories, the most important one of which is the state-operator correspondance. Specifically, there is a one-to-one correspondence between the eigenstates of the critical Hamiltonian on the sphere and the CFT operators. 
 One can colloquially understand the state $|\Phi\rangle$ as the insertion of the corresponding operator $\Phi(0)$ at the origin point into the vacuum $|0\rangle$ : $|\Phi\rangle=\Phi(0)|0\rangle$. The state and its corresponding operator has the same $\mathrm{SO}(3)$ spin and representation under global symmetry. More importantly, as the Weyl transformation maps the Hamiltonian $H$ corresponding to the time translation on the cylinder to the dilatation $D$ on the flat spacetime, the excitation energy of a state $|\Phi\rangle$ is proportional to the scaling dimension of the corresponding operator $\Delta_\Phi$
 ```math
     E_\Phi-E_0=\frac{v}{R}\Delta_\Phi
@@ -77,7 +77,7 @@ Beyond the correlators of local operators, a wealth of information can be learnt
 ```math
     S_A(R_d)=\operatorname{tr}_A\rho\log\rho=\alpha R_d/\delta-F
 ``` 
-where $\delta$ is a UV-regulator. The constant part is known as the $F$-function of a 3d CFT. The $F$-function is proved to be RG-monotonic, _i.e._, along a renormalisation group flow from UV to IR, the value of $F$-function is non-increasing, analogous to the central charge in 2d CFTs. Despite its importance, it has never been calculated before through non-perturbative approaches in interacting 3d CFTs. This work has performed the first non-perturbative computation of $F$ function for paradigmatic 3d Ising CFT on fuzzy sphere. The sphere is cut in the real space into two crowns along a latitude circle $\theta$, and the entanglement entropy $S_A(\theta)$ as a function of $\theta$ is calculated. The $F$-function is extracted from the $S_A(\theta)$ in vicinity of the equator, and the result yields $F_A=0.0612(5)$ after a finite size scaling.
+where $\delta$ is a UV-regulator. The constant part is known as the $F$-function of a 3d CFT. The $F$-function is proved to be RG-monotonic, _i. e._, along a renormalisation group flow from UV to IR, the value of $F$-function is non-increasing, analogous to the central charge in 2d CFTs. Despite its importance, it has never been calculated before through non-perturbative approaches in interacting 3d CFTs. This work has performed the first non-perturbative computation of $F$ function for paradigmatic 3d Ising CFT on fuzzy sphere. The sphere is cut in the real space into two crowns along a latitude circle $\theta$, and the entanglement entropy $S_A(\theta)$ as a function of $\theta$ is calculated. The $F$-function is extracted from the $S_A(\theta)$ in vicinity of the equator, and the result yields $F_A=0.0612(5)$ after a finite size scaling.
 
 ##### [Conformal generators](@id Fardelli2024)
 
@@ -95,7 +95,7 @@ The second direction is to study various other CFTs beyond 3d Ising. Fuzzy spher
 
 > __[Zhou 2023]__ The ``\mathrm{SO}(5)`` deconfined phase transition under the fuzzy sphere microscope: approximate conformal symmetry, pseudo-criticality, and operator spectrum, Zheng Zhou, Liangdong Hu, Wei Zhu, and Yin-Chen He, [arXiv:2306.16435](https://arxiv.org/abs/2306.16435), [Phys. Rev. X __14__, 021044 (2024)](https://doi.org/10.1103/PhysRevX.14.021044).
 
-The first theory besides Ising CFT to which fuzzy sphere is applied is the $\mathrm{SO}(5)$ deconfined quantum critical point (DQCP). Deconfined quantum critical point (DQCP) is one of the pioneering example of phase transitions beyond Landau paradigm. It has led to numerous theoretical surprises including the emergent $\mathrm{SO}(5)$ symmetry and the duality between interacting theories. Despite extensive studies over the past two decades, its nature remains controversial. Numerical simulations have shown no signal of discontinuity, but abnormal scaling behaviors have been observed. A plausible proposal to reconcile the tension is that DQCP is pseudocritical, _i.e._, a weakly first-order phase transition that has approximate critical behaviour, and is controlled by a pair of complex fixed points very close to the pseudocritical region.
+The first theory besides Ising CFT to which fuzzy sphere is applied is the $\mathrm{SO}(5)$ deconfined quantum critical point (DQCP). Deconfined quantum critical point (DQCP) is one of the pioneering example of phase transitions beyond Landau paradigm. It has led to numerous theoretical surprises including the emergent $\mathrm{SO}(5)$ symmetry and the duality between interacting theories. Despite extensive studies over the past two decades, its nature remains controversial. Numerical simulations have shown no signal of discontinuity, but abnormal scaling behaviors have been observed. A plausible proposal to reconcile the tension is that DQCP is pseudocritical, _i. e._, a weakly first-order phase transition that has approximate critical behaviour, and is controlled by a pair of complex fixed points very close to the pseudocritical region.
 
 The DQCP can be conveniently studied on the fuzzy sphere by constructing a non-linear sigma model (NLσM) on target space $S^4$ with a level-1 topological Wess-Zumino-Witten (WZW) term, which serves as a dual description of the DQCP with an exact $\mathrm{SO}(5)$ symmetry. The idea is to construct a four-flavour model with global symmetry $\mathrm{Sp}(2)/\mathbb{Z}_2=\mathrm{SO}(5)$ ($\mathbb{Z}_2$ means to gauge the pseudoreal representations). At half-filling, it can be described by a NLσM on the Grassmannian $\tfrac{\mathrm{Sp}(2)}{\mathrm{Sp}(1)\times\mathrm{Sp}(1)}\cong S^4$ and the WZW level can be matched. This work provides evidence that the DQCP exhibits approximate conformal symmetry. This work has identified 19 conformal primaries and their 82 descendants. Furthermore, by examining the renormalisation group flow of the lowest symmetry singlet, this work demonstrates that the DQCP is more likely pseudo-critical, with the approximate conformal symmetry plausibly emerging from nearby complex fixed points.
 
@@ -187,7 +187,7 @@ Besides the three directions of works, several other works push the boundary of 
 
 > __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, Slava Rychkov [arXiv:2504.00842](https://arxiv.org/abs/2504.00842)
 
-The energy spectrum calculated numerically at finite size does not coincide with that of the CFT. Part of the finite-size correction comes from the higher irrelavant operators that are not exactly tuned to zero (_e.g._, in the Ising CFT, the irrelavent operators include $\epsilon', C_{\mu\nu\rho\sigma}, T'_{\mu\nu}$, _etc._, and the lowest singlets $\epsilon$ and $\epsilon'$ are tuned away through the two parameters). These irrelevant operators exert perturbations on the states and their energy. This paper captures this kind of correction by the conformal perturbation theory. By making use of the fact that the corrections from an irrelevant operator on the energy of the primary and its descendants are not independent, the coefficients of the irrelevant operators can be fitted.
+The energy spectrum calculated numerically at finite size does not coincide with that of the CFT. Part of the finite-size correction comes from the higher irrelavant operators that are not exactly tuned to zero (_e. g._, in the Ising CFT, the irrelavent operators include $\epsilon', C_{\mu\nu\rho\sigma}, T'_{\mu\nu}$, _etc._, and the lowest singlets $\epsilon$ and $\epsilon'$ are tuned away through the two parameters). These irrelevant operators exert perturbations on the states and their energy. This paper captures this kind of correction by the conformal perturbation theory. By making use of the fact that the corrections from an irrelevant operator on the energy of the primary and its descendants are not independent, the coefficients of the irrelevant operators can be fitted.
 
 Although this work is does not exactly carry out study on the fuzzy sphere, it opens up a new route of improving the precision of scaling dimensions on fuzzy sphere by making better use of the existing data, and the method to partly remove the finite-size correction through conformal perturbation theory is widely used by following works.
 
@@ -239,7 +239,7 @@ Each level, known as a Landau level, has a degeneracy $(2l+1)$. Specifically, th
 ```
 where $C_m$ is the normalising factor, and $\Beta$ is the Euler's beta function. The LLL has a degeneracy $N_m=2s+1$.
 
-We now consider $N_f$ flavours of fermions moving on the sphere, characterised by the second-quantised fermion operator $\hat{\psi}_f(\hat{\mathbf{n}})$, with a flavour index $f=1,\dots,N_f$. We partially fill the lowest Landau level and set the single energy gap to be much larger than the scale of interaction $H_0\gg H_\mathrm{int}$, so that the quantum fluctuation can be constrained on the lowest Landau level. In practice, we often fill integer number of flavours $N_e=kN_m$ ($k\in\mathbb{Z}$) so that a quantum Hall ferromagnet (_i.e._, the state where integer number of LLLs are filled) is preferred in the absence of interaction, for which the charge degree of freedom is gapped and will not couple strongly to the CFT degree of freedom in the presence of the interaction.  
+We now consider $N_f$ flavours of fermions moving on the sphere, characterised by the second-quantised fermion operator $\hat{\psi}_f(\hat{\mathbf{n}})$, with a flavour index $f=1,\dots,N_f$. We partially fill the lowest Landau level and set the single energy gap to be much larger than the scale of interaction $H_0\gg H_\mathrm{int}$, so that the quantum fluctuation can be constrained on the lowest Landau level. In practice, we often fill integer number of flavours $N_e=kN_m$ ($k\in\mathbb{Z}$) so that a quantum Hall ferromagnet (_i. e._, the state where integer number of LLLs are filled) is preferred in the absence of interaction, for which the charge degree of freedom is gapped and will not couple strongly to the CFT degree of freedom in the presence of the interaction.  
 
 We then project the system onto the LLL. Technically, this can be done by write the fermion operators in terms of the annihilation operators of the LLL orbitals
 ```math
@@ -265,7 +265,7 @@ We can take $l_B=1$ as the unit length. In this way, the radius scales with the 
 
 ### Density operator
 
-Having constructed the single particle states, we then consider the interacting many-body Hamiltonian. The simplest building block is the density operators, _i.e._, local fermion bilinears. 
+Having constructed the single particle states, we then consider the interacting many-body Hamiltonian. The simplest building block is the density operators, _i. e._, local fermion bilinears. 
 ```math
     n_M(\hat{\mathbf{n}})=\psi_{f'}^\dagger(\hat{\mathbf{n}})M_{f'f}\psi_f(\hat{\mathbf{n}})
 ```
@@ -428,7 +428,7 @@ Having introduced how to construct an interacting model on fuzzy sphere, we now 
 ```math
     E_\Phi-E_0=\frac{v}{R}\Delta_\Phi
 ```
-where $E_0$ is the ground state energy, $R$ is the radius of the sphere (here we take $R=\sqrt{N_m}$), and $v$ is the model-dependent speed of light. The constant $v/R$ can be determined through a calibration process, _i.e._, comparing the spectrum to some known properties of a CFT spectrum. The criteria to determine the conformal symmetry include 
+where $E_0$ is the ground state energy, $R$ is the radius of the sphere (here we take $R=\sqrt{N_m}$), and $v$ is the model-dependent speed of light. The constant $v/R$ can be determined through a calibration process, _i. e._, comparing the spectrum to some known properties of a CFT spectrum. The criteria to determine the conformal symmetry include 
 
 1. The existence of a conserved stress tensor $T^{\mu\nu}$. The stress tensor is the symmetry current of the translation transformation. It is known to be a singlet under the flavour symmetry, have spin-2 under $\mathrm{SO}(3)$ rotation and scaling dimension exactly $\Delta_{T^{\mu\nu}}=3$.
 
@@ -471,7 +471,7 @@ The angular modes are
     n_M(\hat{\mathbf{n}})=\sum_{lm}Y_{lm}(\hat{\mathbf{n}})n_{M,lm}\\
     n_{M,lm}=\sum_{m_1}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m+m_1,f_2}(-1)^{s+m+m_1}(2s+1)\sqrt{\frac{2l+1}{4\pi}}\begin{pmatrix}s&l&s\\m_1&m&-m_1-m\end{pmatrix}\begin{pmatrix}s&l&s\\m_1&m&-m_1-m\end{pmatrix}
 ```
-From the CFT perspective, the density operators are the superpositions of scaling operators with corresponding quantum numbers, _i.e._, with the same representation under flavour symmetry and parity. 
+From the CFT perspective, the density operators are the superpositions of scaling operators with corresponding quantum numbers, _i. e._, with the same representation under flavour symmetry and parity. 
 
 Take the Ising model as an example. Consider the density operators $n^x$ and $n^z$ with matrix insertion $M=\sigma^x,\sigma^z$. In the leading order, they can be used as UV realisations of CFT operators $\sigma$ and $\epsilon$. 
 ```math
@@ -500,7 +500,7 @@ After the Weyl transformation from the flat spacetime to the cylinder, we obtain
 ```math
     f_{\Phi_1\Phi_2\Phi_3}=R^{\Delta_{\Phi_2}}\langle\Phi_1|\Phi^{(\mathrm{cyl.})}_2(\hat{\mathbf{n}})|\Phi_3\rangle
 ```
-The UV realisation of $\Phi_2$ contains many other operators with different spins. By integrating the correlation function against different spherical harmonics, _i.e._, take the angular modes of the operator inserted 
+The UV realisation of $\Phi_2$ contains many other operators with different spins. By integrating the correlation function against different spherical harmonics, _i. e._, take the angular modes of the operator inserted 
 ```math
     \int\mathrm{d}\hat{\mathbf{n}}\,\bar{Y}_{lm}(\hat{\mathbf{n}})\langle\Phi_1|\Phi_2(\hat{\mathbf{n}})|\Phi_3\rangle=\langle\Phi_1|\Phi_{2,lm}|\Phi_3\rangle
 ```
@@ -564,7 +564,7 @@ Hence, the conformal generator $\Lambda^\mu=P^\mu+K^\mu$ is the $l=1$ component 
 ```math
     \Lambda_m=P_m+K_m=\sqrt\frac{4\pi}{3}\int\mathrm{d}^2\mathbf{\hat{n}}\,\bar{Y}_{1m}(\mathbf{\hat{n}})\mathscr{H}(\mathbf{\hat{n}}).
 ```
-(Here the indices $\mu$ and $m$ are two equivalent way to express the components) By acting it on the the states, the number of derivatives is increased or decreased by $1$, _e.g._, for a primary $\Phi$
+(Here the indices $\mu$ and $m$ are two equivalent way to express the components) By acting it on the the states, the number of derivatives is increased or decreased by $1$, _e. g._, for a primary $\Phi$
 ```math
 \begin{aligned}
     \Lambda^\mu|\Phi\rangle&=\mathrm{const.}\times|\partial^\mu\Phi\rangle\\

@@ -52,7 +52,7 @@ generates the configurations from the list of QNDiags.
 
 # Note 
 
-If your `qnd` has negative entries, QNDiags must contain the total number of particles (_i.e._, bosons plus fermions).
+If your `qnd` has negative entries, QNDiags must contain the total number of particles (_i. e._, bosons plus fermions).
 """
 function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}, qnd :: Vector{SQNDiag} ; norf :: Int64 = nof ÷ 2, norb :: Int64 = nob ÷ 2, num_th :: Int64 = NumThreads, disp_std :: Bool = !SilentStd)
     nqnd = length(secd)

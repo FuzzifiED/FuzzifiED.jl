@@ -26,7 +26,7 @@ To use the package, include at the start of the Julia script
 ```julia
 using FuzzifiED
 ```
-To obtain the documentation for an interface, type `?` followed by the keyword in the Julia REPL, _e.g._, `?Confs`.
+To obtain the documentation for an interface, type `?` followed by the keyword in the Julia REPL, _e. g._, `?Confs`.
 
 ## Citation
 

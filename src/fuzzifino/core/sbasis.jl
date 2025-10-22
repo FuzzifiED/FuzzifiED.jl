@@ -8,7 +8,7 @@ The mutable type `SBasis` stores the information of the SBasis that respects bot
 ```math
 |I⟩=λ_{i_{I1}}|i_{I1}⟩+λ_{i_{I2}}|i_{I2}⟩+⋯+λ_{i_{Im_I}}|i_{Im_I}⟩
 ```
-where ``|i⟩`` is a direct product state, _i.e._, the configurations ``|i_{Ik}⟩`` are grouped into a state ``|I⟩``. 
+where ``|i⟩`` is a direct product state, _i. e._, the configurations ``|i_{Ik}⟩`` are grouped into a state ``|I⟩``. 
 
 # Fields
 * `cfs :: SConfs` stores the configurations that respect the QNDiags.
