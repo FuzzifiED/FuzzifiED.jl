@@ -1,4 +1,5 @@
 export SQNDiag, SQNOffd
+export PadSQNDiag, PadSQNOffd
 
 
 """
@@ -97,6 +98,22 @@ end
 
 
 """
+    PadSQNDiag(qnd :: SQNDiag, nofl :: Int64, nobl :: Int64, nofr :: Int64, nobr :: Int64)
+
+adds `nol` empty orbitals to the left and `nor` empty orbitals to the right, implemented as 
+
+    SQNDiag(qnd.name, 
+        [ fill(0, nofl) ; qnd.chargef ; fill(0, nofr) ], 
+        [ fill(0, nobl) ; qnd.chargeb ; fill(0, nobr) ], 
+        qnd.modul)
+"""
+PadSQNDiag(qnd :: SQNDiag, nofl :: Int64, nobl :: Int64, nofr :: Int64, nobr :: Int64) = SQNDiag(qnd.name, 
+    [ fill(0, nofl) ; qnd.chargef ; fill(0, nofr) ], 
+    [ fill(0, nobl) ; qnd.chargeb ; fill(0, nobr) ], 
+    qnd.modul)
+
+
+"""
     SQNOffd
 
 The mutable type `SQNOffd` records the information of an off-diagonal ``ℤ_p`` quantum number in the form of a discrete transformation
@@ -162,3 +179,25 @@ function Base.:*(qnf1 :: SQNOffd, qnf2 :: SQNOffd)
     cyc1 = lcm(qnf1.cyc, qnf2.cyc)
     return SQNOffd(permf1, permb1, phf1, facf1, facb1, cyc1)
 end
+
+
+"""
+    PadSQNOffd(qnf :: SQNOffd, nofl :: Int64, nobl :: Int64, nofr :: Int64, nobr :: Int64)
+
+adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left and `nofr` fermionic and `nobr` bosonic empty orbitals to the right, implemented as 
+
+    SQNOffd(
+        [ collect(1 : nofl) ; qnf.permf .+ nofl ; collect(1 : nofr) .+ (nofl + length(qnf.permf)) ], 
+        [ collect(1 : nobl) ; qnf.permb .+ nobl ; collect(1 : nobr) .+ (nobl + length(qnf.permb)) ], 
+        [ fill(0, nofl) ; qnf.phf ; fill(0, nofr) ], 
+        [ fill(ComplexF64(1), nofl) ; qnf.facf ; fill(ComplexF64(1), nofr) ], 
+        [ fill(ComplexF64(1), nobl) ; qnf.facb ; fill(ComplexF64(1), nobr) ], 
+        qnf.cyc)
+"""
+PadSQNOffd(qnf :: SQNOffd, nofl :: Int64, nobl :: Int64, nofr :: Int64, nobr :: Int64) = SQNOffd(
+    [ collect(1 : nofl) ; qnf.permf .+ nofl ; collect(1 : nofr) .+ (nofl + length(qnf.permf)) ], 
+    [ collect(1 : nobl) ; qnf.permb .+ nobl ; collect(1 : nobr) .+ (nobl + length(qnf.permb)) ], 
+    [ fill(0, nofl) ; qnf.phf ; fill(0, nofr) ], 
+    [ fill(ComplexF64(1), nofl) ; qnf.facf ; fill(ComplexF64(1), nofr) ], 
+    [ fill(ComplexF64(1), nobl) ; qnf.facb ; fill(ComplexF64(1), nobr) ], 
+    qnf.cyc)

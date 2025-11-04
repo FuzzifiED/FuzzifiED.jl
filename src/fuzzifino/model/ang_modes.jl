@@ -1,5 +1,5 @@
 import FuzzifiED: FilterL2, ContractMod
-export SAngModes, GetFermionSMod, GetBosonSMod, GetFerPairingSMod, GetBosPairingSMod, GetFerDensitySMod, GetBosDensitySMod
+export SAngModes, GetFermionSMod, GetBosonSMod, GetFerPairingSMod, GetBosPairingSMod, GetFerDensitySMod, GetBosDensitySMod, PadSSphereObs
 
 """
     SAngModes
@@ -25,6 +25,7 @@ The methods for this type is similarly defined as in AngModes.
     +(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
     adjoint(amd :: SAngModes) :: SAngModes
     *(amd1 :: SAngModes, amd2 :: SAngModes) :: SAngModes
+    PadSAngModes(amd :: SAngModes, nofl :: Int64, nobl :: Int64) :: SAngModes
     GetComponent(amd :: SAngModes, l :: Number, m :: Number) :: STerms
     ContractMod(amd1 :: SAngModes, amd2 :: amd2, comps :: Dict) :: STerms
     ContractMod(amd1 :: SAngModes, amd2 :: SAngModes, l0 :: Number) :: STerms
@@ -384,3 +385,14 @@ function GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
     end
     return amd
 end
+
+
+"""
+    PadSAngModes(amd :: SAngModes, nofl :: Int64, nobl :: Int64)
+
+
+adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index, implemented as 
+
+    SAngModes(amd.l2m, (l, m) -> PadSTerms(obs.get_comp(l, m), nofl, nobl))
+"""
+PadAngModes(amd :: SAngModes, nofl :: Int64, nobl :: Int64) = SAngModes(amd.l2m, (l, m) -> PadSTerms(obs.get_comp(l, m), nofl, nobl))

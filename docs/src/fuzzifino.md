@@ -30,6 +30,8 @@ Several operations of the SQNs are supported.
 *(fac :: Int64, qnd :: SQNDiag)
 +(qnd1 :: SQNDiag, qnd2 :: SQNDiag)
 *(qnf1 :: SQNOffd, qnf2 :: SQNOffd)
+PadSQNDiag
+PadSQNOffd
 ```
 
 ### Configurations
@@ -70,6 +72,7 @@ NormalOrder(tm :: STerm)
 SimplifyTerms(tms :: STerms)
 RemoveOrbs(tms :: STerms, o_rm :: Vector{Int64})
 RelabelOrbs(tms :: STerms, dict_o :: Dict{Int64, Int64})
+PadSTerms
 ```
 
 ### Operator
@@ -123,7 +126,8 @@ GetBosonRotySQNOffd
 GetBosonDenIntSTerms
 GetBosonPairIntSTerms
 GetBosonPolSTerms
-GetL2STerms
+GetBosonLpLzSTerms
+GetL2STerms(tms_lzlp :: Tuple{STerms, STerms})
 GetBosonC2STerms
 ```
 The types `SSphereObs` and `SAngModes` are similarly defined as their fermionic counterparts

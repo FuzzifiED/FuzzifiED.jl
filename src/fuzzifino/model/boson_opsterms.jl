@@ -1,4 +1,4 @@
-export GetBosonDenIntSTerms, GetBosonPairIntSTerms, GetBosonPolSTerms, GetBosonL2STerms, GetBosonC2STerms, GetL2STerms
+export GetBosonDenIntSTerms, GetBosonPairIntSTerms, GetBosonPolSTerms, GetBosonL2STerms, GetBosonC2STerms, GetL2STerms, GetBosonLpLzSTerms
 
 
 """
@@ -188,6 +188,43 @@ Return the terms for the total angular momentum for bosons.
 """
 GetBosonL2STerms(nm :: Int64, nf :: Int64) = GetL2STerms(0, 0, nm, nf)
 
+
+"""
+    GetBosonLpLzSTerms(nm :: Int64, nf :: Int64) :: Tuple{Terms, Terms}
+
+Return the a pair of terms containing ``L^z`` and ``L^+`` for bosons. 
+
+# Arguments
+* `nm :: Int64` is the number of bosonic orbitals.
+* `nf :: Int64` is the number of bosonic flavours.
+"""
+function GetBosonLpLzSTerms(nm :: Int64, nf :: Int64)
+    s = (nm - 1) / 2.0
+    no = nm * nf
+    tms_lz = 
+        [ begin m = div(o - 1, nf)
+            STerm(m - s, [1, -o, 0, -o])
+        end for o = 1 : no ]
+    tms_lp = 
+        [ begin m = div(o - 1, nf)
+            STerm(sqrt(m * (nm - m)), [1, -o, 0, -(o - nf)])
+        end for o = nf + 1 : no ]
+    return tms_lz, tms_lp
+end
+
+
+"""
+    GetL2Terms(tms_lzlp :: Tuple{STerms, STerms}) :: STerms
+
+Return the terms for the total angular momentum from a tuple of terms containing ``L^z`` and ``L^+``, implemented as 
+    
+    tms_lz, tms_lp = tms_lzlp 
+    return SimplifyTerms(tms_lz * tms_lz - tms_lz + tms_lp * tms_lp')
+"""
+function GetL2STerms(tms_lzlp :: Tuple{STerms, STerms})
+    tms_lz, tms_lp = tms_lzlp 
+    return SimplifyTerms(tms_lz * tms_lz - tms_lz + tms_lp * tms_lp')
+end
 
 """
     GetBosonC2STerms(nm :: Int64, nf :: Int64, mat_gen :: Vector{Matrix{<:Number}}[, mat_tr :: Vector{Matrix{<:Number}}]) :: STerms

@@ -1,4 +1,4 @@
-export SphereObs, StoreComps!, StoreComps, Laplacian, GetComponent, GetPointValue,  GetIntegral, FilterComponent, GetElectronObs, GetDensityObs, GetPairingObs
+export SphereObs, StoreComps!, StoreComps, Laplacian, GetComponent, GetPointValue,  GetIntegral, FilterComponent, GetElectronObs, GetDensityObs, GetPairingObs, PadSphereObs
 
 """
     FuzzifiED.ObsNormRadSq :: Float64
@@ -335,3 +335,13 @@ function GetPairingObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; norm_
     end
     return obs
 end
+
+"""
+    PadSphereObs(obs :: SphereObs, nol :: Int64)
+
+
+adds `nol` empty orbitals to the left by shifting each orbital index, implemented as 
+
+    SphereObs(obs.s2, obs.l2m, (l, m) -> PadTerms(obs.get_comp(l, m), nol))
+"""
+PadSphereObs(obs :: SphereObs, nol :: Int64) = SphereObs(obs.s2, obs.l2m, (l, m) -> PadTerms(obs.get_comp(l, m), nol))

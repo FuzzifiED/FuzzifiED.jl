@@ -27,6 +27,11 @@ The QNOffd can be composed
 ```@docs
 *(qnf1 :: QNOffd, qnf2 :: QNOffd)
 ```
+Empty orbitals can be added to the left or right for QNDiag and QNOffd
+```@docs
+PadQNDiag
+PadQNOffd
+```
 
 ## Configurations
 ```@docs
@@ -79,6 +84,7 @@ We allow the removal or relabelling of orbitals by
 ```@docs
 RemoveOrbs(tms :: Terms, o_rm :: Vector{Int64})
 RelabelOrbs(tms :: Terms, dict_o :: Dict{Int64, Int64})
+PadTerms
 ```
 
 ## Operator

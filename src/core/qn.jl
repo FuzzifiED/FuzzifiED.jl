@@ -1,4 +1,4 @@
-export QNDiag, QNOffd
+export QNDiag, QNOffd, PadQNDiag, PadQNOffd
 
 
 """
@@ -86,6 +86,16 @@ end
 
 
 """
+    PadQNDiag(qnd :: QNDiag, nol :: Int64, nor :: Int64)
+
+adds `nol` empty orbitals to the left and `nor` empty orbitals to the right, implemented as 
+
+    QNDiag(qnd.name, [ fill(0, nol) ; qnd.charge ; fill(0, nor) ], qnd.modul)
+"""
+PadQNDiag(qnd :: QNDiag, nol :: Int64, nor :: Int64) = QNDiag(qnd.name, [ fill(0, nol) ; qnd.charge ; fill(0, nor) ], qnd.modul)
+
+
+"""
     QNOffd 
 
 The mutable type `QNOffd` records the information of an off-diagonal ``ℤ_p`` quantum number in the form of a discrete transformation
@@ -135,3 +145,18 @@ function Base.:*(qnf1 :: QNOffd, qnf2 :: QNOffd)
     cyc1 = lcm(qnf1.cyc, qnf2.cyc)
     return QNOffd(perm1, ph1, fac1, cyc1)
 end
+
+"""
+    PadQNOffd(qnf :: QNOffd, nol :: Int64, nor :: Int64)
+
+adds `nol` empty orbitals to the left and `nor` empty orbitals to the right, implemented as 
+
+    QNOffd(
+        [ collect(1 : nol) ; qnf.perm .+ nol ; collect(1 : nor) .+ (nol + length(qnf.perm)) ], 
+        [ fill(0, nol) ; qnf.ph ; fill(0, nor) ], 
+        [ fill(ComplexF64(1), nol) ; qnf.fac ; fill(ComplexF64(1), nor) ], qnf.cyc)
+"""
+PadQNOffd(qnf :: QNOffd, nol :: Int64, nor :: Int64) = QNOffd(
+    [ collect(1 : nol) ; qnf.perm .+ nol ; collect(1 : nor) .+ (nol + length(qnf.perm)) ], 
+    [ fill(0, nol) ; qnf.ph ; fill(0, nor) ], 
+    [ fill(ComplexF64(1), nol) ; qnf.fac ; fill(ComplexF64(1), nor) ], qnf.cyc)

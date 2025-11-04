@@ -1,5 +1,5 @@
 export Term, Terms
-export ParticleHole, NormalOrder, SimplifyTerms, RemoveOrbs, RelabelOrbs
+export ParticleHole, NormalOrder, SimplifyTerms, RemoveOrbs, RelabelOrbs, PadTerm, PadTerms
 
 
 """
@@ -257,3 +257,18 @@ function RelabelOrbs(tms :: Terms, dict_o :: Dict{Int64, Int64})
     end
     return tms1
 end
+
+"""
+    PadTerm(tm :: Term, nol :: Int64)
+
+adds `nol` empty orbitals to the left by shifting each orbital index.
+"""
+PadTerm(tm :: Term, nol :: Int64) = Term(tm.coeff, [ isodd(i) ? tm.cstr[i] : tm.cstr[i] + nol for i in eachindex(tm.cstr)])
+
+
+"""
+    PadTerms(tms :: Terms, nol :: Int64)
+
+adds `nol` empty orbitals to the left by shifting each orbital index.
+"""
+PadTerms(tms :: Terms, nol :: Int64) = PadTerm.(tms, nol)

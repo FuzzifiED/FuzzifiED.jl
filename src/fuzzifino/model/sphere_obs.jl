@@ -1,5 +1,5 @@
 import FuzzifiED: StoreComps!, StoreComps, Laplacian, GetComponent, GetPointValue, GetIntegral, FilterComponent
-export SSphereObs, GetFermionSObs, GetBosonSObs, GetFerDensitySObs, GetBosDensitySObs
+export SSphereObs, GetFermionSObs, GetBosonSObs, GetFerDensitySObs, GetBosDensitySObs, PadSSphereObs
 
 
 """
@@ -29,6 +29,7 @@ The methods for this type is similarly defined as in SphereObs.
     +(obs1 :: SSphereObs, obs2 :: SSphereObs) :: SSphereObs
     adjoint(obs :: SSphereObs) :: SSphereObs
     *(obs1 :: SSphereObs, obs2 :: SSphereObs) :: SSphereObs
+    PadSSphereObs(obs :: SSphereObs, nofl :: Int64, nobl :: Int64) :: SSphereObs
     Laplacian(obs :: SSphereObs[ ; norm_r2 :: Float64]) :: SSphereObs
     GetIntegral(obs :: SSphereObs[ ; norm_r2 :: Float64]) :: STerms
     GetComponent(obs :: SSphereObs, l :: Number, m :: Number) :: STerms
@@ -368,3 +369,14 @@ function GetBosDensitySObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = M
     end
     return obs
 end
+
+
+"""
+    PadSSphereObs(obs :: SphereObs, nofl :: Int64, nobl :: Int64)
+
+
+adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index, implemented as 
+
+    SSphereObs(obs.s2, obs.l2m, (l, m) -> PadSTerms(obs.get_comp(l, m), nofl, nobl))
+"""
+PadSSphereObs(obs :: SSphereObs, nofl :: Int64, nobl :: Int64) = SSphereObs(obs.s2, obs.l2m, (l, m) -> PadSTerms(obs.get_comp(l, m), nofl, nobl))

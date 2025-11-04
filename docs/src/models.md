@@ -60,6 +60,10 @@ adjoint(obs :: SphereObs)
 *(obs1 :: SphereObs, obs2 :: SphereObs)
 Laplacian(obs :: SphereObs)
 ```
+Padding orbitals for SphereObs is realised 
+```@docs
+PadSphereObs
+```
 Here, a parameter `ObsNormRadSq` is used to specify the normalisation of the observables
 ```@docs
 FuzzifiED.ObsNormRadSq
@@ -100,6 +104,10 @@ The multiplication, addition and conjugate of an observable is supported
 +(obs1 :: AngModes, obs2 :: AngModes) 
 adjoint(amd :: AngModes)
 *(obs1 :: AngModes, obs2 :: AngModes)
+```
+Padding orbitals for AngModes is realised 
+```@docs
+PadAngModes
 ```
 One can take out either one or a set of components, or contract two angular modes. 
 ```@docs

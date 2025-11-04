@@ -1,4 +1,4 @@
-export AngModes, GetElectronMod, GetPairingMod, GetDensityMod, FilterL2, ContractMod
+export AngModes, GetElectronMod, GetPairingMod, GetDensityMod, FilterL2, ContractMod, PadAngModes
 
 
 """
@@ -291,3 +291,14 @@ function GetDensityMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
     end
     return amd
 end
+
+
+"""
+    PadAngModes(amd :: AngModes, nol :: Int64)
+
+
+adds `nol` empty orbitals to the left by shifting each orbital index, implemented as 
+
+    AngModes(amd.l2m, (l, m) -> PadTerms(amd.get_comp(l, m), nol))
+"""
+PadAngModes(amd :: AngModes, nol :: Int64) = AngModes(amd.l2m, (l, m) -> PadTerms(amd.get_comp(l, m), nol))

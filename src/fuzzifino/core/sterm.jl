@@ -1,6 +1,6 @@
 import FuzzifiED: NormalOrder, SimplifyTerms, RemoveOrbs, RelabelOrbs
 export STerm, STerms
-
+export PadSTerm, PadSTerms
 
 """
     STerm 
@@ -246,3 +246,19 @@ function RelabelOrbs(tms :: STerms, dict_o :: Dict{Int64, Int64})
     end
     return tms1
 end
+
+
+"""
+    PadSTerm(tm :: STerm, nol :: Int64)
+
+adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index.
+"""
+PadSTerm(tm :: STerm, nofl :: Int64, nobl :: Int64) = STerm(tm.coeff, [ (isodd(i) || tm.cstr[i] == 0) ? tm.cstr[i] : (tm.cstr[i] > 0 ? tm.cstr[i] + nofl : tm.cstr[i] - nobl) for i in eachindex(tm.cstr)])
+
+
+"""
+    PadSTerms(tms :: STerms, nol :: Int64)
+
+adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index.
+"""
+PadSTerms(tms :: STerms, nofl :: Int64, nobl :: Int64) = PadSTerm.(tms, nofl, nobl)
