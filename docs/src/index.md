@@ -99,10 +99,10 @@ Depth = 2
 * __[Yang 2025Jul]__ Conformal operator flows of the deconfined quantum criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
 * __[Zhou 2025Jul]__ Chern-Simons-matter conformal field theory on fuzzy sphere: Confinement transition of Kalmeyer-Laughlin chiral spin liquid, Zheng Zhou, Chong Wang, Yin-Chen He, [arXiv:2507.19580](https://arxiv.org/abs/2507.19580).
 * __[Dong 2025]__ Numerical extraction of crosscap coefficients in microscopic models for $(2+1)$D conformal field theory, Jia-Ming Dong, Yueshui Zhang, Kai-Wen Huang, Hong-Hao Tu, and Ying-Hai Wu, [arXiv:2507.20005](https://arxiv.org/abs/2507.20005).
-* __[Zhou 2025Sep]__ Free Majorana fermion meets gauged Ising conformal field theory on the fuzzy sphere, [arXiv:2509.08038](https://arxiv.org/abs/2509.08038).
-* __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
+* __[Zhou 2025Sep]__ Free Majorana fermion meets gauged Ising conformal field theory on the fuzzy sphere, Zheng Zhou, Davide Gaiotto, Yin-Chen He, [arXiv:2509.08038](https://arxiv.org/abs/2509.08038).
+* __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, Cristian Voinea, Wei Zhu, Nicolas Regnault, Zlatko Papić, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
 * __[Wiese 2025]__ Locating the Ising CFT via the ground-state energy on the fuzzy sphere, Kay Joerg Wiese, [arXiv:2510.09482](https://arxiv.org/abs/2510.09482).
-* __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
+* __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, Arjun Dey, Loic Herviou, Christopher Mudry, Andreas Martin Läuchli, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
 
 ## Index 
 

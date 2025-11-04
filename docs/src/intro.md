@@ -155,15 +155,15 @@ The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natura
 
 ##### [The free Majorana fermion theory](@id Zhou2025Sep)
 
-> __[Zhou 2025Sep]__ Free Majorana fermion meets gauged Ising conformal field theory on the fuzzy sphere, [arXiv:2509.08038](https://arxiv.org/abs/2509.08038).
+> __[Zhou 2025Sep]__ Free Majorana fermion meets gauged Ising conformal field theory on the fuzzy sphere, Zheng Zhou, Davide Gaiotto, Yin-Chen He, [arXiv:2509.08038](https://arxiv.org/abs/2509.08038).
 
 ##### [The transition between bosonic Pfaffian and Halperin 220](@id Voinea2025)
 
-> __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
+> __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, Cristian Voinea, Wei Zhu, Nicolas Regnault, Zlatko Papić, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
 
 ##### [The $\mathrm{O}(3)$ Wilson-Fisher CFT](@id Dey2025)
 
-> __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
+> __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, Arjun Dey, Loic Herviou, Christopher Mudry, Andreas Martin Läuchli, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
 
 ### Studying conformal defects and boundaries
 
