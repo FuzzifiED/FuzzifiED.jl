@@ -8,10 +8,10 @@ To demonstrate the usage of FuzzifiED interfaces for ED and DMRG, in this sectio
 
 Four versions of the tutorial code are provided : 
 
-1. [`tutorial_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising.jl) -- the ED code that uses the built-in models.
-2. [`tutorial_ising_primitive.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_primitive.jl) -- The ED code that uses only the core functions.
-3. [`tutorial_ising_dmrg.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg.jl) -- the DMRG code that converts the format into ITensor.
-4. [`tutorial_ising_dmrg_easysweep.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg_easysweep.jl) -- the DMRG code that uses the EasySweep extension.
+1. [`tutorial_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising.jl) — the ED code that uses the built-in models.
+2. [`tutorial_ising_primitive.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_primitive.jl) — The ED code that uses only the core functions.
+3. [`tutorial_ising_dmrg.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg.jl) — the DMRG code that converts the format into ITensor.
+4. [`tutorial_ising_dmrg_easysweep.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg_easysweep.jl) — the DMRG code that uses the EasySweep extension.
 
 The examples can be found in the directory [`examples`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples). We also append in the end [a list of given examples](@ref List-of-examples) at the end of the page. 
 
@@ -612,7 +612,7 @@ ectrum.jl) calculates the spectrum of ``\mathrm{O}(3)`` Wilson-Fisher CFT using 
 * [`ising_frac_fermion.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_fermion.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for fermions at fractional filling ``ν = 1/3``. This example reproduces Figure 10 in [Voinea 2024](@ref Voinea2024).
 * [`ising_frac_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_boson.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for bosons at fractional filling ``ν = 1/2`` with the module _Fuzzifino_. This example reproduces Figure 12a,b in [Voinea 2024](@ref Voinea2024).
 * [`potts_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/potts_spectrum.jl) calculates the spectrum of 3d Potts model on fuzzy sphere. This example reproduces Table I and Figure 4 in [Yang 2025Jan](@ref Yang2025Jan).
-* [`circle_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/circle_ising.jl) calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I--III in [Han 2025](@ref Han2025).
+* [`circle_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/circle_ising.jl) calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I—III in [Han 2025](@ref Han2025).
 * [`yang_lee_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/yang_lee_spectrum.jl) calculates the spectrum of 3d non-unitary Yang-Lee CFT on fuzzy sphere. This example reproduces the finite size data of Figure 11 [Arguello Cruz 2025](@ref Fan2025)
 * [`free_scalar_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_scalar_spectrum.jl) calculates the spectrum of free real scalar. This example reproduces Figure 2 in [He 2025Jun](@ref He2025Jun).
 * [`free_scalar_correlator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_scalar_correlator.jl) calculates calculates the correlator of $n^i$ for $ϕ$, $ϕ^2$ and $π$ of free real scalar. This example reproduces Figure 3 in [He 2025Jun](@ref He2025Jun)

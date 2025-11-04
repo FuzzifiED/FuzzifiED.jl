@@ -17,4 +17,4 @@ GetTorusPairIntTerms(nm :: Int64, nf :: Int64, lx :: Number, ps_pot :: Vector{<:
 
 ## Related examples 
 
-* [`circle_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/circle_ising.jl) calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I--III in [Han 2025](@ref Han2025)
+* [`circle_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/circle_ising.jl) calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I—III in [Han 2025](@ref Han2025)
