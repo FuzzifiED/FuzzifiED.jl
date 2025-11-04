@@ -1,5 +1,5 @@
 # This example calculates the 2-pt correlator of free Majorana fermion.
-# This example reproduces Figure 7 in arXiv : 2508.*****. 
+# This example reproduces Figure 7 in arXiv : 2509.08038
 # On my portable computer, this calculation takes 3.338 s
 
 using FuzzifiED

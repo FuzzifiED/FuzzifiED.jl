@@ -1,5 +1,5 @@
 # This example calculates the spectrum of free Majorana fermion.
-# This example reproduces Figure 5 in arXiv : 2508.*****. 
+# This example reproduces Figure 5 in arXiv : 2509.08038
 # On my portable computer, this calculation takes 7.718 s
 
 using FuzzifiED

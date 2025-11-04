@@ -157,7 +157,7 @@ The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natura
 
 > __[Zhou 2025Sep]__ Free Majorana fermion meets gauged Ising conformal field theory on the fuzzy sphere, [arXiv:2509.08038](https://arxiv.org/abs/2509.08038).
 
-##### [The transition between bosonic Laughlin and Halperin 220](@id Voinea2025)
+##### [The transition between bosonic Pfaffian and Halperin 220](@id Voinea2025)
 
 > __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
 
