@@ -49,12 +49,12 @@ for P in [1, -1], Z in [1, -1], R in [1, -1]
     l2_val = [ st[:, i]' * l2_mat * st[:, i] for i in eachindex(enrg)]
 
     for i in eachindex(enrg)
-        push!(result, round.([enrg[i], l2_val[i], P, Z], digits = 6))
+        push!(result, [enrg[i], l2_val[i], P, Z])
     end
 end
 
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
 enrg_ϕ = result[2][1]
-result_dim = [ [ 0.5 * (st[1] - enrg_0) / (enrg_ϕ - enrg_0) ; st] for st in result ]
-display(permutedims(hcat(result_dim...)))
+spec = [ round.([ 0.5 * (st[1] - enrg_0) / (enrg_ϕ - enrg_0) ; st] .+ √eps(Float64), digits = 6) for st in result ]
+display(permutedims(hcat(spec...)))

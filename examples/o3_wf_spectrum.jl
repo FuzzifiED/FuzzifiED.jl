@@ -84,6 +84,6 @@ end
 
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
-enrg_T = filter(st -> st[2] ≈ 6 && st[3] ≈ 0 && st[4] ≈ 1, result)[1][1] - enrg_0
-spec = [ round.([ 3 * (st[1] - enrg_0) / enrg_T ; st] .+ √eps(Float64), digits = 6) for st in result ]
+enrg_T = filter(st -> st[2] ≈ 6 && st[3] ≈ 0 && st[4] ≈ 1, result)[1][1]
+spec = [ round.([ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] .+ √eps(Float64), digits = 6) for st in result ]
 display(permutedims(hcat(spec...)))

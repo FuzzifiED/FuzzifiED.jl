@@ -52,12 +52,12 @@ for R in (1, -1), (Z1, Z2, Z3) in ((1,1,1), (1,1,-1), (-1,-1,1), (-1,-1,-1)), X 
     c2_val = [ st[:, i]' * c2_mat * st[:, i] for i in eachindex(enrg)]
     
     for i in eachindex(enrg)
-        push!(result, round.([enrg[i], l2_val[i], c2_val[i]], digits = 6))
+        push!(result, [enrg[i], l2_val[i], c2_val[i]])
     end
 end
 
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
 enrg_T = filter(st -> st[2] ≈ 6 && st[3] ≈ 0, result)[1][1]
-result_dim = [ [ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] for st in result ]
-display(permutedims(hcat(result_dim...)))
+spec = [ round.([ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] .+ √eps(Float64), digits = 6) for st in result ]
+display(permutedims(hcat(spec...)))

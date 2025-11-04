@@ -35,7 +35,7 @@ enrg, st = GetEigensystem(hmt_mat, 6)
 enrg_0 = enrg[1]
 enrg_T = enrg[3]
 
-result = []
+spec = []
 
 qnd = [
     GetNeQNDiag(no),
@@ -60,7 +60,7 @@ for P in (1, -1), R in (1, -1)
     if (P == 1 && R == 1) enrg_d = enrg[1] end
     dim = (enrg .- enrg_d) ./ (enrg_T - enrg_0) * 3
     for i in eachindex(enrg)
-        push!(result, round.([dim[i], enrg[i], 0, P, R], digits = 6))
+        push!(spec, round.([dim[i], enrg[i], 0, P, R] .+ √eps(Float64), digits = 6))
     end
 end
 
@@ -72,15 +72,11 @@ for PR in (1, -1)
     enrg, st = GetEigensystem(hmt_mat, 10)
     dim = (enrg .- enrg_d) ./ (enrg_T - enrg_0) * 3
     for i in eachindex(enrg)
-        push!(result, round.([dim[i], enrg[i], 1, 0, PR], digits = 6))
+        push!(spec, round.([dim[i], enrg[i], 1, 0, PR] .+ √eps(Float64), digits = 6))
     end
 end
 
-sort!(result, by = st -> real(st[1]))
-for (lz, P) in ((0, 1), (0, -1), (1, 0))
-    display(permutedims(hcat(
-        filter(st -> st[3] ≈ lz && st[4] ≈ P, result)...
-    )))
-end
+sort!(spec, by = st -> real(st[1]))
+display(permutedims(hcat(spec...)))
 
 end

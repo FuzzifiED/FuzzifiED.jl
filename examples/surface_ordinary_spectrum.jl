@@ -31,7 +31,7 @@ tms_hmt = SimplifyTerms(
 
 enrg_0 = 0
 enrg_D = 0
-result = []
+spec = []
 for lz = 0 : 4, Z in (1, -1)
     cfs = Confs(2 * nm, [nm, 2 * lz], qnd)
     bs = Basis(cfs, [Z], qnf)
@@ -44,11 +44,11 @@ for lz = 0 : 4, Z in (1, -1)
     end
     dim = 3 .* (enrg .- enrg_0) ./ (enrg_D - enrg_0)
     for i in eachindex(enrg)
-        push!(result, round.([dim[i], enrg[i], lz, Z], digits = 6))
+        push!(spec, round.([dim[i], enrg[i], lz, Z] .+ √eps(Float64), digits = 6))
     end
 end
 
-sort!(result, by = st -> real(st[1]))
-display(permutedims(hcat(result...)))
+sort!(spec, by = st -> real(st[1]))
+display(permutedims(hcat(spec...)))
 
 end

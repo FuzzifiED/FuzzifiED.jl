@@ -6,7 +6,6 @@ using FuzzifiED
 using FuzzifiED.Fuzzifino
 FuzzifiED.ElementType = Float64
 ≈(x, y) = abs(x - y) < √eps(Float64)
-outround(v) = round.(v .+ 1E-7 ; digits = 6) 
 
 nmf = 10
 nof = nmf 
@@ -50,11 +49,11 @@ for lz = 0 : 1
     l2_val = [ st[:, i]' * l2_mat * st[:, i] for i in eachindex(enrg)] 
 
     for i in eachindex(enrg)
-        push!(result, outround([enrg[i], l2_val[i]]))
+        push!(result, [enrg[i], l2_val[i]])
     end
 end
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
 enrg_T = filter(st -> st[2] ≈ 6, result)[1][1]
-spec = [ [ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] for st in result ] 
+spec = [ round.([ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] .+ √eps(Float64), digits = 6) for st in result ] 
 display(permutedims(hcat(spec...)))

@@ -7,7 +7,6 @@ using FuzzifiED.Fuzzifino
 using Jacobi
 FuzzifiED.ElementType = Float64
 ≈(x, y) = abs(x - y) < √eps(Float64)
-outround(v) = round.(v .+ 1E-7 ; digits = 6) 
 
 let ovl_χηI
 

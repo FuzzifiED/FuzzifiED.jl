@@ -43,12 +43,12 @@ for lz = 0 : 3, Z in [1, -1]
     enrg, st = GetEigensystem(hmt_mat, 20)
 
     for i in eachindex(enrg)
-        push!(result, round.([enrg[i], lz, Z], digits = 6))
+        push!(result, [enrg[i], lz, Z])
     end
 end
 
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
 enrg_T = filter(st -> st[2] ≈ 2 && st[3] ≈ 1, result)[1][1]
-result_dim = [ round.(real([ (st[1] - enrg_0) / (enrg_T - enrg_0) * 2 ; st]) .+ eps(Float32), digits = 6) for st in result ]
-display(permutedims(hcat(result_dim...)))
+spec = [ round.(real([ (st[1] - enrg_0) / (enrg_T - enrg_0) * 2 ; st]) .+ eps(Float32), digits = 6) for st in result ]
+display(permutedims(hcat(spec...)))

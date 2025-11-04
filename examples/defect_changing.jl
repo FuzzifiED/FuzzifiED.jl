@@ -62,7 +62,7 @@ qnf = [
     GetParityQNOffd(nm, 2, [2, 1], [-1, 1])
 ]
 cfs = Confs(no, [nm, 0, 1, 0], qnd)
-result_p0 = []
+spec_p0 = []
 for P in (1, -1)
     bs = Basis(cfs, [P], qnf)
     hmt = Operator(bs, tms_hmt)
@@ -70,10 +70,10 @@ for P in (1, -1)
     enrg, st = GetEigensystem(hmt_mat, 10)
     dim = (enrg .- (enrg_d + enrg_0) / 2) ./ (enrg_T - enrg_0) * 3
     for i in eachindex(enrg)
-        push!(result_p0, round.([dim[i], enrg[i], 0, P], digits = 6))
+        push!(spec_p0, round.([dim[i], enrg[i], 0, P] .+ √eps(Float64), digits = 6))
     end
 end
-sort!(result_p0, by = st -> real(st[1]))
+sort!(spec_p0, by = st -> real(st[1]))
 
 qnd = [
     GetNeQNDiag(no),
@@ -86,7 +86,7 @@ qnf = [
     GetRotyQNOffd(nm, 2) * GetFlavPermQNOffd(nm, 2, [2,1])
 ]
 cfs = Confs(no, [nm, 0, 2, 0], qnd)
-result_pm = []
+spec_pm = []
 for P in (1, -1), RZ in (1, -1)
     bs = Basis(cfs, [P, RZ], qnf)
     hmt = Operator(bs, tms_hmt)
@@ -94,12 +94,12 @@ for P in (1, -1), RZ in (1, -1)
     enrg, st = GetEigensystem(hmt_mat, 10)
     dim = (enrg .- enrg_d) ./ (enrg_T - enrg_0) * 3
     for i in eachindex(enrg)
-        push!(result_pm, round.([dim[i], enrg[i], 0, P, RZ], digits = 6))
+        push!(spec_pm, round.([dim[i], enrg[i], 0, P, RZ] .+ √eps(Float64), digits = 6))
     end
 end
-sort!(result_pm, by = st -> real(st[1]))
+sort!(spec_pm, by = st -> real(st[1]))
 
-display(permutedims(hcat(result_p0...)))
-display(permutedims(hcat(result_pm...)))
+display(permutedims(hcat(spec_p0...)))
+display(permutedims(hcat(spec_pm...)))
 
 end

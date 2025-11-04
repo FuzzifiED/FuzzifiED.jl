@@ -58,7 +58,7 @@ for θ in θs
 
     if (θ ≈ π) enrg_d = enrg[1] end
     dim = 3 * (enrg[1] - enrg_d) / (enrg_T - enrg_0)
-    append!(dims, dim)
+    push!(dims, dim)
 end
 display(hcat([θs, dims]...))
 

@@ -56,15 +56,15 @@ for Z in [1, -1], R in [-1, 1]
     c2_val = [ st[:, i]' * c2_mat * st[:, i] for i in eachindex(enrg)]
 
     for i in eachindex(enrg)
-        push!(result, round.([enrg[i], l2_val[i], c2_val[i]] .+ √eps(Float64), digits = 7))
+        push!(result, [enrg[i], l2_val[i], c2_val[i]])
     end
 end
 
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
 enrg_1 = (filter(st -> st[2] ≈ 6 && st[3] ≈ 0, result)[1][1] - enrg_0) / 3
-result_dim = [ [ (st[1] - enrg_0) / enrg_1 ; st] for st in result if st[2] < 12 ]
-display(permutedims(hcat(result_dim...)))
+spec = [ round.([ (st[1] - enrg_0) / enrg_1 ; st] .+ √eps(Float64), digits = 6) for st in result if st[2] < 12 ]
+display(permutedims(hcat(spec...)))
 
 # As a minimal example, in this code, we calibrate by setting Δ_T=3.
 # To calibrate by optimising conformality, replace Lines 69 with
