@@ -1,4 +1,4 @@
-export GetIntMatrix, GetDenIntTerms, GetPairIntTerms, GetPolTerms, GetL2Terms, GetC2Terms
+export GetIntMatrix, GetDenIntTerms, GetPairIntTerms, GetPolTerms, GetL2Terms, GetLpLzTerms, GetC2Terms
 
 
 """
@@ -230,6 +230,44 @@ function GetL2Terms(nm :: Int64, nf :: Int64)
     tms_lm = tms_lp' 
     tms_l2 = tms_lz * tms_lz - tms_lz + tms_lp * tms_lm
     return SimplifyTerms(tms_l2)
+end
+
+
+"""
+    GetLpLzTerms(nm :: Int64, nf :: Int64) :: Tuple{Terms, Terms}
+
+Return the a pair of terms containing ``L^z`` and ``L^+``
+
+# Arguments
+* `nm :: Int64` is the number of orbitals.
+* `nf :: Int64` is the number of flavours.
+"""
+function GetLpLzTerms(nm :: Int64, nf :: Int64)
+    s = (nm - 1) / 2.0
+    no = nm * nf
+    tms_lz = 
+        [ begin m = div(o - 1, nf)
+            Term(m - s, [1, o, 0, o])
+        end for o = 1 : no ]
+    tms_lp = 
+        [ begin m = div(o - 1, nf)
+            Term(sqrt(m * (nm - m)), [1, o, 0, o - nf])
+        end for o = nf + 1 : no ]
+    return tms_lz, tms_lp
+end
+
+
+"""
+    GetL2Terms(tms_lzlp :: Tuple{Terms, Terms}) :: Terms
+
+Return the terms for the total angular momentum from a tuple of terms containing ``L^z`` and ``L^+``, implemented as 
+    
+    tms_lz, tms_lp = tms_lzlp 
+    return SimplifyTerms(tms_lz * tms_lz - tms_lz + tms_lp * tms_lp')
+"""
+function GetL2Terms(tms_lzlp :: Tuple{Terms, Terms})
+    tms_lz, tms_lp = tms_lzlp 
+    return SimplifyTerms(tms_lz * tms_lz - tms_lz + tms_lp * tms_lp')
 end
 
 
