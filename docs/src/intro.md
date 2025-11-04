@@ -87,6 +87,14 @@ where $\delta$ is a UV-regulator. The constant part is known as the $F$-function
 
 Within the generators of conformal symmetry, the $\mathrm{SO}(3)$ rotation and the dilatation are manifest and act as rotation and time translation on fuzzy sphere. The rest two, _viz._ translation $P^\mu$ and special conformal transformation (SCT) $K^\mu$ needs to be emergent in the IR at the conformal point but broken along the RG flow. It is worthwhile to construct these IR generators by the UV operators on fuzzy sphere. These works invest in such construction with the help of stress tensor $T^{\mu\nu}$. The time component $T^{\tau\tau}$ of stress tensor equals the Hamiltonian density $\mathscr{H}$ and it integrates into the generator $\Lambda^\mu=P^\mu+K^\mu=\int\mathrm{d}\hat{\mathbf{n}}\,n^\mu\mathscr{H}$. The action of this generator send a scaling operator to other operators in the same multiplet with the number of partial derivatives increased or decreased by one. These works calculate the matrix elements of the generators $\Lambda^\mu$ and compare it with the theoretical values in the CFT and find good agreement, which is another non-trivial verification of conformal symmetry. Furthermore, the separate generators $P^\mu$ and $K^\mu$ can be obtained by considering the commutatator $[H,\Lambda^\mu]$, which is useful in determining the primaries.
 
+##### [The crosscap coefficients](@id Dong2025)
+
+> __[Dong 2025]__ Numerical extraction of crosscap coefficients in microscopic models for $(2+1)$D conformal field theory, Jia-Ming Dong, Yueshui Zhang, Kai-Wen Huang, Hong-Hao Tu, and Ying-Hai Wu, [arXiv:2507.20005](https://arxiv.org/abs/2507.20005).
+
+##### [Locating the Ising CFT via the ground-state energy](@id Wiese2025)
+
+> __[Wiese 2025]__ Locating the Ising CFT via the ground-state energy on the fuzzy sphere, Kay Joerg Wiese, [arXiv:2510.09482](https://arxiv.org/abs/2510.09482).
+
 ### Realising various 3d CFTs
 
 The second direction is to study various other CFTs beyond 3d Ising. Fuzzy sphere has revealed many new information about these theories ; the previously known results are also consistent with the fuzzy sphere. So far, the accessible CFTs include $\mathrm{SO}(5)$ deconfined criticality, $\mathrm{O}(3)$ Wilson-Fisher and a series of new theories with $\mathrm{Sp}(N)$ symmetry. 
@@ -99,7 +107,7 @@ The first theory besides Ising CFT to which fuzzy sphere is applied is the $\mat
 
 The DQCP can be conveniently studied on the fuzzy sphere by constructing a non-linear sigma model (NLσM) on target space $S^4$ with a level-1 topological Wess-Zumino-Witten (WZW) term, which serves as a dual description of the DQCP with an exact $\mathrm{SO}(5)$ symmetry. The idea is to construct a four-flavour model with global symmetry $\mathrm{Sp}(2)/\mathbb{Z}_2=\mathrm{SO}(5)$ ($\mathbb{Z}_2$ means to gauge the pseudoreal representations). At half-filling, it can be described by a NLσM on the Grassmannian $\tfrac{\mathrm{Sp}(2)}{\mathrm{Sp}(1)\times\mathrm{Sp}(1)}\cong S^4$ and the WZW level can be matched. This work provides evidence that the DQCP exhibits approximate conformal symmetry. This work has identified 19 conformal primaries and their 82 descendants. Furthermore, by examining the renormalisation group flow of the lowest symmetry singlet, this work demonstrates that the DQCP is more likely pseudo-critical, with the approximate conformal symmetry plausibly emerging from nearby complex fixed points.
 
-##### [The $\mathrm{O}(3)$ Wilson-Fisher](@id Han2023Dec)
+##### [The bilayer Heisenberg transition](@id Han2023Dec)
 
 > __[Han 2023Dec]__ Conformal operator content of the Wilson-Fisher transition on fuzzy sphere bilayers, Chao Han, Liangdong Hu, and Wei Zhu, [arXiv:2312.04047](https://arxiv.org/abs/2312.04047), [Phys. Rev. B __110__, 115113 (2024)](https://doi.org/10.1103/PhysRevB.110.115113).
 
@@ -121,29 +129,41 @@ Several candidate Chern-Simons-matter theories are known to exist on its phase d
 
 The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\mathbb{Z}$ is known as the number of states. In 2d, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs, while $Q>Q_c$ are first order. Specifically, 2d 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity in a similar manner with $\mathrm{SO}(5)$ DQCP. In 3d, the 3-state Potts model is found to be first-order. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry between layers. The interacting Hamiltonian resembles the Ising model. Interestingly, this work finds out that the transition point of the 3d 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite size effect.
 
-#### [Yang-Lee non-unitary CFT](@id Fan2025)
+##### [Yang-Lee non-unitary CFT](@id Fan2025)
 
 > __[Fan 2025]__ Simulating the non-unitary Yang-Lee conformal field theory on the fuzzy sphere, Ruihua Fan, Junkai Dong, and Ashvin Vishwanath [arXiv:2505.06342](https://arxiv.org/abs/2505.06342).
 
 > __[Arguello Cruz 2025]__ Yang-Lee quantum criticality in various dimensions, Erick Arguello Cruz, Igor R. Klebanov, Grigory Tarnopolsky, and Yuan Xin, [arXiv:2505.06369](https://arxiv.org/abs/2505.06369).
 
-> __[Elias Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
+> __[Elias Miro 2025]__ Flowing from the Ising model on the fuzzy sphere to the 3d Lee-Yang CFT, Joan Elias Miro, Olivier Delouche, [JHEP __10__ (2025) 037](https://doi.org/10.1007/JHEP10(2025)037), [arXiv:2505.07655](https://arxiv.org/abs/2505.07655).
 
 The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2d Yang-Lee theory is described by $M(2,5)$ minimal model and 3d Yang-Lee CFT can be solved perturbatively up to five-loops, Fan _et al._, Arguello Cruz _et al._, and Elias Miro _et al._ presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
 
-#### [The free real scalar theory](@id He2025Jun)
+##### [The free real scalar theory](@id He2025Jun)
 
 > __[He 2025Jun]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
 
 > __[Taylor 2025]__ Conformal scalar field theory from Ising tricriticality on the fuzzy sphere, Joseph Taylor, Cristian Voinea, Zlatko Papić, Ruihua Fan, [arXiv:2506.22539](https://arxiv.org/abs/2506.22539).
 
-#### [The $\mathrm{O}(4)$ deconfined criticality](@id Yang2025Jul)
+##### [The $\mathrm{O}(4)$ deconfined criticality](@id Yang2025Jul)
 
 > __[Yang 2025Jul]__ Conformal Operator Flows of the Deconfined Quantum Criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
 
-#### [The confinement transition of $\nu=1/2$ bosonic Laughlin state](@id Zhou2025Jul)
+##### [The confinement transition of $\nu=1/2$ bosonic Laughlin state](@id Zhou2025Jul)
 
 > __[Zhou 2025Jul]__ Chern-Simons-matter conformal field theory on fuzzy sphere: Confinement transition of Kalmeyer-Laughlin chiral spin liquid, Zheng Zhou, Chong Wang, Yin-Chen He, [arXiv:2507.19580](https://arxiv.org/abs/2507.19580).
+
+##### [The free Majorana fermion theory](@id Zhou2025Sep)
+
+> __[Zhou 2025Sep]__ Free Majorana fermion meets gauged Ising conformal field theory on the fuzzy sphere, [arXiv:2509.08038](https://arxiv.org/abs/2509.08038).
+
+##### [The transition between bosonic Laughlin and Halperin 220](@id Voinea2025)
+
+> __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
+
+##### [The $\mathrm{O}(3)$ Wilson-Fisher CFT](@id Dey2025)
+
+> __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
 
 ### Studying conformal defects and boundaries
 
@@ -185,7 +205,7 @@ Besides the three directions of works, several other works push the boundary of 
 
 ##### [Conformal perturbation](@id Laeuchli2025)
 
-> __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, Slava Rychkov [arXiv:2504.00842](https://arxiv.org/abs/2504.00842)
+> __[Läuchli 2025]__ Exact diagonalization, matrix product states and conformal perturbation theory study of a 3d Ising fuzzy sphere model, Andreas M. Läuchli, Loïc Herviou, Patrick H. Wilhelm, and Slava Rychkov, [SciPost Phys. __19__, 076 (2025)](https://doi.org/10.21468/SciPostPhys.19.3.076), [arXiv:2504.00842](https://arxiv.org/abs/2504.00842).
 
 The energy spectrum calculated numerically at finite size does not coincide with that of the CFT. Part of the finite-size correction comes from the higher irrelavant operators that are not exactly tuned to zero (_e. g._, in the Ising CFT, the irrelavent operators include $\epsilon', C_{\mu\nu\rho\sigma}, T'_{\mu\nu}$, _etc._, and the lowest singlets $\epsilon$ and $\epsilon'$ are tuned away through the two parameters). These irrelevant operators exert perturbations on the states and their energy. This paper captures this kind of correction by the conformal perturbation theory. By making use of the fact that the corrections from an irrelevant operator on the energy of the primary and its descendants are not independent, the coefficients of the irrelevant operators can be fitted.
 
