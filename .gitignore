@@ -5,3 +5,13 @@ docs/src/assets/
 **offsync**
 **tmp**
 **Manifest.toml
+*.aux
+*.bbl
+*.out
+*.toc
+*.fls
+*.log
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.blg

@@ -2,13 +2,17 @@
 
 ## Version 1.x
 
-### Version 1.1
+### Version 1.2
 
-#### Version 1.1.1 (Ongoing)
+#### Version 1.2.0 (4 November, 2025)
 
 - Update the implementation of Sp and SU Casimir.
 - Add total angular momentum for boson-fermion mixture.
+- Add total angular momentum through $L^z$ and $L^+$. 
+- Add functions padding orbitals. 
 - Update the reference and examples.
+
+### Version 1.1
 
 #### Version 1.1.0 (14 July, 2025)
 
