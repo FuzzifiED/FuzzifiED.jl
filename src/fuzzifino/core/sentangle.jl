@@ -19,7 +19,7 @@ Decompose a state ``|ψ⟩=v_I|I⟩`` into a direct-product basis of two subsyst
 
 # Output
 
-A complex matrix of dimension `bsb.dim * bsa.dim` that corresponds to the state in the decomposed basis ``|ψ⟩=M_{JI}|I_A⟩|J_B⟩``. This is equivalent to ``R_{μν}^A/√p`` in [PRB 85, 125308 (2012)](https://dx.doi.org/10.1103/PhysRevB.85.125308). After calculating all the sectors, the reduced density matrix will be ``ρ_B=⊕\\mathbf{M}\\mathbf{M}^†``.
+A complex matrix of dimension `bsb.dim * bsa.dim` that corresponds to the state in the decomposed basis ``|ψ⟩=M_{JI}|I_A⟩|J_B⟩``. This is equivalent to ``R_{μν}^A/√p`` in [PRB 85, 125308 (2012)](https://dx.doi.org/10.1103/PhysRevB.85.125308). After calculating all the sectors, the reduced density matrix will be ``ρ_B=⊕𝐌𝐌^†``.
 """
 function StateDecompMat(st :: Vector{<:Number}, bs0 :: SBasis, bsa :: SBasis, bsb :: SBasis, amp_ofa :: Vector{<:Number}, amp_oba :: Vector{<:Number}, amp_ofb :: Vector{<:Number}, amp_obb :: Vector{<:Number})
     st_dcp = Matrix{ComplexF64}(undef, bsb.dim, bsa.dim) ;

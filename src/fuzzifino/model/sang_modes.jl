@@ -348,7 +348,7 @@ returns the modes of electron creation and annihilation superposed in the rule o
 
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
-* `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``\\mathbb{I}`` by default.
+* `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
 """
 function GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
     el = [ StoreComps(GetFermionSMod(nm, nf, f)) for f = 1 : nf ]
@@ -374,7 +374,7 @@ returns the modes of boson creation and annihilation superposed in the rule of C
 
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
-* `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``\\mathbb{I}`` by default.
+* `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
 """
 function GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
     el = [ StoreComps(GetBosonSMod(nm, nf, f)) for f = 1 : nf ]
