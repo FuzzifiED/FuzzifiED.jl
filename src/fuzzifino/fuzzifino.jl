@@ -28,7 +28,7 @@ include("core/sentangle.jl")
 
 include("model/boson_sqn.jl")
 include("model/boson_opsterms.jl")
-include("model/sphere_obs.jl")
-include("model/ang_modes.jl")
+include("model/ssphere_obs.jl")
+include("model/sang_modes.jl")
 
 end
