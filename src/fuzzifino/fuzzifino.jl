@@ -8,7 +8,7 @@ using WignerSymbols
 using SphericalHarmonics
 using FuzzifiED_jll
 
-import FuzzifiED: NumThreads, SilentStd, ElementType, ObsNormRadSq
+import FuzzifiED: NumThreads, SilentStd, ElementType, ObsNormRadSq, ObsMomIncr
 
 """
     Fuzzifino.Libpathino :: String = FuzzifiED_jll.LibpathFuzzifino

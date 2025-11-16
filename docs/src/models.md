@@ -64,9 +64,10 @@ Padding orbitals for SphereObs is realised
 ```@docs
 PadSphereObs
 ```
-Here, a parameter `ObsNormRadSq` is used to specify the normalisation of the observables
+Here, two parameters `ObsNormRadSq` and `ObsMomIncr` are respectively used to specify the normalisation of the observables and whether it increases or decreases $L^z$
 ```@docs
 FuzzifiED.ObsNormRadSq
+FuzzifiED.ObsMomIncr
 ```
 One can evaluate an angular component, the value at one point, the uniform spatial integral of an observable, or filter a specific set of components.
 ```@docs

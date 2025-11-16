@@ -227,7 +227,7 @@ end
 
 
 """
-    GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64) :: AngModes
+    GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64[ ; mom_incr :: Bool]) :: AngModes
 
 returns the modes of electron annihilation operator ``c_m``, with angular momentum ``s=(N_m-1)/2``
 
@@ -236,15 +236,20 @@ returns the modes of electron annihilation operator ``c_m``, with angular moment
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64)
-    gc = (l2, m2) -> (l2 == nm - 1) ? Terms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : Term[]
+function GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
+    if mom_incr
+        gc = (l2, m2) -> (l2 == nm - 1) ? Terms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+    else 
+        gc = (l2, m2) -> (l2 == nm - 1) ? Terms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : Term[]
+    end
     return AngModes(nm - 1, gc)
 end
 
 
 """
-    GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: AngModes
+    GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: AngModes
 
 returns the modes of two electrons superposed in the rule of CG coefficients. 
 ```math 
@@ -256,9 +261,10 @@ returns the modes of two electrons superposed in the rule of CG coefficients.
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetElectronMod(nm, nf, f)) for f = 1 : nf ]
+function GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetElectronMod(nm, nf, f) ; mom_incr) for f = 1 : nf ]
     amd = AngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, Terms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
@@ -269,7 +275,7 @@ end
 
 
 """
-    GetDensityMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: AngModes
+    GetDensityMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: AngModes
 
 returns the modes of electron creation and annihilation superposed in the rule of CG coefficients. 
 ```math 
@@ -281,9 +287,10 @@ returns the modes of electron creation and annihilation superposed in the rule o
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetDensityMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetElectronMod(nm, nf, f)) for f = 1 : nf ]
+function GetDensityMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetElectronMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
     amd = AngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, Terms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 

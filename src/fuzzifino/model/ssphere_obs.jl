@@ -290,7 +290,7 @@ end
 
 
 """
-    GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64]) :: SSphereObs
+    GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64, mom_incr :: Bool]) :: SSphereObs
 
 returns the fermion annihilation operator ``ψ_f``.
 
@@ -300,15 +300,21 @@ returns the fermion annihilation operator ``ψ_f``.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
 * `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R`` is included. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq)
-    gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
-    return SSphereObs(nm - 1, nm - 1, gc)
+function GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
+    if mom_incr
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 + m2) ÷ 2) / √norm_r2, [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+        return SSphereObs(-nm + 1, nm - 1, gc)
+    else
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
+        return SSphereObs(nm - 1, nm - 1, gc)
+    end
 end
 
 
 """
-    GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64]) :: SSphereObs
+    GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64[ ; norm_r2 :: Float64, mom_incr :: Bool]) :: SSphereObs
 
 returns the boson annihilation operator ``ϕ_f``.
 
@@ -318,15 +324,21 @@ returns the boson annihilation operator ``ϕ_f``.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
 * `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R`` is included. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq)
-    gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
-    return SSphereObs(nm - 1, nm - 1, gc)
+function GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
+    if mom_incr
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 + m2) ÷ 2) / √norm_r2, [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : Term[]
+        return SSphereObs(-nm + 1, nm - 1, gc)
+    else
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
+        return SSphereObs(nm - 1, nm - 1, gc)
+    end
 end
 
 
 """
-    GetFerDensitySObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64]) :: SSphereObs
+    GetFerDensitySObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64, mom_incr :: Bool]) :: SSphereObs
 
 returns the fermion density operator ``n_c=∑_{ff'}ψ^†_{f}M_{ff'}ψ_{f'}``
 
@@ -336,9 +348,10 @@ returns the fermion density operator ``n_c=∑_{ff'}ψ^†_{f}M_{ff'}ψ_{f'}``
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
 * `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R^2`` is included. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetFerDensitySObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = Matrix{Float64}(I, nf, nf) ; norm_r2 :: Float64 = ObsNormRadSq)
-    el = [ StoreComps(GetFermionSObs(nm, nf, f ; norm_r2)) for f = 1 : nf ]
+function GetFerDensitySObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = Matrix{Float64}(I, nf, nf) ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetFermionSObs(nm, nf, f ; norm_r2, mom_incr)) for f = 1 : nf ]
     obs = SSphereObs(0, 0, Dict{Tuple{Int64, Int64}, STerms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
@@ -349,7 +362,7 @@ end
 
 
 """
-    GetBosDensitySObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64]) :: SSphereObs
+    GetBosDensitySObs(nm :: Int64, nf :: Int64[, mat :: Matrix{<:Number}][ ; norm_r2 :: Float64, mom_incr :: Bool]) :: SSphereObs
 
 returns the boson density operator ``n_c=∑_{ff'}ϕ^†_{f}M_{ff'}ϕ_{f'}``
 
@@ -359,9 +372,10 @@ returns the boson density operator ``n_c=∑_{ff'}ϕ^†_{f}M_{ff'}ϕ_{f'}``
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
 * `norm_r2 :: Float64` is the radius squared ``R^2`` used for normalisation. Facultative, `ObsNormRadSq` by default. If ``R≠1``, an extra factor ``1/R^2`` is included. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetBosDensitySObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = Matrix{Float64}(I, nf, nf) ; norm_r2 :: Float64 = ObsNormRadSq)
-    el = [ StoreComps(GetBosonSObs(nm, nf, f ; norm_r2)) for f = 1 : nf ]
+function GetBosDensitySObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} = Matrix{Float64}(I, nf, nf) ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetBosonSObs(nm, nf, f ; norm_r2, mom_incr)) for f = 1 : nf ]
     obs = SSphereObs(0, 0, Dict{Tuple{Int64, Int64}, STerms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 

@@ -253,7 +253,7 @@ end
 
 
 """
-    GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64) :: SAngModes
+    GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64[ ; mom_incr :: Bool]) :: SAngModes
 
 returns the modes of fermion annihilation operator ``c_m``, with angular momentum ``s=(N_m-1)/2``
 
@@ -262,15 +262,20 @@ returns the modes of fermion annihilation operator ``c_m``, with angular momentu
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64)
-    gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
+function GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
+    if mom_incr
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+    else
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
+    end
     return SAngModes(nm - 1, gc)
 end
 
 
 """
-    GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64) :: SAngModes
+    GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64[ ; mom_incr :: Bool]) :: SAngModes
 
 returns the modes of electron boson operator ``b_m``, with angular momentum ``s=(N_m-1)/2``
 
@@ -279,15 +284,20 @@ returns the modes of electron boson operator ``b_m``, with angular momentum ``s=
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64)
-    gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1.0, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
+function GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
+    if mom_incr
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : Term[]
+    else
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1.0, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
+    end
     return SAngModes(nm - 1, gc)
 end
 
 
 """
-    GetFerPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetFerPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: SAngModes
 
 returns the modes of two fermions superposed in the rule of CG coefficients. 
 ```math 
@@ -299,9 +309,10 @@ returns the modes of two fermions superposed in the rule of CG coefficients.
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetFerPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetFermionSMod(nm, nf, f)) for f = 1 : nf ]
+function GetFerPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetFermionSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
     amd = SAngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, STerms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
@@ -312,7 +323,7 @@ end
 
 
 """
-    GetBosPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetBosPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: SAngModes
 
 returns the modes of two bosons superposed in the rule of CG coefficients. 
 ```math 
@@ -324,9 +335,10 @@ returns the modes of two bosons superposed in the rule of CG coefficients.
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetBosPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetBosonSMod(nm, nf, f)) for f = 1 : nf ]
+function GetBosPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetBosonSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
     amd = SAngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, STerms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
@@ -337,7 +349,7 @@ end
 
 
 """
-    GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: SAngModes
 
 returns the modes of electron creation and annihilation superposed in the rule of CG coefficients. 
 ```math 
@@ -349,9 +361,10 @@ returns the modes of electron creation and annihilation superposed in the rule o
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetFermionSMod(nm, nf, f)) for f = 1 : nf ]
+function GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetFermionSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
     amd = SAngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, STerms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
@@ -363,7 +376,7 @@ end
 
 
 """
-    GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}) :: SAngModes
+    GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: SAngModes
 
 returns the modes of boson creation and annihilation superposed in the rule of CG coefficients. 
 ```math 
@@ -375,9 +388,10 @@ returns the modes of boson creation and annihilation superposed in the rule of C
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
+* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
-function GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
-    el = [ StoreComps(GetBosonSMod(nm, nf, f)) for f = 1 : nf ]
+function GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
+    el = [ StoreComps(GetBosonSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
     amd = SAngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, STerms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
