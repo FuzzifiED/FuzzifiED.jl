@@ -586,7 +586,7 @@ f_sse = abs(inner(sts', nx00, ste) / inner(sts', nx00, st0))
 
 ## List of examples
 
-We offer a series of other examples that reproduces various achievements of fuzzy sphere. For a more detailed summary of the background, see the [Review of existing work](@ref). 
+We offer a series of other examples that reproduces various achievements of fuzzy sphere. For a more detailed summary of the background, see the [review of existing works](@ref Review-of-Existing-Works). 
 
 * [`ising_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum.jl) calculates the spectrum of 3d Ising model on fuzzy sphere at ``N_m = 12``. For each ``(P,Z,R)`` sector, 20 states are calculated. This example reproduces Table I and Figure 4 in [Zhu 2022](@ref Zhu2022).
 * [`ising_phase_diagram.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_phase_diagram.jl) calculates the phase diagram of fuzzy sphere Ising modelby calculating the order parameter ``\langle M^2\rangle``. This example reproduces Figure 3 in [Zhu 2022](@ref Zhu2022).

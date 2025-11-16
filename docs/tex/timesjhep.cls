@@ -8,7 +8,7 @@
 \newif\ifnatbibsort\natbibsorttrue
 \newif\iftitlerule\titleruletrue
 \newif\iftocrule\tocruletrue
-\newif\ifdoublepage\doublepagetrue
+\newif\ifdoublepage\doublepagefalse
 \newif\iftimesfont\timesfontfalse
 \newif\ifchangefont\changefonttrue
 
@@ -18,12 +18,14 @@
 \DeclareOption{toc-simple}{\tocrulefalse}
 \DeclareOption{simple}{\toccontinuoustrue\titlerulefalse\tocrulefalse}
 \DeclareOption{no-toc}{\notoctrue}
-\DeclareOption{no-double-page}{\doublepagefalse}
+\DeclareOption{double-page}{\doublepagetrue}
 \DeclareOption{times-font}{\timesfonttrue}
 \DeclareOption{def-font}{\changefontfalse}
 \ProcessOptions\relax
 
+\RequirePackage{babel}
 \RequirePackage{amsmath}
+\RequirePackage{amssymb}
 \RequirePackage{amsfonts}
 \RequirePackage{epsfig}
 \RequirePackage{graphicx}
@@ -33,13 +35,12 @@
 ,allcolors=Blue
 ,linktocpage=true
 ]{hyperref}
-\RequirePackage{calrsfs}
 \RequirePackage[normalem]{ulem}
 \RequirePackage{lipsum}
 \RequirePackage{multirow}
 \RequirePackage{enumitem}
 \RequirePackage{indentfirst}
-\RequirePackage[section]{placeins}
+\RequirePackage{placeins}
 \RequirePackage{ifxetex}
 \RequirePackage[nottoc,notlot,notlof]{tocbibind}
 \ifchangefont
@@ -58,6 +59,7 @@
     \fi
   \fi
 \fi
+\RequirePackage{calrsfs}
 \urlstyle{same}
 \bibliographystyle{timesjhepbib}
 \setlist{align=parleft,leftmargin=0pt,itemindent=2\parindent,labelsep=0em,labelwidth=1\parindent,nosep}
@@ -129,35 +131,55 @@
 \renewcommand\afterEmailSpace{\par\bigskip}}
 
 %authors and affiliations
-\newtoks\auth@toks
 \newif\ifauthor\authorfalse
-\newif\iflastauthor\lastauthorfalse
-\newcommand\last\lastauthortrue
-\renewcommand{\author}[2][]{%
-  \if!#1!%
-    \ifauthor
-      \iflastauthor
-        \auth@toks=\expandafter{\the\auth@toks, and #2}%
-      \else
-        \auth@toks=\expandafter{\the\auth@toks, #2}%
-      \fi
-    \else
-      \auth@toks=\expandafter{\the\auth@toks#2}%
-      \authortrue
-    \fi
-  \else
-    \ifauthor
-      \iflastauthor
-        \auth@toks=\expandafter{\the\auth@toks\ and #2$^{#1}$}%
-      \else
-        \auth@toks=\expandafter{\the\auth@toks, #2$^{#1}$}%
-      \fi
-    \else
-      \auth@toks=\expandafter{\the\auth@toks#2$^{#1}$}%
-      \authortrue
-    \fi
-  \fi
-}
+\RequirePackage{xparse}
+
+\ExplSyntaxOn
+% Global sequences to store names and marks
+\seq_new:N \g_myauth_names_seq
+\seq_new:N \g_myauth_marks_seq
+\int_new:N \l_myauth_n_int
+
+% Collect authors as \author[<mark>]{<name>}
+\RenewDocumentCommand \author { O{} m }
+  {
+    \authortrue
+    \seq_gput_right:Nn \g_myauth_names_seq {#2}
+    \seq_gput_right:Nn \g_myauth_marks_seq {#1}
+  }
+
+% Print them as:
+% 1: Name$^{1}$
+% 2: Name1,$^{1}$ and Name2$^{2}$
+% 3+: Name1,$^{1}$ Name2,$^{2}$ and Name3$^{3}$ ...
+\NewDocumentCommand \printauthors {} { \myauth_print: }
+
+\cs_new_protected:Npn \myauth_print:
+  {
+    \int_set:Nn \l_myauth_n_int { \seq_count:N \g_myauth_names_seq }
+    \int_compare:nNnTF { \l_myauth_n_int } = { 0 } { } % nothing to print
+      {
+        \int_step_inline:nn { \l_myauth_n_int }
+          {
+            \tl_set:Nx \l_tmpa_tl { \seq_item:Nn \g_myauth_names_seq { ##1 } }
+            \tl_set:Nx \l_tmpb_tl { \seq_item:Nn \g_myauth_marks_seq { ##1 } }
+            \tl_use:N \l_tmpa_tl
+            \int_compare:nNnTF { ##1 } = { \l_myauth_n_int }
+              { \textsuperscript{\mdseries\upshape\tl_use:N \l_tmpb_tl} } % last: no comma before the superscript
+              {
+                ,\textsuperscript{\mdseries\upshape\tl_use:N \l_tmpb_tl}%
+                \int_compare:nNnTF { \l_myauth_n_int } = { 2 }
+                  { ~and~ } % exactly two authors
+                  {
+                    \int_compare:nNnTF { ##1 } = { \l_myauth_n_int - 1 }
+                      { ~and~ } % before last when 3+
+                      { \c_space_tl } % otherwise just a space
+                  }
+              }
+          }
+      }
+  }
+\ExplSyntaxOff
 
 \newtoks\affil@toks\newif\ifaffil\affilfalse
 \newcommand{\affiliation}[2][]{%
@@ -165,7 +187,7 @@
   \if!#1!%
     \affil@toks=\expandafter{\the\affil@toks{\item[]#2}}%
   \else
-    \affil@toks=\expandafter{\the\affil@toks{\item[$^{#1}$]#2}}%
+    \affil@toks=\expandafter{\the\affil@toks{\item[\textsuperscript{\mdseries\upshape #1}]#2}}%
   \fi
 }
 
@@ -206,7 +228,8 @@
 %this is the ``itemsep'' of the affiliations list
 \newlength{\affiliationsSep}\setlength{\affiliationsSep}{-3pt}
 %this hook is needed if the toc starts on the first page
-\newcommand\beforetochook{\pagestyle{myplain}\pagenumbering{roman}\setcounter{page}{2}}
+\newcounter{savedpage}
+\newcommand\beforetochook{\setcounter{savedpage}{\value{page}}\pagestyle{myplain}\pagenumbering{roman}\setcounter{page}{\value{savedpage}}}
 
 \iftoccontinuous
 \renewcommand\afterProceedingsSpace{\vskip21pt minus15pt}
@@ -234,9 +257,9 @@
 \if!\@proceeding!\else\noindent{\sc\@proceeding}\fi
 \afterProceedingsSpace
 % Title
-{\LARGE\flushleft\bfseries\boldmath\@title\par}
+{\LARGE\flushleft\bfseries\@title\par}
 % To-do list
-\if!\@subtitle!\else{\Large\flushleft\bfseries\itshape\boldmath\@subtitle\par}\fi
+\if!\@subtitle!\else{\Large\flushleft\bfseries\itshape\@subtitle\par}\fi
 
 % Rule
 \iftitlerule\afterTitleSpace\hrule height 1.5\p@\afterRuleSpace\else\afterTitleSpace\fi
@@ -253,7 +276,7 @@
 %% they can be linked with an 'and'
 \fi
 % Author
-\if!\@author!\else{\bfseries\raggedright\the\auth@toks\par}
+\if!\@author!\else{\bfseries\raggedright\printauthors\par}
 \afterAuthorSpace\fi
 % Affiliation
 \ifaffil\begin{list}{}{%
@@ -278,21 +301,21 @@
 %Erratum or addendum
 \if!\@xtum!\else\noindent{\@xtum}\afterXtumSpace\fi
 % Abstract
-\if!\@abstract!\else\noindent{\textit{Abstract}}~: \@abstract\afterAbstractSpace\fi
+\if!\@abstract!\else\noindent{\textsc{Abstract}}: \@abstract\afterAbstractSpace\fi
 % Rapid update
-\if!\@rapidupdate!\else\noindent{\textit{Rapid update}}~: \@rapidupdate\afterAbstractSpace\fi
+\if!\@rapidupdate!\else\noindent{\textsc{Rapid update}}: \@rapidupdate\afterAbstractSpace\fi
 % To-discuss
-\if!\@todiscuss!\else\noindent{\textit{To discuss}}~: \@todiscuss\afterAbstractSpace\fi
+\if!\@todiscuss!\else\noindent{\textsc{To discuss}}: \@todiscuss\afterAbstractSpace\fi
 % To-do list
-\if!\@todolist!\else\noindent{\textit{To-do list}}~: \@todolist\afterAbstractSpace\fi
+\if!\@todolist!\else\noindent{\textsc{To-do list}}: \@todolist\afterAbstractSpace\fi
 % Questions
-\if!\@questions!\else\noindent{\textit{Questions}}~: \@questions\afterAbstractSpace\fi
+\if!\@questions!\else\noindent{\textsc{Questions}}: \@questions\afterAbstractSpace\fi
 % Keywords
-\if!\@keywords!\else\noindent{\textit{Keywords}}~: \@keywords\afterKeywordsSpace\fi
+\if!\@keywords!\else\noindent{\textsc{Keywords}}: \@keywords\afterKeywordsSpace\fi
 % Extra
-\if!\@extra!\else\noindent\@extra\vskip 0pt\fi
+\if!\@extra!\else\noindent\@extra\afterAbstractSpace\fi
 % Arxivnumber
-\if!\@arxivnumber!\else\noindent{\textit{ArXiv ePrint}}~: \href{http://arxiv.org/abs/\@arxivnumber}{\@arxivnumber}\afterArxivSpace\fi
+\if!\@arxivnumber!\else\noindent{\textsc{ArXiv ePrint}}: \href{http://arxiv.org/abs/\@arxivnumber}{\@arxivnumber}\afterArxivSpace\fi
 % Dedication
 \if!\@dedicated!\else\vbox{\small\it\raggedleft\@dedicated}\afterDedicatedSpace\fi
 %
@@ -303,7 +326,7 @@
 \iftocrule\afterTocSpace\hrule\fi
 \afterTocRuleSpace
 \fi
-\iftoccontinuous\else\ifdoublepage\vglue0pt\cleardoublepage\fi\fi
+\iftoccontinuous\else\ifdoublepage\vglue0pt\cleardoublepage\else\clearpage\fi\fi
 \setcounter{footnote}{0}
 \pagestyle{myplain}\pagenumbering{arabic}
 } % close the \renewcommand\maketitle{

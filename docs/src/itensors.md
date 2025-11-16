@@ -4,7 +4,7 @@ FuzzifiED also supports an ITensor extension, including convertion with the `Sit
 ```julia
 using ITensors, ITensorMPS
 ```
-at the heading of the Julia script.
+at the heading of the Julia script. Also note that the ITensor package supports Julia at 1.10 the best.
 
 During intialisation, the optimal configuration for parallelisation is already automatically set.
 ```julia
