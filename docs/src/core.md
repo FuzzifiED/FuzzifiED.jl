@@ -1,6 +1,6 @@
-# Core functions
+# Core Functions
 
-## Environment parameters
+## Environment Parameters
 
 The following environment parameters defines how FuzzifiED works, _viz._ whether it outputs logs, how many threads it uses and where it reads its libraries. In general, you can keep it at default. 
 ```@docs
@@ -11,7 +11,7 @@ FuzzifiED.ElementType
 FuzzifiED.OpenHelp!()
 ```
 
-## Quantum numbers
+## Quantum Numbers
 
 FuzzifiED implements diagonal and off-diagonal quantum numbers. They are defined as
 ```@docs
@@ -102,7 +102,7 @@ The product of an operator on a state and the inner product of a final state, an
 *(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Vector{ComplexF64}}, op :: Operator, st_d :: Vector{ComplexF64})
 ```
 
-## Sparse matrix
+## Sparse Matrix
 
 ```@docs
 OpMat{T}

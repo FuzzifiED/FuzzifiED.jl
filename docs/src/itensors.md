@@ -1,4 +1,4 @@
-# ITensor extension
+# ITensor Extension
 
 FuzzifiED also supports an ITensor extension, including convertion with the `Site` and `OpSum` objects from ITensor library and management of DMRG sweeping process. To use the extension, make sure the packages `ITensors`, `ITensorMPS` are properly installed, and include
 ```julia
@@ -13,7 +13,7 @@ NDTensors.Strided.disable_threads();
 ITensors.enable_threaded_blocksparse();
 ```
 
-## Format conversion
+## Format Conversion
 
 FuzzyfiED defines a new SityType "FuzzyFermion" that can be initialised from QNDiags to avoid overwriting the original "Fermion" type.
 ```@docs
@@ -40,7 +40,7 @@ Terms(opsum :: Sum{Scaled{ComplexF64, Prod{Op}}})
 OpSum(tms :: Terms)
 ```
 
-## Easy sweep
+## Easy-Sweep
 
 This tool kit facilitates the management of DMRG process. It automatically records the intermediate results and recover these results if a job is stopped and run again on HPC. It also manages the gradual increase of maximal bond dimensions and the determination of convergence by the criteria of energy. This extension required the packages `HDF5`. We also recommand using the package [`ITensorMPOConstruction`](https://github.com/ITensor/ITensorMPOConstruction.jl) for the generation of Hamiltonian MPO, which can be installed by 
 ```julia
@@ -54,7 +54,7 @@ GetMPOSites(id :: String, tms :: Union{Terms, Sum{Scaled{ComplexF64, Prod{Op}}}}
 GetMPO(id :: String, tms :: Union{Terms, Sum{Scaled{ComplexF64, Prod{Op}}}}, sites :: Vector{<:Index} ; path :: String = "./", mpo_method :: Function = MPO)
 ```
 
-## Modified version of ITensor
+## Modified Version of ITensor
 
 We have forked `ITensors` and made some modifications to better suit our need. To install the modified packages, please use 
 

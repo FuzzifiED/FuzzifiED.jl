@@ -1,4 +1,4 @@
-# An introduction to the fuzzy sphere
+# An Introduction to the Fuzzy Sphere
 
 ## Introduction
 
@@ -47,13 +47,13 @@ In this section, we review the existing works related to the fuzzy sphere.
 
 This work first proposes the idea of the fuzzy sphere and applies it to a pedagogical example of the 3D Ising CFT. Zhu _et al._ construct a model with two flavours of fermions that resemble the spin-up and spin-down in the lattice transverse-field Ising model. At half-filling, one can colloquially think that a spin degree of freedom lives on each orbital. The Hamiltonian contains a density-density interaction (here the density operator refers to a local fermion bilinear) that resembles the Ising ferromagnetic interaction and a polarising term that resembles the transverse field. By tuning the ratio between the two terms, a transition between quantum Hall ferromagnet (a two-fold degenerate state where either of the two flavours is completely occupied) and paramagnet (a one-fold degenerate state where the superposition of the two flavours at each orbital is occupied) occurs. This transition spontaneously breaks a $\mathbb{Z}_2$ symmetry and falls into the Ising criticality. They then make use of a unique feature of spherical models described by CFT — state-operator correspondence — at the critical point to extract the scaling dimensions of the scaling local operators. They find evidence for the conformal symmetry, including that (1) there exists a conserved stress tensor with $\Delta=3$ (which is used as the calibrator), and (2) all the levels can be classified into conformal multiplet where the spacings between operators' scaling dimensions are very close to integer. This is one of the first numerical evidence that the 3D Ising transition has emergent conformal symmetry. More remarkably, the scaling dimensions of primaries such as $\sigma,\epsilon,\epsilon'$ are already very close to the most accurate known value by numerical bootstrap with an error within $1.2\%$ at a small system size with the number of orbitals $N_m=16$, for which the computational cost is comparable to a $4\times4$ lattice system. The structure of the Ising CFT operator spectrum already starts to show up at an even smaller system size $N_m=4$. All these clues point towards a curious observation that the fuzzy sphere suffers from a remarkably small finite-size effect. The detail for the construction of models is presented in the Sections ['Density-Density Interaction'](@ref Density-Density-Interaction) and ['Interaction in Terms of Pseudopotentials'](@ref Interaction-in-Terms-of-Pseudopotentials), and the detail for the analysis of the spectrum is presented in Section ['Operator Spectrum and Search for Conformal Point'](@ref Operator-Spectrum-and-Search-for-Conformal-Point).
 
-This seminal work opens a new avenue for studying 3D conformal field theories. After that, most of the research on the fuzzy sphere can roughly be categorised into three directions :
+This seminal work opens a new avenue for studying 3D conformal field theories. After that, most of the research on the fuzzy sphere can roughly be categorised into the following directions :
 
-1. Accessing various conformal data,
-2. Developing techniques to improve the numerical precision,
-3. Realising various 3D CFTs, 
-4. Exploring fractional quantum Hall transitions and
-5. Studying conformal defects and boundaries.
+1. [Accessing various conformal data](@ref Accessing-Various-Conformal-Data),
+2. [Developing techniques to improve the numerical precision](@ref Developing-Techniques-to-Improve-the-Numerical-Precision),
+3. [Realising various 3D CFTs](@ref Realising-Various-3D-CFTs), 
+4. [Exploring fractional quantum Hall transitions](@ref Exploring-Fractional-Quantum-Hall-Transitions) and
+5. [Studying conformal defects and boundaries](@ref Studying-Conformal-Defects-and-Boundaries).
 
 ### Accessing Various Conformal Data
 
@@ -99,7 +99,7 @@ This work focuses on the 3D CFTs on the space-time manifold of the the real proj
 
 There has also been techniques to improve the precision through accessing larger system size and detailed analysis of finite-size data, such as quantum Monte Carlo simulation, conformal perturbation, and finite-size scaling the ground-state energy.
 
-##### [Quantum Monte Carlo on fuzzy sphere](@id Hofmann2024)
+##### [Quantum Monte Carlo on the fuzzy sphere](@id Hofmann2024)
 
 > __[Hofmann 2024]__ Quantum Monte Carlo simulation of the 3d Ising transition on the fuzzy sphere, Johannes S. Hofmann, Florian Goth, Wei Zhu, Yin-Chen He, and Emilie Huffman, [arXiv:2310.19880](https://arxiv.org/abs/2310.19880), [SciPost Phys. Core __7__, 028 (2024)](https://doi.org/10.21468/SciPostPhysCore.7.2.028).
 
@@ -120,8 +120,39 @@ The conformal perturbation theory is first studied on the 2D CFTs and the icosah
 This work proposes a new approach to locate the phase-transition line from a finite-size scaling analysis of its ground-state energy with the example of the 3D Ising CFT. Wiese performs a finite-size scaling with the ansatz $E_{\text{GS}}=E_0 R^2+E_1+E_{3/2}R^{-1}$ and identify the minima of $E_{3/2}/E_0$ as the critical curve and the 'sweet spot.'
 
 ### Realising Various 3D CFTs
+The third direction is to study various other CFTs beyond 3D Ising. The fuzzy sphere has revealed lots of new information about these theories~; the previously known results are also consistent with the fuzzy sphere. So far, three classes of CFTs are widely studied on the fuzzy sphere :
 
-The second direction is to study various other CFTs beyond 3D Ising. The fuzzy sphere has revealed lots of new information about these theories ; the previously known results are also consistent with the fuzzy sphere. So far, the accessible CFTs include $\mathrm{SO}(5)$ deconfined criticality, $\mathrm{O}(3)$ Wilson-Fisher, a series of new theories with $\mathrm{Sp}(N)$ symmetry, the 3-state Potts model, the free scalar CFT and the $\mathrm{O}(4)$ deconfined criticality. An outstanding catagory is to realise CFTs through fractional quantum Hall transitions. We leave the discussion to the next section. 
+1. the free-scalar and Wilson-Fisher CFTs realised as Heisenberg bilinear and truncated quantum rotor model, 
+2. CFTs with $\mathrm{Sp}(N)$ global symmetry related to the non-linear $\sigma$ models (NLSM) with a Wess-Zumino-Witten topological term, including $\mathrm{SO}(5)$ deconfined criticality and $\mathrm{O}(4)$ deconfined criticality through a symmetry-breaking perturbation, and a series of new theories with $\mathrm{Sp}(N)$ symmetry and
+3. fractional quantum Hall transitions, which will be discussed in more detail in the next section.
+
+Other accessible CFTs include the 3-state Potts model and the Yang-Lee non-unitary CFT.
+
+#### Free-Scalar and Wilson-Fisher CFTs
+
+##### [The free real scalar theory](@id He2025Jun)
+
+> __[He 2025Jun]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
+
+> __[Taylor 2025]__ Conformal scalar field theory from Ising tricriticality on the fuzzy sphere, Joseph Taylor, Cristian Voinea, Zlatko Papić, Ruihua Fan, [arXiv:2506.22539](https://arxiv.org/abs/2506.22539).
+
+This work introduces a simple model to realise the free real scalar CFT on the fuzzy sphere that is structurally similar to the 3D Ising CFT. A weakly-broken $\mathrm{U}(1)$ symmetry in the fuzzy sphere model realises the $\mathbb{R}$-shift symmetry of the free scalar in the thermodynamic limit, so that the fix point can be accessed with only a single tuning parameter. He numerically demonstrates that our model correctly reproduces the operator spectrum, correlation functions, and, crucially, the harmonic oscillator algebra of the real scalar CFT. He generalises the Girvin-MacDonald-Platzman algebra to the fuzzy sphere algebra of the density operators, which is potentially useful for defining quantum field theories on non-commutative geometries. He proposes a wavefunction ansatz for the ground states which exhibit remarkable agreement with the CFT ground state wavefunctions of the fuzzy sphere model.
+
+##### [The bilayer Heisenberg transition](@id Han2023Dec)
+
+> __[Han 2023Dec]__ Conformal operator content of the Wilson-Fisher transition on fuzzy sphere bilayers, Chao Han, Liangdong Hu, and Wei Zhu, [arXiv:2312.04047](https://arxiv.org/abs/2312.04047), [Phys. Rev. B __110__, 115113 (2024)](https://doi.org/10.1103/PhysRevB.110.115113).
+
+The $\mathrm{O}(N)$ Wilson-Fisher (WF) theories are probably one of the most studied theories for 3D criticalities with a wide range of applications. Specifically, this work studies the $\mathrm{O}(3)$ WF CFT on the set-up of a bilayer Heisenberg model. The construction involves two copies of $\mathrm{SU}(2)$ ferromagnet with altogether four flavours. Briefly speaking, the model contains two competing terms : (1) a $\mathrm{SU}(2)$ ferromagnetic interaction which favours a Heisenberg ferromagnetic phase where each of the two copies is half-filled and the symmetry-breaking order parameter lives on a $S^2$ manifold, (2) a polarising term which favours one of the two copies being completely filled, corresponding to a Heisenberg paramagnet. The transition between these two phases falls into the $\mathrm{O}(3)$ Wilson-Fisher universality. Through the energy spectrum at the transition, Han _et al._ provide evidence that $\mathrm{O}(3)$ Wilson-Fisher fixed point exhibits conformal symmetry, as well as revealing a wealth of information about the CFT, _e. g._ the instability to cubic anisotropy. They also calculate several OPE coefficients.
+
+##### [The $\mathrm{O}(N)$ Wilson-Fisher CFT](@id Dey2025)
+
+> __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, Arjun Dey, Loic Herviou, Christopher Mudry, Andreas Martin Läuchli, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
+
+Although an instance — the $\mathrm{O}(3)$ WF — has been realised in the Heisenberg bilayer, seeking a general realisation of $\mathrm{O}(N)$ WF theories on the fuzzy sphere is helpful as a foundation to study the interacting scalar theories as well as conformal defects and boundaries. This work proposes such a construction analogous to a truncated rotor model. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\mathrm{O}(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\mathrm{O}(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\mathrm{O}(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour.
+
+Dey _et al._ study the $N=3$ instance using ED and DMRG. They locate the critical point using the conformal perturbation. They obtain scaling dimensions from finite-size spectra and operator product expansion coefficients through conformal perturbation. The results are benchmarked against conformal bootstrap and perturbative calculations.
+
+#### NLSM-WZW with Symplectic Symmetry
 
 ##### [The $\mathrm{SO}(5)$ deconfined criticality](@id Zhou2023)
 
@@ -131,11 +162,11 @@ The first theory besides Ising CFT to which fuzzy sphere is applied is the $\mat
 
 The DQCP can be conveniently studied on the fuzzy sphere by constructing a non-linear sigma model (NLSM) on target space $S^4$ with a level-1 topological Wess-Zumino-Witten (WZW) term, which serves as a dual description of the DQCP with an exact $\mathrm{SO}(5)$ symmetry. The idea is to construct a 4-flavour model with symmetry $\mathrm{Sp}(2)/\mathbb{Z}_2=\mathrm{SO}(5)$ ($\mathbb{Z}_2$ means to gauge the pseudoreal representations). At half-filling, it can be described by a NLSM on the Grassmannian $\tfrac{\mathrm{Sp}(2)}{\mathrm{Sp}(1)\times\mathrm{Sp}(1)}\cong S^4$ and the WZW level can be matched. This work provides evidence that the DQCP exhibits approximate conformal symmetry. Zhou _et al._ have identified 19 conformal primaries and their 82 descendants. Furthermore, by examining the renormalisation group flow of the lowest symmetry singlet, they demonstrate that the DQCP is more likely pseudocritical, with the approximate conformal symmetry plausibly emerging from nearby complex fixed points. Several works appear later to follow up.
 
-##### [The bilayer Heisenberg transition](@id Han2023Dec)
+##### [The $\mathrm{O}(4)$ deconfined criticality](@id Yang2025Jul)
 
-> __[Han 2023Dec]__ Conformal operator content of the Wilson-Fisher transition on fuzzy sphere bilayers, Chao Han, Liangdong Hu, and Wei Zhu, [arXiv:2312.04047](https://arxiv.org/abs/2312.04047), [Phys. Rev. B __110__, 115113 (2024)](https://doi.org/10.1103/PhysRevB.110.115113).
+> __[Yang 2025Jul]__ Conformal Operator Flows of the Deconfined Quantum Criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
 
-The $\mathrm{O}(N)$ Wilson-Fisher (WF) theories are probably one of the most studied theories for 3D criticalities with a wide range of applications. Specifically, this work studies the $\mathrm{O}(3)$ WF CFT on the set-up of a bilayer Heisenberg model. The construction involves two copies of $\mathrm{SU}(2)$ ferromagnet with altogether four flavours. Briefly speaking, the model contains two competing terms : (1) a $\mathrm{SU}(2)$ ferromagnetic interaction which favours a Heisenberg ferromagnetic phase where each of the two copies is half-filled and the symmetry-breaking order parameter lives on a $S^2$ manifold, (2) a polarising term which favours one of the two copies being completely filled, corresponding to a Heisenberg paramagnet. The transition between these two phases falls into the $\mathrm{O}(3)$ Wilson-Fisher universality. Through the energy spectrum at the transition, Han _et al._ provide evidence that $\mathrm{O}(3)$ Wilson-Fisher fixed point exhibits conformal symmetry, as well as revealing a wealth of information about the CFT, _e. g._ the instability to cubic anisotropy. They also calculate several OPE coefficients.
+Apart from the $\mathrm{SO}(5)$ deconfined criticality, one can reach the $\mathrm{O}(4)$, or easy-plane DQCP by adding a perturbation in the $\mathrm{SO}(5)$ symmetric tensor representation that breaks the global symmetry to $\mathrm{O}(4)$. The $\mathrm{O}(4)$ DQCP appears in several lattice models and has several gauge theory descriptions, _e. g._ QED with two flavours of Dirac fermions. This work studies the renormalisation group flow from the $\mathrm{SO}(5)$ to the $\mathrm{O}(4)$ DQCP and traces the $\mathrm{O}(4)$ operators back to the $\mathrm{SO}(5)$ operators.
 
 ##### [A series of new $\mathrm{Sp}(N)$-symmetric CFTs](@id Zhou2024Oct)
 
@@ -146,6 +177,8 @@ The quest to discover new 3D CFTs has been intriguing for physicists. A virgin l
     \frac{\mathrm{Sp}(N)}{\mathrm{Sp}(M)\times\mathrm{Sp}(N-M)}.
 ```
 Several candidate Chern-Simons-matter theories are known to exist on its phase diagram with $N$ flavour of gapless bosons or fermions coupled to a non-Abelian (_viz._ $\mathrm{Sp}(1)$, $\mathrm{Sp}(2)$, _etc._) Chern-Simons gauge field. On the fuzzy sphere, this WZW-NLSM can be realised by a $2N$ layer model with $\mathrm{Sp}(N)$ flavour symmetry, and $2M$ out of the $2N$ layers are filled. Zhou _et al._ numerically verify the emergent conformal symmetry by observing the integer-spaced conformal multiplets and studying the finite-size scaling of the conformality.
+
+#### Other CFTs on the Fuzzy Sphere
 
 ##### [The 3-state Potts model](@id Yang2025Jan)
 
@@ -163,27 +196,6 @@ The Potts models describe transitions that spontaneously break $S_Q$ symmetries 
 
 The Yang-Lee singularity is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2D Yang-Lee theory is described by $M(2,5)$ minimal model and 3D Yang-Lee CFT can be solved perturbatively up to five-loops, Fan _et~al._, Arguello Cruz _et~al._, and Elias Miro _et~al._ presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
 
-##### [The free real scalar theory](@id He2025Jun)
-
-> __[He 2025Jun]__ Free real scalar CFT on fuzzy sphere : Spectrum, algebra and wavefunction ansatz, [arXiv:2506.14904](https://arxiv.org/abs/2506.14904).
-
-> __[Taylor 2025]__ Conformal scalar field theory from Ising tricriticality on the fuzzy sphere, Joseph Taylor, Cristian Voinea, Zlatko Papić, Ruihua Fan, [arXiv:2506.22539](https://arxiv.org/abs/2506.22539).
-
-This work introduces a simple model to realise the free real scalar CFT on the fuzzy sphere that is structurally similar to the 3D Ising CFT. A weakly-broken $\mathrm{U}(1)$ symmetry in the fuzzy sphere model realises the $\mathbb{R}$-shift symmetry of the free scalar in the thermodynamic limit, so that the fix point can be accessed with only a single tuning parameter. He numerically demonstrates that our model correctly reproduces the operator spectrum, correlation functions, and, crucially, the harmonic oscillator algebra of the real scalar CFT. He generalises the Girvin-MacDonald-Platzman algebra to the fuzzy sphere algebra of the density operators, which is potentially useful for defining quantum field theories on non-commutative geometries. He proposes a wavefunction ansatz for the ground states which exhibit remarkable agreement with the CFT ground state wavefunctions of the fuzzy sphere model.
-
-##### [The $\mathrm{O}(4)$ deconfined criticality](@id Yang2025Jul)
-
-> __[Yang 2025Jul]__ Conformal Operator Flows of the Deconfined Quantum Criticality from $\mathrm{SO}(5)$ to $\mathrm{O}(4)$, Shuai Yang, Liang-Dong Hu, Chao Han, Wei Zhu, Yan Chen, [arXiv:2507.01322](https://arxiv.org/abs/2507.01322).
-
-Apart from the $\mathrm{SO}(5)$ deconfined criticality, one can reach the $\mathrm{O}(4)$, or easy-plane DQCP by adding a perturbation in the $\mathrm{SO}(5)$ symmetric tensor representation that breaks the global symmetry to $\mathrm{O}(4)$. The $\mathrm{O}(4)$ DQCP appears in several lattice models and has several gauge theory descriptions, _e. g._ QED with two flavours of Dirac fermions. This work studies the renormalisation group flow from the $\mathrm{SO}(5)$ to the $\mathrm{O}(4)$ DQCP and traces the $\mathrm{O}(4)$ operators back to the $\mathrm{SO}(5)$ operators.
-
-##### [The $\mathrm{O}(N)$ Wilson-Fisher CFT](@id Dey2025)
-
-> __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, Arjun Dey, Loic Herviou, Christopher Mudry, Andreas Martin Läuchli, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
-
-Although an instance — the $\mathrm{O}(3)$ WF — has been realised in the Heisenberg bilayer, seeking a general realisation of $\mathrm{O}(N)$ WF theories on the fuzzy sphere is helpful as a foundation to study the interacting scalar theories as well as conformal defects and boundaries. This work proposes such a construction analogous to a truncated rotor model. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\mathrm{O}(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\mathrm{O}(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\mathrm{O}(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour.
-
-Dey _et al._ study the $N=3$ instance using ED and DMRG. They locate the critical point using the conformal perturbation. They obtain scaling dimensions from finite-size spectra and operator product expansion coefficients through conformal perturbation. The results are benchmarked against conformal bootstrap and perturbative calculations.
 
 ### Exploring Fractional Quantum Hall Transitions
 
@@ -297,13 +309,13 @@ We then project the system onto the LLL. Technically, this can be done by writin
 ```math
     \psi^\dagger_f(\mathbf{r})=\sum_{m=-s}^s \Phi_{0m}(\mathbf{r})c^\dagger_{mf}=\frac{1}{R}\sum_{m=-s}^s Y^{(s)}_{sm}(\hat{\mathbf{n}})c^\dagger_{mf},
 ```
-where $c^{(\dagger)}_{mf}$ annihilates/creates an electron with $L^z$-quantum number $m$ at the $f$-th flavour of the lowest Landau level. Hereafter, we will omit the hats on the operators.
+where $c^{(\dagger)}_{mf}$ annihilates/creates an electron with $L^z$-quantum number $m$ at the $f$-th flavour of the lowest Landau level. Hereafter, we will omit the hats on the operators. In the old version, we used a different convension $\psi_f(\hat{\mathbf{n}})_\text{(old)}=\sum_{m=-s}^s Y^{(s)}_{sm}(\hat{\mathbf{n}})c_{mf}$. In the old convension, the components of density operator $n_{M,lm}$ are extensive and their action decreases the angular momentum $L^z$ by $m$ ; in the current convension, $n_{M,lm}$ is intensive and its action increases the angular momentum $L^z$ by $m$. In the code, two parameters [`ObsNormRadSq`](@ref FuzzifiED.ObsNormRadSq) and [`ObsMomIncr`](@ref FuzzifiED.ObsMomIncr) controls the convension.
 
 After the projection, we obtain a finite Hilbert space on which numerical simulations can be carried out. For this purpose, the system is analogous to a length-$(2s+1)$ spin chain with long-range interaction, where different Landau level orbitals behave like the lattice sites. The difference is that the $(2s+1)$ orbital forms a spin-$s$ representation of the $\mathrm{SO}(3)$ rotation group, and in this way the continuous rotation symmetry is preserved. The exact rotation symmetry shortens the RG flow from the UV to the IR and reduces the finite-size effect, so that the numerical results are considerably accurate even at a small system size.
 
 The word _'fuzzy'_ means non-commutativity. Here, the magnetic field results in the non-commutativity of the coordinates. More concretely, we write the coordinate operators as a matrix on the lowest Landau level
 ```math
-    X^\mu_{m_1m_2}=\int\mathrm{d}^2\mathbf{r}\,x^\mu \frac{Y_{sm_1}^{(s)}(\mathbf{r})}{R}\frac{\bar{Z}_{sm_2}^{(s)}(\mathbf{r})}{R}.
+    X^\mu_{m_1m_2}=\int\mathrm{d}^2\mathbf{r}\,x^\mu \frac{Y_{sm_1}^{(s)}(\mathbf{r})}{R}\frac{\bar{Y}_{sm_2}^{(s)}(\mathbf{r})}{R}.
 ```
 These matrices $\mathbf{X}^\mu$ ($\mu=x,y,z$) satisfy relation
 ```math
@@ -339,9 +351,9 @@ Like the fermion operator, the density operator can also be expressed in the orb
 Conversely,
 ```math
 \begin{aligned}
-    n_{M,lm}&=\frac{1}{R^2}\int\mathrm{d}^2\mathbf{r}\,\bar{Z}_{lm}(\hat{\mathbf{n}})n_M(\mathbf{r})\nonumber\\
-    &=\int\mathrm{d}^2\hat{\mathbf{n}}\,\bar{Z}_{lm}(\hat{\mathbf{n}})\left(\frac{1}{R}\sum_{m_1}Y^{(s)}_{sm_1}(\hat{\mathbf{n}})c^\dagger_{m_1f_1}\right)M_{f_1f_2}\left(\frac{1}{R}\sum_{m_2}\bar{Z}^{(s)}_{sm_2}(\hat{\mathbf{n}})c_{m_1f_2}\right)\nonumber\\
-    &=\sum_{m_1m_2}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m_1f_2}\int\mathrm{d}^2\hat{\mathbf{n}}\,\bar{Z}_{lm}(\hat{\mathbf{n}})Y^{(s)}_{sm_1}(\hat{\mathbf{n}})\bar{Z}^{(s)}_{sm_2}(\hat{\mathbf{n}})\nonumber\\
+    n_{M,lm}&=\frac{1}{R^2}\int\mathrm{d}^2\mathbf{r}\,\bar{Y}_{lm}(\hat{\mathbf{n}})n_M(\mathbf{r})\nonumber\\
+    &=\int\mathrm{d}^2\hat{\mathbf{n}}\,\bar{Y}_{lm}(\hat{\mathbf{n}})\left(\frac{1}{R}\sum_{m_1}Y^{(s)}_{sm_1}(\hat{\mathbf{n}})c^\dagger_{m_1f_1}\right)M_{f_1f_2}\left(\frac{1}{R}\sum_{m_2}\bar{Y}^{(s)}_{sm_2}(\hat{\mathbf{n}})c_{m_1f_2}\right)\nonumber\\
+    &=\sum_{m_1m_2}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m_1f_2}\int\mathrm{d}^2\hat{\mathbf{n}}\,\bar{Y}_{lm}(\hat{\mathbf{n}})Y^{(s)}_{sm_1}(\hat{\mathbf{n}})\bar{Y}^{(s)}_{sm_2}(\hat{\mathbf{n}})\nonumber\\
     &=\frac{1}{R^2}\sum_{m_1}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m-m_1,f_2}\times\nonumber\\
     &\qquad\qquad(-1)^{s+2m-m_1}(2s+1)\sqrt{\frac{2l+1}{4\pi}}\begin{pmatrix}l&s&s\\-m&m_1&-m_1+m\end{pmatrix}\begin{pmatrix}l&s&s\\0&-s&s\end{pmatrix}.
 \end{aligned}
@@ -349,8 +361,8 @@ Conversely,
 Here, we have used the properties of the monopole spherical harmonics
 ```math
 \begin{aligned}
-    \bar{Z}_{lm}^{s}&=(-1)^{s+m}Y_{l,-m}^{(-s)}\\
-    \int\mathrm{d}^2\hat{\mathbf{n}}\,Y_{lm}^{(s)}\bar{Z}_{lm}^{(s)}&=\delta_{ll'}\delta_{mm'}\\
+    \bar{Y}_{lm}^{s}&=(-1)^{s+m}Y_{l,-m}^{(-s)}\\
+    \int\mathrm{d}^2\hat{\mathbf{n}}\,Y_{lm}^{(s)}\bar{Y}_{lm}^{(s)}&=\delta_{ll'}\delta_{mm'}\\
     \int\mathrm{d}^2\hat{\mathbf{n}}\,Y_{l_1m_1}^{(s_1)}Y_{l_2m_2}^{(s_2)}Y_{l_3m_3}^{(s_3)}&=\sqrt{\frac{(2l_1+1)(2l_2+1)(2l_3+1)}{4\pi}}\begin{pmatrix}l_1&l_2&l_3\\m_1&m_2&m_3\end{pmatrix}\begin{pmatrix}l_1&l_2&l_3\\-s_1&-s_2&-s_3\end{pmatrix},
 \end{aligned}
 ```
@@ -364,7 +376,7 @@ The most straightforward way to construct an interaction term is to add a densit
 ```
 The interacting potentials can be expanded in terms of the Legendre polynomials
 ```math
-    U(|\mathbf{r}_{12}|)=\sum_l\tilde{U}_lP_l(\cos\theta_{12})=\sum_{lm}\frac{4\pi\tilde{U}_l}{2l+1}\bar{Z}_{lm}(\hat{\mathbf{n}}_1)Y_{lm}(\hat{\mathbf{n}}_2),
+    U(|\mathbf{r}_{12}|)=\sum_l\tilde{U}_lP_l(\cos\theta_{12})=\sum_{lm}\frac{4\pi\tilde{U}_l}{2l+1}\bar{Y}_{lm}(\hat{\mathbf{n}}_1)Y_{lm}(\hat{\mathbf{n}}_2),
 ```
 where $\mathbf{r}_{12}=\mathbf{r}_1-\mathbf{r}_2$ and $|\mathbf{r}_{12}|=2R\sin\theta_{12}/2$. Conversely
 ```math
@@ -451,26 +463,28 @@ More details are given in Ref.. We also note that the construction for interacti
 
 For systems with more complicated continuous flavour symmetries, classification in terms of representation of flavour symmetry must also be considered, and the indices must be overall antisymmetrised. We explain that through the example of a $2N$-flavour system with $\mathrm{Sp}(N)$ symmetry. The maximal flavour symmetry is $\mathrm{SU}(2N)$, so interactions must be added to break the symmetry from $\mathrm{SU}(2N)$ to $\mathrm{Sp}(N)$. The fermion operators $c_{ma}$ live in the $\mathrm{Sp}(N)$ fundamental representation, where $a$ is the $\mathrm{Sp}(N)$ index. We shall show that all the allowed terms are
 ```math
-    H=\sum_{\substack{l\in\mathbb{Z}\\m_1m_2m_3m_4}}U_lC^l_{m_1m_2m_3m_4}c^\dagger_{m_1a}c^\dagger_{m_2b}c_{m_3b}c_{m_4a}\\
-    -\frac{1}{2}\sum_{\substack{l\in 2\mathbb{Z}\\m_1m_2m_3m_4}}V_lC^l_{m_1m_2m_3m_4}\Omega_{aa'}\Omega_{bb'}c^\dagger_{m_1a}c^\dagger_{m_2a'}c_{m_3b'}c_{m_4b}.
+\begin{aligned}
+    H&=\sum_{\substack{l\in\mathbb{Z}\\m_1m_2m_3m_4}}U_lC^l_{m_1m_2m_3m_4}c^\dagger_{m_1a}c^\dagger_{m_2b}c_{m_3b}c_{m_4a}\\
+    &\qquad\qquad-\frac{1}{2}\sum_{\substack{l\in 2\mathbb{Z}\\m_1m_2m_3m_4}}V_lC^l_{m_1m_2m_3m_4}\Omega_{aa'}\Omega_{bb'}c^\dagger_{m_1a}c^\dagger_{m_2a'}c_{m_3b'}c_{m_4b}.
+\end{aligned}
 ```
 where $\Omega=\begin{pmatrix}0&\mathbb{I}_N\\-\mathbb{I}_N&0\end{pmatrix}$.
 
 To find out all the four-fermion interactions allowed by the rotation symmetry $\mathrm{SO}(3)$ and flavour symmetry $\mathrm{Sp}(N)$, we classify all the fermion bilinears $c_{m_1a}c_{m_2b}$ into irreps of $\mathrm{SO}(3)\times\mathrm{Sp}(N)$. For each irrep, by contracting the bilinear with its Hermitian conjugate, we obtain an allowed four-fermion interaction term. Each fermion carries $\mathrm{SO}(3)$ spin-$s$ and $\mathrm{Sp}(N)$ fundamental. For the rotation symmetry $\mathrm{SO}(3)$, the bilinears can carry spin-$(2s-l)(l=0,\dots,2s)$ represetation ; for even $l$, the orbital indices are symmetrised ; for odd $l$, the orbital indices are antisymmetrised. For the flavour symmetry $\mathrm{Sp}(N)$, the bilinears can carry singlet $S$, traceless antisymmetric rank-2 tensor $A$ and symmetric rank-2 tensor $T$ representation ; for $S$ and $A$, the flavour indices are antisymmetrised ; for $T$, the flavour indices are symmetrised. As the two fermions altogether should be antisymmetrised, the allowed combinations are
 
-1. $\mathrm{Sp}(N)$ singlet and $\mathrm{SO}(3)$ spin-$(2s-l)$ with even $l$, the bilinears are
+__Case 1.__  $\mathrm{Sp}(N)$ singlet and $\mathrm{SO}(3)$ spin-$(2s-l)$ with even $l$, the bilinears are
 ```math
     \Delta_{lm}=\sum_{m_1m_2}\langle sm_1,sm_2|(2s-l)m\rangle\Omega_{cc'}c_{m_1c}c_{m_2c'}\delta_{m,m_1+m_2}.
 ```
 The corresponding interaction term $H_{S,l}=\sum_m\Delta_{lm}^\dagger\Delta_{lm}$ is the even-$l$ pseudopotential for the $V$-term.
 
-2. $\mathrm{Sp}(N)$ antisymmetric and $\mathrm{SO}(3)$ spin-$(2s-l)$ with even $l$, the bilinears are
+__Case 2.__  $\mathrm{Sp}(N)$ antisymmetric and $\mathrm{SO}(3)$ spin-$(2s-l)$ with even $l$, the bilinears are
 ```math
     \Delta_{lm,[ab]}=\sum_{m_1m_2}\langle sm_1,sm_2|(2s-l)m\rangle(c_{m_1a}c_{m_2b}-c_{m_1b}c_{m_2a}-\tfrac{1}{N}\Omega_{ab}\Omega_{cc'}c_{m_1c'}c_{m_2c})\delta_{m,m_1+m_2}.
 ```
 The corresponding interaction term $H_{A,l}=\sum_m\Delta_{lm,[ab]}^\dagger\Delta_{lm,[ab]}$ is the even-$l$ pseudopotential for the $U$-term.
 
-3. $\mathrm{Sp}(N)$ symmetric and $\mathrm{SO}(3)$ spin-$(2s-l)$ with odd $l$, the bilinears are
+__Case 3.__  $\mathrm{Sp}(N)$ symmetric and $\mathrm{SO}(3)$ spin-$(2s-l)$ with odd $l$, the bilinears are
 ```math
     \Delta_{lm,(ab)}=\sum_{m_1m_2}\langle sm_1,sm_2|(2s-l)m\rangle(c_{m_1a}c_{m_2b}+c_{m_1b}c_{m_2a})\delta_{m,m_1+m_2}.
 ```
@@ -520,8 +534,10 @@ The most convenient way of determining the coefficient $v/R$ is by utilising cri
 ```
 Alternatively, one can define a cost function that depends on the tuning parameter and the speed of light and compares the scaling dimensions obtained from the fuzzy sphere and the prediction by conformal symmetry. _E. g._, for the Ising CFT, the tuning parameters are the pseudopotentials $\{U_i\}$ and the transverse field $h$. The criteria for conformal symmetry we use include the stress tensor $T^{\mu\nu}$ and the descendants $\partial^\mu\sigma$, $\partial^\mu\partial^\nu\sigma$, $\Box\sigma$, $\partial^\mu\epsilon$. The cost function is the root-mean-square of the deviations of these criteria from the expectation of the conformal symmetry
 ```math
-    Q^2(\{U_i\},h,v;N_m)=\frac{1}{N_s}\left[(\Delta_{T^{\mu\nu}}^\text{(FS)}-3)^2+(\Delta_{\partial^\mu\sigma}^\text{(FS)}-\Delta_\sigma^\text{(FS)}-1)^2\right.\\
-    \left.+(\Delta_{\partial^\mu\partial^\nu\sigma}^\text{(FS)}-\Delta_\sigma^\text{(FS)}-1)^2+(\Delta_{\Box\sigma}^\text{(FS)}-\Delta_\sigma^\text{(FS)}-1)^2+(\Delta_{\partial^\mu\epsilon}^\text{(FS)}-\Delta_\epsilon^\text{(FS)}-1)^2\right]
+\begin{aligned}
+    Q^2(\{U_i\},h,v;N_m)&=\frac{1}{N_s}\left[(\Delta_{T^{\mu\nu}}^\text{(FS)}-3)^2+(\Delta_{\partial^\mu\sigma}^\text{(FS)}-\Delta_\sigma^\text{(FS)}-1)^2\right.\\
+    &\qquad\qquad\left.+(\Delta_{\partial^\mu\partial^\nu\sigma}^\text{(FS)}-\Delta_\sigma^\text{(FS)}-1)^2+(\Delta_{\Box\sigma}^\text{(FS)}-\Delta_\sigma^\text{(FS)}-1)^2+(\Delta_{\partial^\mu\epsilon}^\text{(FS)}-\Delta_\epsilon^\text{(FS)}-1)^2\right]
+\end{aligned}
 ```
 where $N_s=5$ is the number of criteria, the scaling dimension of an operator $\Phi$ on the fuzzy sphere is determined as
 ```math
@@ -570,7 +586,7 @@ After the Weyl transformation from the flat spacetime to the cylinder, we obtain
 ```
 The UV realisation of $\Phi_2$ contains many other operators with different spins. By integrating the correlation function against different spherical harmonics, _i. e._ take the angular modes of the operator inserted
 ```math
-    \int\mathrm{d}^2\mathbf{r}\,\bar{Z}_{lm}(\hat{\mathbf{n}})\langle\Phi_1|\Phi_2(\mathbf{r})|\Phi_3\rangle=\langle\Phi_1|\Phi_{2,lm}|\Phi_3\rangle,
+    \int\mathrm{d}^2\mathbf{r}\,\bar{Y}_{lm}(\hat{\mathbf{n}})\langle\Phi_1|\Phi_2(\mathbf{r})|\Phi_3\rangle=\langle\Phi_1|\Phi_{2,lm}|\Phi_3\rangle,
 ```
 we can filter out the subleading contributions with different spins. For the spinning operators, this also tells us about different OPE structures. By taking $\Phi_3=\mathbb{I}$, we can recover the 2-pt functions
 ```math
@@ -631,7 +647,7 @@ where for the second equation, the integral is evaluated on a closed surface $\S
 ```
 Hence, the conformal generator $\Lambda^\mu=P^\mu+K^\mu$ is the $l=1$ component of the Hamiltonian density $\mathscr{H}=T^0{}_0$
 ```math
-    \Lambda_m=P_m+K_m=\sqrt\frac{16\pi}{3}\int\mathrm{d}^2\mathbf{r}\,\bar{Z}_{1m}(\hat{\mathbf{n}})\mathscr{H}(\mathbf{r}).
+    \Lambda_m=P_m+K_m=\sqrt\frac{16\pi}{3}\int\mathrm{d}^2\mathbf{r}\,\bar{Y}_{1m}(\hat{\mathbf{n}})\mathscr{H}(\mathbf{r}).
 ```
 Here the indices $\mu$ and $m$ are two equivalent way to express the components. By acting it on the states, the number of derivatives is increased or decreased by $1$, _e. g._, for a primary $\Phi$
 ```math

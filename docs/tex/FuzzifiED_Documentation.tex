@@ -36,7 +36,7 @@
 
 \title{FuzzifiED}
 \subtitle{Julia Package for Numerics on the Fuzzy Sphere}
-\date{1st December 2025}
+\date{16th November 2025}
 \author{Zheng Zhou 周正}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
 \affiliation{Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
@@ -126,7 +126,7 @@ In this section, we review the existing works related to the fuzzy sphere.
 
 This work first proposes the idea of the fuzzy sphere and applies it to a pedagogical example of the 3D Ising CFT. Zhu \textit{et al.}~construct a model with two flavours of fermions that resemble the spin-up and spin-down in the lattice transverse-field Ising model. At half-filling, one can colloquially think that a spin degree of freedom lives on each orbital. The Hamiltonian contains a density-density interaction\footnote{Here the density operator refers to a local fermion bilinear.} that resembles the Ising ferromagnetic interaction and a polarising term that resembles the transverse field. By tuning the ratio between the two terms, a transition between quantum Hall ferromagnet~\cite{Pasquier2000HallFM,Girvin2010HallFM} (a two-fold degenerate state where either of the two flavours is completely occupied) and paramagnet (a one-fold degenerate state where the superposition of the two flavours at each orbital is occupied) occurs. This transition spontaneously breaks a $\BZ_2$ symmetry and falls into the Ising criticality. They then make use of a unique feature of spherical models described by CFT --- state-operator correspondence --- at the critical point to extract the scaling dimensions of the scaling local operators. They find evidence for the conformal symmetry, including that (1) there exists a conserved stress tensor with $\Delta=3$ (which is used as the calibrator), and (2) all the levels can be classified into conformal multiplet where the spacings between operators' scaling dimensions are very close to integer. This is one of the first numerical evidence that the 3D Ising transition has emergent conformal symmetry. More remarkably, the scaling dimensions of primaries such as $\sigma,\epsilon,\epsilon'$ are already very close to the most accurate known value by numerical bootstrap with an error within $1.2\%$ at a small system size with the number of orbitals $N_m=16$, for which the computational cost is comparable to a $4\times4$ lattice system. The structure of the Ising CFT operator spectrum already starts to show up at an even smaller system size $N_m=4$. All these clues point towards a curious observation that the fuzzy sphere suffers from a remarkably small finite-size effect. The detail for the construction of models is presented in Sections~\ref{sec:construct_denint} and \ref{sec:construct_pspot}, and the detail for the analysis of the spectrum is presented in Section~\ref{sec:construct_spec}.
 
-This seminal work opens a new avenue for studying 3D conformal field theories. After that, most of the research on the fuzzy sphere can roughly be categorised into three directions~:
+This seminal work opens a new avenue for studying 3D conformal field theories. After that, most of the research on the fuzzy sphere can roughly be categorised into the following directions~:
 
 \begin{enumerate}
     \item Accessing various conformal data,
@@ -168,7 +168,7 @@ This work focuses on the 3D CFTs on the space-time manifold of the the real proj
 
 There has also been techniques to improve the precision through accessing larger system size and detailed analysis of finite-size data, such as quantum Monte Carlo simulation~\cite{Hofmann2023}, conformal perturbation~\cite{Laeuchli2025}, and finite-size scaling the ground-state energy~\cite{Wiese2025}.
 
-\paragraph{Quantum Monte Carlo on fuzzy sphere~\cite{Hofmann2023}}
+\paragraph{Quantum Monte Carlo on the fuzzy sphere~\cite{Hofmann2023}}
 
 Until this work, the numerical methods that have been applied to the fuzzy sphere include exact diagonalisation (ED) and density matrix renormalisation group (DMRG). Hofmann \textit{et al.}~further present the numerical studies of the fuzzy sphere with quantum Monte Carlo (QMC) simulation, which is known for its potential for studying criticalities in $(2+1)$ dimensions at larger system size. Specifically, they make use of the determinant quantum Monte Carlo (DQMC) method that converts the simulation of fermions into the simulation of bosonic auxiliary fields. To overcome the sign problem, they consider two copies of the original model and construct the Ising CFT on a 4-flavour model. They determine the lowest energy spectra within each symmetry sector by calculating the time-displaced correlation functions. They also calculate the equal-time correlation functions and compare them with the 2-pt functions of CFT.
 
@@ -184,7 +184,31 @@ This work proposes a new approach to locate the phase-transition line from a fin
 
 \subsection{Realising Various 3D CFTs}
 
-The second direction is to study various other CFTs beyond 3D Ising. The fuzzy sphere has revealed lots of new information about these theories~; the previously known results are also consistent with the fuzzy sphere. So far, the accessible CFTs include $\SO(5)$ deconfined criticality~\cite{Zhou2023}, $\rO(3)$ Wilson-Fisher~\cite{Han2023Dec}, a series of new theories with $\Sp(N)$ symmetry~\cite{Zhou2024Oct}, the 3-state Potts model~\cite{Yang2025Jan}, the free scalar CFT~\cite{He2025Jun,Taylor2025} and the $\rO(4)$ deconfined criticality~\cite{Yang2025Jul}. An outstanding catagory is to realise CFTs through fractional quantum Hall transitions. We leave the discussion to the next section. 
+The third direction is to study various other CFTs beyond 3D Ising. The fuzzy sphere has revealed lots of new information about these theories~; the previously known results are also consistent with the fuzzy sphere. So far, three classes of CFTs are widely studied on the fuzzy sphere
+\begin{enumerate}
+    \item the free-scalar~\cite{He2025Jun,Taylor2025} and Wilson-Fisher CFTs realised as Heisenberg bilinear~\cite{Han2023Dec} and truncated quantum rotor model~\cite{Dey2025}, 
+    \item CFTs with $\Sp(N)$ global symmetry related to the non-linear $\sigma$ models (NLSM) with a Wess-Zumino-Witten topological term, including $\SO(5)$ deconfined criticality~\cite{Zhou2023} and $\rO(4)$ deconfined criticality~\cite{Yang2025Jul} through a symmetry-breaking perturbation, and a series of new theories with $\Sp(N)$ symmetry~\cite{Zhou2024Oct}, and
+    \item fractional quantum Hall transitions, which will be discussed in more detail in Section~\ref{sec:review_fqh}.
+\end{enumerate}
+Other accessible CFTs include the 3-state Potts model~\cite{Yang2025Jan} and the Yang-Lee non-unitary CFT~\cite{Fan2025,ArguelloCruz2025,EliasMiro2025}.
+
+\subsubsection{Free-Scalar and Wilson-Fisher CFTs}
+
+\paragraph{The free scalar CFT~\cite{He2025Jun,Taylor2025}}
+
+This work introduces a simple model to realise the free real scalar CFT on the fuzzy sphere that is structurally similar to the 3D Ising CFT. A weakly-broken $\rU(1)$ symmetry in the fuzzy sphere model realises the $\BR$-shift symmetry of the free scalar in the thermodynamic limit, so that the fix point can be accessed with only a single tuning parameter. He numerically demonstrates that our model correctly reproduces the operator spectrum, correlation functions, and, crucially, the harmonic oscillator algebra of the real scalar CFT. He generalises the Girvin-MacDonald-Platzman algebra~\cite{Girvin1986GMP} to the fuzzy sphere algebra of the density operators, which is potentially useful for defining quantum field theories on non-commutative geometries. He proposes a wavefunction ansatz for the ground states which exhibit remarkable agreement with the CFT ground state wavefunctions of the fuzzy sphere model.
+
+\paragraph{The bilayer Heisenberg transition~\cite{Han2023Dec}}
+
+The $\rO(N)$ Wilson-Fisher (WF) theories are probably one of the most studied theories for 3D criticalities with a wide range of applications~\cite{Wilson1971WF,Sachdev2011Quantum,Cardy1996Scaling}. Specifically, this work studies the $\rO(3)$ WF CFT on the set-up of a bilayer Heisenberg model. The construction involves two copies of $\SU(2)$ ferromagnet with altogether four flavours. Briefly speaking, the model contains two competing terms~: (1) a $\SU(2)$ ferromagnetic interaction which favours a Heisenberg ferromagnetic phase where each of the two copies is half-filled and the symmetry-breaking order parameter lives on a $S^2$ manifold, (2) a polarising term which favours one of the two copies being completely filled, corresponding to a Heisenberg paramagnet. The transition between these two phases falls into the $\rO(3)$ Wilson-Fisher universality. Through the energy spectrum at the transition, Han \textit{et al.}~provide evidence that $\rO(3)$ Wilson-Fisher fixed point exhibits conformal symmetry, as well as revealing a wealth of information about the CFT, \textit{e.~g.}~the instability to cubic anisotropy. They also calculate several OPE coefficients.
+
+\paragraph{The $\rO(N)$ Wilson-Fisher CFT~\cite{Dey2025}}
+
+Although an instance --- the $\rO(3)$ WF --- has been realised in the Heisenberg bilayer, seeking a general realisation of $\rO(N)$ WF theories on the fuzzy sphere is helpful as a foundation to study the interacting scalar theories as well as conformal defects and boundaries. This work proposes such a construction analogous to a truncated rotor model. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\rO(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\rO(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\rO(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour.
+
+Dey \textit{et al.}~study the $N=3$ instance using ED and DMRG. They locate the critical point using the conformal perturbation. They obtain scaling dimensions from finite-size spectra and operator product expansion coefficients through conformal perturbation. The results are benchmarked against conformal bootstrap and perturbative calculations.
+
+\subsubsection{NLSM-WZW with Symplectic Symmetry}
 
 \paragraph{The $\SO(5)$ deconfined criticality~\cite{Zhou2023}}
 
@@ -192,9 +216,9 @@ The first theory besides Ising CFT to which fuzzy sphere is applied is the $\SO(
 
 The DQCP can be conveniently studied on the fuzzy sphere by constructing a non-linear sigma model (NLSM) on target space $S^4$ with a level-1 topological Wess-Zumino-Witten (WZW) term, which serves as a dual description of the DQCP with an exact $\SO(5)$ symmetry~\cite{Nahum2015DQCP,Wang2017DQCP}. The idea is to construct a 4-flavour model with symmetry $\Sp(2)/\BZ_2=\SO(5)$ ($\BZ_2$ means to gauge the pseudoreal representations). At half-filling, it can be described by a NLSM on the Grassmannian $\tfrac{\Sp(2)}{\Sp(1)\times\Sp(1)}\cong S^4$ and the WZW level can be matched~\cite{Lee2014WZW,Ippoliti2018DQCP,Wang2020DQCP}. This work provides evidence that the DQCP exhibits approximate conformal symmetry. Zhou \textit{et al.}~have identified 19 conformal primaries and their 82 descendants. Furthermore, by examining the renormalisation group flow of the lowest symmetry singlet, they demonstrate that the DQCP is more likely pseudocritical, with the approximate conformal symmetry plausibly emerging from nearby complex fixed points. Several works~\cite{Chen2023WZW,Chen2024WZW} appear later to follow up.
 
-\paragraph{The bilayer Heisenberg transition~\cite{Han2023Dec}}
+\paragraph{The $\rO(4)$ deconfined criticality~\cite{Yang2025Jul}}
 
-The $\rO(N)$ Wilson-Fisher (WF) theories are probably one of the most studied theories for 3D criticalities with a wide range of applications~\cite{Wilson1971WF,Sachdev2011Quantum,Cardy1996Scaling}. Specifically, this work studies the $\rO(3)$ WF CFT on the set-up of a bilayer Heisenberg model. The construction involves two copies of $\SU(2)$ ferromagnet with altogether four flavours. Briefly speaking, the model contains two competing terms~: (1) a $\SU(2)$ ferromagnetic interaction which favours a Heisenberg ferromagnetic phase where each of the two copies is half-filled and the symmetry-breaking order parameter lives on a $S^2$ manifold, (2) a polarising term which favours one of the two copies being completely filled, corresponding to a Heisenberg paramagnet. The transition between these two phases falls into the $\rO(3)$ Wilson-Fisher universality. Through the energy spectrum at the transition, Han \textit{et al.}~provide evidence that $\rO(3)$ Wilson-Fisher fixed point exhibits conformal symmetry, as well as revealing a wealth of information about the CFT, \textit{e.~g.}~the instability to cubic anisotropy. They also calculate several OPE coefficients.
+Apart from the $\SO(5)$ deconfined criticality, one can reach the $\rO(4)$, or easy-plane DQCP by adding a perturbation in the $\SO(5)$ symmetric tensor representation that breaks the global symmetry to $\rO(4)$. The $\rO(4)$ DQCP appears in several lattice models and has several gauge theory descriptions, \textit{e.~g.}~QED with two flavours of Dirac fermions~\cite{Wang2017DQCP}. This work studies the renormalisation group flow from the $\SO(5)$ to the $\rO(4)$ DQCP and traces the $\rO(4)$ operators back to the $\SO(5)$ operators.
 
 \paragraph{A series of new $\Sp(N)$-symmetric CFTs~\cite{Zhou2024Oct}}
 
@@ -204,6 +228,8 @@ The quest to discover new 3D CFTs has been intriguing for physicists. A virgin l
 \end{equation}
 Several candidate Chern-Simons-matter theories are known to exist on its phase diagram with $N$ flavour of gapless bosons or fermions coupled to a non-Abelian (\textit{viz.}~$\Sp(1)$, $\Sp(2)$, \textit{etc.}) Chern-Simons gauge field~\cite{Komargodski2017QCD}. On the fuzzy sphere, this WZW-NLSM can be realised by a $2N$ layer model with $\Sp(N)$ flavour symmetry, and $2M$ out of the $2N$ layers are filled. Zhou \textit{et al.}~numerically verify the emergent conformal symmetry by observing the integer-spaced conformal multiplets and studying the finite-size scaling of the conformality.
 
+\subsubsection{Other CFTs on the Fuzzy Sphere}
+
 \paragraph{The 3-state Potts model~\cite{Yang2025Jan}}
 
 The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\BZ$ is known as the number of states. In 2D, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs~\cite{Dotsenko1984Potts}, while $Q>Q_c$ are first order. Specifically, 2D 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity~\cite{Tang2024Potts} in a similar manner with the conjectured $\SO(5)$ DQCP. In 3D, the 3-state Potts model is found to be first-order~\cite{Barkema1991Potts,Chester2022Potts}. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry among flavours. The interacting Hamiltonian resembles the Ising model. Interestingly, Yang \textit{et al.}~find out that the transition point of the 3D 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite-size effect.
@@ -212,21 +238,8 @@ The Potts models describe transitions that spontaneously break $S_Q$ symmetries 
 
 The Yang-Lee singularity~\cite{Yang1952Singularity,Lee1952Singularity,Cardy2023Singularity} is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2D Yang-Lee theory is described by $M(2,5)$ minimal model and 3D Yang-Lee CFT can be solved perturbatively up to five-loops, Fan \textit{et~al.}, Arguello Cruz \textit{et~al.}, and Elias Miro \textit{et~al.}~presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
 
-\paragraph{The free scalar CFT~\cite{He2025Jun,Taylor2025}}
-
-This work introduces a simple model to realise the free real scalar CFT on the fuzzy sphere that is structurally similar to the 3D Ising CFT. A weakly-broken $\rU(1)$ symmetry in the fuzzy sphere model realises the $\BR$-shift symmetry of the free scalar in the thermodynamic limit, so that the fix point can be accessed with only a single tuning parameter. He numerically demonstrates that our model correctly reproduces the operator spectrum, correlation functions, and, crucially, the harmonic oscillator algebra of the real scalar CFT. He generalises the Girvin-MacDonald-Platzman algebra to the fuzzy sphere algebra of the density operators, which is potentially useful for defining quantum field theories on non-commutative geometries. He proposes a wavefunction ansatz for the ground states which exhibit remarkable agreement with the CFT ground state wavefunctions of the fuzzy sphere model.
-
-\paragraph{The $\rO(4)$ deconfined criticality~\cite{Yang2025Jul}}
-
-Apart from the $\SO(5)$ deconfined criticality, one can reach the $\rO(4)$, or easy-plane DQCP by adding a perturbation in the $\SO(5)$ symmetric tensor representation that breaks the global symmetry to $\rO(4)$. The $\rO(4)$ DQCP appears in several lattice models and has several gauge theory descriptions, \textit{e.~g.}~QED with two flavours of Dirac fermions~\cite{Wang2017DQCP}. This work studies the renormalisation group flow from the $\SO(5)$ to the $\rO(4)$ DQCP and traces the $\rO(4)$ operators back to the $\SO(5)$ operators.
-
-\paragraph{The $\rO(N)$ Wilson-Fisher CFT~\cite{Dey2025}}
-
-Although an instance --- the $\rO(3)$ WF --- has been realised in the Heisenberg bilayer, seeking a general realisation of $\rO(N)$ WF theories on the fuzzy sphere is helpful as a foundation to study the interacting scalar theories as well as conformal defects and boundaries. This work proposes such a construction analogous to a truncated rotor model. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\rO(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\rO(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\rO(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour.
-
-Dey \textit{et al.}~study the $N=3$ instance using ED and DMRG. They locate the critical point using the conformal perturbation. They obtain scaling dimensions from finite-size spectra and operator product expansion coefficients through conformal perturbation. The results are benchmarked against conformal bootstrap and perturbative calculations.
-
 \subsection{Exploring Fractional Quantum Hall Transitions}
+\label{sec:review_fqh}
 
 The lowest Landau level at fractional filling realises various topological orders (TO) with long-range entanglement and anyon excitations. \textit{E.~g.}, the Laughlin states~\cite{Laughlin1983Anomalous} with filling $\nu=1/k$ realise the Abelian topological orders captured by Chern-Simons theories $\rU(1)_{-k}$, the Jain sequence~\cite{Jain1989Composite} with $\nu=p/(mp+1)$ realises the Abelian topological orders with composite fermion descriptions, and the Read-Rezayi sequence with $\nu=p/(mp+2)$~\cite{Read1998Rezayi}, as a natural extension of the Moore-Read states~\cite{Moore1991Pfaffian}, realises in general a series of non-Abelian topological orders. 
 
@@ -242,7 +255,7 @@ Voinea \textit{et al.}~further explore the possibility of constructing CFTs on o
 
 \paragraph{The confinement transition of $\nu=1/2$ bosonic Laughlin state~\cite{Zhou2025Jul}}
 
-This work studies one of the simplest instances of Chern-Simons-matter theories~: one complex critical scalar coupled to a $\rU(1)_2$ Chern-Simons gauge field and its three other dual Lagrangian descriptions. They describe the transition between a $\nu=1/2$ bosonic Laughlin state and a trivially gapped phase. This transition appears in various contexts in condensed~matter physics, \textit{viz.}~Kalmeyer-Laughlin chiral spin liquid, anyon superconductivity, Feshbach resonance, \textit{etc.}
+This work studies one of the simplest instances of Chern-Simons-matter theories~: one complex critical scalar coupled to a $\rU(1)_2$ Chern-Simons gauge field and its three other dual Lagrangian descriptions~\cite{Seiberg2016Duality,Hsin2016LevelRank,Benini2017Duality}. They describe the transition between a $\nu=1/2$ bosonic Laughlin state and a trivially gapped phase. This transition appears in various contexts in condensed-matter physics, \textit{viz.}~Kalmeyer-Laughlin chiral spin liquid~\cite{Kalmeyer1987CSL,Kalmeyer1989CSL}, anyon superconductivity~\cite{Divic2025AnyonSC,Kim2024AnyonSC,Shi2024AnyonSC}, Feshbach resonance~\cite{Yang2008Feshbach,Liou2018Feshbach}, \textit{etc.}
 
 Zhou \textit{et al.}~realise this theory on a set-up with fermion-boson mixture containing two flavours of fermion and one flavour of bosons carrying electric charge $Q_b=2Q_f$. Tuning the relative chemical potential induces a transition between a $\nu_f=2$ fermionic integer quantum Hall state and a $\nu_b=1/2$ bosonic fractional quantum Hall state. They show that the transition is continuous and has emergent conformal symmetry. The operator spectrum has exactly one relevant singlet with scaling dimension $\Delta_S=1.52(18)$, signature of a critical point. This work opens up the possiblity of using the fuzzy sphere to study transitions between distinct topological order. 
 
@@ -250,11 +263,11 @@ Zhou \textit{et al.}~realise this theory on a set-up with fermion-boson mixture 
 
 The CFTs realised on the fuzzy sphere until this work contains only bosonic CFT operators. The microscopic fermions on the fuzzy sphere have strong non-commutativity, transform under projective representations of the sphere rotation symmetry, and thus cannot flow to CFT operators. This work overcomes this challenge by constructing a boson-fermion mixed setup with both microscopic bosons $b$ and fermions $f$ with the same electric charge and let their angular momenta differ by $1/2$. Their bilinears $b^\dagger f$ or $f^\dagger b$ can be used to realise fermionic local operators in a CFTs.
 
-Zhou \textit{et al.}~allow conversion between two bosons and two fermions and set the total filling $\nu=1$. On the phase diagram, there are three gapped phases, \textit{viz.}~a fermionic integer quantum Hall phase, an $f$-wave chiral topological superconductor, and a bosonic Pfaffian phase. They are separated by two continuous transitions described respectively by a massless free Majorana fermion and a gauged Ising CFT. 
+Zhou \textit{et al.}~allow conversion between two bosons and two fermions and set the total filling $\nu=1$. On the phase diagram, there are three gapped phases, \textit{viz.}~a fermionic integer quantum Hall phase, an $f$-wave chiral topological superconductor, and a bosonic Pfaffian phase~\cite{Moore1991Pfaffian}. They are separated by two continuous transitions described respectively by a massless free Majorana fermion and a gauged Ising CFT. 
 
 \paragraph{The transition between bosonic Pfaffian and Halperin 220~\cite{Voinea2025}}
 
-The fuzzy sphere can be used to answer long-standing questions on fractional quantum Hall transitions. An example is the transition between the bosonic Moore-Read Pfaffian and the Halperin 220 state on a bilayer bosonic system, which has been predicted to be described by a massless free Majorana fermion with the fermion parity $\BZ_2$ symmetry gauged, but lacks simulations. This work identifies the low-energy spectrum with the gauged Majorana fermion. 
+The fuzzy sphere can be used to answer long-standing questions on fractional quantum Hall transitions. An example is the transition between the bosonic Moore-Read Pfaffian~\cite{Moore1991Pfaffian} and the Halperin 220 state~\cite{Halperin1983} on a bilayer bosonic system, which has been predicted to be described by a massless free Majorana fermion with the fermion parity $\BZ_2$ symmetry gauged~\cite{Wen2000Majorana}, but lacks simulations. This work identifies the low-energy spectrum with the gauged Majorana fermion. 
 
 \subsection{Studying Conformal Defects and Boundaries}
 
@@ -316,7 +329,11 @@ where $C_m=1/\sqrt{4\pi\Beta(s+m+1,s-m+1)}$ is the normalising factor, and $\Bet
 
 We now consider $N_f$ flavours of fermions moving on the sphere, characterised by the second-quantised fermion operator $\psi_f(\br)$, with a flavour index $f=1,\dots,N_f$. We partially fill the lowest Landau level and set the single energy gap to be much larger than the scale of interaction $H_0\gg H_\Int$, so that the quantum fluctuation can be constrained on the lowest Landau level. In practice, we often fill integer number of flavours $N_e=kN_m$ ($k\in\BZ$) so that a quantum Hall ferromagnet (\textit{i.~e.}~the state where integer number of LLLs are fully filled) is preferred in the absence of interaction, for which the charge degree of freedom is gapped and does not couple strongly to the gapless CFT degree of freedom when the interactions are introduced.
 
-We then project the system onto the LLL. Technically, this can be done by writing the fermion operators in terms of the annihilation operators of the LLL orbitals
+We then project the system onto the LLL. Technically, this can be done by writing the fermion operators in terms of the annihilation operators of the LLL orbitals\footnote{In the old version, we used a different convension
+\begin{equation*}
+    \psi_f(\bnh)_\text{(old)}=\sum_{m=-s}^s Y^{(s)}_{sm}(\bnh)c_{mf}.
+\end{equation*}
+In the old convension, the components of density operator $n_{M,lm}$ are extensive and their action decreases the angular momentum $L^z$ by $m$~; in the current convension, $n_{M,lm}$ is intensive and its action increases the angular momentum $L^z$ by $m$. In the code, two parameters \href{https://docs.fuzzified.world/models/\#FuzzifiED.ObsNormRadSq}{\lstinline[basicstyle=\ttfamily\scriptsize]|ObsNormRadSq|} and \href{https://docs.fuzzified.world/models/\#FuzzifiED.ObsMomIncr}{\lstinline[basicstyle=\ttfamily\scriptsize]|ObsMomIncr|} control the convension.}
 \begin{equation}
     \psi^\dagger_f(\br)=\sum_{m=-s}^s \Phi_{0m}(\br)c^\dagger_{mf}=\frac{1}{R}\sum_{m=-s}^s Y^{(s)}_{sm}(\bnh)c^\dagger_{mf},
 \end{equation}
@@ -355,7 +372,7 @@ Here, the matrix insertion $M$ puts the density operators in a certain represent
     n_S(\br)&=\psi_{c}^\dagger(\br)\psi^c(\br)\nonumber\\
     n_a{}^b(\br)&=\psi_{a}^\dagger(\br)\psi^b(\br)-\tfrac{1}{N}\delta_{a}{}^b\psi_c^\dagger(\br)\psi^c(\br).
 \end{align}
-Like the fermion operator, the density operator can also be expressed in the orbital space\footnote{Under this convention, the action of $n_{M,lm}$ will decrease the angular momentum $L^z$ by $m$. Our convention of $n_{lm}$ differs from Ref.~\cite{Hu2023Mar} by a factor of $R^2$. We take this convension in alignment with the implementation in the code.}
+Like the fermion operator, the density operator can also be expressed in the orbital space
 \begin{equation}
     n_M(\br)=\sum_{lm}Y_{lm}(\bnh)n_{M,lm}.
     \label{eq:den_decomp}
@@ -1216,7 +1233,7 @@ Their adjoint, addition and multiplication are supported. The related functions 
 \end{itemize}
 \end{block}
 
-Several important types of spherical observables are built-in in FuzzifiED\footnote{By default, the operators are normalised by angular coordinate. A parameter \href{https://docs.fuzzified.world/core/\#FuzzifiED.ObsNormRadSq}{\lstinline[basicstyle=\ttfamily\scriptsize]|ObsNormRadSq|} is used to normalise the observables on a sphere with radius $R$.}
+Several important types of spherical observables are built-in in FuzzifiED\footnote{Two parameters \href{https://docs.fuzzified.world/models/\#FuzzifiED.ObsNormRadSq}{\lstinline[basicstyle=\ttfamily\scriptsize]|ObsNormRadSq|} and \href{https://docs.fuzzified.world/models/\#FuzzifiED.ObsMomIncr}{\lstinline[basicstyle=\ttfamily\scriptsize]|ObsMomIncr|} control how the components are normalised and whether they increase or decrease $L^z$.}
 \begin{itemize}
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetElectronObs-Tuple{Int64,\%20Int64,\%20Int64}}{\lstinline|GetElectronObs(nm, nf, f)|} --- electron annihilation operator $\psi_f(\br)$.
     \item \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetDensityObs-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetDensityObs(nm, nf[, mat])|} --- density operator $n_M(\br)=\sum_{ff'}\psi^\dagger_{f}(\br)M_{ff'}\psi_{f'}(\br)$.
@@ -1539,10 +1556,10 @@ FuzzifiED can help reproduce almost all the ED and DMRG results in fuzzy sphere 
     \item \linkexample{ising\_frac\_boson.jl} calculates the spectrum of the 3D Ising model on the fuzzy sphere for bosons at fractional filling $\nu = 1/2$ with the module Fuzzifino. This example reproduces Figure 12a, b in Ref.~\cite{Voinea2024}.
     \item \linkexample{potts\_spectrum.jl} calculates the spectrum of 3D Potts model on the fuzzy sphere. This example reproduces Table I and Figure 4 in Ref.~\cite{Yang2025Jan}.
     \item \linkexample{circle\_ising.jl} calculates the spectrum of 2D Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I--III in Ref.~\cite{Han2025}.
-    \item \linkexample{yang\_lee\_spectrum.jl} calculates the spectrum of 3D non-unitary Yang-Lee CFT on fuzzy sphere. This example reproduces Figure 11 in Ref.~\cite{ArguelloCruz2025}.
+    \item \linkexample{yang\_lee\_spectrum.jl} calculates the spectrum of 3D non-unitary Yang-Lee CFT on the fuzzy sphere. This example reproduces Figure 11 in Ref.~\cite{ArguelloCruz2025}.
     \item \linkexample{free\_scalar\_spectrum.jl} calculates the spectrum of free real scalar. This example reproduces Figure 2 in Ref.~\cite{He2025Jun}.
     \item \linkexample{free\_scalar\_correlator.jl} calculates the correlator of $n^i$ for $\phi$, $\phi^2$ and $\pi$ of free real scalar. This example reproduces Figure 3 in Ref.~\cite{He2025Jun}.
-    \item \linkexample{o4\_dqcp\_spectrum.jl} calculates the spectrum of $\rO(4)$ DQCP on fuzzy sphere. This example reproduces Figure 4 and Table I in Ref.~\cite{Yang2025Jul}.
+    \item \linkexample{o4\_dqcp\_spectrum.jl} calculates the spectrum of $\rO(4)$ DQCP on the fuzzy sphere. This example reproduces Figure 4 and Table I in Ref.~\cite{Yang2025Jul}.
     \item \linkexample{su2\_1\_scal\_spectrum.jl} calculates the spectrum of the $\rU(1)_2$ coupled to a complex scalar Chern-Simons matter CFT on the fuzzy sphere. This example reproduces Figures 2d and 3 in Ref.~\cite{Zhou2025Jul}.
     \item \linkexample{free\_majorana\_spectrum.jl} calculates the spectrum of free Majorana fermion. This example reproduces Figure 5 in Ref.~\cite{Zhou2025Sep}.
     \item \linkexample{free\_majorana\_correlator.jl} calculates the 2-pt correlator of free Majorana fermion. This example reproduces Figure 7 in Ref.~\cite{Zhou2025Sep}.
@@ -2007,132 +2024,149 @@ In this appendix, we collect the full version of the codes, including
 \section{Glossary for interfaces in FuzzifiED}
 \label{app:glossary}
 
-\begin{multicols}{2}
+\begin{multicols}{3}
     \noindent
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.AngModes}{\lstinline|AngModes|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Basis}{\lstinline|Basis|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Confs}{\lstinline|Confs|}\\
-    \href{https://docs.fuzzified.world/extension/\#CUDA.CUSPARSE.CuSparseMatrixCSC-Tuple{OpMat{ComplexF64}}}{\lstinline|CuSparseMatrixCSC|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.EasySweep-Tuple{String,\%20MPO,\%20MPS}}{\lstinline|EasySweep|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.ElementType}{\lstinline|FuzzifiED.ElementType|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.FilterComponent-Tuple{SphereObs,\%20Any}}{\lstinline|FilterComponent|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.FilterL2-Tuple{AngModes,\%20Number}}{\lstinline|FilterL2|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonC2STerms}{\lstinline|GetBosonC2STerms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonDenIntSTerms}{\lstinline|GetBosonDenIntSTerms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonFlavSQNDiag}{\lstinline|GetBosonFlavSQNDiag|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonFlavPermSQNOffd}{\lstinline|GetBosonFlavPermSQNOffd|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonL2STerms}{\lstinline|GetBosonL2STerms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonLz2SQNDiag}{\lstinline|GetBosonLz2SQNDiag|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonPairIntSTerms}{\lstinline|GetBosonPairIntSTerms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonPolSTerms}{\lstinline|GetBosonPolSTerms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetBosonRotySQNOffd}{\lstinline|GetBosonRotySQNOffd|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetC2Terms-Tuple{Int64,\%20Int64,\%20Vector{\%3C:AbstractMatrix{\%3C:Number}}}}{\lstinline|GetC2Terms|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetComponent-Tuple{SphereObs,\%20Number,\%20Number}}{\lstinline|GetComponent|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.GetConfId-Tuple{Confs,\%20Int64}}{\lstinline|GetConfId|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.GetConfWeight-Tuple{Basis,\%20Union{Vector{ComplexF64},\%20Vector{Float64}},\%20Int64}}{\lstinline|GetConfWeight|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetDenIntTerms}{\lstinline|GetDenIntTerms|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetDensityMod-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetDensityMod|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetDensityObs-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetDensityObs|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.GetEigensystem-Tuple{OpMat{ComplexF64},\%20Int64}}{\lstinline|GetEigensystem|}\\
-    \href{https://docs.fuzzified.world/extension/\#FuzzifiED.GetEigensystemCuda-Tuple{OpMat{ComplexF64},\%20Int64}}{\lstinline|GetEigensystemCuda|}\\
-    \href{https://docs.fuzzified.world/extension/\#FuzzifiED.GetEigensystemKrylov-Tuple{OpMat{ComplexF64},\%20Int64}}{\lstinline|GetEigensystemKrylov|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetElectronMod-Tuple{Int64,\%20Int64,\%20Int64}}{\lstinline|GetElectronMod|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetElectronObs-Tuple{Int64,\%20Int64,\%20Int64}}{\lstinline|GetElectronObs|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.GetEntSpec-Tuple{Vector{\%3C:Number},\%20Basis,\%20Vector{Vector{Vector{Int64}}},\%20Vector{Vector{Vector{Int64}}}}}{\lstinline|GetEntSpec|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetFlavPermQNOffd}{\lstinline|GetFlavPermQNOffd|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetFlavQNDiag}{\lstinline|GetFlavQNDiag|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetIntegral-Tuple{SphereObs}}{\lstinline|GetIntegral|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetIntMatrix-Tuple{Int64,\%20Vector{\%3C:Number}}}{\lstinline|GetIntMatrix|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetL2Terms-Tuple{Int64,\%20Int64}}{\lstinline|GetL2Terms|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetLz2QNDiag|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.GetMPO-Tuple{String,\%20Union{Sum{Scaled{ComplexF64,\%20Prod{Op}}},\%20Vector{Term}},\%20Vector{\%3C:Index}}}{\lstinline|GetMPO|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.GetMPOSites-Tuple{String,\%20Union{Sum{Scaled{ComplexF64,\%20Prod{Op}}},\%20Vector{Term}},\%20Vector{QNDiag}}}{\lstinline|GetMPOSites|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.GetNeSQNDiag}{\lstinline|GetNeSQNDiag|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetNeQNDiag-Tuple{Int64}}{\lstinline|GetNeQNDiag|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPairingMod-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetPairingMod|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPairingObs-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetPairingObs|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPairIntTerms}{\lstinline|GetPairIntTerms|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetParityQNOffd}{\lstinline|GetParityQNOffd|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPinOrbQNDiag}{\lstinline|GetPinOrbQNDiag|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPointValue-Tuple{SphereObs,\%20Float64,\%20Float64}}{\lstinline|GetPointValue|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetPolTerms-Tuple{Int64,\%20Int64,\%20Matrix{\%3C:Number}}}{\lstinline|GetPolTerms|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.GetQNDiags-Tuple{Vector{Index{Vector{Pair{QN,\%20Int64}}}}}}{\lstinline|GetQNDiags|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetRotyQNOffd-Tuple{Int64,\%20Int64}}{\lstinline|GetRotyQNOffd|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.GetSites-Tuple{Vector{QNDiag}}}{\lstinline|GetSites|}\\
-    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusDenIntTerms}{\lstinline|GetTorusDenIntTerms|}\\
-    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusIntMatrix-Tuple{Int64,\%20Number,\%20Vector{\%3C:Number}}}{\lstinline|GetTorusIntMatrix|}\\
-    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusLz2QNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusLz2QNDiag|}\\
-    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusTranslQNOffd-Tuple{Int64,\%20Int64}}{\lstinline|GetTorusTranslQNOffd|}\\
-    \href{https://docs.fuzzified.world/manifolds/\#FuzzifiED.FuzzyManifolds.GetTorusPairIntTerms}{\lstinline|GetTorusPairIntTerms|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.GetZnfChargeQNDiag-Tuple{Int64,\%20Int64}}{\lstinline|GetZnfChargeQNDiag|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.Laplacian-Tuple{SphereObs}}{\lstinline|Laplacian|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Libpath}{\lstinline|FuzzifiED.Libpath|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.Libpathino}{\lstinline|Fuzzifino.Libpathino|}\\
-    \href{https://docs.fuzzified.world/extension/\#Base.Matrix-Tuple{OpMat}}{\lstinline|Matrix|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.NormalOrder-Tuple{Term}}{\lstinline|NormalOrder|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.NumThreads}{\lstinline|FuzzifiED.NumThreads|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.ObsNormRadSq}{\lstinline|FuzzifiED.ObsNormRadSq|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.OpenHelp!-Tuple{}}{\lstinline|FuzzifiED.OpenHelp!|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Operator}{\lstinline|Operator|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.OpMat}{\lstinline|OpMat|}\\
-    \href{https://docs.fuzzified.world/itensors/\#ITensors.Ops.OpSum-Tuple{Vector{Term}}}{\lstinline|OpSum|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.ParticleHole-Tuple{Vector{Term}}}{\lstinline|ParticleHole|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.QNDiag}{\lstinline|QNDiag|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.QNOffd}{\lstinline|QNOffd|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.SBasis}{\lstinline|SBasis|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.SConfs}{\lstinline|SConfs|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.SilentStd}{\lstinline|FuzzifiED.SilentStd|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.SimplifyTerms-Tuple{Vector{Term}}}{\lstinline|SimplifyTerms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.SOperator}{\lstinline|SOperator|}\\
-    \href{https://docs.fuzzified.world/extension/\#SparseArrays.SparseMatrixCSC-Tuple{OpMat}}{\lstinline|SparseMatrixCSC|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.SphereObs}{\lstinline|SphereObs|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.SQNDiag}{\lstinline|SQNDiag|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.SQNOffd}{\lstinline|SQNOffd|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.StateDecompMat-Tuple{Vector{\%3C:Number},\%20Basis,\%20Basis,\%20Basis,\%20Vector{\%3C:Number},\%20Vector{\%3C:Number}}}{\lstinline|StateDecompMat|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.STerm}{\lstinline|STerm|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.STerms}{\lstinline|STerms|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.StoreComps-Tuple{SphereObs}}{\lstinline|StoreComps|}\\
-    \href{https://docs.fuzzified.world/models/\#FuzzifiED.StoreComps!-Tuple{SphereObs}}{\lstinline|StoreComps!|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#FuzzifiED.Fuzzifino.STransf}{\lstinline|STransf|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.SweepOne-Tuple{String,\%20MPO,\%20MPS,\%20Int64}}{\lstinline|SweepOne|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Term}{\lstinline|Term|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Terms}{\lstinline|Terms|}\\
-    \href{https://docs.fuzzified.world/core/\#FuzzifiED.Transf}{\lstinline|Transf|}\\
-    \href{https://docs.fuzzified.world/itensors/\#FuzzifiED.TruncateQNDiag-Tuple{Vector{QNDiag}}}{\lstinline|TruncateQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.AngModes}{\lstinline|AngModes|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Basis}{\lstinline|Basis|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Confs}{\lstinline|Confs|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.ContractMod-Tuple%7BAngModes,%20AngModes,%20Dict%7D}{\lstinline|ContractMod|}\\
+    \href{https://docs.fuzzified.world/extension/#CUDA.CUSPARSE.CuSparseMatrixCSC-Tuple{OpMat{ComplexF64}}}{\lstinline|CuSparseMatrixCSC|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.EasySweep-Tuple{String,%20MPO,%20MPS}}{\lstinline|EasySweep|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.ElementType}{\lstinline|FuzzifiED.ElementType|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.FilterComponent-Tuple{SphereObs,%20Any}}{\lstinline|FilterComponent|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.FilterL2-Tuple{AngModes,%20Number}}{\lstinline|FilterL2|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonC2STerms}{\lstinline|GetBosonC2STerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonDenIntSTerms}{\lstinline|GetBosonDenIntSTerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonFlavSQNDiag}{\lstinline|GetBosonFlavSQNDiag|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonFlavPermSQNOffd}{\lstinline|GetBosonFlavPermSQNOffd|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonL2STerms}{\lstinline|GetBosonL2STerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonLpLzSTerms}{\lstinline|GetBosonLpLzSTerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonLz2SQNDiag}{\lstinline|GetBosonLz2SQNDiag|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonPairIntSTerms}{\lstinline|GetBosonPairIntSTerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonPolSTerms}{\lstinline|GetBosonPolSTerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetBosonRotySQNOffd}{\lstinline|GetBosonRotySQNOffd|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetC2Terms-Tuple{Int64,%20Int64,%20Vector{%3C:AbstractMatrix{%3C:Number}}}}{\lstinline|GetC2Terms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetComponent-Tuple{SphereObs,%20Number,%20Number}}{\lstinline|GetComponent|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.GetConfId-Tuple{Confs,%20Int64}}{\lstinline|GetConfId|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.GetConfWeight-Tuple{Basis,%20Union{Vector{ComplexF64},%20Vector{Float64}},%20Int64}}{\lstinline|GetConfWeight|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetDenIntTerms}{\lstinline|GetDenIntTerms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetDensityMod-Tuple{Int64,%20Int64,%20Matrix{%3C:Number}}}{\lstinline|GetDensityMod|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetDensityObs-Tuple{Int64,%20Int64,%20Matrix{%3C:Number}}}{\lstinline|GetDensityObs|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.GetEigensystem-Tuple{OpMat{ComplexF64},%20Int64}}{\lstinline|GetEigensystem|}\\
+    \href{https://docs.fuzzified.world/extension/#FuzzifiED.GetEigensystemCuda-Tuple{OpMat{ComplexF64},%20Int64}}{\lstinline|GetEigensystemCuda|}\\
+    \href{https://docs.fuzzified.world/extension/#FuzzifiED.GetEigensystemKrylov-Tuple{OpMat{ComplexF64},%20Int64}}{\lstinline|GetEigensystemKrylov|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetElectronMod-Tuple{Int64,%20Int64,%20Int64}}{\lstinline|GetElectronMod|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetElectronObs-Tuple{Int64,%20Int64,%20Int64}}{\lstinline|GetElectronObs|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.GetEntSpec-Tuple{Vector{%3C:Number},%20Basis,%20Vector{Vector{Vector{Int64}}},%20Vector{Vector{Vector{Int64}}}}}{\lstinline|GetEntSpec|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetFlavPermQNOffd}{\lstinline|GetFlavPermQNOffd|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetFlavQNDiag}{\lstinline|GetFlavQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetIntegral-Tuple{SphereObs}}{\lstinline|GetIntegral|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetIntMatrix-Tuple{Int64,%20Vector{%3C:Number}}}{\lstinline|GetIntMatrix|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetL2STerms-Tuple%7BTuple%7BVector%7BSTerm%7D,%20Vector%7BSTerm%7D%7D%7D}{\lstinline|GetL2STerms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetL2Terms-Tuple{Int64,%20Int64}}{\lstinline|GetL2Terms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetLpLzTerms}{\lstinline|GetLpLzTerms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetLz2QNDiag-Tuple%7BInt64,%20Int64%7D}{\lstinline|GetLz2QNDiag|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.GetMPO-Tuple{String,%20Union{Sum{Scaled{ComplexF64,%20Prod{Op}}},%20Vector{Term}},%20Vector{%3C:Index}}}{\lstinline|GetMPO|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.GetMPOSites-Tuple{String,%20Union{Sum{Scaled{ComplexF64,%20Prod{Op}}},%20Vector{Term}},%20Vector{QNDiag}}}{\lstinline|GetMPOSites|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.GetNeSQNDiag}{\lstinline|GetNeSQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetNeQNDiag-Tuple{Int64}}{\lstinline|GetNeQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetPairingMod-Tuple{Int64,%20Int64,%20Matrix{%3C:Number}}}{\lstinline|GetPairingMod|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetPairingObs-Tuple{Int64,%20Int64,%20Matrix{%3C:Number}}}{\lstinline|GetPairingObs|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetPairIntTerms}{\lstinline|GetPairIntTerms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetParityQNOffd}{\lstinline|GetParityQNOffd|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetPinOrbQNDiag}{\lstinline|GetPinOrbQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetPointValue-Tuple{SphereObs,%20Float64,%20Float64}}{\lstinline|GetPointValue|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetPolTerms-Tuple{Int64,%20Int64,%20Matrix{%3C:Number}}}{\lstinline|GetPolTerms|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.GetQNDiags-Tuple{Vector{Index{Vector{Pair{QN,%20Int64}}}}}}{\lstinline|GetQNDiags|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetRotyQNOffd-Tuple{Int64,%20Int64}}{\lstinline|GetRotyQNOffd|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.GetSites-Tuple{Vector{QNDiag}}}{\lstinline|GetSites|}\\
+    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusDenIntTerms}{\lstinline|GetTorusDenIntTerms|}\\
+    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusIntMatrix-Tuple{Int64,%20Number,%20Vector{%3C:Number}}}{\lstinline|GetTorusIntMatrix|}\\
+    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusLz2QNDiag-Tuple{Int64,%20Int64}}{\lstinline|GetTorusLz2QNDiag|}\\
+    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusTranslQNOffd-Tuple{Int64,%20Int64}}{\lstinline|GetTorusTranslQNOffd|}\\
+    \href{https://docs.fuzzified.world/manifolds/#FuzzifiED.FuzzyManifolds.GetTorusPairIntTerms}{\lstinline|GetTorusPairIntTerms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.GetZnfChargeQNDiag-Tuple{Int64,%20Int64}}{\lstinline|GetZnfChargeQNDiag|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.Laplacian-Tuple{SphereObs}}{\lstinline|Laplacian|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Libpath}{\lstinline|FuzzifiED.Libpath|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.Libpathino}{\lstinline|Fuzzifino.Libpathino|}\\
+    \href{https://docs.fuzzified.world/extension/#Base.Matrix-Tuple{OpMat}}{\lstinline|Matrix|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.NormalOrder-Tuple{Term}}{\lstinline|NormalOrder|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.NumThreads}{\lstinline|FuzzifiED.NumThreads|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.ObsMomIncr}{\lstinline|FuzzifiED.ObsMomIncr|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.ObsNormRadSq}{\lstinline|FuzzifiED.ObsNormRadSq|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.OpenHelp!-Tuple{}}{\lstinline|FuzzifiED.OpenHelp!|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Operator}{\lstinline|Operator|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.OpMat}{\lstinline|OpMat|}\\
+    \href{https://docs.fuzzified.world/itensors/#ITensors.Ops.OpSum-Tuple{Vector{Term}}}{\lstinline|OpSum|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.PadAngModes}{\lstinline|PadAngModes|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.PadQNDiag}{\lstinline|PadQNDiag|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.PadQNOffd}{\lstinline|PadQNOffd|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.PadSphereObs}{\lstinline|PadSphereObs|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.PadSQNDiag}{\lstinline|PadSQNDiag|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.PadSQNOffd}{\lstinline|PadSQNOffd|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.PadSTerms}{\lstinline|PadSTerms|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.PadTerms}{\lstinline|PadTerms|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.ParticleHole-Tuple{Vector{Term}}}{\lstinline|ParticleHole|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.QNDiag}{\lstinline|QNDiag|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.QNOffd}{\lstinline|QNOffd|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.RelabelOrbs-Tuple%7BVector%7BTerm%7D,%20Dict%7BInt64,%20Int64%7D%7D}{\lstinline|RelabelOrbs|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.RemoveOrbs-Tuple%7BVector%7BTerm%7D,%20Vector%7BInt64%7D%7D}{\lstinline|RemoveOrbs|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SAngModes}{\lstinline|SAngModes|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SBasis}{\lstinline|SBasis|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SConfs}{\lstinline|SConfs|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.SilentStd}{\lstinline|FuzzifiED.SilentStd|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.SimplifyTerms-Tuple{Vector{Term}}}{\lstinline|SimplifyTerms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SOperator}{\lstinline|SOperator|}\\
+    \href{https://docs.fuzzified.world/extension/#SparseArrays.SparseMatrixCSC-Tuple{OpMat}}{\lstinline|SparseMatrixCSC|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.SphereObs}{\lstinline|SphereObs|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SQNDiag}{\lstinline|SQNDiag|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SQNOffd}{\lstinline|SQNOffd|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.SSphereObs}{\lstinline|SSphereObs|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.StateDecompMat-Tuple{Vector{%3C:Number},%20Basis,%20Basis,%20Basis,%20Vector{%3C:Number},%20Vector{%3C:Number}}}{\lstinline|StateDecompMat|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.STerm}{\lstinline|STerm|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.STerms}{\lstinline|STerms|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.StoreComps-Tuple{SphereObs}}{\lstinline|StoreComps|}\\
+    \href{https://docs.fuzzified.world/models/#FuzzifiED.StoreComps!-Tuple{SphereObs}}{\lstinline|StoreComps!|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#FuzzifiED.Fuzzifino.STransf}{\lstinline|STransf|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.SweepOne-Tuple{String,%20MPO,%20MPS,%20Int64}}{\lstinline|SweepOne|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Term}{\lstinline|Term|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Terms}{\lstinline|Terms|}\\
+    \href{https://docs.fuzzified.world/core/#FuzzifiED.Transf}{\lstinline|Transf|}\\
+    \href{https://docs.fuzzified.world/itensors/#FuzzifiED.TruncateQNDiag-Tuple{Vector{QNDiag}}}{\lstinline|TruncateQNDiag|}\\
     \subsection*{Operations}
     \noindent
-    \href{https://docs.fuzzified.world/models/\#Base.:+-Tuple{AngModes,\%20AngModes}}{\lstinline|amd + amd|}\footnote{Here each symbol represents a specific type~: \lstinline[basicstyle=\ttfamily\scriptsize]|amd| is a \lstinline[basicstyle=\ttfamily\scriptsize]|AngModes|,  \lstinline[basicstyle=\ttfamily\scriptsize]|obs| is a \lstinline[basicstyle=\ttfamily\scriptsize]|SphereObs|, \lstinline[basicstyle=\ttfamily\scriptsize]|op| is a \lstinline[basicstyle=\ttfamily\scriptsize]|Operator|, \lstinline[basicstyle=\ttfamily\scriptsize]|sop| is a \lstinline[basicstyle=\ttfamily\scriptsize]|SOperator|, \lstinline[basicstyle=\ttfamily\scriptsize]|mat| is a \lstinline[basicstyle=\ttfamily\scriptsize]|OpMat|, \lstinline[basicstyle=\ttfamily\scriptsize]|qnd| is a \lstinline[basicstyle=\ttfamily\scriptsize]|QNDiag|, \lstinline[basicstyle=\ttfamily\scriptsize]|sqnd| is a  \lstinline[basicstyle=\ttfamily\scriptsize]|SQNDiag|, \lstinline[basicstyle=\ttfamily\scriptsize]|qnf| is a \lstinline[basicstyle=\ttfamily\scriptsize]|QNOffd|, \lstinline[basicstyle=\ttfamily\scriptsize]|sqnf| is a  \lstinline[basicstyle=\ttfamily\scriptsize]|SQNOffd|, \lstinline[basicstyle=\ttfamily\scriptsize]|trs| is a \lstinline[basicstyle=\ttfamily\scriptsize]|Transf|, \lstinline[basicstyle=\ttfamily\scriptsize]|strs| is a \lstinline[basicstyle=\ttfamily\scriptsize]|STransf|, \lstinline[basicstyle=\ttfamily\scriptsize]|vec| is a \lstinline[basicstyle=\ttfamily\scriptsize]|Vector|, \lstinline[basicstyle=\ttfamily\scriptsize]|\#| is a number. In general, \lstinline[basicstyle=\ttfamily\scriptsize]|a1 - a2| is supported where \lstinline[basicstyle=\ttfamily\scriptsize]|a1 + a2| is supported~; \lstinline[basicstyle=\ttfamily\scriptsize]|a * \#|, \lstinline[basicstyle=\ttfamily\scriptsize]|a / \#| and \lstinline[basicstyle=\ttfamily\scriptsize]|-a| are supported where \lstinline[basicstyle=\ttfamily\scriptsize]|\# * a| is supported.}\\
-    \href{https://docs.fuzzified.world/models/\#Base.:+-Tuple{SphereObs,\%20SphereObs}}{\lstinline|obs + obs|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:+-Tuple{QNDiag,\%20QNDiag}}{\lstinline|qnd + qnd|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:+-Tuple{SQNDiag,\%20SQNDiag}}{\lstinline|sqnd + sqnd|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:+-Tuple{Vector{Term},\%20Vector{Term}}}{\lstinline|tms + tms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:+-Tuple{Vector{STerm},\%20Vector{STerm}}}{\lstinline|stms + stms|}\\
-    \href{https://docs.fuzzified.world/models/\#Base.:*-Tuple{Number,\%20AngModes}}{\lstinline|\# * amd|}\\
-    \href{https://docs.fuzzified.world/models/\#Base.:*-Tuple{Number,\%20SphereObs}}{\lstinline|\# * obs|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Int64,\%20QNDiag}}{\lstinline|\# * qnd|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{Int64,\%20SQNDiag}}{\lstinline|\# * sqnd|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Number,\%20Vector{Term}}}{\lstinline|\# * tms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{Number,\%20Vector{STerm}}}{\lstinline|\# * stms|}\\
-    \href{https://docs.fuzzified.world/models/\#Base.:*-Tuple{AngModes,\%20AngModes}}{\lstinline|amd * amd|}\\
-    \href{https://docs.fuzzified.world/models/\#Base.:*-Tuple{SphereObs,\%20SphereObs}}{\lstinline|obs * obs|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{QNOffd,\%20QNOffd}}{\lstinline|qnf * qnf|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{SQNOffd,\%20SQNOffd}}{\lstinline|sqnf * sqnf|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Vector{Term},\%20Vector{Term}}}{\lstinline|tms * tms|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{Vector{STerm},\%20Vector{STerm}}}{\lstinline|stms * stms|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{OpMat{ComplexF64},\%20Vector{ComplexF64}}}{\lstinline|mat * vec|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Operator,\%20Vector{ComplexF64}}}{\lstinline|op * vec|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{SOperator,\%20Vector{ComplexF64}}}{\lstinline|sop * vec|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Transf,\%20Vector{ComplexF64}}}{\lstinline|trs * vec|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{STransf,\%20Vector{ComplexF64}}}{\lstinline|strs * vec|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{Adjoint{ComplexF64,\%20Vector{ComplexF64}},\%20OpMat{ComplexF64},\%20Vector{ComplexF64}}}{\lstinline|vec' * mat * vec|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Adjoint{ComplexF64,\%20Vector{ComplexF64}},\%20Operator,\%20Vector{ComplexF64}}}{\lstinline|vec' * op * vec|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{Adjoint{ComplexF64,\%20Vector{ComplexF64}},\%20SOperator,\%20Vector{ComplexF64}}}{\lstinline|vec' * sop * vec|}\\
-    \href{https://docs.fuzzified.world/models/\#Base.adjoint-Tuple{AngModes}}{\lstinline|amd'|}\\
-    \href{https://docs.fuzzified.world/models/\#Base.adjoint-Tuple{SphereObs}}{\lstinline|obs'|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.adjoint-Tuple{Vector{Term}}}{\lstinline|tms'|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.adjoint-Tuple{Vector{STerm}}}{\lstinline|stms'|}\\
-    \href{https://docs.fuzzified.world/core/\#Base.:*-Tuple{Vector{Term},\%20Vector{Term}}}{\lstinline|tms ^ \#|}\\
-    \href{https://docs.fuzzified.world/fuzzifino/\#Base.:*-Tuple{Vector{STerm},\%20Vector{STerm}}}{\lstinline|stms ^ \#|}\\
+    \href{https://docs.fuzzified.world/models/#Base.:+-Tuple{AngModes,%20AngModes}}{\lstinline|amd + amd|}\footnote{Here each symbol represents a specific type~: \lstinline[basicstyle=\ttfamily\scriptsize]|amd| is a \lstinline[basicstyle=\ttfamily\scriptsize]|AngModes|,  \lstinline[basicstyle=\ttfamily\scriptsize]|obs| is a \lstinline[basicstyle=\ttfamily\scriptsize]|SphereObs|, \lstinline[basicstyle=\ttfamily\scriptsize]|op| is a \lstinline[basicstyle=\ttfamily\scriptsize]|Operator|, \lstinline[basicstyle=\ttfamily\scriptsize]|sop| is a \lstinline[basicstyle=\ttfamily\scriptsize]|SOperator|, \lstinline[basicstyle=\ttfamily\scriptsize]|mat| is a \lstinline[basicstyle=\ttfamily\scriptsize]|OpMat|, \lstinline[basicstyle=\ttfamily\scriptsize]|qnd| is a \lstinline[basicstyle=\ttfamily\scriptsize]|QNDiag|, \lstinline[basicstyle=\ttfamily\scriptsize]|sqnd| is a  \lstinline[basicstyle=\ttfamily\scriptsize]|SQNDiag|, \lstinline[basicstyle=\ttfamily\scriptsize]|qnf| is a \lstinline[basicstyle=\ttfamily\scriptsize]|QNOffd|, \lstinline[basicstyle=\ttfamily\scriptsize]|sqnf| is a  \lstinline[basicstyle=\ttfamily\scriptsize]|SQNOffd|, \lstinline[basicstyle=\ttfamily\scriptsize]|trs| is a \lstinline[basicstyle=\ttfamily\scriptsize]|Transf|, \lstinline[basicstyle=\ttfamily\scriptsize]|strs| is a \lstinline[basicstyle=\ttfamily\scriptsize]|STransf|, \lstinline[basicstyle=\ttfamily\scriptsize]|vec| is a \lstinline[basicstyle=\ttfamily\scriptsize]|Vector|, \lstinline[basicstyle=\ttfamily\scriptsize]|#| is a number. In general, \lstinline[basicstyle=\ttfamily\scriptsize]|a1 - a2| is supported where \lstinline[basicstyle=\ttfamily\scriptsize]|a1 + a2| is supported~; \lstinline[basicstyle=\ttfamily\scriptsize]|a * #|, \lstinline[basicstyle=\ttfamily\scriptsize]|a / #| and \lstinline[basicstyle=\ttfamily\scriptsize]|-a| are supported where \lstinline[basicstyle=\ttfamily\scriptsize]|# * a| is supported.}\\
+    \href{https://docs.fuzzified.world/models/#Base.:+-Tuple{SphereObs,%20SphereObs}}{\lstinline|obs + obs|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:+-Tuple{QNDiag,%20QNDiag}}{\lstinline|qnd + qnd|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:+-Tuple{SQNDiag,%20SQNDiag}}{\lstinline|sqnd + sqnd|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:+-Tuple{Vector{Term},%20Vector{Term}}}{\lstinline|tms + tms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:+-Tuple{Vector{STerm},%20Vector{STerm}}}{\lstinline|stms + stms|}\\
+    \href{https://docs.fuzzified.world/models/#Base.:*-Tuple{Number,%20AngModes}}{\lstinline|# * amd|}\\
+    \href{https://docs.fuzzified.world/models/#Base.:*-Tuple{Number,%20SphereObs}}{\lstinline|# * obs|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Int64,%20QNDiag}}{\lstinline|# * qnd|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{Int64,%20SQNDiag}}{\lstinline|# * sqnd|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Number,%20Vector{Term}}}{\lstinline|# * tms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{Number,%20Vector{STerm}}}{\lstinline|# * stms|}\\
+    \href{https://docs.fuzzified.world/models/#Base.:*-Tuple{AngModes,%20AngModes}}{\lstinline|amd * amd|}\\
+    \href{https://docs.fuzzified.world/models/#Base.:*-Tuple{SphereObs,%20SphereObs}}{\lstinline|obs * obs|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{QNOffd,%20QNOffd}}{\lstinline|qnf * qnf|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{SQNOffd,%20SQNOffd}}{\lstinline|sqnf * sqnf|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Vector{Term},%20Vector{Term}}}{\lstinline|tms * tms|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{Vector{STerm},%20Vector{STerm}}}{\lstinline|stms * stms|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{OpMat{ComplexF64},%20Vector{ComplexF64}}}{\lstinline|mat * vec|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Operator,%20Vector{ComplexF64}}}{\lstinline|op * vec|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{SOperator,%20Vector{ComplexF64}}}{\lstinline|sop * vec|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Transf,%20Vector{ComplexF64}}}{\lstinline|trs * vec|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{STransf,%20Vector{ComplexF64}}}{\lstinline|strs * vec|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{Adjoint{ComplexF64,%20Vector{ComplexF64}},%20OpMat{ComplexF64},%20Vector{ComplexF64}}}{\lstinline|vec' * mat * vec|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Adjoint{ComplexF64,%20Vector{ComplexF64}},%20Operator,%20Vector{ComplexF64}}}{\lstinline|vec' * op * vec|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{Adjoint{ComplexF64,%20Vector{ComplexF64}},%20SOperator,%20Vector{ComplexF64}}}{\lstinline|vec' * sop * vec|}\\
+    \href{https://docs.fuzzified.world/models/#Base.adjoint-Tuple{AngModes}}{\lstinline|amd'|}\\
+    \href{https://docs.fuzzified.world/models/#Base.adjoint-Tuple{SphereObs}}{\lstinline|obs'|}\\
+    \href{https://docs.fuzzified.world/core/#Base.adjoint-Tuple{Vector{Term}}}{\lstinline|tms'|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.adjoint-Tuple{Vector{STerm}}}{\lstinline|stms'|}\\
+    \href{https://docs.fuzzified.world/core/#Base.:*-Tuple{Vector{Term},%20Vector{Term}}}{\lstinline|tms ^ #|}\\
+    \href{https://docs.fuzzified.world/fuzzifino/#Base.:*-Tuple{Vector{STerm},%20Vector{STerm}}}{\lstinline|stms ^ #|}\\
 \end{multicols}
 
 \cleardoublepage

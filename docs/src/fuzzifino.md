@@ -5,15 +5,15 @@ Fuzzifino is a module for exact diagonalisation (ED) calculation on the fuzzy sp
 using FuzzifiED.Fuzzifino
 ```
 
-## Core functions
+## Core Functions
 
-### Environment parameter
+### Environment Parameter
 
 ```@docs
 FuzzifiED.Fuzzifino.Libpathino
 ```
 
-### Quantum numbers
+### Quantum Numbers
 
 The diagonal and off-diagonal quantum numbers are implemented as
 ```@docs
@@ -90,7 +90,7 @@ The product of an operator on a state and the inner product of a final state, an
 *(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Vector{ComplexF64}}, op :: SOperator, st_d :: Vector{ComplexF64} ; num_th = NumThreads, disp_std = !SilentStd)
 ```
 
-### Sparse matrix
+### Sparse Matrix
 
 The OpMat can be generated from `SOperator` by the following methods.
 ```@docs
@@ -136,6 +136,10 @@ SSphereObs
 SAngModes
 ```
 
-## Related examples
+## Related Examples
 
-* [`ising_frac_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_boson.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for bosons at fractional filling ``ν = 1/2``. This example reproduces Figure 12a,b in [Voinea 2024](@ref Voinea2024).
+* [`ising_frac_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_boson.jl) calculates the spectrum of 3d Ising model on the fuzzy sphere for bosons at fractional filling ``ν = 1/2``. This example reproduces Figure 12a,b in [Voinea 2024](@ref Voinea2024).
+* [`su2_1_scal_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/su2_1_scal_spectrum.jl) calculates the spectrum of the $\mathrm{SU}(2)_1$ coupled to a complex scalar Chern-Simons matter CFT on the fuzzy sphere. This example reproduces Figs. 2d and 3 in [Zhou 2025Jul](@ref Zhou2025Jul).
+* [`free_majorana_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_majorana_spectrum.jl) calculates the spectrum of free Majorana fermion. This example reproduces Figure 5 in [Zhou 2025Sep](@ref Zhou2025Sep). 
+* [`free_majorana_correlator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_majorana_correlator.jl) calculates the 2-pt correlator of free Majorana fermion. This example reproduces Figure 7 in [Zhou 2025Sep](@ref Zhou2025Sep).
+* [`bpf_220_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/bpf_220_spectrum.jl) calculates the spectrum of the transition between bosonic Pfaffian and Halperin 220 described by gauged Majorana fermion CFT # This example reproduces Figure 4a in [Voinea 2025](@ref Voinea2025)

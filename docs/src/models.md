@@ -1,8 +1,8 @@
 # Built-in models
 
-## Diagonal quantum numbers on fuzzy sphere
+## Diagonal Quantum Numbers on the Fuzzy Sphere
 
-The following diagonal quantum numbers (symmetry charges) on fuzzy sphere are built in in FuzzifiED.
+The following diagonal quantum numbers (symmetry charges) on the fuzzy sphere are built in in FuzzifiED.
 
 ```@docs
 GetNeQNDiag(no :: Int64)
@@ -12,9 +12,9 @@ GetZnfChargeQNDiag(nm :: Int64, nf :: Int64)
 GetPinOrbQNDiag(no :: Int64, pin_o :: Vector{Int64}, id :: Int64 = 1) 
 ```
 
-## Off-diagonal quantum numbers on fuzzy sphere
+## Off-diagonal Quantum Numbers on the Fuzzy Sphere
 
-The following off-diagonal quantum numbers (transformations) on fuzzy sphere are built in in FuzzifiED.
+The following off-diagonal quantum numbers (transformations) on the fuzzy sphere are built in in FuzzifiED.
 
 ```@docs
 GetParityQNOffd(nm :: Int64, nf :: Int64, permf :: Union{Dict{Int64, Int64}, Vector{Vector{Int64}}, Vector{Int64}} = Dict{Int64, Int64}(), fac :: Union{Dict{Int64, <: Number}, Vector{<: Number}} = Dict{Int64, ComplexF64}()) 
@@ -22,7 +22,7 @@ GetFlavPermQNOffd(nm :: Int64, nf :: Int64, permf :: Union{Dict{Int64, Int64}, V
 GetRotyQNOffd(nm :: Int64, nf :: Int64)
 ```
 
-## Operators on fuzzy sphere
+## Operators on the Fuzzy Sphere
 
 ```@docs 
 GetIntMatrix(nm :: Int64, ps_pot :: Vector{<:Number})
@@ -36,7 +36,7 @@ GetL2Terms(tms_lzlp :: Tuple{Terms, Terms})
 GetC2Terms
 ```
 
-## Spherical observables
+## Spherical Observables
 
 FuzzifiED supports local observables on sphere that can be decomposed into angular components ``\Phi(\Omega)=\sum_{lm}\Phi_{lm}Y^{(s)}_{lm}``
 ```@docs
@@ -83,7 +83,7 @@ GetDensityObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
 GetPairingObs(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number})
 ```
 
-## Angular modes
+## Angular Modes
 
 An angular modes object is similar to spherical observables except that it superposes in the rule of Clebsch-Gordan coefficients and does not have the notion of locality.
 ```@docs

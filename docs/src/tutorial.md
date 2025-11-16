@@ -1,6 +1,6 @@
-# FuzzifiED explained in a tutorial
+# FuzzifiED Explained in a Tutorial
 
-To demonstrate the usage of FuzzifiED interfaces for ED and DMRG, in this section, we use a tutorial that calculates the eigenstates for the Ising model on fuzzy sphere. Specifically, it
+To demonstrate the usage of FuzzifiED interfaces for ED and DMRG, in this section, we use a tutorial that calculates the eigenstates for the Ising model on the fuzzy sphere. Specifically, it
 
 1. calculates the lowest eigenstates in the symmetry sector $L^z=0$ and $(\mathcal{P},\mathcal{Z},\mathcal{R})=(+,+,+)$,
 2. measures their total angular momenta, and 
@@ -11,9 +11,9 @@ Four versions of the tutorial code are provided :
 1. [`tutorial_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising.jl) — the ED code that uses the built-in models.
 2. [`tutorial_ising_primitive.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_primitive.jl) — The ED code that uses only the core functions.
 3. [`tutorial_ising_dmrg.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg.jl) — the DMRG code that converts the format into ITensor.
-4. [`tutorial_ising_dmrg_easysweep.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg_easysweep.jl) — the DMRG code that uses the EasySweep extension.
+4. [`tutorial_ising_dmrg_easysweep.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg_easysweep.jl) — the DMRG code that uses the Easy-Sweep extension.
 
-The examples can be found in the directory [`examples`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples). We also append in the end [a list of given examples](@ref List-of-examples) at the end of the page. 
+The examples can be found in the directory [`examples`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples). We also append in the end [a list of given examples](@ref List-of-Examples) at the end of the page. 
 
 ## ED with FuzzifiED
 
@@ -43,7 +43,7 @@ no = nm * nf
 
 FuzzifiED also provides several environment parameters that defines how FuzzifiED works, _viz._ [FuzzifiED.ElementType](@ref), [FuzzifiED.NumThreads](@ref) and [FuzzifiED.SilentStd](@ref).
 
-### Constructing the configurations
+### Constructing the Configurations
 
 The first step for the ED calculation is to construct the basis tha respects the symmetries of the Hamiltonian. This is divided into two steps : (1) generate the 'configurations' that carry the diagonal quantum numbers, and (2) generate the 'basis' that also carry the off-diagonal quantum numbers (under discrete transformations). The '_configurations_' are the collection of states that can be written as direct product of occupied $|1\rangle$ or empty $|0\rangle$ on each site and carries certain diagonal quantum numbers (QNDiag). 
 
@@ -54,7 +54,7 @@ The QNDiags supported by FuzzifiED are the charges of $\mathrm{U}(1)$ or $\mathb
     Q&=\sum_oq_on_o\mod p&\mathbb{Z}_p&\textrm{ symmetry}
 \end{aligned}
 ```
-where $n_o=c^\dagger_oc_o$ is the particle number on each site, and $q_o$ is the charge that each orbital carries. FuzzifiED restricts $q_o$ to be integer-valued. In FuzzifiED, the QNDiags are recorded in the mutable type [`QNDiag`](@ref). Several useful QNDiags are [built-in](@ref Diagonal-quantum-numbers-on-fuzzy-sphere). 
+where $n_o=c^\dagger_oc_o$ is the particle number on each site, and $q_o$ is the charge that each orbital carries. FuzzifiED restricts $q_o$ to be integer-valued. In FuzzifiED, the QNDiags are recorded in the mutable type [`QNDiag`](@ref). Several useful QNDiags are [built-in](@ref Diagonal-Quantum-Numbers-on-the-Fuzzy-Sphere). 
 
 The collection of configurations is generated from the QNDiags. It is recorded in the mutable type [`Confs`](@ref) 
 and can be constructed by the method 
@@ -87,7 +87,7 @@ qnd = [
 cfs = Confs(no, [nm, 0], qnd)
 ```
 
-### Constructing the basis
+### Constructing the Basis
 
 Having constructed the configurations, we now construct the basis of the Hilbert space. The `_basis_' is the collection of states that are linear combinations of the configuration carrying certain diagonal and $\mathbb{Z}_p$ off-diagonal quantum numbers (QNOffd). 
 
@@ -95,7 +95,7 @@ The QNOffds supported by FuzzifiED are the $\mathbb{Z}_p$ symmetry that are in t
 ```math
     \mathcal{Z}:\ c_o\to \alpha_o^* c^{(p_o)}_{\pi_o},\quad c_o^\dagger\to \alpha_o c^{(1-p_o)}_{\pi_o}
 ```
-where we use a notation $c^{(1)}=c^\dagger$ and $c^{(0)}=c$ for convenience, $\pi_o$ is a permutation of the sites $1,\dots N_o$, $\alpha_o$ is a coefficient, and $p_o$ specified whether or not particle-hole transformation is performed for the site. Note that one must guarentee that all these transformations commute with each other and also commute with the diagonal quantum numbers. In FuzzifiED, the QNOffds are recorded in the mutable type [`QNOffd`](@ref). Several useful QNOffds are [built-in](@ref Off-diagonal-quantum-numbers-on-fuzzy-sphere).
+where we use a notation $c^{(1)}=c^\dagger$ and $c^{(0)}=c$ for convenience, $\pi_o$ is a permutation of the sites $1,\dots N_o$, $\alpha_o$ is a coefficient, and $p_o$ specified whether or not particle-hole transformation is performed for the site. Note that one must guarentee that all these transformations commute with each other and also commute with the diagonal quantum numbers. In FuzzifiED, the QNOffds are recorded in the mutable type [`QNOffd`](@ref). Several useful QNOffds are [built-in](@ref Off-diagonal-Quantum-Numbers-on-the-Fuzzy-Sphere).
 
 After implementing the QNOffds, a state in the new basis should look like 
 ```math
@@ -143,7 +143,7 @@ bs = Basis(cfs, [1, 1, 1], qnf)
 # The second argument gives the eigenvalues under the transformations, for Z_2 put 1,-1 ; for Z_n put exp(2im*pi*q/p)
 ```
 
-### Recording the many-body operator terms
+### Recording the Many-Body Operator Terms
 
 Having constructed the basis, we now construct the many-body operators. A general many-body operator can be written as
 ```math
@@ -157,7 +157,7 @@ The addition and multiplication of terms are supported, and the terms can be sim
 ```julia
 SimplifyTerms(tms :: Vector{Term})
 ```
-In FuzzifiED, several useful operator terms are [built-in](@ref Operators-on-fuzzy-sphere).
+In FuzzifiED, several useful operator terms are [built-in](@ref Operators-on-the-Fuzzy-Sphere).
 
 In the example of Ising model, the full code that records the Hamiltonian is 
 ```julia
@@ -225,7 +225,7 @@ Alternatively, using the built-in functions,
 tms_l2 = GetL2Terms(nm, nf)
 ```
 
-### Generating sparse matrix
+### Generating the Sparse Matrix
 
 Having gotten the terms in the many-body operator, we now need to generate the matrix elements given the initial and final basis and find its eigenstates. 
 
@@ -239,7 +239,7 @@ In FuzzifiED, the sparse matrix is stored in the mutable type [`OpMat{T}`](@ref 
 OpMat[{T}](op :: Operator)
 ```
 
-### Finding the eigenstates
+### Finding the Eigenstates
 
 After generating the sparse matrix, the method [`GetEigensystem`](@ref) uses the Fortran Arpack package to calculate its lowest eigenstates. 
 
@@ -251,7 +251,7 @@ hmt_mat = OpMat(hmt)
 enrg, st = GetEigensystem(hmt_mat, nst)
 ```
 
-### Write the sparse matrix into HDF5 file 
+### Write the Sparse Matrix into a HDF5 File 
 
 It is sometimes needed to write the sparse matrix into file to avoid extra effort to generate it again in another calculation. 
 
@@ -272,7 +272,7 @@ close(f)
 
 Apart from `OpMat`, the supported types for writing include `Confs`, `Basis`, `Terms`, `Operator`, `OpMat{ComplexF64}` and `OpMat{Float64}`. 
 
-### Inner product of states, operators and transformations
+### Inner Product of States, Operators and Transformations
 
 Having obtained the eigenstates, we need to make measurements on it. The simplest kind of measurements is the inner product of a many body operator with two states $\langle j|\mathcal{O}|i\rangle$. FuzzifiED supports the inner product and vector product of `Operator` and `OpMat{T}` with vectors that represent the state
 ```julia
@@ -290,7 +290,7 @@ l2_mat = OpMat(l2)
 l2_val = [ st[:, i]' * l2_mat * st[:, i] for i in eachindex(enrg)]
 ```
 
-### Go through all the sectors
+### Go through All the Sectors
 
 One can repeat the calculation for all the sectors and records the results
 ```julia
@@ -319,9 +319,9 @@ result_dim = [ [ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] for st in result
 display(permutedims(hcat(result_dim...)))
 ```
 
-### Measuring local observables
+### Measuring Local Observables
 
-Local observables are a kind of particularly useful operators on fuzzy sphere. Their value at a point on the sphere can be decomposed into spherical components, and the multiplication of the components follows the triple integral formula of monopole spherical harmonics
+Local observables are a kind of particularly useful operators on the fuzzy sphere. Their value at a point on the sphere can be decomposed into spherical components, and the multiplication of the components follows the triple integral formula of monopole spherical harmonics
 ```math
 \begin{aligned}
     \mathcal{O}(\hat{\mathbf{n}})&=\sum_{lm}Y^{(s)}_{lm}(\hat{\mathbf{n}})\mathcal{O}_{lm}\\
@@ -360,7 +360,7 @@ Besides the spherical observable, we also provide a type [`AngModes`](@ref) that
 ```
 The interfaces are similar.
 
-### Measuring the entanglement
+### Measuring the Entanglement
 
 A non-local quantity that bears particular significance is the entanglement. To calculate the entanglement, we divide the sphere into two parts $A$ and $B$. The reduced density matrix of part $A$ is obtained by tracing the density matrix over the part $B$
 ```math
@@ -511,9 +511,9 @@ nx00 = MPO(OpSum(tms_nx00), sites)
 f_sse = abs(inner(sts', nx00, ste) / inner(sts', nx00, st0))
 ```
 
-### The EasySweep extension
+### The Easy-Sweep Extension
 
-The extension EasySweep facilitates the management of DMRG process. It automatically records the intermediate results and recover these results if a job is stopped and run again on HPC. It also manages the gradual increase of maximal bond dimensions and the determination of convergence by the criteria of energy. This extension contains the following functions : [`GetMPOSites`](@ref), [`GetMPO`](@ref), [`SweepOne`](@ref), [`EasySweep`](@ref).
+The extension Easy-Sweep facilitates the management of DMRG process. It automatically records the intermediate results and recover these results if a job is stopped and run again on HPC. It also manages the gradual increase of maximal bond dimensions and the determination of convergence by the criteria of energy. This extension contains the following functions : [`GetMPOSites`](@ref), [`GetMPO`](@ref), [`SweepOne`](@ref), [`EasySweep`](@ref).
 
 To use the this extension, one need to use the packages `ITensors`, `ItensorMPS` and `HDF5`. A path need to be created a priori to store the result HDF5 files. We recommend using the package `ITensorMPOConstruction` to generate the MPO, which can be installed through 
 ```julia
@@ -584,16 +584,16 @@ nx00 = GetMPO("nx00", tms_nx00, sites ; path, mpo_method = MyMPO)
 f_sse = abs(inner(sts', nx00, ste) / inner(sts', nx00, st0))
 ```
 
-## List of examples
+## List of Examples
 
 We offer a series of other examples that reproduces various achievements of fuzzy sphere. For a more detailed summary of the background, see the [review of existing works](@ref Review-of-Existing-Works). 
 
-* [`ising_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum.jl) calculates the spectrum of 3d Ising model on fuzzy sphere at ``N_m = 12``. For each ``(P,Z,R)`` sector, 20 states are calculated. This example reproduces Table I and Figure 4 in [Zhu 2022](@ref Zhu2022).
+* [`ising_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum.jl) calculates the spectrum of 3d Ising model on the fuzzy sphere at ``N_m = 12``. For each ``(P,Z,R)`` sector, 20 states are calculated. This example reproduces Table I and Figure 4 in [Zhu 2022](@ref Zhu2022).
 * [`ising_phase_diagram.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_phase_diagram.jl) calculates the phase diagram of fuzzy sphere Ising modelby calculating the order parameter ``\langle M^2\rangle``. This example reproduces Figure 3 in [Zhu 2022](@ref Zhu2022).
 * [`ising_ope.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_ope.jl) calculates various OPE coefficients at ``N_m = 12`` by taking overlaps between CFT states and density operators and composite. This example reproduces Figure 2 and Table I in [Hu 2023Mar](@ref Hu2023Mar).
 * [`ising_correlator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_correlator.jl) calculates the ``σσ`` two-point function on sphere and the ``σσσσ`` four-point function on sphere, 0 and ``∞``. This example reproduces Figures 1c and 2a in [Han 2023Jun](@ref Han2023Jun).
 * [`ising_optimisation.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_optimisation.jl) defines a cost function as the square sum of the deviations of descendants and stress tensor to evaluate the conformal symmetry for Ising model and minimises this cost function to find the best parameter.
-* [`ising_full_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_full_spectrum.jl) calculates the full spectrum of 3d Ising model on fuzzy sphere at ``N_m = 10`` for sector ``(P,Z,R) = (1,1,1)``.
+* [`ising_full_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_full_spectrum.jl) calculates the full spectrum of 3d Ising model on the fuzzy sphere at ``N_m = 10`` for sector ``(P,Z,R) = (1,1,1)``.
 * [`ising_space_entangle.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_space_entangle.jl) calculates the entanglement entropy of the Ising ground state along the real space cut of ``θ = 0.500π`` and ``0.499π`` respectively, and use these two data to extract finite size ``F``-function without sustracting the IQHE contribution. This example reproduces Figures 3 in [Hu 2024](@ref Hu2024).
 * [`ising_orbital_entangle.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_space_entangle.jl) calculates the entanglement entropy of the Ising ground state along the orbital space cut at ``m = 0``, and also the entanglement spectrum in the half-filled ``l_z = 0, 1`` and  both ``\mathbb{Z}_2`` sectors.
 * [`ising_generator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_generator.jl) examines the quality of conformal symmetry at ``N_m = 12`` by examining the matrix elements of conformal generators ``P^z + K^z`` and compare the states ``(P^z + K^z)|Φ⟩`` with the CFT expectations. This example reproduces Figure 7 in [Fardelli 2024](@ref Fardelli2024).
@@ -605,16 +605,16 @@ We offer a series of other examples that reproduces various achievements of fuzz
 * [`surface_ordinary_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/surface_ordinary_spectrum.jl) calculates the spectrum of ordinary surface CFT in 3d Ising model calibrated by surface displacement operator ``D`` in the orbital boundary scheme. This example reproduces Figures 3 and 4 in [Zhou 2024Jul](@ref Zhou2024Jul).
 * [`surface_normal_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/surface_normal_spectrum.jl) calculates the spectrum of normal surface CFT in 3d Ising model calibrated by surface displacement operator ``D`` in the orbital boundary scheme. This example reproduces Figure 5 in [Zhou 2024Jul](@ref Zhou2024Jul).
 * [`hsb_2l_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/hsb_2l_spectrum.jl) calculates the spectrum of ``\mathrm{O}(3)`` Wilson-Fisher CFT using the bilayer Heisenberg model. This example reproduces Table I and Figure 2 in [Han 2023Dec](@ref Han2023Dec).
-* [`so5_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/so5_spectrum.jl) calculates the spectrum of SO(5) DQCP on fuzzy sphere. This example reproduces Table II in [Zhou 2023](@ref Zhou2023).
-* [`sp3_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/sp3_spectrum.jl) calculates the spectrum of Sp(3) CFT on fuzzy sphere. This example reproduces Table I in [Zhou 2024Oct](@ref Zhou2024Oct).
-* [`ising_frac_fermion.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_fermion.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for fermions at fractional filling ``ν = 1/3``. This example reproduces Figure 10 in [Voinea 2024](@ref Voinea2024).
-* [`ising_frac_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_boson.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for bosons at fractional filling ``ν = 1/2`` with the module _Fuzzifino_. This example reproduces Figure 12a,b in [Voinea 2024](@ref Voinea2024).
-* [`potts_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/potts_spectrum.jl) calculates the spectrum of 3d Potts model on fuzzy sphere. This example reproduces Table I and Figure 4 in [Yang 2025Jan](@ref Yang2025Jan).
+* [`so5_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/so5_spectrum.jl) calculates the spectrum of SO(5) DQCP on the fuzzy sphere. This example reproduces Table II in [Zhou 2023](@ref Zhou2023).
+* [`sp3_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/sp3_spectrum.jl) calculates the spectrum of Sp(3) CFT on the fuzzy sphere. This example reproduces Table I in [Zhou 2024Oct](@ref Zhou2024Oct).
+* [`ising_frac_fermion.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_fermion.jl) calculates the spectrum of 3d Ising model on the fuzzy sphere for fermions at fractional filling ``ν = 1/3``. This example reproduces Figure 10 in [Voinea 2024](@ref Voinea2024).
+* [`ising_frac_boson.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_frac_boson.jl) calculates the spectrum of 3d Ising model on the fuzzy sphere for bosons at fractional filling ``ν = 1/2`` with the module _Fuzzifino_. This example reproduces Figure 12a,b in [Voinea 2024](@ref Voinea2024).
+* [`potts_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/potts_spectrum.jl) calculates the spectrum of 3d Potts model on the fuzzy sphere. This example reproduces Table I and Figure 4 in [Yang 2025Jan](@ref Yang2025Jan).
 * [`circle_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/circle_ising.jl) calculates the spectrum of 2d Ising CFT on a fuzzy thin torus. This example reproduces Figure 4 and Tables I—III in [Han 2025](@ref Han2025).
-* [`yang_lee_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/yang_lee_spectrum.jl) calculates the spectrum of 3d non-unitary Yang-Lee CFT on fuzzy sphere. This example reproduces the finite size data of Figure 11 [Arguello Cruz 2025](@ref Fan2025)
+* [`yang_lee_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/yang_lee_spectrum.jl) calculates the spectrum of 3d non-unitary Yang-Lee CFT on the fuzzy sphere. This example reproduces the finite size data of Figure 11 [Arguello Cruz 2025](@ref Fan2025)
 * [`free_scalar_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_scalar_spectrum.jl) calculates the spectrum of free real scalar. This example reproduces Figure 2 in [He 2025Jun](@ref He2025Jun).
 * [`free_scalar_correlator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_scalar_correlator.jl) calculates calculates the correlator of $n^i$ for $ϕ$, $ϕ^2$ and $π$ of free real scalar. This example reproduces Figure 3 in [He 2025Jun](@ref He2025Jun)
-* [`o4_dqcp_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/o4_dqcp_spectrum.jl) calculates the spectrum of $\mathrm{O}(4)$ DQCP on fuzzy sphere. This example reproduces Figure 4 and Table I in [Yang 2025Jul](@ref Yang2025Jul).
+* [`o4_dqcp_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/o4_dqcp_spectrum.jl) calculates the spectrum of $\mathrm{O}(4)$ DQCP on the fuzzy sphere. This example reproduces Figure 4 and Table I in [Yang 2025Jul](@ref Yang2025Jul).
 * [`su2_1_scal_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/su2_1_scal_spectrum.jl) calculates the spectrum of the $\mathrm{SU}(2)_1$ coupled to a complex scalar Chern-Simons matter CFT on the fuzzy sphere. This example reproduces Figs. 2d and 3 in [Zhou 2025Jul](@ref Zhou2025Jul).
 * [`free_majorana_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_majorana_spectrum.jl) calculates the spectrum of free Majorana fermion. This example reproduces Figure 5 in [Zhou 2025Sep](@ref Zhou2025Sep). 
 * [`free_majorana_correlator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/free_majorana_correlator.jl) calculates the 2-pt correlator of free Majorana fermion. This example reproduces Figure 7 in [Zhou 2025Sep](@ref Zhou2025Sep).
@@ -622,5 +622,5 @@ We offer a series of other examples that reproduces various achievements of fuzz
 * [`o2_wf_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/o2_wf_spectrum.jl) calculates the spectrum of $\mathrm{O}(2)$ Wilson-Fisher CFT.
 * [`o3_wf_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/o2_wf_spectrum.jl) calculates the spectrum of $\mathrm{O}(3)$ Wilson-Fisher CFT.
 * [`o2_free_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/o2_free_spectrum.jl) calculates the spectrum of $\mathrm{O}(2)$ free scalar CFT.
-* [`ising_spectrum_krylov.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum_krylov.jl) calculates the spectrum of 3d Ising model on fuzzy sphere by calling the eigsolve function in KrylovKit.jl instead of Arpack.
-* [`ising_spectrum_cuda.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum_cuda.jl) calculates the spectrum of 3d Ising model on fuzzy sphere for one sector by performing the sparse matrix multiplication on CUDA.
+* [`ising_spectrum_krylov.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum_krylov.jl) calculates the spectrum of 3d Ising model on the fuzzy sphere by calling the eigsolve function in KrylovKit.jl instead of Arpack.
+* [`ising_spectrum_cuda.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/ising_spectrum_cuda.jl) calculates the spectrum of 3d Ising model on the fuzzy sphere for one sector by performing the sparse matrix multiplication on CUDA.
