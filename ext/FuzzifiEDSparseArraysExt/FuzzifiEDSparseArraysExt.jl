@@ -4,6 +4,8 @@ using SparseArrays
 using LinearAlgebra
 using FuzzifiED
 
+import FuzzifiED: OpMat
+
 
 """
     SparseMatrixCSC(mat :: OpMat{ComplexF64}) :: SparseMatrixCSC{Int64,ComplexF64}
