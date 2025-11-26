@@ -6,17 +6,18 @@
 \newif\ifemailadd\emailaddfalse
 \newif\iftoccontinuous\toccontinuousfalse
 \newif\ifnatbibsort\natbibsorttrue
-\newif\iftitlerule\titleruletrue
-\newif\iftocrule\tocruletrue
+\newif\iftitlerule\titlerulefalse
+\newif\iftocrule\tocrulefalse
 \newif\ifdoublepage\doublepagefalse
 \newif\iftimesfont\timesfontfalse
 \newif\ifchangefont\changefonttrue
+\newif\iftitlecentre\titlecentretrue
 
 \DeclareOption{no-natbib-sort}{\natbibsortfalse}
 \DeclareOption{toc-continuous}{\toccontinuoustrue}
-\DeclareOption{title-simple}{\titlerulefalse}
-\DeclareOption{toc-simple}{\tocrulefalse}
-\DeclareOption{simple}{\toccontinuoustrue\titlerulefalse\tocrulefalse}
+\DeclareOption{title-rule}{\titleruletrue}
+\DeclareOption{toc-rule}{\tocruletrue}
+\DeclareOption{title-left}{\titlecentrefalse}
 \DeclareOption{no-toc}{\notoctrue}
 \DeclareOption{double-page}{\doublepagetrue}
 \DeclareOption{times-font}{\timesfonttrue}
@@ -83,6 +84,7 @@
 \def\@preprint{\@empty}
 \def\@extra{\@empty}
 
+\newcommand{\condcentering}{\iftitlecentre\centering\else\flushleft\fi}
 \newcommand{\fpheader}[1]{\gdef\@fpheader{#1}}
 \newcommand{\subheader}[1]{\gdef\@subheader{#1}}
 \newcommand{\keywords}[1]{\if!\@keywords!\gdef\@keywords{#1}\else%
@@ -152,7 +154,7 @@
 % 1: Name$^{1}$
 % 2: Name1,$^{1}$ and Name2$^{2}$
 % 3+: Name1,$^{1}$ Name2,$^{2}$ and Name3$^{3}$ ...
-\NewDocumentCommand \printauthors {} { \myauth_print: }
+\NewDocumentCommand \printauthors {} { \condcentering\myauth_print: }
 
 \cs_new_protected:Npn \myauth_print:
   {
@@ -257,9 +259,9 @@
 \if!\@proceeding!\else\noindent{\sc\@proceeding}\fi
 \afterProceedingsSpace
 % Title
-{\LARGE\flushleft\bfseries\@title\par}
+{\LARGE\condcentering\bfseries\@title\par}
 % To-do list
-\if!\@subtitle!\else{\Large\flushleft\bfseries\itshape\@subtitle\par}\fi
+\if!\@subtitle!\else{\Large\condcentering\bfseries\@subtitle\par}\fi
 
 % Rule
 \iftitlerule\afterTitleSpace\hrule height 1.5\p@\afterRuleSpace\else\afterTitleSpace\fi
@@ -276,46 +278,47 @@
 %% they can be linked with an 'and'
 \fi
 % Author
-\if!\@author!\else{\bfseries\raggedright\printauthors\par}
+\if!\@author!\else{\bfseries\condcentering\raggedright\printauthors\par}
 \afterAuthorSpace\fi
 % Affiliation
 \ifaffil\begin{list}{}{%
 \setlength{\leftmargin}{0.28cm}%
+\setlength{\rightmargin}{0.28cm}%
 \setlength{\labelsep}{0pt}%
 \setlength{\itemsep}{\affiliationsSep}%
 \setlength{\topsep}{-\parskip}}
 \itshape\small%
-\the\affil@toks
+\condcentering\the\affil@toks
 \end{list}
 \afterAffiliationSpace\fi
 % E-mail
 \ifemailadd %% if emailadd is true
-\noindent\hspace{0.28cm}\begin{minipage}[l]{.9\textwidth}
-\begin{flushleft}
-\textit{E-mail:} \the\email@toks
-\end{flushleft}
+\noindent\begin{minipage}[l]{\textwidth}
+\condcentering
+\textit{E-mail~:} \the\email@toks
 \end{minipage}
 \fi
 \afterEmailSpace
-\if!\@date!\else\noindent{\itshape\@date}\afterAbstractSpace\fi
+
+{\condcentering\if!\@date!\else\itshape\@date\afterAbstractSpace\fi}
 %Erratum or addendum
 \if!\@xtum!\else\noindent{\@xtum}\afterXtumSpace\fi
 % Abstract
-\if!\@abstract!\else\noindent{\textsc{Abstract}}: \@abstract\afterAbstractSpace\fi
+\if!\@abstract!\else\noindent{\textsc{Abstract}}~: \@abstract\afterAbstractSpace\fi
 % Rapid update
-\if!\@rapidupdate!\else\noindent{\textsc{Rapid update}}: \@rapidupdate\afterAbstractSpace\fi
+\if!\@rapidupdate!\else\noindent{\textsc{Rapid update}}~: \@rapidupdate\afterAbstractSpace\fi
 % To-discuss
-\if!\@todiscuss!\else\noindent{\textsc{To discuss}}: \@todiscuss\afterAbstractSpace\fi
+\if!\@todiscuss!\else\noindent{\textsc{To discuss}}~: \@todiscuss\afterAbstractSpace\fi
 % To-do list
-\if!\@todolist!\else\noindent{\textsc{To-do list}}: \@todolist\afterAbstractSpace\fi
+\if!\@todolist!\else\noindent{\textsc{To-do list}}~: \@todolist\afterAbstractSpace\fi
 % Questions
-\if!\@questions!\else\noindent{\textsc{Questions}}: \@questions\afterAbstractSpace\fi
+\if!\@questions!\else\noindent{\textsc{Questions}}~: \@questions\afterAbstractSpace\fi
 % Keywords
-\if!\@keywords!\else\noindent{\textsc{Keywords}}: \@keywords\afterKeywordsSpace\fi
+\if!\@keywords!\else\noindent{\textsc{Keywords}}~: \@keywords\afterKeywordsSpace\fi
 % Extra
 \if!\@extra!\else\noindent\@extra\afterAbstractSpace\fi
 % Arxivnumber
-\if!\@arxivnumber!\else\noindent{\textsc{ArXiv ePrint}}: \href{http://arxiv.org/abs/\@arxivnumber}{\@arxivnumber}\afterArxivSpace\fi
+\if!\@arxivnumber!\else\noindent{\textsc{ArXiv ePrint}}~: \href{http://arxiv.org/abs/\@arxivnumber}{\@arxivnumber}\afterArxivSpace\fi
 % Dedication
 \if!\@dedicated!\else\vbox{\small\it\raggedleft\@dedicated}\afterDedicatedSpace\fi
 %
@@ -408,6 +411,8 @@
 \renewcommand{\theequation}{\thesection.\arabic{equation}}
 \numberwithin{equation}{section}
 
+\RequirePackage{titlesec}
+\titleformat{\part}[display]{\normalfont\bfseries\Large}{\normalsize\centering\scshape Part~\thepart}{0ex}{\centering}
 
 %headings style
 \renewcommand\section{\@startsection{section}{1}{\z@}%

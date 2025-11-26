@@ -6,8 +6,8 @@
 
 #### Version 1.2.1 (Under Construction)
 
-- Add flag to control whether SphereObs and AngModes increase or decrease angular momenta
-- Fix bugs
+- Add flag to control whether SphereObs and AngModes increase or decrease angular momenta.
+- Fix bugs.
 
 #### Version 1.2.0 (4 November, 2025)
 

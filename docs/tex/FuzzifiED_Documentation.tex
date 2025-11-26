@@ -36,7 +36,7 @@
 
 \title{FuzzifiED}
 \subtitle{Julia Package for Numerics on the Fuzzy Sphere}
-\date{16th November 2025}
+\date{1st December 2025}
 \author{Zheng Zhou 周正}
 \affiliation{Perimeter Institute for Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada}
 \affiliation{Department of Physics and Astronomy, University of Waterloo, Waterloo, Ontario N2L 3G1, Canada}
@@ -51,7 +51,7 @@
 
 \section{Purpose and Outline}
 
-Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3D CFTs~\cite{Zhu2022,Hu2023Mar,Han2023Jun,Zhou2023,Lao2023,Hu2023Aug,Hofmann2023,Han2023Dec,Zhou2024Jan,Hu2024,Cuomo2024,Zhou2024Jul,Dedushenko2024,Fardelli2024,Fan2024,Zhou2024Oct,Voinea2024,Yang2025Jan,Han2025,Laeuchli2025,Fan2025,ArguelloCruz2025,EliasMiro2025,He2025Jun,Taylor2025,Yang2025Jul,Zhou2025Jul,Dong2025,Zhou2025Sep,Voinea2025,Wiese2025,Dey2025}. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor~\cite{ITensor} library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features~:
+Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3D CFTs~\cite{Zhu2022,Hu2023Mar,Han2023Jun,Zhou2023,Lao2023,Hu2023Aug,Hofmann2023,Han2023Dec,Zhou2024Jan,Hu2024,Cuomo2024,Zhou2024Jul,Dedushenko2024,Fardelli2024,Fan2024,Zhou2024Oct,Voinea2024,Yang2025Jan,Han2025,Laeuchli2025,Fan2025,ArguelloCruz2025,EliasMiro2025,He2025Jun,Taylor2025,Yang2025Jul,Zhou2025Jul,Dong2025,Zhou2025Sep,Voinea2025,Wiese2025,Dey2025,Guo2025,Huffman2025}. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor~\cite{ITensor} library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features~:
 \begin{enumerate}
     \item Flexibility~: FuzzifiED can reproduce nearly all the ED and DMRG results from fuzzy sphere research. Its flexible design also makes it straightforward to adapt to new models.
     \item Usability~: The expressive Julia interface~\cite{Julia} simplifies coding and comprehension. To help users get started, we provide a collection of examples.
@@ -184,15 +184,27 @@ This work proposes a new approach to locate the phase-transition line from a fin
 
 \subsection{Realising Various 3D CFTs}
 
-The third direction is to study various other CFTs beyond 3D Ising. The fuzzy sphere has revealed lots of new information about these theories~; the previously known results are also consistent with the fuzzy sphere. So far, three classes of CFTs are widely studied on the fuzzy sphere
+The third direction is to study various other CFTs beyond 3D Ising. The fuzzy sphere has revealed lots of new information about these theories~; the previously known results are also consistent with the fuzzy sphere. So far, the accessible CFTs include the 3-state Potts model~\cite{Yang2025Jan}, the Yang-Lee non-unitary CFT~\cite{Fan2025,ArguelloCruz2025,EliasMiro2025} and three widely studied classes~:
 \begin{enumerate}
-    \item the free-scalar~\cite{He2025Jun,Taylor2025} and Wilson-Fisher CFTs realised as Heisenberg bilinear~\cite{Han2023Dec} and truncated quantum rotor model~\cite{Dey2025}, 
-    \item CFTs with $\Sp(N)$ global symmetry related to the non-linear $\sigma$ models (NLSM) with a Wess-Zumino-Witten topological term, including $\SO(5)$ deconfined criticality~\cite{Zhou2023} and $\rO(4)$ deconfined criticality~\cite{Yang2025Jul} through a symmetry-breaking perturbation, and a series of new theories with $\Sp(N)$ symmetry~\cite{Zhou2024Oct}, and
+    \item the free-scalar~\cite{He2025Jun,Taylor2025} and Wilson-Fisher CFTs realised as Heisenberg bilinear~\cite{Han2023Dec} and truncated quantum rotor model~\cite{Dey2025,Guo2025}, 
+    \item CFTs with $\Sp(N)$ global symmetry related to the non-linear $\sigma$ models (NLSM) with a Wess-Zumino-Witten topological term, including $\SO(5)$ deconfined criticality~\cite{Zhou2023} and $\rO(4)$ deconfined criticality~\cite{Yang2025Jul} through a symmetry-breaking perturbation, a series of new theories with $\Sp(N)$ symmetry~\cite{Zhou2024Oct}, and the multi-flavour $\SU(2)$ QCD~\cite{Huffman2025}.
+\end{enumerate}
+While the CFTs above are all built from quantum Hall ferromagnets at integer filling, another class is 
+\begin{enumerate}[resume]
     \item fractional quantum Hall transitions, which will be discussed in more detail in Section~\ref{sec:review_fqh}.
 \end{enumerate}
-Other accessible CFTs include the 3-state Potts model~\cite{Yang2025Jan} and the Yang-Lee non-unitary CFT~\cite{Fan2025,ArguelloCruz2025,EliasMiro2025}.
+
+\paragraph{The 3-state Potts model~\cite{Yang2025Jan}}
+
+The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\BZ$ is known as the number of states. In 2D, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs~\cite{Dotsenko1984Potts}, while $Q>Q_c$ are first order. Specifically, 2D 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity~\cite{Tang2024Potts} in a similar manner with the conjectured $\SO(5)$ DQCP. In 3D, the 3-state Potts model is found to be first-order~\cite{Barkema1991Potts,Chester2022Potts}. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry among flavours. The interacting Hamiltonian resembles the Ising model. Interestingly, Yang \textit{et al.}~find out that the transition point of the 3D 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite-size effect.
+
+\paragraph{Yang-Lee non-unitary CFT~\cite{Fan2025,ArguelloCruz2025,EliasMiro2025}} 
+
+The Yang-Lee singularity~\cite{Yang1952Singularity,Lee1952Singularity,Cardy2023Singularity} is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2D Yang-Lee theory is described by $M(2,5)$ minimal model and 3D Yang-Lee CFT can be solved perturbatively up to five-loops, Fan \textit{et~al.}, Arguello Cruz \textit{et~al.}, and Elias Miro \textit{et~al.}~present the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
 
 \subsubsection{Free-Scalar and Wilson-Fisher CFTs}
+
+The $\rO(N)$ vector model is arguably the most well studied theory that describes the critical behaviours. It can be formulated as a quantum field theory (QFT) of $N$ interacting scalar fields. This QFT has an ultra-violet fixed point of $N$ free scalars. A quartic interaction term induces a RG flow to the infra-red fixed point described by the Wilson-Fisher (WF) CFT~\cite{Wilson1971WF,Sachdev2011Quantum,Cardy1996Scaling}. It describes a transition between an ordered phase with $\rO(N)$ spontaneous symmetry breaking and an $\rO(N)$-symmetric disordered phase. This theory has been extensively studied using perturbative calculations, quantum Monte Carlo and conformal bootstrap. The $\rO(2)$ WF has been experimentally measured with high precision in the normal-superfluid transition of Helium-4~\cite{Lipa2003SF}. Its fuzzy-sphere realisation paves the way for studying operators with certain quantum numbers, multi-scalar CFTs, defects and boundaries, \textit{etc.}
 
 \paragraph{The free scalar CFT~\cite{He2025Jun,Taylor2025}}
 
@@ -200,21 +212,32 @@ This work introduces a simple model to realise the free real scalar CFT on the f
 
 \paragraph{The bilayer Heisenberg transition~\cite{Han2023Dec}}
 
-The $\rO(N)$ Wilson-Fisher (WF) theories are probably one of the most studied theories for 3D criticalities with a wide range of applications~\cite{Wilson1971WF,Sachdev2011Quantum,Cardy1996Scaling}. Specifically, this work studies the $\rO(3)$ WF CFT on the set-up of a bilayer Heisenberg model. The construction involves two copies of $\SU(2)$ ferromagnet with altogether four flavours. Briefly speaking, the model contains two competing terms~: (1) a $\SU(2)$ ferromagnetic interaction which favours a Heisenberg ferromagnetic phase where each of the two copies is half-filled and the symmetry-breaking order parameter lives on a $S^2$ manifold, (2) a polarising term which favours one of the two copies being completely filled, corresponding to a Heisenberg paramagnet. The transition between these two phases falls into the $\rO(3)$ Wilson-Fisher universality. Through the energy spectrum at the transition, Han \textit{et al.}~provide evidence that $\rO(3)$ Wilson-Fisher fixed point exhibits conformal symmetry, as well as revealing a wealth of information about the CFT, \textit{e.~g.}~the instability to cubic anisotropy. They also calculate several OPE coefficients.
+This work studies the $\rO(3)$ WF CFT on the set-up of a bilayer Heisenberg model. The construction involves two copies of $\SU(2)$ ferromagnet with altogether four flavours. Briefly speaking, the model contains two competing terms~: (1) a $\SU(2)$ ferromagnetic interaction which favours a Heisenberg ferromagnetic phase where each of the two copies is half-filled and the symmetry-breaking order parameter lives on a $S^2$ manifold, (2) a polarising term which favours one of the two copies being completely filled, corresponding to a Heisenberg paramagnet. The transition between these two phases falls into the $\rO(3)$ Wilson-Fisher universality. Through the energy spectrum at the transition, Han \textit{et al.}~provide evidence that $\rO(3)$ Wilson-Fisher fixed point exhibits conformal symmetry, as well as revealing a wealth of information about the CFT, \textit{e.~g.}~the instability to cubic anisotropy. They also calculate several OPE coefficients.
 
-\paragraph{The $\rO(N)$ Wilson-Fisher CFT~\cite{Dey2025}}
+\paragraph{The general model for $\rO(N)$ free-scalar and Wilson-Fisher CFTs~\cite{Guo2025}}
 
-Although an instance --- the $\rO(3)$ WF --- has been realised in the Heisenberg bilayer, seeking a general realisation of $\rO(N)$ WF theories on the fuzzy sphere is helpful as a foundation to study the interacting scalar theories as well as conformal defects and boundaries. This work proposes such a construction analogous to a truncated rotor model. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\rO(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\rO(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\rO(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour.
+This work proposes a general model that realises the $\rO(N)$ free-scalar and Wilson-Fisher CFTs. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\rO(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\rO(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian for the WF CFT contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\rO(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour. Turning to the $\rO(N)$ free-scalar theory, it corresponds to a pseudo-Goldstone phase of a $\mathrm{PO}(N)$ SSB.
 
-Dey \textit{et al.}~study the $N=3$ instance using ED and DMRG. They locate the critical point using the conformal perturbation. They obtain scaling dimensions from finite-size spectra and operator product expansion coefficients through conformal perturbation. The results are benchmarked against conformal bootstrap and perturbative calculations.
+Guo \textit{et al.}~provide numrical evidence for $N=2,3,4$ such as the operator spectra and two-point conformal correlators. They discuss several quantities that may not have a direct CFT interpretation, but imply that the CFTs become to some extent semi-classical once regularised on the fuzzy sphere. 
+
+\paragraph{The detailed study of the $\rO(3)$ Wilson-Fisher CFT~\cite{Dey2025}}
+
+This work focuses on the $\rO(3)$ WF and fomulate the four-flavour model as a truncated rotor model. Dey \textit{et al.}~study the model numerically using ED and DMRG. They locate the critical point through a careful conformal perturbation analysis. They obtain scaling dimensions from finite-size spectra and OPE coefficients through conformal perturbation. The results are benchmarked with conformal bootstrap and perturbative calculations.
 
 \subsubsection{NLSM-WZW with Symplectic Symmetry}
+\newcommand{\rG}{\mathrm{G}}
+
+One route to realise many CFTs is through the non-linear sigma model (NLSM) with a Wess-Zumino-Witten (WZW) term. The NLSM on a Grassmannian 
+\begin{equation*}
+    \frac{\rG(N)}{\rG(M)\times\rG(N-M)},\qquad\rG(N)=\Sp(\tfrac{N}{2}),\rO(N),\rU(N),\dots
+\end{equation*}
+captures a symmetry breaking pattern of fully fill $M$ out of $N$ flavours of fermions with a global symmetry $\rG(N)$. The NLSM often allows a topological WZW term with a quantised level. On the Landau level, a WZW term naturally appear~\cite{Lee2014WZW,Huffman2025}. While the 3D NLSM in its renormalisable region can only flow to the SSB phase, the symmetry and anomaly of the NLSM-WZW can be matched with critical gauge theories with critical scalars or fermions coupled to a dynamic gauge field~\cite{Komargodski2017QCD}. These gauge theories can either serve as the UV completion of the NLSM, or has the same UV completion with the NLSM. The simplest one to construct on the fuzzy sphere are the NLSM on the symplectic Grassmannian (\textit{i.~e.}~with $\rG(N)=\Sp(\tfrac{N}{2})$) with a level-1 WZW term.\footnote{The construction for $\rU$ or $\rO$ faces the difficulty that their centres $\rU(1)$ or $\BZ_2$, as the electric charge conservation or its subgroup, must be decoupled~; the construction for $\SU$ or $\SO$ faces the difficulty in realising the topological $\rU(1)$ or $\BZ_2$ symmetry.} They can be constructed by considering $N$ flavours of fermions and break the flavour symmetry to $\Sp(\tfrac{N}{2})$. This construction can be used to realise various 3D QCDs. 
 
 \paragraph{The $\SO(5)$ deconfined criticality~\cite{Zhou2023}}
 
-The first theory besides Ising CFT to which fuzzy sphere is applied is the $\SO(5)$ deconfined quantum critical point (DQCP). Deconfined quantum critical point (DQCP) is one of the pioneering examples of phase transitions beyond Landau paradigm~\cite{Senthil2003DQCP,Senthil2004DQCP,Senthil2023DQCP}. It has led to numerous theoretical surprises, including the emergent $\SO(5)$ symmetry~\cite{Nahum2015DQCP} and the duality between interacting theories~\cite{Wang2017DQCP}. Despite extensive studies over the past two decades, its nature remains controversial. Numerical simulations have shown no signal of discontinuity, but abnormal scaling behaviours have been observed~\cite{Senthil2023DQCP}. A plausible proposal to reconcile the tension is that DQCP is pseudocritical, \textit{i.~e.}~a weakly first-order phase transition that has approximate critical behaviour, and is controlled by a pair of complex fixed points very close to the pseudocritical region~\cite{Wang2017DQCP,Gorbenko2018Complex}.
+Deconfined quantum critical point (DQCP) is one of the pioneering examples of phase transitions beyond Landau paradigm~\cite{Senthil2003DQCP,Senthil2004DQCP,Senthil2023DQCP}. It has led to numerous theoretical surprises, including the emergent $\SO(5)$ symmetry~\cite{Nahum2015DQCP} and the duality between interacting theories~\cite{Wang2017DQCP}. Despite extensive studies over the past two decades, its nature remains controversial. Numerical simulations have shown no signal of discontinuity, but abnormal scaling behaviours have been observed~\cite{Senthil2023DQCP}. A plausible proposal to reconcile the tension is that DQCP is pseudocritical, \textit{i.~e.}~a weakly first-order phase transition that has approximate critical behaviour, and is controlled by a pair of complex fixed points very close to the pseudocritical region~\cite{Wang2017DQCP,Gorbenko2018Complex}.
 
-The DQCP can be conveniently studied on the fuzzy sphere by constructing a non-linear sigma model (NLSM) on target space $S^4$ with a level-1 topological Wess-Zumino-Witten (WZW) term, which serves as a dual description of the DQCP with an exact $\SO(5)$ symmetry~\cite{Nahum2015DQCP,Wang2017DQCP}. The idea is to construct a 4-flavour model with symmetry $\Sp(2)/\BZ_2=\SO(5)$ ($\BZ_2$ means to gauge the pseudoreal representations). At half-filling, it can be described by a NLSM on the Grassmannian $\tfrac{\Sp(2)}{\Sp(1)\times\Sp(1)}\cong S^4$ and the WZW level can be matched~\cite{Lee2014WZW,Ippoliti2018DQCP,Wang2020DQCP}. This work provides evidence that the DQCP exhibits approximate conformal symmetry. Zhou \textit{et al.}~have identified 19 conformal primaries and their 82 descendants. Furthermore, by examining the renormalisation group flow of the lowest symmetry singlet, they demonstrate that the DQCP is more likely pseudocritical, with the approximate conformal symmetry plausibly emerging from nearby complex fixed points. Several works~\cite{Chen2023WZW,Chen2024WZW} appear later to follow up.
+The DQCP can be conveniently studied on the fuzzy sphere by constructing a NLSM on $S^4$ with WZW level-1, which serves as a dual description of the DQCP with an exact $\SO(5)$ symmetry~\cite{Nahum2015DQCP,Wang2017DQCP}. The idea is to construct a 4-flavour model with symmetry $\Sp(2)/\BZ_2=\SO(5)$ ($\BZ_2$ means to gauge the pseudoreal representations). At half-filling, it can be described by a NLSM on the Grassmannian $\tfrac{\Sp(2)}{\Sp(1)\times\Sp(1)}\cong S^4$ and the WZW level can be matched~\cite{Ippoliti2018DQCP,Wang2020DQCP}. This work provides evidence that the DQCP exhibits approximate conformal symmetry. Zhou \textit{et al.}~have identified 19 conformal primaries and their 82 descendants. Furthermore, by examining the renormalisation group flow of the lowest symmetry singlet, they demonstrate that the DQCP is more likely pseudocritical, with the approximate conformal symmetry plausibly emerging from nearby complex fixed points. Several works~\cite{Chen2023WZW,Chen2024WZW} appear later to follow up.
 
 \paragraph{The $\rO(4)$ deconfined criticality~\cite{Yang2025Jul}}
 
@@ -228,20 +251,18 @@ The quest to discover new 3D CFTs has been intriguing for physicists. A virgin l
 \end{equation}
 Several candidate Chern-Simons-matter theories are known to exist on its phase diagram with $N$ flavour of gapless bosons or fermions coupled to a non-Abelian (\textit{viz.}~$\Sp(1)$, $\Sp(2)$, \textit{etc.}) Chern-Simons gauge field~\cite{Komargodski2017QCD}. On the fuzzy sphere, this WZW-NLSM can be realised by a $2N$ layer model with $\Sp(N)$ flavour symmetry, and $2M$ out of the $2N$ layers are filled. Zhou \textit{et al.}~numerically verify the emergent conformal symmetry by observing the integer-spaced conformal multiplets and studying the finite-size scaling of the conformality.
 
-\subsubsection{Other CFTs on the Fuzzy Sphere}
+\paragraph{Multi-flavour $\SU(2)$ QCD~\cite{Huffman2025}}
 
-\paragraph{The 3-state Potts model~\cite{Yang2025Jan}}
+The conformal window is an outstanding problem for 3D gauge theories. For a given gauge field, when the number of flavours coupled to it exceeds some critical value $N>N_c$, the field theory flows to a conformal fixed point~; otherwise the gauge field is confined and the field theory flows to SSB. The conformal windows of QED\textsubscript{3} and $\SU(2)$ QCD\textsubscript{3} are directly related to the nature of deconfined criticality and the Dirac spin liquid. However, results beyond perturbative calculations for certain gauge groups are still hard to access.
 
-The Potts models describe transitions that spontaneously break $S_Q$ symmetries where $Q\in\BZ$ is known as the number of states. In 2D, the transitions with $Q\leq Q_c=4$ are continuous and captured by CFTs~\cite{Dotsenko1984Potts}, while $Q>Q_c$ are first order. Specifically, 2D 5-state Potts transition is pseudocritical and described by a pair of complex CFTs in its vicinity~\cite{Tang2024Potts} in a similar manner with the conjectured $\SO(5)$ DQCP. In 3D, the 3-state Potts model is found to be first-order~\cite{Barkema1991Potts,Chester2022Potts}. This work constructs a 3-flavour model on the fuzzy sphere with $S_3$ permutation symmetry among flavours. The interacting Hamiltonian resembles the Ising model. Interestingly, Yang \textit{et al.}~find out that the transition point of the 3D 3-state Potts model, despite being probably first-order, exhibits approximate conformal symmetry, indicating that there might be an underlying CFT describing it. However, it is difficult to determine the nature of the transition from the operator spectrum (specifically, from the relevance of the second singlet $\epsilon'$) due to the complicated finite-size effect.
+On the fuzzy sphere, the $\SU(2)$ QCD\textsubscript{3} with $N$ flavours of fermions can be realised with the $\Sp(N)$ model at half-filling $M=N/2$. The model is free of sign problem and thus accessible through quantum Monte Carlo. Notably, $N$ is treated as a parameter instead of the number of fermions simulated, so the calculation can reach arbitrarily large number of flavours. 
 
-\paragraph{Yang-Lee non-unitary CFT~\cite{Fan2025,ArguelloCruz2025,EliasMiro2025}} 
-
-The Yang-Lee singularity~\cite{Yang1952Singularity,Lee1952Singularity,Cardy2023Singularity} is one of the simplest non-unitary CFTs. It is a natural extension of the Ising CFT triggered by the $i\sigma$ deformation, and plays an important role in understanding order-disorder transformation. While the 2D Yang-Lee theory is described by $M(2,5)$ minimal model and 3D Yang-Lee CFT can be solved perturbatively up to five-loops, Fan \textit{et~al.}, Arguello Cruz \textit{et~al.}, and Elias Miro \textit{et~al.}~presents the non-perturbative results of the Yang-Lee CFT on the fuzzy sphere. They have studied the operator spectrum, the OPE coefficients, and the RG flow from the Ising CFT to the Yang-Lee CFT. They have also shown how the finite-size effects can be controlled by finite-size scaling and conformal perturbation.
+This work finds that the phase diagram at $N\geq 4$ has a stable conformal fixed point corresponding to the QCD\textsubscript{3} through examining the RG flow. Huffmann \textit{et al.}~extracts the various scaling dimensions from the equal-time and imaginary-time two-point correlation functions and finds agreement with conformal symmetry and large-$N$ expansion result.
 
 \subsection{Exploring Fractional Quantum Hall Transitions}
 \label{sec:review_fqh}
 
-The lowest Landau level at fractional filling realises various topological orders (TO) with long-range entanglement and anyon excitations. \textit{E.~g.}, the Laughlin states~\cite{Laughlin1983Anomalous} with filling $\nu=1/k$ realise the Abelian topological orders captured by Chern-Simons theories $\rU(1)_{-k}$, the Jain sequence~\cite{Jain1989Composite} with $\nu=p/(mp+1)$ realises the Abelian topological orders with composite fermion descriptions, and the Read-Rezayi sequence with $\nu=p/(mp+2)$~\cite{Read1998Rezayi}, as a natural extension of the Moore-Read states~\cite{Moore1991Pfaffian}, realises in general a series of non-Abelian topological orders. 
+The models above are all built from quantum Hall ferromagnets at integer filling. Specifically, in the absence of the interaction, an integer number of the lowest Landau levels are fully occupied. The lowest Landau level at fractional filling realises various topological orders (TO) with long-range entanglement and anyon excitations. \textit{E.~g.}, the Laughlin states~\cite{Laughlin1983Anomalous} with filling $\nu=1/k$ realise the Abelian topological orders captured by Chern-Simons theories $\rU(1)_{-k}$, the Jain sequence~\cite{Jain1989Composite} with $\nu=p/(mp+1)$ realises the Abelian topological orders with composite fermion descriptions, and the Read-Rezayi sequence with $\nu=p/(mp+2)$~\cite{Read1998Rezayi}, as a natural extension of the Moore-Read states~\cite{Moore1991Pfaffian}, realises in general a series of non-Abelian topological orders. These states have finite charge gaps as well that guarantees that the gapless spin degree of freedom can decouple from the strongly non-commutative charge degree of freedom.
 
 The fuzzy sphere provides a suitable platforms to study the transitions between or out of these fractional quantum Hall (FQH) states. Theoretically, these transitions are often described by Chern-Simons theories coupled to matter, many of which are conjectured to be conformal with enhanced symmetries and field theory dualities~\cite{Dasgupta1981Duality,Metlitski2015Duality,Seiberg2016Duality}. Experimentally, the Moir\'e materials~\cite{Cai2023Moire,Zeng2023Moire,Park2023Moire} provide an exciting opportunity to study these transitions. The critical points can be conveniently reached by tuning many knobs like potential amplitude.
 
@@ -249,9 +270,7 @@ The exploration starts at realising the Ising CFT on the background of a FQHE st
 
 \paragraph{Ising CFT from FQHE state~\cite{Voinea2024}}
 
-Until this work, all the constructions of CFTs on the fuzzy sphere were based on the quantum Hall ferromagnet. Specifically, in the absence of the interaction, an integer number of the lowest Landau levels are fully occupied. This state has a finite charge gap that guarantees that the gapless spin degree of freedom does not strongly couple with the charge degree of freedom when one adds the interactions.
-
-Voinea \textit{et al.}~further explore the possibility of constructing CFTs on other states with charge gap --- in particular, the Haldane-Laughlin states that capture the fractional quantum Hall effect (FQHE)~\cite{Haldane1983LLL,Laughlin1983FQHE}. Specifically, they study the fermionic LLL at fillings of $\nu=1/3$ and $1/5$. The model Hamiltonian contains (1) a dominant projection term that puts the ground state on the Haldane-Laughlin state, and (2) an interaction term as a perturbation that drives the Ising-type phase transition. They show that the energy spectra at the critical point exhibit conformal symmetry. Notably, they also make the construction with respect to the bosonic LLL at a filling of $\nu=1/2$.
+Voinea \textit{et al.}~explore the possibility of constructing CFTs on the Haldane-Laughlin states that capture the fractional quantum Hall effect (FQHE)~\cite{Haldane1983LLL,Laughlin1983FQHE}. Specifically, they study the fermionic LLL at fillings of $\nu=1/3$ and $1/5$. The model Hamiltonian contains (1) a dominant projection term that puts the ground state on the Haldane-Laughlin state, and (2) an interaction term as a perturbation that drives the Ising-type phase transition. They show that the energy spectra at the critical point exhibit conformal symmetry. Notably, they also make the construction with respect to the bosonic LLL at a filling of $\nu=1/2$.
 
 \paragraph{The confinement transition of $\nu=1/2$ bosonic Laughlin state~\cite{Zhou2025Jul}}
 
@@ -263,7 +282,7 @@ Zhou \textit{et al.}~realise this theory on a set-up with fermion-boson mixture 
 
 The CFTs realised on the fuzzy sphere until this work contains only bosonic CFT operators. The microscopic fermions on the fuzzy sphere have strong non-commutativity, transform under projective representations of the sphere rotation symmetry, and thus cannot flow to CFT operators. This work overcomes this challenge by constructing a boson-fermion mixed setup with both microscopic bosons $b$ and fermions $f$ with the same electric charge and let their angular momenta differ by $1/2$. Their bilinears $b^\dagger f$ or $f^\dagger b$ can be used to realise fermionic local operators in a CFTs.
 
-Zhou \textit{et al.}~allow conversion between two bosons and two fermions and set the total filling $\nu=1$. On the phase diagram, there are three gapped phases, \textit{viz.}~a fermionic integer quantum Hall phase, an $f$-wave chiral topological superconductor, and a bosonic Pfaffian phase~\cite{Moore1991Pfaffian}. They are separated by two continuous transitions described respectively by a massless free Majorana fermion and a gauged Ising CFT. 
+Zhou \textit{et al.}~allow conversion between two bosons and two fermions and set the total filling $\nu=1$. On the phase diagram, there are three gapped phases, \textit{viz.}~a fermionic integer quantum Hall phase, an $f$-wave chiral topological superconductor, and a bosonic Pfaffian phase~\cite{Moore1991Pfaffian}. They are separated by two continuous transitions described respectively by a massless free Majorana fermion and a gauged Ising CFT. Notably, the Hamiltonian that realises the free Majorana fermion is analogous with the field theory Hamiltonian in addition to a density-density interaction.
 
 \paragraph{The transition between bosonic Pfaffian and Halperin 220~\cite{Voinea2025}}
 
@@ -381,7 +400,7 @@ Conversely,
 \begin{align}
     n_{M,lm}&=\frac{1}{R^2}\int\rd^2\br\,\Yb_{lm}(\bnh)n_M(\br)\nonumber\\
     &=\int\rd^2\bnh\,\Yb_{lm}(\bnh)\left(\frac{1}{R}\sum_{m_1}Y^{(s)}_{sm_1}(\bnh)c^\dagger_{m_1f_1}\right)M_{f_1f_2}\left(\frac{1}{R}\sum_{m_2}\Yb^{(s)}_{sm_2}(\bnh)c_{m_1f_2}\right)\nonumber\\
-    &=\sum_{m_1m_2}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m_1f_2}\int\rd^2\bnh\,\Yb_{lm}(\bnh)Y^{(s)}_{sm_1}(\bnh)\Yb^{(s)}_{sm_2}(\bnh)\nonumber\\
+    &=\frac{1}{R^2}\sum_{m_1m_2}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m_1f_2}\int\rd^2\bnh\,\Yb_{lm}(\bnh)Y^{(s)}_{sm_1}(\bnh)\Yb^{(s)}_{sm_2}(\bnh)\nonumber\\
     &=\frac{1}{R^2}\sum_{m_1}c^\dagger_{m_1f_1}M_{f_1f_2}c_{m-m_1,f_2}\times\nonumber\\
     &\qquad\qquad(-1)^{s+2m-m_1}(2s+1)\sqrt{\frac{2l+1}{4\pi}}\begin{pmatrix}l&s&s\\-m&m_1&-m_1+m\end{pmatrix}\begin{pmatrix}l&s&s\\0&-s&s\end{pmatrix}.
     \label{eq:den_mod}
@@ -399,7 +418,7 @@ where $\left(\begin{smallmatrix}\bullet&\bullet&\bullet\\\bullet&\bullet&\bullet
 \subsection{Density-Density Interaction}
 \label{sec:construct_denint}
 
-The most straightforward way to construct an interaction term is to add a density-density interaction with a potential function\footnote{This is, however, not the simplest construction and we will present the simpler construction in terms of pseudopotentials in the next section.}
+The most straightforward way to construct an interaction term is to add a density-density interaction with a potential function\footnote{Computationally, this is not the simplest construction and we will present the simpler construction in terms of pseudopotentials in the next section.}
 \begin{equation}
     H_\Int=\int\rd^2\br_1\,\rd^2\br_2\,U(|\br_1-\br_2|)n_M(\br_1)n_M(\br_2).
 \end{equation}
@@ -407,7 +426,7 @@ The interacting potentials can be expanded in terms of the Legendre polynomials
 \begin{equation}
     U(|\br_{12}|)=\sum_l\tilde{U}_lP_l(\cos\theta_{12})=\sum_{lm}\frac{4\pi\tilde{U}_l}{2l+1}\Yb_{lm}(\bnh_1)Y_{lm}(\bnh_2),
 \end{equation}
-where $\br_{12}=\br_1-\br_2$ and $|\br_{12}|=2R\sin\theta_{12}/2$. Conversely
+where the cordial distance $\br_{12}=\br_1-\br_2$ and $|\br_{12}|=2R\sin\theta_{12}/2$. Conversely
 \begin{equation}
     \tilde{U}_l=\int\sin\theta_{12}\rd\theta_{12}\,\frac{2l+1}{2}U(|\br_{12}|)P_l(\cos\theta_{12}).
 \end{equation}
@@ -447,7 +466,7 @@ By tuning the ratio between $h$ and $U(|\br_{12}|)$, a phase transition describe
 \subsection{Interaction in Terms of Pseudopotentials}
 \label{sec:construct_pspot}
 
-Another way that is much more convenient to construct the four-fermion interaction terms is through Haldane pseudopotential~\cite{Haldane1983LLL,Trugman1985Pseudo}. To explain the idea, we take the 3D Ising model as an example. We first classify all the fermion bilinears $\lambda_{m_1f_1m_2f_2}c_{m_1f_1}c_{m_2f_2}$. To simplify the discussion, we can take a specific flavour index $\lambda_{m_1m_2}c_{m_1\uparrow}c_{m_2\downarrow}$. The fermion bilinears can be classified into irreducible representations (irreps) of $\SO(3)$ rotation symmetry. Since $c_{mf}$ carries the spin-$s$ representation, the spin of its bilinear ranges from $0$ to $2s$ and takes integer values. The spin-$(2s-l)$ combination reads
+Another way that is computationally much more convenient to construct the four-fermion interaction terms is through Haldane pseudopotential~\cite{Haldane1983LLL,Trugman1985Pseudo}. To explain the idea, we take the 3D Ising model as an example. We first classify all the fermion bilinears $\lambda_{m_1f_1m_2f_2}c_{m_1f_1}c_{m_2f_2}$. To simplify the discussion, we can take a specific flavour index $\lambda_{m_1m_2}c_{m_1\uparrow}c_{m_2\downarrow}$. The fermion bilinears can be classified into irreducible representations (irreps) of $\SO(3)$ rotation symmetry. Since $c_{mf}$ carries the spin-$s$ representation, the spin of its bilinear ranges from $0$ to $2s$ and takes integer values. The spin-$(2s-l)$ combination reads
 \begin{equation}
     \Delta_{lm}=\sum_{m_1}\langle sm_1,s(m-m_1)|(2s-l)m\rangle c_{m_1\uparrow}c_{m-m_1\downarrow},
     \label{eq:ising_pair}
@@ -539,9 +558,9 @@ where $E_0$ is the ground state energy, $R$ is the radius of the sphere (here we
     \begin{equation*}
         \Delta=\Delta_\Phi+2n+l,
     \end{equation*}
-    where $\Box=\partial_\mu\partial^\nu$. For a spinning primary $\Phi^{\mu_1\dots\mu_s}$, its descendants has the two forms~:
+    where $\Box=\partial_\mu\partial^\mu$. For a spinning primary $\Phi^{\mu_1\dots\mu_s}$, its descendants has the two forms~:
     \begin{equation*}
-        \Box^n\partial^{\nu_1}\dots\partial^{\nu_m}\partial_{\rho_1}\dots\partial_{\rho_k}\Phi^{\rho_1\dots\rho_{k}\mu_1\dots \mu_{s-k}}\qquad (k=0,\dots,s,\ n,m=0,1,\dots)
+        \Box^n\partial^{\nu_1}\dots\partial^{\nu_m}\partial_{\rho_1}\dots\partial_{\rho_k}\Phi^{\rho_1\dots\rho_{k}\mu_1\dots \mu_{s-k}}\qquad (k=0,\dots,s,\quad n,m=0,1,\dots)
     \end{equation*}
     with scaling dimension and $\SO(3)$ spin
     \begin{equation*}
@@ -549,7 +568,7 @@ where $E_0$ is the ground state energy, $R$ is the radius of the sphere (here we
     \end{equation*}
     and
     \begin{equation*}
-        \Box^n\partial^{\nu_1}\dots\partial^{\nu_m}\partial_{\rho_1}\dots\partial_{\rho_k}\epsilon^{\sigma}{}_{\tilde{\mu}\tilde{\nu}}\partial^{\tilde{\nu}}\Phi^{\rho_1\dots\rho_{k}\tilde{\mu}\mu_1\dots \mu_{s-k-1}}\qquad (k=0,\dots,s-1,\ n,m=0,1,\dots)
+        \Box^n\partial^{\nu_1}\dots\partial^{\nu_m}\partial_{\rho_1}\dots\partial_{\rho_k}\epsilon^{\sigma}{}_{\tilde{\mu}\tilde{\nu}}\partial^{\tilde{\nu}}\Phi^{\rho_1\dots\rho_{k}\tilde{\mu}\mu_1\dots \mu_{s-k-1}}\qquad (k=0,\dots,s-1,\quad n,m=0,1,\dots)
     \end{equation*}
     with
     \begin{equation*}
@@ -1564,16 +1583,18 @@ FuzzifiED can help reproduce almost all the ED and DMRG results in fuzzy sphere 
     \item \linkexample{free\_majorana\_spectrum.jl} calculates the spectrum of free Majorana fermion. This example reproduces Figure 5 in Ref.~\cite{Zhou2025Sep}.
     \item \linkexample{free\_majorana\_correlator.jl} calculates the 2-pt correlator of free Majorana fermion. This example reproduces Figure 7 in Ref.~\cite{Zhou2025Sep}.
     \item \linkexample{bpf\_220\_spectrum.jl} calculates the spectrum of the transition between bosonic Pfaffian and Halperin 220 described by gauged Majorana fermion CFT. This example reproduces Figure 4a in Ref.~\cite{Voinea2025}.
-    \item \linkexample{o2\_free\_spectrum.jl} calculates the spectrum of $\rO(2)$ free scalar CFT.
-    \item \linkexample{o2\_wf\_spectrum.jl} calculates the spectrum of $\rO(2)$ Wilson-Fisher scalar CFT.
-    \item \linkexample{o3\_wf\_spectrum.jl} calculates the spectrum of $\rO(3)$ Wilson-Fisher scalar CFT.
+    \item \linkexample{o3\_wf\_spectrum.jl} calculates the spectrum of $\rO(3)$ Wilson-Fisher CFT. This example takes the model from Ref.~\cite{Dey2025} and reproduces partly Tables I and II, Figures 1 and 2.
+    \item \linkexample{o2\_wf\_spectrum.jl} calculates the spectrum of $\rO(2)$ Wilson-Fisher CFT. This example reproduces Figure 3, upper panel in Ref.~\cite{Guo2025}.
+    \item \linkexample{o2\_free\_spectrum.jl} calculates the spectrum of $\rO(2)$ free scalar CFT. This example reproduces Figure 4, upper-left panel in Ref.~\cite{Guo2025}.
+    \item \linkexample{o4\_wf\_spectrum.jl} calculates the spectrum of $\rO(4)$ Wilson-Fisher CFT and demonstrates the general set-up for O(N) vector models. This example reproduces Figure 3, lower panel in Ref.~\cite{Guo2025}.
     \item \linkexample{ising\_spectrum\_krylov.jl} calculates the spectrum of the 3D Ising model on the fuzzy sphere by calling the \lstinline|eigsolve| function in \lstinline|KrylovKit.jl| instead of Arpack.
     \item \linkexample{ising\_spectrum\_cuda.jl} calculates the spectrum of the 3D Ising model on the fuzzy sphere for one sector by performing the sparse matrix multiplication on CUDA.
 \end{enumerate}
 
+\clearpage
 \acknowledgments
 
-We extend our deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Liangdong Hu, Wenhan Guo, Andrew Liam Fitzpatrick, Christian Voinea, Xiang Li, Shuai Yang, and Wei Zhu for their suggestions and contributions to the package.
+We extend our deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Andrew Liam Fitzpatrick, Wenhan Guo, Liangdong Hu, Xiang Li, Christian Voinea, Kay J\"org Wiese, Shuai Yang, and Wei Zhu for their suggestions and contributions to the package.
 
 Z.~Z.~acknowledges support from the Natural Sciences and Engineering Research Council of Canada (NSERC) through Discovery Grants. Research at Perimeter Institute is supported in part by the Government of Canada through the Department of Innovation, Science and Industry Canada and by the Province of Ontario through the Ministry of Colleges and Universities.
 

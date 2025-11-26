@@ -98,7 +98,7 @@ This function automatically performs several rounds of DMRG sweeps with increasi
 * `hmt :: MPO` is an MPO specifying the Hamiltonian.
 * `st00 :: MPS` is an MPS specifying the initial state. 
 * `path :: String` identifies the path where the results will be accessed and stored. Facultative, `./` by default. 
-* `dim_list :: Vector{Int64} :: Int64` is a list that specifies the maximal bond dimensions of each round of sweeps starting from the second round. Facultative, `[1000,2000,3000,4000,5000,6000]` by default
+* `dim_list :: Vector{Int64}` is a list that specifies the maximal bond dimensions of each round of sweeps starting from the second round. Facultative, `[1000,2000,3000,4000,5000,6000]` by default
 * `proj :: Vector{String}` specifies the name of the states that will be projected. Facultative, empty by default. 
 * `e_tol1 :: Float64` specifies the energy tolerence as a criteria to end the round of sweeps for each round of sweeps. Facultative, `1E-6` by default. 
 * `e_tol :: Float64` specifies the energy tolerence as a criteria to end the entire process. Facultative, `1E-7` by default. 
