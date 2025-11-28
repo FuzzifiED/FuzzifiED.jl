@@ -412,21 +412,42 @@
 \numberwithin{equation}{section}
 
 \RequirePackage{titlesec}
-\titleformat{\part}[display]{\normalfont\bfseries\Large}{\normalsize\centering\scshape Part~\thepart}{0ex}{\centering}
+\titleformat{\part}[display]
+    {\normalfont\bfseries\Large}
+    {\normalsize\centering\mdseries Part~\thepart.}
+    {0ex}
+    {\centering}
+\titleformat{\section}
+    {\normalfont\large\bfseries\centering}
+    {\thesection.}
+    {1em}
+    {}
+\titlespacing{\section}
+    {0pt}
+    {3.5ex plus 1.3ex minus .7ex}
+    {2.3ex plus .4ex minus .4ex}
+\titleformat{\subsection}
+    {\normalfont\normalsize\bfseries\centering}
+    {\thesubsection.}
+    {1em}
+    {}
+\titlespacing{\subsection}
+    {0pt}
+    {2.3ex \@plus 1ex \@minus .5ex}
+    {1.2ex \@plus .3ex \@minus .3ex}
+\titleformat{\subsubsection}
+    {\normalfont\normalsize\bfseries\centering}
+    {\thesubsubsection.}
+    {1em}
+    {}
+\titlespacing{\subsubsection}
+    {0pt}
+    {2.3ex \@plus 1ex \@minus .5ex}
+    {1ex \@plus .2ex \@minus .2ex}
+
+\renewcommand{\numberline}[1]{#1.\hspace{1ex}}
 
 %headings style
-\renewcommand\section{\@startsection{section}{1}{\z@}%
-                                   {-3.5ex \@plus -1.3ex \@minus -.7ex}%
-                                   {2.3ex \@plus.4ex \@minus .4ex}%
-                                   {\normalfont\large\bfseries}}
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-                                   {-2.3ex\@plus -1ex \@minus -.5ex}%
-                                   {1.2ex \@plus .3ex \@minus .3ex}%
-                                   {\normalfont\normalsize\bfseries}}
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-                                   {-2.3ex\@plus -1ex \@minus -.5ex}%
-                                   {1ex \@plus .2ex \@minus .2ex}%
-                                   {\normalfont\normalsize\bfseries}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                    {1.75ex \@plus1ex \@minus.2ex}%
                                    {-1em}%

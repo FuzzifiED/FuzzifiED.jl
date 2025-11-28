@@ -30,9 +30,9 @@ Practically, the ED calculation can be divided into 4 steps.
 
 Before starting the calculation, we need to input the setup for the system, including the number of flavours $N_f$, orbitals $N_m$ and sites $N_o$ 
 
-* A 'flavour' is labelled by $f$. The number of flavours is $N_f$.
-* An 'orbital' is specified by the magnetic quantum number labelled by $m$. The number of orbitals is $N_m=2s+1$.
-* A 'site' is specific by both the flavour and the orbital index $o=(f,m)$. The number of sites is $N_o=N_mN_f$. In practice, we label the sites with an integer from $1$ to $N_o$. We store the sites in an ascending order of first $m$ and then $f$ : $o=(m+s)N_f+f$.
+* A “flavour” is labelled by $f$. The number of flavours is $N_f$.
+* An “orbital” is specified by the magnetic quantum number labelled by $m$. The number of orbitals is $N_m=2s+1$.
+* A “site” is specific by both the flavour and the orbital index $o=(f,m)$. The number of sites is $N_o=N_mN_f$. In practice, we label the sites with an integer from $1$ to $N_o$. We store the sites in an ascending order of first $m$ and then $f$ : $o=(m+s)N_f+f$.
 
 In the example of Ising model with $s=5.5$,
 ```julia
@@ -45,7 +45,7 @@ FuzzifiED also provides several environment parameters that defines how FuzzifiE
 
 ### Constructing the Configurations
 
-The first step for the ED calculation is to construct the basis tha respects the symmetries of the Hamiltonian. This is divided into two steps : (1) generate the 'configurations' that carry the diagonal quantum numbers, and (2) generate the 'basis' that also carry the off-diagonal quantum numbers (under discrete transformations). The '_configurations_' are the collection of states that can be written as direct product of occupied $|1\rangle$ or empty $|0\rangle$ on each site and carries certain diagonal quantum numbers (QNDiag). 
+The first step for the ED calculation is to construct the basis tha respects the symmetries of the Hamiltonian. This is divided into two steps : (1) generate the “configurations” that carry the diagonal quantum numbers, and (2) generate the “basis” that also carry the off-diagonal quantum numbers (under discrete transformations). The _“configurations”_ are the collection of states that can be written as direct product of occupied $|1\rangle$ or empty $|0\rangle$ on each site and carries certain diagonal quantum numbers (QNDiag). 
 
 The QNDiags supported by FuzzifiED are the charges of $\mathrm{U}(1)$ or $\mathbb{Z}_p$ symmetry in the form of 
 ```math
@@ -175,7 +175,7 @@ for m[1] = 0 : nm - 1, m[2] = 0 : nm - 1, m[3] = 0 : nm - 1
     o = m .* nf .+ f .+ 1
     mr = m .- s
     
-    # Calculate the matrix element val from pseudopotentials
+    # Calculate the matrix element val from pseudo-potentials
     val = ComplexF64(0)
     for l in eachindex(ps_pot)
         (abs(mr[1] + mr[2]) > nm - l || abs(mr[3] + mr[4]) > nm - l) && break 
