@@ -12,12 +12,13 @@
 \newif\iftimesfont\timesfontfalse
 \newif\ifchangefont\changefonttrue
 \newif\iftitlecentre\titlecentretrue
+\newif\ifsecpoint\secpointtrue
 
 \DeclareOption{no-natbib-sort}{\natbibsortfalse}
-\DeclareOption{toc-continuous}{\toccontinuoustrue}
-\DeclareOption{title-rule}{\titleruletrue}
-\DeclareOption{toc-rule}{\tocruletrue}
-\DeclareOption{title-left}{\titlecentrefalse}
+\DeclareOption{continuous}{\toccontinuoustrue}
+\DeclareOption{rule}{\titleruletrue\tocruletrue}
+\DeclareOption{left}{\titlecentrefalse}
+\DeclareOption{no-sec-point}{\secpointfalse}
 \DeclareOption{no-toc}{\notoctrue}
 \DeclareOption{double-page}{\doublepagetrue}
 \DeclareOption{times-font}{\timesfonttrue}
@@ -85,6 +86,8 @@
 \def\@extra{\@empty}
 
 \newcommand{\condcentering}{\iftitlecentre\centering\else\flushleft\fi}
+\newcommand{\secpt}{\ifsecpoint.\else\fi}
+
 \newcommand{\fpheader}[1]{\gdef\@fpheader{#1}}
 \newcommand{\subheader}[1]{\gdef\@subheader{#1}}
 \newcommand{\keywords}[1]{\if!\@keywords!\gdef\@keywords{#1}\else%
@@ -331,7 +334,7 @@
 \fi
 \iftoccontinuous\else\ifdoublepage\vglue0pt\cleardoublepage\else\clearpage\fi\fi
 \setcounter{footnote}{0}
-\pagestyle{myplain}\pagenumbering{arabic}
+\pagenumbering{arabic}
 } % close the \renewcommand\maketitle{
 
 
@@ -400,6 +403,7 @@
 \renewcommand\@evenhead{}}
 \let\ps@plain=\ps@myplain
 
+\pagestyle{myplain}
 
 
 % no header or footer in the title page
@@ -408,18 +412,18 @@
 
 
 %number equations after the sections
-\renewcommand{\theequation}{\thesection.\arabic{equation}}
-\numberwithin{equation}{section}
+\ifnotoc\else\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\numberwithin{equation}{section}\fi
 
 \RequirePackage{titlesec}
 \titleformat{\part}[display]
     {\normalfont\bfseries\Large}
-    {\normalsize\centering\mdseries Part~\thepart.}
+    {\normalsize\condcentering\mdseries Part~\thepart\secpt}
     {0ex}
-    {\centering}
+    {\condcentering}
 \titleformat{\section}
-    {\normalfont\large\bfseries\centering}
-    {\thesection.}
+    {\normalfont\large\bfseries\condcentering}
+    {\thesection\secpt}
     {1em}
     {}
 \titlespacing{\section}
@@ -427,8 +431,8 @@
     {3.5ex plus 1.3ex minus .7ex}
     {2.3ex plus .4ex minus .4ex}
 \titleformat{\subsection}
-    {\normalfont\normalsize\bfseries\centering}
-    {\thesubsection.}
+    {\normalfont\normalsize\bfseries\condcentering}
+    {\thesubsection\secpt}
     {1em}
     {}
 \titlespacing{\subsection}
@@ -436,8 +440,8 @@
     {2.3ex \@plus 1ex \@minus .5ex}
     {1.2ex \@plus .3ex \@minus .3ex}
 \titleformat{\subsubsection}
-    {\normalfont\normalsize\bfseries\centering}
-    {\thesubsubsection.}
+    {\normalfont\normalsize\bfseries\condcentering}
+    {\thesubsubsection\secpt}
     {1em}
     {}
 \titlespacing{\subsubsection}
@@ -445,7 +449,12 @@
     {2.3ex \@plus 1ex \@minus .5ex}
     {1ex \@plus .2ex \@minus .2ex}
 
-\renewcommand{\numberline}[1]{#1.\hspace{1ex}}
+\ifnotoc\else\ifsecpoint
+    \RequirePackage[dotinlabels]{titletoc}
+    \dottedcontents{subsection}[3.8em]{}{2.3em}{1pc}
+    \dottedcontents{subsubsection}[7.0em]{}{3.2em}{1pc}
+\fi
+
 
 %headings style
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%

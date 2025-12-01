@@ -6,8 +6,6 @@
 \lstset{basicstyle=\footnotesize\ttfamily,columns=flexible,breaklines=true,numbers=none,numberstyle=\scriptsize,numbersep=-1.2em,keywordstyle=\bfseries,morekeywords={baremodule,begin,break,catch,const,continue,do,else,elseif,end,export,false,finally,for,function,global,if,import,let,local,macro,module,quote,return,struct,true,try,using,while}}
 \newenvironment{block}[1]{\vspace{0.4\baselineskip}\hrule height 2\arrayrulewidth\vspace{\doublerulesep}\hrule\vspace{0.30\baselineskip}{\bfseries #1}\vspace{0.2\baselineskip}\hrule\vspace{0.3\baselineskip}}{\vspace{0.2\baselineskip}\hrule\vspace{\doublerulesep}\hrule height 2\arrayrulewidth\vspace{0.5\baselineskip}}
 
-\newcommand{\zhou}[1]{\textcolor{Blue}{\small[\textsc{Zhou}~: \textit{#1}]}}
-
 \newcommand{\Sp}{\mathrm{Sp}}
 \newcommand{\SO}{\mathrm{SO}}
 \newcommand{\SU}{\mathrm{SU}}
@@ -206,7 +204,7 @@ The Yang-Lee singularity~\cite{Yang1952Singularity,Lee1952Singularity,Cardy2023S
 
 The $\rO(N)$ vector model is arguably the most well studied theory that describes the critical behaviours. It can be formulated as a quantum field theory (QFT) of $N$ interacting scalar fields. This QFT has an ultra-violet fixed point of $N$ free scalars. A quartic interaction term induces a RG flow to the infra-red fixed point described by the Wilson-Fisher (WF) CFT~\cite{Wilson1971WF,Sachdev2011Quantum,Cardy1996Scaling}. It describes a transition between an ordered phase with $\rO(N)$ spontaneous symmetry breaking and an $\rO(N)$-symmetric disordered phase. This theory has been extensively studied using perturbative calculations, quantum Monte Carlo and conformal bootstrap. The $\rO(2)$ WF has been experimentally measured with high precision in the normal-superfluid transition of Helium-4~\cite{Lipa2003SF}. Its fuzzy-sphere realisation paves the way for studying operators with certain quantum numbers, multi-scalar CFTs, defects and boundaries, \textit{etc.}
 
-\paragraph{The free scalar CFT~\cite{He2025Jun,Taylor2025}}
+\paragraph{The free-scalar CFT~\cite{He2025Jun,Taylor2025}}
 
 This work introduces a simple model to realise the free real scalar CFT on the fuzzy sphere that is structurally similar to the 3D Ising CFT. A weakly-broken $\rU(1)$ symmetry in the fuzzy-sphere model realises the $\BR$-shift symmetry of the free scalar in the thermodynamic limit, so that the fix point can be accessed with only a single tuning parameter. He numerically demonstrates that the model correctly reproduces the operator spectrum, correlation functions and the harmonic oscillator algebra of the real-scalar CFT. He generalises the Girvin-MacDonald-Platzman algebra~\cite{Girvin1986GMP} to the fuzzy-sphere algebra of the density operators, which is potentially useful for defining quantum field theories on non-commutative geometries. He proposes a wave-function ansatz for the ground states which exhibit remarkable agreement with the CFT ground state wave-functions of the fuzzy-sphere model.
 
@@ -2038,7 +2036,7 @@ In this appendix, we collect the full version of the codes, including
     f_sse = abs(inner(sts', nx00, ste) / inner(sts', nx00, st0))
 \end{lstlisting}
 
-\section{Glossary for interfaces in FuzzifiED}
+\section{Glossary for Interfaces in FuzzifiED}
 \label{app:glossary}
 
 \begin{multicols}{3}

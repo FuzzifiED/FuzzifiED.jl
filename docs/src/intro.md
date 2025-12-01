@@ -18,8 +18,7 @@ Among these higher dimensional CFTs, we mainly focus on $d=3$, as many Lagrangia
 
 ### Fuzzy Sphere
 
-In addition to these existing approaches, the \emph{`fuzzy sphere regularisation'} has recently emerged as a new powerful method to study 3D CFTs. It involves studying interacting electrons moving on a sphere
-under the influence of a magnetic monopole at its centre.
+In addition to these existing approaches, the _“fuzzy sphere regularisation”_ has recently emerged as a new powerful method to study 3D CFTs. It involves studying interacting electrons moving on a sphere under the influence of a magnetic monopole at its centre.
 
 The idea begins with putting an interacting quantum Hamiltonian on a 2-sphere $S^2$. This geometry preserves the full rotation symmetry (on the contrary, lattice models often only preserve a discrete subgroup). Moreover, when the system is tuned to a critical point or critical phase, combined with the time evolution direction, the system is described by a quantum field theory living on a generalised cylinder $S^2\times\mathbb{R}$, a manifold that is conformally equivalent to flat spacetime through the Weyl transformation
 ```math

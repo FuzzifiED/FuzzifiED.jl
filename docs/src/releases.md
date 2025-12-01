@@ -60,21 +60,21 @@
 
 ### Version 0.10
 
-#### Version 0.10.7 (9th December, 2024)
+#### Version 0.10.7 (9th December 2024)
 
 - Add implementation of transformations.
 
-#### Version 0.10.6 (6th December, 2024)
+#### Version 0.10.6 (6th December 2024)
 
 - Add entanglement calculations in Fuzzifino. 
 
-#### Version 0.10.5 (4th December, 2024)
+#### Version 0.10.5 (4th December 2024)
 
 - Fix the dependency in FuzzifiED_jll
 - Move KrylovKit and SparseArrays to extensions. 
 - Fix minor bugs. 
 
-#### Version 0.10.4 (30th November, 2024)
+#### Version 0.10.4 (30th November 2024)
 
 - Split ITensorsExt and EasySweepExt.
 - Define a new SiteType "FuzzyFermion" for ITensors to avoid overwriting "Fermion" in ITensorsExt.
@@ -83,78 +83,78 @@
 - Fix bugs in converting OpSum to Terms.
 - Improve the interface for ITensor extension.
 
-#### Version 0.10.3 (28th November, 2024)
+#### Version 0.10.3 (28th November 2024)
 
 - Add options for DMRG. 
 - Optimise the implementation of confs in Fuzzifino.
 - Add the examples of fractional filling.
 
-#### Version 0.10.1 (25th November, 2024)
+#### Version 0.10.1 (25th November 2024)
 
 - Add CUDA extension. 
 - Add interface with KrylovKit.
 
-#### Version 0.10.0 (24th November, 2024)
+#### Version 0.10.0 (24th November 2024)
 
 - Add module Fuzzifino for boson-fermion systems.
 
 ### Version 0.9
 
-#### Version 0.9.3 (23rd November, 2024)
+#### Version 0.9.3 (23rd November 2024)
 
 - Move HDF5 and ITensor to extensions
 - Modify ITensor extension interfaces in alignment with the update of ITensor.
 
-#### Version 0.9.2 (16th September, 2024)
+#### Version 0.9.2 (16th September 2024)
 
 - Add the example of Ising generators and Sp(3) CFT.
 
-#### Version 0.9.1 (13th September, 2024)
+#### Version 0.9.1 (13th September 2024)
 
 - Allow input of initial vectors for diagonalisation. (We acknowledge Andrew Fitzpatrick for the suggestion.)
 
-#### Version 0.9.0 (11th September, 2024)
+#### Version 0.9.0 (11th September 2024)
 
 - Add feature of angular modes observables.
 - Fix typos and bugs.
 
 ### Version 0.8
 
-#### Version 0.8.2 (28th July, 2024)
+#### Version 0.8.2 (28th July 2024)
 
 - Fix bugs in GetDenIntTerms and multiplication in SphereObs. 
 
-#### Version 0.8.0 (26th July, 2024)
+#### Version 0.8.0 (26th July 2024)
 
 - Improve the performance of SimplifyTerms. 
 - Add file operation. 
 
 ### Version 0.7
 
-#### Version 0.7.2 (24th July, 2024)
+#### Version 0.7.2 (24th July 2024)
 
 - Add example and support for surface CFTs. 
 - Add example of Ising cusp.
 
-#### Version 0.7.1 (11th June, 2024)
+#### Version 0.7.1 (11th June 2024)
 
 - Add some new interfaces for built-in operators. 
 - Add new examples. 
 - Fix bugs
 
-#### Version 0.7.0 (9th June, 2024)
+#### Version 0.7.0 (9th June 2024)
 
 - Revise the implementation of diagonal and off-diagonal quantum number. 
 
 ### Version 0.6
 
-#### Version 0.6.3 (8th June, 2024)
+#### Version 0.6.3 (8th June 2024)
 
 - Add support for calculating entanglement spectrum. 
 - Add global parameters to control the number of threads, the output and the path of the dynamic library. 
 - Fix bugs. 
 
-#### Version 0.6.0 (5th June, 2024)
+#### Version 0.6.0 (5th June 2024)
 
 - Add support for full diagonalisation. 
 - Fix bugs and typos.
@@ -162,11 +162,11 @@
 
 ### Version 0.5
 
-#### Version 0.5.8 (3rd June, 2024)
+#### Version 0.5.8 (3rd June 2024)
 
 - Change the binary dependence to Julia Binary Builder. 
 
-#### Version 0.5.0 (30th May, 2024)
+#### Version 0.5.0 (30th May 2024)
 
 - Enable simplification of terms.
 - Add general observables and built-in electrons and density operators. 
@@ -175,7 +175,7 @@
 
 ### Version 0.4
 
-#### Version 0.4.3 (29th May, 2024)
+#### Version 0.4.3 (29th May 2024)
 
 - Add QNU truncation for ITensor use.
 - Change the Fortran code to be robust against QNU breaking terms
@@ -183,7 +183,7 @@
 - Add built-in 3-state Potts model.
 - Add built-in Ising model with magnetic line defect. 
 
-#### Version 0.4.0 (28th May, 2024)
+#### Version 0.4.0 (28th May 2024)
 
 - Add support for DMRG.
 - Add convertion from diagonal QNs to sites. 
@@ -194,7 +194,7 @@
 
 ### Version 0.3
 
-#### Version 0.3.0 (27th May, 2024)
+#### Version 0.3.0 (27th May 2024)
 
 - Add the support for Hamiltonians with real elements. 
 - Add conversion with SparseMatrixCSC. 
@@ -205,7 +205,7 @@
 
 ### Version 0.2
 
-#### Version 0.2.0 (26th May, 2024)
+#### Version 0.2.0 (26th May 2024)
 
 - Add operations of terms.
 - Add built-in Ising model. 
