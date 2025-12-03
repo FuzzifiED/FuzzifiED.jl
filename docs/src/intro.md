@@ -162,6 +162,8 @@ This work studies the $\mathrm{O}(3)$ WF CFT on the set-up of a bilayer Heisenbe
 
 ##### [The general model for $\mathrm{O}(N)$ free-scalar and Wilson-Fisher CFTs](@id Guo2025)
 
+> __[Guo 2025]__ The $O(N)$ free-scalar and Wilson-Fisher conformal field theories on the fuzzy sphere, Wenhan Guo, Zheng Zhou, Tzu-Chieh Wei, Yin-Chen He, [arXiv:2512.02234](https://arxiv.org/abs/2512.02234).
+
 This work proposes a general model that realises the $\mathrm{O}(N)$ free-scalar and Wilson-Fisher CFTs. The set-up contains altogether $(N+1)$ flavours with total filling $\nu=1$, where one flavour $c_0$ is $\mathrm{O}(N)$ singlet and the rest $N$ flavours $c_i$ transform as $\mathrm{O}(N)$ vector. The scalar field is realised as the bilinear $\phi_i=c_i^\dagger c_0+c_0^\dagger c_i$, and the Hamiltonian for the WF CFT contains (1) a particle density interaction, (2) a $\phi$ density interaction, and (3) a relative chemical potential of the singlet flavour. Tuning the chemical potential realises a phase transition between a paramagnetic phase with $c_0$ fully filled and an $\mathrm{O}(N)$ symmetry-breaking phase where electrons are in a superposed state between a vector flavour and the singlet flavour. Turning to the $\mathrm{O}(N)$ free-scalar theory, it corresponds to a pseudo-Goldstone phase of a $\mathrm{PO}(N)$ SSB.
 
 Guo _et al._ provide numrical evidence for $N=2,3,4$ such as the operator spectra and two-point conformal correlators. They discuss several quantities that may not have a direct CFT interpretation, but imply that the CFTs become to some extent semi-classical once regularised on the fuzzy sphere. 

@@ -103,6 +103,7 @@ Depth = 2
 * __[Voinea 2025]__ Critical Majorana fermion at a topological quantum Hall bilayer transition, Cristian Voinea, Wei Zhu, Nicolas Regnault, Zlatko Papić, [arXiv:2509.08036](https://arxiv.org/abs/2509.08036).
 * __[Wiese 2025]__ Locating the Ising CFT via the ground-state energy on the fuzzy sphere, Kay Joerg Wiese, [arXiv:2510.09482](https://arxiv.org/abs/2510.09482).
 * __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, Arjun Dey, Loic Herviou, Christopher Mudry, Andreas Martin Läuchli, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
+* __[Guo 2025]__ The $O(N)$ free-scalar and Wilson-Fisher conformal field theories on the fuzzy sphere, Wenhan Guo, Zheng Zhou, Tzu-Chieh Wei, Yin-Chen He, [arXiv:2512.02234](https://arxiv.org/abs/2512.02234).
 
 ## Index 
 

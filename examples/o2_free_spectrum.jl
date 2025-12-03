@@ -1,4 +1,5 @@
 # This example calculates the spectrum of O(2) free scalar CFT.
+# This example reproduces Figure 3, upper left panel in arXiv:2512.02234.
 # On my table computer, this calculation takes 6.836 s
 
 using FuzzifiED

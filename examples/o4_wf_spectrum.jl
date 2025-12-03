@@ -1,5 +1,6 @@
 # This example calculates the spectrum of O(4) Wilson-Fisher CFT
 # and demonstrates the general set-up for O(N) vector models
+# This example reproduces Figure 3, lower panel in arXiv:2512.02234.
 # On my table computer, this calculation takes 3.002 s
 
 using FuzzifiED

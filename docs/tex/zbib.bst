@@ -782,7 +782,7 @@ FUNCTION {article}
         { format.eprint output }
         { journal empty$
             { format.eprint output }
-            { format.doi * "{" * journal emphasize before.all 'output.state := "journal" output.check
+            { format.doi * "{" * journal before.all 'output.state := "journal" output.check
               blank.sep
               format.volume output
               blank.sep

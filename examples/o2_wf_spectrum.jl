@@ -1,4 +1,5 @@
 # This example calculates the spectrum of O(2) Wilson-Fisher CFT.
+# This example reproduces Figure 3, upper panel in arXiv:2512.02234.
 # On my table computer, this calculation takes 5.854 s
 
 using FuzzifiED
@@ -39,7 +40,7 @@ end
 tms_hmt = SimplifyTerms(
     GetIntegral(obs_ne' * obs_ne)
     - 0.270 * GetIntegral(obs_V' * Laplacian.(obs_V))
-    - 0.084 * GetPolTerms(nm, nf, mat_0)
+    - 0.08344 * GetPolTerms(nm, nf, mat_0)
 )
 
 result = []

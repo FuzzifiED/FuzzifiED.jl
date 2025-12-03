@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{timesjhep}
+\ProvidesClass{zarticle}
 \LoadClass[11pt,twoside]{article}
 
 \newif\ifnotoc\notocfalse
@@ -12,13 +12,13 @@
 \newif\iftimesfont\timesfontfalse
 \newif\ifchangefont\changefonttrue
 \newif\iftitlecentre\titlecentretrue
-\newif\ifsecpoint\secpointtrue
+\newif\ifsecdot\secdottrue
 
 \DeclareOption{no-natbib-sort}{\natbibsortfalse}
 \DeclareOption{continuous}{\toccontinuoustrue}
 \DeclareOption{rule}{\titleruletrue\tocruletrue}
 \DeclareOption{left}{\titlecentrefalse}
-\DeclareOption{no-sec-point}{\secpointfalse}
+\DeclareOption{no-sec-dot}{\secdotfalse}
 \DeclareOption{no-toc}{\notoctrue}
 \DeclareOption{double-page}{\doublepagetrue}
 \DeclareOption{times-font}{\timesfonttrue}
@@ -29,13 +29,14 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{amsfonts}
+\RequirePackage{amsthm}
 \RequirePackage{epsfig}
 \RequirePackage{graphicx}
 \ifnatbibsort\RequirePackage[numbers,sort&compress]{natbib}\else\RequirePackage[numbers,compress]{natbib}\fi
 \RequirePackage[dvipsnames,cmyk,table]{xcolor}
 \RequirePackage[colorlinks=true
 ,allcolors=Blue
-,linktocpage=true
+,linktocpage=true,unicode,psdextra
 ]{hyperref}
 \RequirePackage[normalem]{ulem}
 \RequirePackage{lipsum}
@@ -51,19 +52,21 @@
     \RequirePackage{newtxmath}
     \else
     \ifxetex
-      \RequirePackage{fontspec}
-      \RequirePackage{unicode-math}
-      \setmainfont{Old Standard}
+      \usepackage{fontspec}
+      \setmainfont{MFB Oldstyle}
+      \usepackage{unicode-math}
       \setmathfont{OldStandard-Math}
+      \setmathfont[range=up/{latin,Latin,num}]{MFB Oldstyle}
+      \setmathfont[range=it/{latin,Latin}]{MFB Oldstyle-Italic}
     \else
       \RequirePackage[T1]{fontenc}
-      \RequirePackage{OldStandard}
+      \RequirePackage{mfb-oldstyle}
     \fi
   \fi
 \fi
 \RequirePackage{calrsfs}
 \urlstyle{same}
-\bibliographystyle{timesjhepbib}
+\bibliographystyle{zbib}
 \setlist{align=parleft,leftmargin=0pt,itemindent=2\parindent,labelsep=0em,labelwidth=1\parindent,nosep}
 \allowdisplaybreaks
 
@@ -86,7 +89,7 @@
 \def\@extra{\@empty}
 
 \newcommand{\condcentering}{\iftitlecentre\centering\else\flushleft\fi}
-\newcommand{\secpt}{\ifsecpoint.\else\fi}
+\newcommand{\secpt}{\ifsecdot.\else\fi}
 
 \newcommand{\fpheader}[1]{\gdef\@fpheader{#1}}
 \newcommand{\subheader}[1]{\gdef\@subheader{#1}}
@@ -402,8 +405,8 @@
 \renewcommand\@evenfoot{\hfill-- \thepage\ --\hfill}
 \renewcommand\@evenhead{}}
 \let\ps@plain=\ps@myplain
-
 \pagestyle{myplain}
+
 
 
 % no header or footer in the title page
@@ -414,6 +417,7 @@
 %number equations after the sections
 \ifnotoc\else\renewcommand{\theequation}{\thesection.\arabic{equation}}
 \numberwithin{equation}{section}\fi
+
 
 \RequirePackage{titlesec}
 \titleformat{\part}[display]
@@ -449,11 +453,11 @@
     {2.3ex \@plus 1ex \@minus .5ex}
     {1ex \@plus .2ex \@minus .2ex}
 
-\ifnotoc\else\ifsecpoint
+\ifnotoc\else\ifsecdot
     \RequirePackage[dotinlabels]{titletoc}
     \dottedcontents{subsection}[3.8em]{}{2.3em}{1pc}
     \dottedcontents{subsubsection}[7.0em]{}{3.2em}{1pc}
-\fi
+\fi\fi
 
 
 %headings style
