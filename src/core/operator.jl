@@ -1,5 +1,6 @@
 export Operator
 
+abstract type AbstractOperator end
 
 """
     Operator
@@ -16,7 +17,7 @@ The mutable type `Operator` records the sum of terms together with information a
 * `cstrs :: Matrix{Int64}` is a matrix recording the operator string of each term. Each column corresponds to a term and is padded to the maximum length with `-1`'s.
 * `coeffs :: Vector{ComplexF64}` corresponds to the coefficients in each term.
 """
-mutable struct Operator 
+mutable struct Operator <: AbstractOperator
     bsd :: Basis 
     bsf :: Basis
     red_q :: Int64

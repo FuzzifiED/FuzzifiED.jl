@@ -1,3 +1,4 @@
+import FuzzifiED.AbstractOperator
 export SOperator
 
 
@@ -16,7 +17,7 @@ The mutable type `SOperator` records the sum of terms together with information 
 * `cstrs :: Matrix{Int64}` is a matrix recording the operator string of each term. Each column corresponds to a term and is padded to the maximum length with `-1`'s.
 * `coeffs :: Vector{ComplexF64}` corresponds to the coefficients in each term.
 """
-mutable struct SOperator 
+mutable struct SOperator <: AbstractOperator
     bsd :: SBasis 
     bsf :: SBasis
     red_q :: Int64
