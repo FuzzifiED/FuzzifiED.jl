@@ -3,7 +3,7 @@ module FuzzifiEDKrylovKitExt
 using KrylovKit
 using FuzzifiED
 import FuzzifiED: GetEigensystemKrylov
-import FuzzifiED: NumThreads, SilentStd
+import FuzzifiED: NumThreads, SilentStd, ElementType, AbstractOperator
 
 
 """
@@ -33,6 +33,13 @@ function GetEigensystemKrylov(mat :: OpMat{T}, nst :: Int64 ; tol :: Float64 = 1
     eigval, eigvec, info = eigsolve(x -> *(mat, x ; num_th), initvec, nst, :SR ; tol, kwargs1...)
     if (disp_std) print(info) end
     return Vector{T}(eigval), Matrix{T}(hcat(eigvec...))
+end
+
+function GetEigensystemKrylov(op :: AbstractOperator, nst :: Int64, type :: DataType = ElementType ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), initvec = rand(type, op.bsd.dim), num_th = NumThreads, disp_std = !SilentStd, kwargs...)
+    kwargs1 = haskey(kwargs, :krylovdim) ? kwargs : (kwargs..., krylovdim = ncv)
+    eigval, eigvec, info = eigsolve(x -> *(op, x ; num_th), initvec, nst, :SR ; tol, kwargs1...)
+    if (disp_std) print(info) end
+    return Vector{type}(eigval), Matrix{type}(hcat(eigvec...))
 end
 
 end
