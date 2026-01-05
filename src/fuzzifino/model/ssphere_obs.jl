@@ -238,7 +238,7 @@ function DMinus(obs :: SSphereObs ; norm_r2 :: Float64 = ObsNormRadSq)
     s = obs.s2 / 2
     return SSphereObs(
         obs.s2 - 2, obs.l2m, 
-        (l2, m2) -> (l2 < abs(obs.s2 - 2)) ? STerm[] : (√((l2/2 + s) * (l2/2 - s + 1)) * obs.get_comp(l2, m2) / √norm_r2) 
+        (l2, m2) -> (l2 < abs(obs.s2 - 2)) ? STerm[] : (-√((l2/2 + s) * (l2/2 - s + 1)) * obs.get_comp(l2, m2) / √norm_r2) 
     )
 end
 
