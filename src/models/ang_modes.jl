@@ -264,7 +264,7 @@ returns the modes of two electrons superposed in the rule of CG coefficients.
 * `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
 """
 function GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
-    el = [ StoreComps(GetElectronMod(nm, nf, f) ; mom_incr) for f = 1 : nf ]
+    el = [ StoreComps(GetElectronMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
     amd = AngModes(2 * (nm - 1), Dict{Tuple{Int64, Int64}, Terms}())
     for f1 = 1 : nf, f2 = 1 : nf
         if abs(mat[f1, f2]) < 1E-13 continue end 
