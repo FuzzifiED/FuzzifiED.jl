@@ -104,6 +104,15 @@ Depth = 2
 * __[Wiese 2025]__ Locating the Ising CFT via the ground-state energy on the fuzzy sphere, Kay Joerg Wiese, [arXiv:2510.09482](https://arxiv.org/abs/2510.09482).
 * __[Dey 2025]__ Conformal data for the $\mathrm{O}(3)$ Wilson-Fisher CFT from fuzzy sphere realization of quantum rotor model, Arjun Dey, Loic Herviou, Christopher Mudry, Andreas Martin Läuchli, [arXiv:2510.09755](https://arxiv.org/abs/2510.09755).
 * __[Guo 2025]__ The $O(N)$ free-scalar and Wilson-Fisher conformal field theories on the fuzzy sphere, Wenhan Guo, Zheng Zhou, Tzu-Chieh Wei, Yin-Chen He, [arXiv:2512.02234](https://arxiv.org/abs/2512.02234).
+* __[Tang 2025]__ Emergence of 3D superconformal Ising criticality on the Fuzzy Sphere, Yin Tang, Cristian Voinea, Liangdong Hu, Zlatko Papić, Wei Zhu, [arXiv:2512.25054](https://arxiv.org/abs/2512.25054).
+* __[Hao 2026]__ Multi-target density matrix renormalization group for 3D CFTs on the fuzzy sphere, Jin-Xiang Hao, Zheng Zhu, and Yang Qi, [arXiv:2601.18648](https://arxiv.org/abs/2601.18648).
+* __[Fardelli 2026]__ Improving 3d Ising OPE coefficients with fuzzy sphere conformal generators, Giulia Fardelli, A. Liam Fitzpatrick, Emanuel Katz, [arXiv:2602.04958](https://arxiv.org/abs/2602.04958).
+* __[Huffman 2026]__ Generalizing Deconfined Criticality to 3D $N$-Flavor $\mathrm{SU}(2)$ Quantum Chromodynamics on the Fuzzy Sphere, Emilie Huffman, Zheng Zhou, Yin-Chen He, Johannes S. Hofmann, [arXiv:2602.11255](https://arxiv.org/abs/2602.11255).
+* __[Meng 2026]__ Quantum phase transitions on complex projective space $\mathbb{CP}^2$, Xue Meng, Junwen Zhao, Wei Zhu, Congjun Wu, [Phys. Lett. A __580__, 131488 (2026)](https://doi.org/10.1016/j.physleta.2026.131488).
+* __[Sarma 2026]__ Fortuitous Universality of Bose-Kondo Impurities, Abhijat Sarma, Zheng Zhou, Ryan A. Lanzetta, Yin-Chen He, [arXiv:2604.07554](https://arxiv.org/abs/2604.07554).
+* __[Dey 2026]__ Conformal Data for the $O(2)$ Wilson-Fisher CFT in $(2+1)$-Dimensional Spacetime from Exact Diagonalization and Matrix Product States on the Fuzzy Sphere, Arjun Dey, Loic Herviou, Christopher Mudry, Slava Rychkov, Andreas Martin Läuchli, [arXiv:2604.18705](https://arxiv.org/abs/2604.18705).
+* __[Feng 2026]__ Studying 3D $O(N)$ Surface CFT on the Fuzzy Sphere, Jiechao Feng, Taige Wang, [arXiv:2604.21091](https://arxiv.org/abs/2604.21091).
+* __[Stergiou 2026]__ Quantum Rotors on the Fuzzy Sphere and the Cubic CFT, Andreas Stergiou, [arXiv:2604.24840](https://arxiv.org/abs/2604.24840).
 
 ## Index 
 
