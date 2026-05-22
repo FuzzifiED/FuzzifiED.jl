@@ -14,27 +14,15 @@ This function ensures that the row indices within each column are in ascending o
 The function takes three arguments: `colptr`, which is a vector of column pointers; `rowval`, which is a vector of row indices; and `nzval`, which is a vector of non-zero values corresponding to the row indices. 
 The sorting is performed for each column, and the function modifies the input vectors in-place.
 """
-
-function canonicalize_csc!(
-    colptr::Vector{Int},
-    rowval::Vector{Int},
-    nzval
-)
-
+function canonicalize_csc!(colptr::Vector{Int}, rowval::Vector{Int}, nzval)
     n = length(colptr) - 1
-
     for col in 1:n
-
         r = colptr[col]:(colptr[col+1]-1)
-
         # skip small columns
         length(r) <= 1 && continue
-
         p = sortperm(view(rowval, r))
-
         rowval[r] = rowval[r][p]
         nzval[r]  = nzval[r][p]
-
     end
 end
 
