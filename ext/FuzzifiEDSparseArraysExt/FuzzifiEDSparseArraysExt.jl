@@ -49,7 +49,7 @@ function SparseArrays.SparseMatrixCSC(mat :: OpMat)
     rowval = copy(mat.rowid)
     nzval = copy(mat.elval)
     canonicalize_csc!(mat.colptr, rowval, nzval)
-    matcsc1 = SparseMatrixCSC(mat.dimd, mat.dimd, mat.colptr, rowval, nzval)
+    matcsc1 = SparseMatrixCSC(mat.dimf, mat.dimd, mat.colptr, rowval, nzval)
     if (mat.sym_q == 0) 
         return matcsc1
     elseif (mat.sym_q == 1)
