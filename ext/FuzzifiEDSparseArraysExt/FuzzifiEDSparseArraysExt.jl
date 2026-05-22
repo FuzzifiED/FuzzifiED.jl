@@ -14,7 +14,17 @@ import FuzzifiED: OpMat
 converts the `OpMat` objects to a `SparseMatrixCSC` object in the `SparseArrays` package.
 """
 function SparseArrays.SparseMatrixCSC(mat :: OpMat)
-    matcsc1 = SparseMatrixCSC(mat.dimf, mat.dimd, mat.colptr, mat.rowid, mat.elval)
+    I = Int[]
+    J = Int[]
+    V = eltype(mat.elval)[]
+    for col in 1:mat.dimd
+        for ptr in mat.colptr[col]:(mat.colptr[col+1]-1)
+            push!(I, mat.rowid[ptr])
+            push!(J, col)
+            push!(V, mat.elval[ptr])
+        end
+    end
+    matcsc1 = sparse(I, J, V, mat.dimf, mat.dimd)
     if (mat.sym_q == 0) 
         return matcsc1
     elseif (mat.sym_q == 1)
