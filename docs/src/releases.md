@@ -4,6 +4,11 @@
 
 ### Version 1.2
 
+#### Version 1.2.2 (17th July 2026)
+
+- Fix the behaviour of AngModes. 
+- Change the default of SphereObs and AngModes to increasing the angular momentum.
+
 #### Version 1.2.1 (28th November 2025)
 
 - Add flag to control whether SphereObs and AngModes increase or decrease angular momenta.

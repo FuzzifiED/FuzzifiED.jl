@@ -9,7 +9,7 @@ The mutable type `AngModes` stores angular momentum components of an operator on
 # Fields
 
 * `l2m :: Int64` is twice the maximal angular momentum ``2l_{\\max}`` of the components of the modes object. 
-* `get_comp :: Function` is a function `get_comp(l2 :: Int64, m2 :: Int64) :: Terms` that sends the component specified by a tuple of integers ``(2l,2m)`` where ``|s|\\leq l\\leq l_{\\max}, -l\\leq m\\leq l`` to a list of terms that specifies the expression of the component. 
+* `get_comp :: Function` is a function `get_comp(l2 :: Int64, m2 :: Int64) :: Terms` that sends the component specified by a tuple of integers ``(2l,2m)`` where ``|s|≤l≤l_{\\max}, -l≤m≤l`` to a list of terms that specifies the expression of the component. 
 * `stored_q :: Bool` is a boolean that specifies whether or not each component of the modes object is stored.
 * `comps :: Dict{Tuple{Int64, Int64}, Terms}` stores each component of the modes object in the format of a dictionary whose keys are the tuples of integers ``(2l,2m)`` and values are the lists of terms that specifies the expression of the component. 
 """
@@ -29,7 +29,7 @@ initialises the modes object from ``2l_{\\max}`` and the function ``(l,m)↦\\Ph
 # Arguments
 
 * `l2m :: Int64` is twice the maximal angular momentum ``2l_{\\max}`` of the components of the modes object. 
-* `get_comp :: Function` is a function `get_comp(l2 :: Int64, m2 :: Int64) :: Terms` that sends the component specified by a tuple of integers ``(2l,2m)`` where ``|s|\\leq s\\leq l_{\\max}, -l\\leq m\\leq l`` to a list of terms that specifies the expression of the component. 
+* `get_comp :: Function` is a function `get_comp(l2 :: Int64, m2 :: Int64) :: Terms` that sends the component specified by a tuple of integers ``(2l,2m)`` where ``|s|≤s≤l_{\\max}, -l≤m≤l`` to a list of terms that specifies the expression of the component. 
 """
 function AngModes(l2m :: Int64, get_comp :: Function)
     return AngModes(l2m, get_comp, false, Dict{Tuple{Int64, Int64}, Terms}())
@@ -136,13 +136,13 @@ end
 enables the Hermitian conjugate of a spherical mode.
 ```math
 \\begin{aligned}
-    (Φ^†)_{lm}&=(-1)^{l+m}(Φ_{l,-m})^†
+    (Φ^†)_{lm}&=(-1)^{-m}(Φ_{l,-m})^†
 \\end{aligned}
 ```
 """
 function Base.adjoint(amd :: AngModes)
     l2m = amd.l2m
-    amd1 = AngModes(l2m, (l2, m2) -> (iseven((l2 + m2) ÷ 2) ? 1 : -1) * amd.get_comp(l2, -m2)')
+    amd1 = AngModes(l2m, (l2, m2) -> (1.0im) ^ (-m2) * amd.get_comp(l2, -m2)')
     return amd1
 end
 
@@ -160,9 +160,7 @@ function Base.:*(amd1 :: AngModes, amd2 :: AngModes)
     l2m2 = amd2.l2m
     l2m = l2m1 + l2m2
     gc = ((l2, m2) -> sum(Terms[sum(Terms[sum(Terms[
-            (iseven((-l21 + l22 + m2) ÷ 2) ? 1 : -1) *
-            sqrt(l2 + 1) *
-            wigner3j(l21/2, l22/2, l2/2, m21/2, (m2-m21)/2, -m2/2) *
+            clebschgordan(l21/2, m21/2, l22/2, (m2-m21)/2, l2/2) *
             amd1.get_comp(l21, m21) * amd2.get_comp(l22, m2 - m21)
         for m21 = max(-l21, -l22 + m2) : 2 : min(l21, l22 + m2)])
         for l21 = max(l2m1 % 2, abs(l2 - l22)) : 2 : min(l2m1, l2 + l22)])
@@ -187,15 +185,15 @@ end
 
 Return the contraction of two angular modes 
 ```math 
-    ∑_{l}U_l∑_{m=-l}^l(-1)^{l+m}Φ_{1,l}Φ_{2,l(-m)}
+    ∑_{l}U_l∑_{m=-l}^l(-1)^mΦ_{1,lm}Φ_{2,l(-m)}
 ```
 where the list of ``U_l`` is given by a dictionary, or
 ```math 
-    U_{l₀}∑_{m=-l₀}^{l₀}(-1)^{l₀+m}Φ_{1,l₀m}Φ_{2,l₀(-m)}.
+    U_{l₀}∑_{m=-l₀}^{l₀}(-1)^mΦ_{1,l₀m}Φ_{2,l₀(-m)}.
 ```
 """
 function ContractMod(amd1 :: AngModes, amd2 :: AngModes, comps :: Dict)
-    return SimplifyTerms(sum(Terms[ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (iseven((Int64(2 * l) + m2) ÷ 2) ? 1 : -1) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
+    return SimplifyTerms(sum(Terms[ U * amd1.get_comp(Int64(2 * l), m2) * amd2.get_comp(Int64(2 * l), -m2) * (1.0im) ^ (m2) for (l, U) in comps for m2 = -Int64(2 * l) : 2 : Int64(2 * l)]))
 end
 ContractMod(amd1 :: AngModes, amd2 :: AngModes, l0 :: Number) = ContractMod(amd1, amd2, Dict([l0 => 1]))
 
@@ -229,7 +227,7 @@ end
 """
     GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64[ ; mom_incr :: Bool]) :: AngModes
 
-returns the modes of electron annihilation operator ``c_m``, with angular momentum ``s=(N_m-1)/2``
+returns the modes of electron annihilation operator with angular momentum ``s=(N_m-1)/2``. Its components are ``(c)_m=(-1)^m c_{-m}`` and its adjoint ``(c^†)_m=c^†_m``.
 
 # Arguments
 
@@ -240,7 +238,7 @@ returns the modes of electron annihilation operator ``c_m``, with angular moment
 """
 function GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? Terms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? Terms((1.0im) ^ m2, [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
     else 
         gc = (l2, m2) -> (l2 == nm - 1) ? Terms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : Term[]
     end
@@ -251,9 +249,9 @@ end
 """
     GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number}[ ; mom_incr :: Bool]) :: AngModes
 
-returns the modes of two electrons superposed in the rule of CG coefficients. 
+returns the modes of two electrons superposed in the rule of CG coefficients. Its conjugate is
 ```math 
-    Δ_{lm}=∑_{m_1m_2}δ_{m,m_1+m_2}⟨sm_1,sm_2|lm⟩c_{a,m_1}M_{ab}c_{b,m_2}
+    Δ_^†{lm}=∑_{m_1m_2}δ_{m,m_1+m_2}⟨sm_1,sm_2|lm⟩c^†_{a,m_1}M^†_{ab}c^†_{b,m_2}
 ```
 
 # Arguments
@@ -279,7 +277,7 @@ end
 
 returns the modes of electron creation and annihilation superposed in the rule of CG coefficients. 
 ```math 
-    n_{lm}=∑_{m_1m_2}δ_{m,-m_1+m_2}(-1)^{s+m_1}⟨s(-m_1),sm_2|lm⟩c^†_{m_1}c_{m_2}
+    n_{lm}=∑_{m_1m_2}δ_{m,-m_1+m_2}(-1)^{-m_2}⟨sm_1,s(-m_2)|lm⟩c^†_{m_1}c_{m_2}
 ```
 
 # Arguments
@@ -302,7 +300,6 @@ end
 
 """
     PadAngModes(amd :: AngModes, nol :: Int64)
-
 
 adds `nol` empty orbitals to the left by shifting each orbital index, implemented as 
 

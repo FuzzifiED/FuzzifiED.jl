@@ -11,9 +11,9 @@ ObsNormRadSq :: Float64 = 1.0
 """
     FuzzifiED.ObsMomIncr :: Bool
 
-A flag to control whether action of ``𝒪_{lm}`` increases or decreases the ``L^z`` component of the angular momentum, false by default, true in the convention of He2025. 
+A flag to control whether action of ``𝒪_{lm}`` increases or decreases the ``L^z`` component of the angular momentum, true by default.
 """
-ObsMomIncr :: Bool = false
+ObsMomIncr :: Bool = true
 
 
 """
