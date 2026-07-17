@@ -34,6 +34,10 @@ If this package is helpful in your research, please cite the package as :
 
 > FuzzifiED : Julia package for numerics on the fuzzy sphere, Zheng Zhou, [arXiv:2503.00100](https://arxiv.org/abs/2503.00100).
 
+For a review of the fuzzy sphere, please see : 
+
+> A fuzzy sphere journey in critical phenomena, Yin-Chen He, and Wei Zhu, [arXiv:2607.01310](https://arxiv.org/abs/2607.01310), [Ann. Rev. Condensed Matter Phys. __17__, 1 (2025)](https://doi.org/10.1146/annurev-conmatphys-031424-020256).
+
 We have also provided a BibTeX file that includes all the works on the fuzzy sphere works at [this link](https://docs.fuzzified.world/assets/bib_fuzzy.bib).
 
 ## Useful Information
@@ -109,6 +113,9 @@ Depth = 2
 * __[Fardelli 2026]__ Improving 3d Ising OPE coefficients with fuzzy sphere conformal generators, Giulia Fardelli, A. Liam Fitzpatrick, Emanuel Katz, [arXiv:2602.04958](https://arxiv.org/abs/2602.04958).
 * __[Huffman 2026]__ Generalizing Deconfined Criticality to 3D $N$-Flavor $\mathrm{SU}(2)$ Quantum Chromodynamics on the Fuzzy Sphere, Emilie Huffman, Zheng Zhou, Yin-Chen He, Johannes S. Hofmann, [arXiv:2602.11255](https://arxiv.org/abs/2602.11255).
 * __[Meng 2026]__ Quantum phase transitions on complex projective space $\mathbb{CP}^2$, Xue Meng, Junwen Zhao, Wei Zhu, Congjun Wu, [Phys. Lett. A __580__, 131488 (2026)](https://doi.org/10.1016/j.physleta.2026.131488).
+* __[Eck 2026]__ 3d conformal field theories via fuzzy sphere algebra, Luisa Eck and Zhenghan Wang, [arXiv:2602.15025](https://arxiv.org/abs/2602.15025).
+* __[Janssens 2026]__ Central extensions for loop groups of area-preserving diffeomorphisms and their fuzzy sphere limits, Bas Janssens and Zhenghan Wang, [arXiv:2603.06876](https://arxiv.org/abs/2603.06876).
+* __[He 2026]__ A fuzzy sphere journey in critical phenomena, Yin-Chen He, and Wei Zhu, [arXiv:2607.01310](https://arxiv.org/abs/2607.01310), [Ann. Rev. Condensed Matter Phys. __17__, 1 (2025)](https://doi.org/10.1146/annurev-conmatphys-031424-020256).
 * __[Sarma 2026]__ Fortuitous Universality of Bose-Kondo Impurities, Abhijat Sarma, Zheng Zhou, Ryan A. Lanzetta, Yin-Chen He, [arXiv:2604.07554](https://arxiv.org/abs/2604.07554).
 * __[Dey 2026]__ Conformal Data for the $O(2)$ Wilson-Fisher CFT in $(2+1)$-Dimensional Spacetime from Exact Diagonalization and Matrix Product States on the Fuzzy Sphere, Arjun Dey, Loic Herviou, Christopher Mudry, Slava Rychkov, Andreas Martin Läuchli, [arXiv:2604.18705](https://arxiv.org/abs/2604.18705).
 * __[Feng 2026]__ Studying 3D $O(N)$ Surface CFT on the Fuzzy Sphere, Jiechao Feng, Taige Wang, [arXiv:2604.21091](https://arxiv.org/abs/2604.21091).
