@@ -266,7 +266,7 @@ returns the modes of fermion annihilation operator ``c_m``, with angular momentu
 """
 function GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : STerm[]
     else
         gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1.0, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
     end
@@ -288,7 +288,7 @@ returns the modes of electron boson operator ``b_m``, with angular momentum ``s=
 """
 function GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((nm - 1 - m2) ÷ 2), [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : STerm[]
     else
         gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1.0, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
     end

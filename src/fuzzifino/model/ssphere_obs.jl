@@ -320,7 +320,7 @@ returns the fermion annihilation operator ``ψ_f``.
 """
 function GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 + m2) ÷ 2) / √norm_r2, [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 - m2) ÷ 2) / √norm_r2, [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : STerm[]
         return SSphereObs(-nm + 1, nm - 1, gc)
     else
         gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
@@ -344,7 +344,7 @@ returns the boson annihilation operator ``ϕ_f``.
 """
 function GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 + m2) ÷ 2) / √norm_r2, [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 - m2) ÷ 2) / √norm_r2, [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : STerm[]
         return SSphereObs(-nm + 1, nm - 1, gc)
     else
         gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
