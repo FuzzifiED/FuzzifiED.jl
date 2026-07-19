@@ -36,6 +36,7 @@ mutable struct QNDiag
     QNDiag(charge :: Vector{Int64}, modul :: Int64 = 1) = new("QN", charge, modul)
 end
 
+Base.zero( :: Type{QNDiag}, no :: Int64) = QNDiag(zeros(Int64, no))
 
 """
     *(fac :: Int64, qnd :: QNDiag) :: QNDiag 

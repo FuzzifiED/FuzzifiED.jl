@@ -50,6 +50,8 @@ function AngModes(l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64}, Terms})
     return AngModes(l2m, (l2, m2) -> (l2 ≤ l2m && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : Term[], true, cmps)
 end
 
+Base.one( :: Type{AngModes}) = AngModes(0, Dict((0, 0) => one(Terms)))
+Base.zero( :: Type{AngModes}) = AngModes(0, Dict((0, 0) => zero(Terms)))
 
 """
     StoreComps!(amd :: AngModes)

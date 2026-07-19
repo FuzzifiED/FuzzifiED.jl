@@ -75,6 +75,8 @@ function SAngModes(l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64}, STerms})
     return SAngModes(l2m, (l2, m2) -> (l2 ≤ l2m && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : STerm[], true, cmps)
 end
 
+Base.one( :: Type{SAngModes}) = SAngModes(0, Dict((0, 0) => one(STerms)))
+Base.zero( :: Type{SAngModes}) = SAngModes(0, Dict((0, 0) => zero(STerms)))
 
 """
     StoreComps!(amd :: SAngModes)

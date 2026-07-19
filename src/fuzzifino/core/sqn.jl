@@ -39,6 +39,7 @@ mutable struct SQNDiag
     SQNDiag(chargef :: Vector{Int64}, chargeb :: Vector{Int64}, modul :: Int64 = 1) = new("QN", chargef, chargeb, modul)
 end
 
+Base.zero( :: Type{SQNDiag}, nof :: Int64, nob :: Int64) = SQNDiag(zeros(Int64, nof), zeros(Int64, nob))
 
 """
     SQNDiag(qnd :: QNDiag, nob :: Int64) :: SQNDiag

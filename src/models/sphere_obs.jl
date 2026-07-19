@@ -72,6 +72,8 @@ function SphereObs(s2 :: Int64, l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64}, 
     return SphereObs(s2, l2m, (l2, m2) -> (l2 ≤ l2m && l2 ≥ abs(s2) && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : Term[], true, cmps)
 end
 
+Base.one( :: Type{SphereObs}) = SphereObs(0, 0, Dict((0, 0) => one(Terms)))
+Base.zero( :: Type{SphereObs}) = SphereObs(0, 0, Dict((0, 0) => zero(Terms)))
 
 """
     StoreComps!(obs :: SphereObs)
@@ -145,6 +147,8 @@ enables the addition of two observables.
 """
 function Base.:+(obs1 :: SphereObs, obs2 :: SphereObs) 
     if (obs1.s2 ≠ obs2.s2) 
+        if (obs1 == zero(SphereObs)) return obs2 end 
+        if (obs2 == zero(SphereObs)) return obs1 end
         print("Additions must have equal S")
         return 
     end

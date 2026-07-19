@@ -80,6 +80,8 @@ function SSphereObs(s2 :: Int64, l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64},
     return SSphereObs(s2, l2m, (l2, m2) -> (l2 ≤ l2m && l2 ≥ abs(s2) && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : STerm[], true, cmps)
 end
 
+Base.one( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => one(Terms)))
+Base.zero( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => zero(Terms)))
 
 """
     StoreComps!(obs :: SSphereObs)
@@ -153,6 +155,8 @@ enables the addition of two observables.
 """
 function Base.:+(obs1 :: SSphereObs, obs2 :: SSphereObs) 
     if (obs1.s2 ≠ obs2.s2) 
+        if (obs1 == zero(SSphereObs)) return obs2 end 
+        if (obs2 == zero(SSphereObs)) return obs1 end
         print("Additions must have equal S")
         return 
     end
@@ -402,7 +406,7 @@ end
 
 
 """
-    PadSSphereObs(obs :: SphereObs, nofl :: Int64, nobl :: Int64)
+    PadSSphereObs(obs :: SSphereObs, nofl :: Int64, nobl :: Int64)
 
 
 adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index, implemented as 
