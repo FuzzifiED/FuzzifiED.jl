@@ -72,7 +72,7 @@ function SphereObs(s2 :: Int64, l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64}, 
     return SphereObs(s2, l2m, (l2, m2) -> (l2 ≤ l2m && l2 ≥ abs(s2) && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : Term[], true, cmps)
 end
 
-Base.one( :: Type{SphereObs}) = SphereObs(0, 0, Dict((0, 0) => one(Terms)))
+Base.one( :: Type{SphereObs}) = SphereObs(0, 0, Dict((0, 0) => √(4π) * one(Terms)))
 Base.zero( :: Type{SphereObs}) = SphereObs(0, 0, Dict((0, 0) => zero(Terms)))
 
 """

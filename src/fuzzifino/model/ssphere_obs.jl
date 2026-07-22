@@ -80,8 +80,8 @@ function SSphereObs(s2 :: Int64, l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64},
     return SSphereObs(s2, l2m, (l2, m2) -> (l2 ≤ l2m && l2 ≥ abs(s2) && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : STerm[], true, cmps)
 end
 
-Base.one( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => one(Terms)))
-Base.zero( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => zero(Terms)))
+Base.one( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => √(4π) * one(STerms)))
+Base.zero( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => zero(STerms)))
 
 """
     StoreComps!(obs :: SSphereObs)

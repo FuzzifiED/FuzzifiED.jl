@@ -94,7 +94,7 @@ calls the Arpack package to calculate the lowest eigenstates of sparse matrix.
 * A length-`nst` array that has the same type as `mat` recording the eigenvalues, and 
 * A `dimd`×`nst` matrix that has the same type as `mat` where every column records an eigenstate. 
 """
-function GetEigensystem(mat :: OpMat{ComplexF64}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), initvec :: Vector{ComplexF64} = ComplexF64[], num_th = NumThreads, disp_std = !SilentStd)
+function GetEigensystem(mat :: OpMat{ComplexF64}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = min(max(2 * nst, nst + 10), mat.dimd), initvec :: Vector{ComplexF64} = ComplexF64[], num_th = NumThreads, disp_std = !SilentStd)
     eigval = Vector{ComplexF64}(undef, nst + 1)
     eigvec = Matrix{ComplexF64}(undef, mat.dimd, nst)
     if isempty(initvec)
@@ -104,7 +104,7 @@ function GetEigensystem(mat :: OpMat{ComplexF64}, nst :: Int64 ; tol :: Float64 
     end
     return eigval[1 : end - 1], eigvec
 end 
-function GetEigensystem(mat :: OpMat{Float64}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), initvec :: Vector{Float64} = Float64[], num_th = NumThreads, disp_std = !SilentStd)
+function GetEigensystem(mat :: OpMat{Float64}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = min(max(2 * nst, nst + 10), mat.dimd), initvec :: Vector{Float64} = Float64[], num_th = NumThreads, disp_std = !SilentStd)
     eigval = Vector{Float64}(undef, nst + 1)
     eigvec = Matrix{Float64}(undef, mat.dimd, nst)
     if isempty(initvec)
