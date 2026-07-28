@@ -36,15 +36,4 @@ function FuzzifiED.OpMat(matcsc :: SparseMatrixCSC)
 end
 
 
-"""
-    Matrix(mat :: OpMat{ComplexF64}) :: Matrix{ComplexF64}
-    Matrix(mat :: OpMat{Float64}) :: Matrix{Float64}
-
-converts the `OpMat` objects to a full matrix.
-"""
-function LinearAlgebra.Matrix(mat :: OpMat)
-    return Matrix(SparseMatrixCSC(mat))
-end
-
-
 end

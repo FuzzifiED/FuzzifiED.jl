@@ -74,6 +74,38 @@ OpMat(op :: Operator ; type :: DataType = ElementType, num_th = NumThreads, disp
 
 
 """
+    Matrix(mat :: OpMat{ComplexF64} ; num_th :: Int64) :: Matrix{ComplexF64}
+    Matrix(mat :: OpMat{Float64} ; num_th :: Int64) :: Matrix{Float64}
+
+converts the `OpMat` objects to a full matrix. 
+
+# Facultative argument
+
+* `num_th :: Int64`, the number of threads. Facultative, `NumThreads` by default.
+"""
+function Base.Matrix(mat :: OpMat{T} ; num_th = NumThreads) where T <: Union{Float64, ComplexF64}
+    mat_full = Matrix{T}(undef, mat.dimf, mat.dimd)
+    num_th_a = max(1, min(num_th, mat.dimd))
+    blk = cld(mat.dimd, num_th_a)
+    @sync for i_th = 1 : num_th_a
+        Threads.@spawn fill!(view(mat_full, :, (i_th - 1) * blk + 1 : min(i_th * blk, mat.dimd)), zero(T))
+    end
+    @sync for i_th = 1 : num_th_a
+        Threads.@spawn for j = i_th : num_th_a : mat.dimd
+            for p = mat.colptr[j] : mat.colptr[j + 1] - 1
+                i = mat.rowid[p]
+                mat_full[i, j] = mat.elval[p]
+                if (mat.sym_q ≠ 0 && i ≠ j)
+                    mat_full[j, i] = mat.sym_q == 1 ? conj(mat.elval[p]) : mat.elval[p]
+                end
+            end
+        end
+    end
+    return mat_full
+end
+
+
+"""
     GetEigensystem(mat :: OpMat{ComplexF64}, nst :: Int64 ; tol :: Float64, ncv :: Int64, initvec :: Vector{ComplexF64}, num_th :: Int64, disp_std :: Bool) :: Tuple{Vector{ComplexF64}, Matrix{ComplexF64}}
     GetEigensystem(mat :: OpMat{Float64}, nst :: Int64 ; tol :: Float64, ncv :: Int64, initvec :: Vector{Float64}, num_th :: Int64, disp_std :: Bool) :: Tuple{Vector{Float64}, Matrix{Float64}}
 
