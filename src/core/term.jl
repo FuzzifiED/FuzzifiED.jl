@@ -186,7 +186,7 @@ end
 
 
 """
-    SimplifyTerms(tms :: Terms ; cutoff :: Float64 = eps(Float64)) :: Terms
+    SimplifyTerms(tms :: Terms ; cutoff :: Float64 = 1E-14) :: Terms
 
 simplifies the sum of terms such that 
 * each term is normal ordered,
@@ -194,9 +194,9 @@ simplifies the sum of terms such that
 
 # Argument 
 
-* `cutoff :: Float64` is the cutoff such that terms with smaller absolute value of coefficients will be neglected. Facultative, `eps(Float64)` by default. 
+* `cutoff :: Float64` is the cutoff such that terms with smaller absolute value of coefficients will be neglected. Facultative, `1E-14` by default. 
 """
-function SimplifyTerms(tms :: Terms ; cutoff :: Float64 = eps(Float64)) :: Terms
+function SimplifyTerms(tms :: Terms ; cutoff :: Float64 = 1E-14) :: Terms
     dictlock = [ ReentrantLock() for i = 1 : 64 ]
     dict_tms = [ Dict{Vector{Int64}, ComplexF64}() for i = 1 : 64 ]
     
