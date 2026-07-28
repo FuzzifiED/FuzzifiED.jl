@@ -16,7 +16,7 @@ The sorting is performed for each column, and the function modifies the input ve
 """
 function canonicalize_csc!(colptr::Vector{Int}, rowval::Vector{Int}, nzval)
     n = length(colptr) - 1
-    for col in 1:n
+    Threads.@threads for col in 1:n
         r = colptr[col]:(colptr[col+1]-1)
         # skip small columns
         length(r) <= 1 && continue
@@ -34,8 +34,8 @@ end
 converts the `OpMat` objects to a `SparseMatrixCSC` object in the `SparseArrays` package.
 """
 function SparseArrays.SparseMatrixCSC(mat :: OpMat)
-    rowval = copy(mat.rowid)
-    nzval = copy(mat.elval)
+    rowval = mat.rowid
+    nzval = mat.elval
     canonicalize_csc!(mat.colptr, rowval, nzval)
     matcsc1 = SparseMatrixCSC(mat.dimf, mat.dimd, mat.colptr, rowval, nzval)
     if (mat.sym_q == 0) 
