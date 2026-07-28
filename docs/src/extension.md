@@ -38,13 +38,12 @@ mat = read(f, group_name :: String, OpMat{Float64})
 
 ## SparseArrays Extension 
 
-The SparseArrays extension supports the conversion between `OpMat` in FuzzifiED and the `SparseMatrixCSC` and `Matrix` format. This extension requires the packages `SparseArrays`. To use this extension, include at the heading 
+The SparseArrays extension supports the conversion between `OpMat` in FuzzifiED and the `SparseMatrixCSC` format. This extension requires the packages `SparseArrays`. To use this extension, include at the heading 
 ```julia
 using SparseArrays
 ```
 ```@docs
 SparseMatrixCSC(mat :: OpMat)
-Matrix(mat :: OpMat)
 OpMat(matcsc :: SparseMatrixCSC)
 ```
 

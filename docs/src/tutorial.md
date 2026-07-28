@@ -4,7 +4,7 @@ To demonstrate the usage of FuzzifiED interfaces for ED and DMRG, in this sectio
 
 1. calculates the lowest eigenstates in the symmetry sector $L^z=0$ and $(\mathscr{P},\mathscr{Z},\mathscr{R})=(+,+,+)$,
 2. measures their total angular momenta, and 
-3. calcultes the OPE coefficient $f_{\sigma\sigma\epsilon}=\langle \sigma|n^z_{00}|\epsilon\rangle/\langle \sigma|n^z_{00}|0\rangle$.
+3. calculates the OPE coefficient $f_{\sigma\sigma\epsilon}=\langle \sigma|n^z_{00}|\epsilon\rangle/\langle \sigma|n^z_{00}|0\rangle$.
 
 Four versions of the tutorial code are provided : 
 
@@ -24,9 +24,9 @@ Practically, the ED calculation can be divided into 4 steps.
 * Construct a many-body basis that respect a given set of quantum numbers. Specifically, in FuzzifiED we support quantum numbers of commuting $\mathrm{U}(1)$ or discrete $\mathbb{Z}_p$ symmetries.
 * Construct the sparse matrix corresponding to the Hamiltonian in the basis above. 
 * Find the lowest eigenstates and their corresponding eigenenergies of the sparse matrix.
-* Making measurements on the eigenstates. This including the total angular momentum, density operators, entanglement, _etc._
+* Make measurements on the eigenstates. This including the total angular momentum, density operators, entanglement, _etc._
 
-### Setup
+### Set-up
 
 Before starting the calculation, we need to input the setup for the system, including the number of flavours $N_f$, orbitals $N_m$ and sites $N_o$ 
 

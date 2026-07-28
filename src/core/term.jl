@@ -186,7 +186,7 @@ end
 
 
 """
-    SimplifyTerms(tms :: Terms ; cutoff :: Float64 = eps(Float64)) :: Terms
+    SimplifyTerms(tms :: Terms ; cutoff :: Float64 = 1E-14) :: Terms
 
 simplifies the sum of terms such that 
 * each term is normal ordered,
@@ -194,9 +194,9 @@ simplifies the sum of terms such that
 
 # Argument 
 
-* `cutoff :: Float64` is the cutoff such that terms with smaller absolute value of coefficients will be neglected. Facultative, `eps(Float64)` by default. 
+* `cutoff :: Float64` is the cutoff such that terms with smaller absolute value of coefficients will be neglected. Facultative, `1E-14` by default. 
 """
-function SimplifyTerms(tms :: Terms ; cutoff :: Float64 = eps(Float64)) :: Terms
+function SimplifyTerms(tms :: Terms ; cutoff :: Float64 = 1E-14) :: Terms
     dictlock = [ ReentrantLock() for i = 1 : 64 ]
     dict_tms = [ Dict{Vector{Int64}, ComplexF64}() for i = 1 : 64 ]
     
@@ -227,7 +227,7 @@ end
 """
     RemoveOrbs(tms :: Terms, o_rm :: Vector{Int64}) :: Terms
 
-remove all the terms that has creation or annihilation operators of sites in the set `o_rm`.
+remove all the terms that have creation or annihilation operators of sites in the set `o_rm`.
 """
 function RemoveOrbs(tms :: Terms, o_rm :: Vector{Int64})
     return filter(tm -> all([o ∉ o_rm for o in tm.cstr[2 : 2 : end]]), tms)
@@ -245,6 +245,7 @@ function RelabelOrbs(tms :: Terms, dict_o :: Dict{Int64, Int64})
         cstr1 = deepcopy(tm.cstr)
         flag = true
         for i = 2 : 2 : length(cstr1)
+            if (cstr1[i] == -1) break end
             if (!haskey(dict_o, cstr1[i]))
                 flag = false 
                 break

@@ -4,7 +4,6 @@
 
 using FuzzifiED
 using LinearAlgebra
-using SparseArrays
 const σ1 = [  1  0 ;  0  0 ]
 const σ2 = [  0  0 ;  0  1 ]
 const σx = [  0  1 ;  1  0 ]

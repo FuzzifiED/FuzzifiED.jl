@@ -80,6 +80,8 @@ function SSphereObs(s2 :: Int64, l2m :: Int64, cmps :: Dict{Tuple{Int64, Int64},
     return SSphereObs(s2, l2m, (l2, m2) -> (l2 ≤ l2m && l2 ≥ abs(s2) && abs(m2) ≤ l2 && haskey(cmps, (l2, m2))) ? cmps[(l2, m2)] : STerm[], true, cmps)
 end
 
+Base.one( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => √(4π) * one(STerms)))
+Base.zero( :: Type{SSphereObs}) = SSphereObs(0, 0, Dict((0, 0) => zero(STerms)))
 
 """
     StoreComps!(obs :: SSphereObs)
@@ -153,6 +155,8 @@ enables the addition of two observables.
 """
 function Base.:+(obs1 :: SSphereObs, obs2 :: SSphereObs) 
     if (obs1.s2 ≠ obs2.s2) 
+        if (obs1 == zero(SSphereObs)) return obs2 end 
+        if (obs2 == zero(SSphereObs)) return obs1 end
         print("Additions must have equal S")
         return 
     end
@@ -320,7 +324,7 @@ returns the fermion annihilation operator ``ψ_f``.
 """
 function GetFermionSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 + m2) ÷ 2) / √norm_r2, [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 - m2) ÷ 2) / √norm_r2, [0, f + nf * ((nm - 1 - m2) ÷ 2)]) : STerm[]
         return SSphereObs(-nm + 1, nm - 1, gc)
     else
         gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, f + nf * ((m2 + nm - 1) ÷ 2)]) : STerm[]
@@ -344,7 +348,7 @@ returns the boson annihilation operator ``ϕ_f``.
 """
 function GetBosonSObs(nm :: Int64, nf :: Int64, f :: Int64 ; norm_r2 :: Float64 = ObsNormRadSq, mom_incr :: Bool = ObsMomIncr)
     if mom_incr
-        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 + m2) ÷ 2) / √norm_r2, [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : Term[]
+        gc = (l2, m2) -> (l2 == nm - 1) ? STerms((-1) ^ ((l2 - m2) ÷ 2) / √norm_r2, [0, -(f + nf * ((nm - 1 - m2) ÷ 2))]) : STerm[]
         return SSphereObs(-nm + 1, nm - 1, gc)
     else
         gc = (l2, m2) -> (l2 == nm - 1) ? STerms(1 / √norm_r2, [0, -(f + nf * ((m2 + nm - 1) ÷ 2))]) : STerm[]
@@ -402,7 +406,7 @@ end
 
 
 """
-    PadSSphereObs(obs :: SphereObs, nofl :: Int64, nobl :: Int64)
+    PadSSphereObs(obs :: SSphereObs, nofl :: Int64, nobl :: Int64)
 
 
 adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index, implemented as 

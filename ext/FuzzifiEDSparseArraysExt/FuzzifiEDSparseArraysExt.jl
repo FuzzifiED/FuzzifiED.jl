@@ -54,19 +54,8 @@ end
 
 converts the `SparseMatrixCSC` object in the `SparseArrays` package to an `OpMat` objects.
 """
-function OpMat(matcsc :: SparseMatrixCSC)
+function FuzzifiED.OpMat(matcsc :: SparseMatrixCSC)
     return OpMat{typeof(matcsc.nzval[1])}(matcsc.n, matcsc.m, 0, length(matcsc.rowval), matcsc.colptr, matcsc.rowval, matcsc.nzval)
-end
-
-
-"""
-    Matrix(mat :: OpMat{ComplexF64}) :: Matrix{ComplexF64}
-    Matrix(mat :: OpMat{Float64}) :: Matrix{Float64}
-
-converts the `OpMat` objects to a full matrix.
-"""
-function LinearAlgebra.Matrix(mat :: OpMat)
-    return Matrix(SparseMatrixCSC(mat))
 end
 
 
