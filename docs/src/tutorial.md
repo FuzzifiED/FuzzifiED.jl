@@ -13,7 +13,7 @@ Four versions of the tutorial code are provided :
 3. [`tutorial_ising_dmrg.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg.jl) — the DMRG code that converts the format into ITensor.
 4. [`tutorial_ising_dmrg_easysweep.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/blob/main/examples/tutorial_ising_dmrg_easysweep.jl) — the DMRG code that uses the Easy-Sweep extension.
 
-The examples can be found in the directory [`examples`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples). We also append in the end [a list of given examples](@ref List-of-Examples) at the end of the page. 
+The examples can be found in the directory [`examples`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples). We also append [a list of given examples](@ref List-of-Examples) at the end of the page. 
 
 ## ED with FuzzifiED
 
