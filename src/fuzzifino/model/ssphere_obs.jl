@@ -200,7 +200,8 @@ function Base.:*(obs1 :: SSphereObs, obs2 :: SSphereObs)
     l2m1 = obs1.l2m
     l2m2 = obs2.l2m
     l2m = l2m1 + l2m2
-    gc = ((l2, m2) -> sum(STerms[sum(STerms[sum(STerms[
+    gc = ((l2, m2) -> (l2 ≥ abs(s2) && l2 ≥ m2 && l2 ≤ l2m) ? 
+            sum(STerms[sum(STerms[sum(STerms[
             (iseven((s2 + m2) ÷ 2) ? 1 : -1) *
             sqrt((l21 + 1) * (l22 + 1) * (l2 + 1) / (4 * π)) *
             wigner3j(l21/2, l22/2, l2/2, -s21/2, -s22/2, s2/2) *
@@ -208,7 +209,7 @@ function Base.:*(obs1 :: SSphereObs, obs2 :: SSphereObs)
             obs1.get_comp(l21, m21) * obs2.get_comp(l22, m2 - m21)
         for m21 = max(-l21, -l22 + m2) : 2 : min(l21, l22 + m2)])
         for l21 = max(abs(s21), abs(l2 - l22)) : 2 : min(l2m1, l2 + l22)])
-        for l22 = abs(s22) : 2 : l2m2]))
+        for l22 = abs(s22) : 2 : l2m2]) : Term[])
     return SSphereObs(s2, l2m, gc)
 end
 
