@@ -1,4 +1,4 @@
-export GetIntMatrix, GetDenIntTerms, GetPairIntTerms, GetPolTerms, GetL2Terms, GetLpLzTerms, GetC2Terms
+export GetIntMatrix, GetDenIntTerms, GetPairIntTerms, GetPolTerms, GetL2Terms, GetLzLpTerms, GetLpLzTerms, GetC2Terms
 
 
 """
@@ -234,7 +234,7 @@ end
 
 
 """
-    GetLpLzTerms(nm :: Int64, nf :: Int64) :: Tuple{Terms, Terms}
+    GetLzLpTerms(nm :: Int64, nf :: Int64) :: Tuple{Terms, Terms}
 
 Return the a pair of terms containing ``L^z`` and ``L^+``
 
@@ -242,7 +242,7 @@ Return the a pair of terms containing ``L^z`` and ``L^+``
 * `nm :: Int64` is the number of orbitals.
 * `nf :: Int64` is the number of flavours.
 """
-function GetLpLzTerms(nm :: Int64, nf :: Int64)
+function GetLzLpTerms(nm :: Int64, nf :: Int64)
     s = (nm - 1) / 2.0
     no = nm * nf
     tms_lz = 
@@ -255,7 +255,7 @@ function GetLpLzTerms(nm :: Int64, nf :: Int64)
         end for o = nf + 1 : no ]
     return tms_lz, tms_lp
 end
-
+@deprecate GetLpLzTerms GetLzLpTerms
 
 """
     GetL2Terms(tms_lzlp :: Tuple{Terms, Terms}) :: Terms

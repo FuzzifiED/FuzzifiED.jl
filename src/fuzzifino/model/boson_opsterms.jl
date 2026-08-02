@@ -1,4 +1,4 @@
-export GetBosonDenIntSTerms, GetBosonPairIntSTerms, GetBosonPolSTerms, GetBosonL2STerms, GetBosonC2STerms, GetL2STerms, GetBosonLpLzSTerms
+export GetBosonDenIntSTerms, GetBosonPairIntSTerms, GetBosonPolSTerms, GetBosonL2STerms, GetBosonC2STerms, GetL2STerms, GetBosonLzLpSTerms, GetBosonLpLzSTerms
 
 
 """
@@ -190,7 +190,7 @@ GetBosonL2STerms(nm :: Int64, nf :: Int64) = GetL2STerms(0, 0, nm, nf)
 
 
 """
-    GetBosonLpLzSTerms(nm :: Int64, nf :: Int64) :: Tuple{Terms, Terms}
+    GetBosonLzLpSTerms(nm :: Int64, nf :: Int64) :: Tuple{Terms, Terms}
 
 Return the a pair of terms containing ``L^z`` and ``L^+`` for bosons. 
 
@@ -198,7 +198,7 @@ Return the a pair of terms containing ``L^z`` and ``L^+`` for bosons.
 * `nm :: Int64` is the number of bosonic orbitals.
 * `nf :: Int64` is the number of bosonic flavours.
 """
-function GetBosonLpLzSTerms(nm :: Int64, nf :: Int64)
+function GetBosonLzLpSTerms(nm :: Int64, nf :: Int64)
     s = (nm - 1) / 2.0
     no = nm * nf
     tms_lz = 
@@ -211,7 +211,7 @@ function GetBosonLpLzSTerms(nm :: Int64, nf :: Int64)
         end for o = nf + 1 : no ]
     return tms_lz, tms_lp
 end
-
+@deprecate GetBosonLpLzSTerms GetBosonLzLpSTerms
 
 """
     GetL2Terms(tms_lzlp :: Tuple{STerms, STerms}) :: STerms
