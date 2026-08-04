@@ -140,8 +140,10 @@ end
 """
     *(mat :: OpMat{ComplexF64}, st_d :: Vector{ComplexF64} ; num_th :: Int64) :: Vector{ComplexF64}
     *(mat :: OpMat{Float64}, st_d :: Vector{Float64} ; num_th :: Int64) :: Vector{Float64}
+    *(mat :: OpMat{ComplexF64}, st_d :: Matrix{ComplexF64} ; num_th :: Int64) :: Vector{ComplexF64}
+    *(mat :: OpMat{Float64}, st_d :: Matrix{Float64} ; num_th :: Int64) :: Vector{Float64}
 
-Measure the action of a sparse matrix on a state. `st_d` must be of length `mat.dimd`. Returns a vector of length `mat.dimf` that represents the final state. 
+Measure the action of a sparse matrix on a state or a set of states in the format of a matrix. `st_d` must be of length `mat.dimd`. Returns a vector or a matrix of length `mat.dimf` that represents the final state(s). 
 
 # Facultative argument
 
@@ -175,8 +177,10 @@ end
 """
     *(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Vector{ComplexF64}}, mat :: OpMat{ComplexF64}, st_d :: Vector{ComplexF64} ; num_th :: Int64) :: ComplexF64
     *(st_fp :: LinearAlgebra.Adjoint{Float64, Vector{Float64}}, mat :: OpMat{Float64}, st_d :: Vector{Float64} ; num_th :: Int64) :: Float64
+    *(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Matrix{ComplexF64}}, mat :: OpMat{ComplexF64}, st_d :: Matrix{ComplexF64} ; num_th :: Int64) :: ComplexF64
+    *(st_fp :: LinearAlgebra.Adjoint{Float64, Matrix{Float64}}, mat :: OpMat{Float64}, st_d :: Matrix{Float64} ; num_th :: Int64) :: Float64
 
-Measuring the inner product between two states and a sparse matrix. `st_d` must be of length `mat.dimd` and `st_fp` must be of length `mat.dimf`, and `st_fp` must be an adjoint. 
+Measuring the inner product between two states (or two sets of states in the format of a matrix) and a sparse matrix. `st_d` must be of length `mat.dimd` and `st_fp` must be of length `mat.dimf`, and `st_fp` must be an adjoint. 
 
 # Facultative argument
 
