@@ -126,7 +126,7 @@ GetBosonRotySQNOffd
 GetBosonDenIntSTerms
 GetBosonPairIntSTerms
 GetBosonPolSTerms
-GetBosonLpLzSTerms
+GetBosonLzLpSTerms
 GetL2STerms(tms_lzlp :: Tuple{STerms, STerms})
 GetBosonC2STerms
 ```

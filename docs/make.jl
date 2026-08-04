@@ -1,5 +1,5 @@
 #=
-julia -O3 --color=yes make.jl && mv -f publish/FuzzifiEDFullRotation.jl/* tmp && rm -r publish/*/* && mv -f build/* publish && mv -f tmp/* publish/FuzzifiEDFullRotation.jl && rm -r build && cd publish && git commit -a -m "a" && git push && cd ..
+julia -O3 --color=yes make.jl && mv -f publish/so3lver/* tmp && rm -r publish/*/* && mv -f build/* publish && mv -f tmp/* publish/so3lver && rm -r build && cd publish && git commit -a -m "a" && git push && cd ..
 =#
 push!(LOAD_PATH,"../src/")
 push!(LOAD_PATH,"../ext/")
