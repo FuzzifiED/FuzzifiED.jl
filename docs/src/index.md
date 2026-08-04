@@ -1,11 +1,11 @@
 # FuzzifiED.jl 
 
-[![Version](https://img.shields.io/badge/Version-1.2.2-orange)](https://juliahub.com/ui/Packages/General/FuzzifiED/1.2.2)
+[![Version](https://img.shields.io/badge/Version-1.2.4-orange)](https://juliahub.com/ui/Packages/General/FuzzifiED/1.2.4)
 [![Documentation online](https://img.shields.io/badge/Documentation-Online-8e8eff)](https://docs.fuzzified.world/)
 [![Documentation PDF](https://img.shields.io/badge/Documentation-PDF-8e8eff)](https://docs.fuzzified.world/assets/FuzzifiED_Documentation.pdf)
 [![Source GitHub](https://img.shields.io/badge/Source-GitHub-silver)](https://github.com/FuzzifiED/FuzzifiED.jl)
 [![arXiv](https://img.shields.io/badge/arXiv-2503.00100-b31b1b)](https://arxiv.org/abs/2503.00100)
-[![Contact](https://img.shields.io/badge/Contact-Zheng_Zhou_周正-2e63b8)](mailto:Zheng%20Zhou%20%E5%91%A8%E6%AD%A3%20<physics@zhengzhou.page>)
+[![Contact](https://img.shields.io/badge/Contact-Zheng_Zhou_周正-2e63b8)](mailto:Zheng%20Zhou%20周正<physics@zhengzhou.page>)
 
 Since its proposal, the fuzzy sphere regularisation has made significant contributions to the study of 3d CFTs. The Julia package FuzzifiED aims at simplifying the numerical calculations on the fuzzy sphere. It supports exact diagonalisation (ED) calculations, as well as the density matrix renormalisation group (DMRG) using the ITensor library. FuzzifiED can also apply to generic fermionic and bosonic models. This package offers the following features : 
 
@@ -120,6 +120,10 @@ Depth = 2
 * __[Dey 2026]__ Conformal Data for the $O(2)$ Wilson-Fisher CFT in $(2+1)$-Dimensional Spacetime from Exact Diagonalization and Matrix Product States on the Fuzzy Sphere, Arjun Dey, Loic Herviou, Christopher Mudry, Slava Rychkov, Andreas Martin Läuchli, [arXiv:2604.18705](https://arxiv.org/abs/2604.18705).
 * __[Feng 2026]__ Studying 3D $O(N)$ Surface CFT on the Fuzzy Sphere, Jiechao Feng, Taige Wang, [arXiv:2604.21091](https://arxiv.org/abs/2604.21091).
 * __[Stergiou 2026]__ Quantum Rotors on the Fuzzy Sphere and the Cubic CFT, Andreas Stergiou, [arXiv:2604.24840](https://arxiv.org/abs/2604.24840).
+
+## Acknowledgement
+
+Zheng Zhou extend his deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Andrew Liam Fitzpatrick, Wenhan Guo, Liangdong Hu, Xiang Li, Christian Voinea, Kay Jörg Wiese, Shuai Yang, Matthew Yusef, and Wei Zhu for their suggestions and contributions to the package.
 
 ## Index 
 
