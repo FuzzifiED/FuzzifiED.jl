@@ -4,6 +4,16 @@
 
 ### Version 1.2
 
+#### Version 1.2.4 (4th August 2026)
+
+- Fix bug in generating SparseMatrixCSC. (We acknowledge Matthew Yusef for his contribution.)
+- Improve generating matrix from OpMat.
+- Change the cut-off for SimplifyTerms to 1E-14.
+- Fix angular-momentum bound in observable multiplication. 
+- Allow modul for zero(QNDiag). 
+- Rename ...LpLz... to ...LzLp...
+- Fix other various bugs.
+
 #### Version 1.2.2 (19th July 2026)
 
 - Fix the behaviour of AngModes. 
