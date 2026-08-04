@@ -83,24 +83,14 @@ converts the `OpMat` objects to a full matrix.
 
 * `num_th :: Int64`, the number of threads. Facultative, `NumThreads` by default.
 """
-function Base.Matrix(mat :: OpMat{T} ; num_th = NumThreads) where T <: Union{Float64, ComplexF64}
-    mat_full = Matrix{T}(undef, mat.dimf, mat.dimd)
-    num_th_a = max(1, min(num_th, mat.dimd))
-    blk = cld(mat.dimd, num_th_a)
-    @sync for i_th = 1 : num_th_a
-        Threads.@spawn fill!(view(mat_full, :, (i_th - 1) * blk + 1 : min(i_th * blk, mat.dimd)), zero(T))
-    end
-    @sync for i_th = 1 : num_th_a
-        Threads.@spawn for j = i_th : num_th_a : mat.dimd
-            for p = mat.colptr[j] : mat.colptr[j + 1] - 1
-                i = mat.rowid[p]
-                mat_full[i, j] = mat.elval[p]
-                if (mat.sym_q ≠ 0 && i ≠ j)
-                    mat_full[j, i] = mat.sym_q == 1 ? conj(mat.elval[p]) : mat.elval[p]
-                end
-            end
-        end
-    end
+function Base.Matrix(mat :: OpMat{ComplexF64} ; num_th = NumThreads)
+    mat_full = Matrix{ComplexF64}(undef, mat.dimf, mat.dimd)
+    @ccall Libpath.__diag_MOD_full_matrix(mat.dimd :: Ref{Int64}, mat.dimf :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{ComplexF64}, mat_full :: Ref{ComplexF64}, num_th :: Ref{Int64}) :: Nothing
+    return mat_full
+end
+function Base.Matrix(mat :: OpMat{Float64} ; num_th = NumThreads)
+    mat_full = Matrix{Float64}(undef, mat.dimf, mat.dimd)
+    @ccall Libpath.__diag_re_MOD_full_matrix_re(mat.dimd :: Ref{Int64}, mat.dimf :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{Float64}, mat_full :: Ref{Float64}, num_th :: Ref{Int64}) :: Nothing
     return mat_full
 end
 
@@ -168,6 +158,19 @@ function Base.:*(mat :: OpMat{Float64}, st_d :: Vector{Float64} ; num_th = NumTh
     return st_f
 end
 
+function Base.:*(mat :: OpMat{ComplexF64}, st_d :: Matrix{ComplexF64} ; num_th = NumThreads)
+    nst = size(st_d, 2)
+    st_f = Matrix{ComplexF64}(undef, mat.dimf, nst)
+    @ccall Libpath.__diag_MOD_vec_mat_prod(mat.dimd :: Ref{Int64}, mat.dimf :: Ref{Int64}, nst :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{ComplexF64}, st_d :: Ref{ComplexF64}, st_f :: Ref{ComplexF64}, num_th :: Ref{Int64}) :: Nothing
+    return st_f
+end
+function Base.:*(mat :: OpMat{Float64}, st_d :: Matrix{Float64} ; num_th = NumThreads)
+    nst = size(st_d, 2)
+    st_f = Matrix{Float64}(undef, mat.dimf, nst)
+    @ccall Libpath.__diag_re_MOD_vec_mat_prod_re(mat.dimd :: Ref{Int64}, mat.dimf :: Ref{Int64}, nst :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{Float64}, st_d :: Ref{Float64}, st_f :: Ref{Float64}, num_th :: Ref{Int64}) :: Nothing
+    return st_f
+end
+
 
 """
     *(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Vector{ComplexF64}}, mat :: OpMat{ComplexF64}, st_d :: Vector{ComplexF64} ; num_th :: Int64) :: ComplexF64
@@ -188,4 +191,19 @@ function Base.:*(st_fp :: LinearAlgebra.Adjoint{Float64, Vector{Float64}}, mat :
     ovl_ref = Ref{Float64}(0)
     @ccall Libpath.__diag_re_MOD_scal_prod_re(mat.dimd :: Ref{Int64}, mat.dimf :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{Float64}, st_d :: Ref{Float64}, st_fp' :: Ref{Float64}, ovl_ref :: Ref{Float64}, num_th :: Ref{Int64}) :: Nothing
     return ovl_ref[]
+end
+
+function Base.:*(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Matrix{ComplexF64}}, mat :: OpMat{ComplexF64}, st_d :: Matrix{ComplexF64} ; num_th = NumThreads)
+    nst_d = size(st_d, 2)
+    nst_f = size(st_fp', 2)
+    ovl = Matrix{ComplexF64}(undef, nst_f, nst_d)
+    @ccall Libpath.__diag_MOD_scal_mat_prod(mat.dimd :: Ref{Int64}, nst_d :: Ref{Int64}, mat.dimf :: Ref{Int64}, nst_f :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{ComplexF64}, st_d :: Ref{ComplexF64}, st_fp' :: Ref{ComplexF64}, ovl :: Ref{ComplexF64}, num_th :: Ref{Int64}) :: Nothing
+    return ovl
+end
+function Base.:*(st_fp :: LinearAlgebra.Adjoint{Float64, Matrix{Float64}}, mat :: OpMat{Float64}, st_d :: Matrix{Float64} ; num_th = NumThreads)
+    nst_d = size(st_d, 2)
+    nst_f = size(st_fp', 2)
+    ovl = Matrix{Float64}(undef, nst_f, nst_d)
+    @ccall Libpath.__diag_re_MOD_scal_mat_prod_re(mat.dimd :: Ref{Int64}, nst_d :: Ref{Int64}, mat.dimf :: Ref{Int64}, nst_f :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{Float64}, st_d :: Ref{Float64}, st_fp' :: Ref{Float64}, ovl :: Ref{Float64}, num_th :: Ref{Int64}) :: Nothing
+    return ovl
 end
