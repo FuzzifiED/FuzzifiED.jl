@@ -29,15 +29,15 @@ This method calls the `eigsolve` from Julia `KrylovKit.jl` package instead of Ar
 * A `dimd`×`nst` matrix that has the same type as `mat` where every column records an eigenstate. 
 """
 function GetEigensystemKrylov(mat :: OpMat{T}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), initvec = rand(T, mat.dimd), num_th = NumThreads, disp_std = !SilentStd, kwargs...) where T <: Union{ComplexF64,Float64}
-    kwargs1 = haskey(kwargs, :krylovdim) ? kwargs : (kwargs..., krylovdim = ncv)
-    eigval, eigvec, info = eigsolve(x -> *(mat, x ; num_th), initvec, nst, :SR ; tol, kwargs1...)
+    verbosity = disp_std ? 3 : 0
+    eigval, eigvec, info = eigsolve(x -> *(mat, x ; num_th), initvec, nst, :SR ; tol, krylovdim = ncv, verbosity, kwargs...)
     if (disp_std) print(info) end
     return Vector{T}(eigval), Matrix{T}(hcat(eigvec...))
 end
 
 function GetEigensystemKrylov(op :: AbstractOperator, nst :: Int64, type :: DataType = ElementType ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), initvec = rand(type, op.bsd.dim), num_th = NumThreads, disp_std = !SilentStd, kwargs...)
-    kwargs1 = haskey(kwargs, :krylovdim) ? kwargs : (kwargs..., krylovdim = ncv)
-    eigval, eigvec, info = eigsolve(x -> *(op, x ; num_th), initvec, nst, :SR ; tol, kwargs1...)
+    verbosity = disp_std ? 3 : 0
+    eigval, eigvec, info = eigsolve(x -> *(op, x ; num_th), initvec, nst, :SR ; tol, krylovdim = ncv, verbosity, kwargs...)
     if (disp_std) print(info) end
     return Vector{type}(eigval), Matrix{type}(hcat(eigvec...))
 end

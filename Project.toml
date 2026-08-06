@@ -1,7 +1,7 @@
 name = "FuzzifiED"
 uuid = "b45b6d2d-92f2-400f-a7df-d2d897927e5f"
 authors = ["Zheng Zhou"]
-version = "1.2.4"
+version = "1.2.5"
 
 [deps]
 FuzzifiED_jll = "0fc6ce7e-a225-5ad5-93a0-97260cfa1513"
@@ -31,7 +31,7 @@ LinearAlgebra = "1"
 SparseArrays = "1"
 SphericalHarmonics = "0.1"
 WignerSymbols = "2"
-KrylovKit = "0.4, 0.5, 0.6, 0.7, 0.8"
+KrylovKit = "0.10"
 ITensors = "0.6, 0.7, 0.8, 0.9"
 ITensorMPS = "0.2, 0.3"
 HDF5 = "0.14, 0.15, 0.16, 0.17"
