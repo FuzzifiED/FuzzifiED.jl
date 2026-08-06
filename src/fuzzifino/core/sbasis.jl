@@ -49,6 +49,10 @@ generates the SBasis that respects the off-diagonal ``ℤ_p`` quantum numbers (s
 """
 function SBasis(cfs :: SConfs, secf :: Vector{<:Number}, qnf :: Vector{SQNOffd} ; num_th = NumThreads, disp_std = !SilentStd)
     if (length(secf) == 0) return SBasis(cfs) end
+    if (isempty(qnf[1].permf))
+        qnf1 = PadSQNOffd.(qnf, Ref(1), Ref(0), Ref(0), Ref(0))
+        return SBasis(cfs, secf, qnf1 ; num_th, disp_std)
+    end
     nqnf = length(secf)
     cyc = [ qnfi.cyc for qnfi in qnf ]
     permf_o_mat = reduce(hcat, [ qnfi.permf for qnfi in qnf ])

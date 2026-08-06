@@ -15,19 +15,17 @@ FuzzifiED.ElementType = Float64
 
 ne = 7
 nm = 2 * ne - 1
-nf = 2 
-nof = 1 # Fuzzifino can only deal with mixture of bosons and fermions, so we put a single site of fermion and keep it empty.
-nob = nm * nf 
+nf = 2
+no = nm * nf 
 qnd = [
-    GetNeSQNDiag(nof, nob),
-    SQNDiag(GetNeQNDiag(nof), nob),
-    GetBosonLz2SQNDiag(nof, nm, nf)
+    GetNeSQNDiag(0, no),
+    GetBosonLz2SQNDiag(0, nm, nf)
 ]
 qnf = [
-    GetBosonFlavPermSQNOffd(nof, nm, nf, [2, 1]),
-    GetBosonRotySQNOffd(nof, nm, nf)
+    GetBosonFlavPermSQNOffd(0, nm, nf, [2, 1]),
+    GetBosonRotySQNOffd(0, nm, nf)
 ]
-cfs = SConfs(nof, nob, ne, [ne, 0, 0], qnd) ;
+cfs = SConfs(0, no, ne, [ne, 0], qnd) ;
 
 tms_hmt = SimplifyTerms(
     GetBosonDenIntSTerms(nm, 2, [1.0])

@@ -55,6 +55,13 @@ generates the configurations from the list of QNDiags.
 If your `qnd` has negative entries, QNDiags must contain the total number of particles (_i. e._, bosons plus fermions).
 """
 function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}, qnd :: Vector{SQNDiag} ; norf :: Int64 = nof ÷ 2, norb :: Int64 = nob ÷ 2, num_th :: Int64 = NumThreads, disp_std :: Bool = !SilentStd)
+    if nof == 0
+        qnd1 = PadSQNDiag.(qnd, Ref(1), Ref(0), Ref(0), Ref(0))
+        push!(qnd1, SQNDiag("Nef", [1], fill(0, nob)))
+        secd1 = [secd ; 0]
+        return SConfs(1, nob, nebm, secd1, qnd1 ; norb, num_th, disp_std)
+    end
+
     nqnd = length(secd)
     binom = [ binomial(i + j, i) for i = 0 : nebm, j = 0 : nob]
     lid = Vector{Int64}(undef, 2 ^ (nof - norf) * (binom[nebm + 1, nob - norb + 1] + 1) + 1)
