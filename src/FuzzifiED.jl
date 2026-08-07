@@ -23,6 +23,7 @@ include("models/ang_modes.jl")
 
 include("fuzzifino/fuzzifino.jl")
 include("manifolds/manifolds.jl")
+include("jack/jack.jl")
 
 export GetSites, GetQNDiags, TruncateQNDiag
 function GetSites end

@@ -16,6 +16,7 @@ using KrylovKit
 using FuzzifiED
 using FuzzifiED.Fuzzifino
 using FuzzifiED.FuzzyManifolds
+using FuzzifiED.JackToolkit
 
 makedocs(sitename = "FuzzifiED.jl", 
     pages = ["Home" => "index.md", 
@@ -27,6 +28,7 @@ makedocs(sitename = "FuzzifiED.jl",
         "Other Extensions" => "extension.md", 
         "Fuzzifino" => "fuzzifino.md",
         "Fuzzy Manifolds" => "manifolds.md",
+        "Jack Tool-Kit" => "jack.md",
         "Releases" => "releases.md"],
     format = Documenter.HTML(
         assets = ["assets/serif.css", "assets/favicon.ico"], 

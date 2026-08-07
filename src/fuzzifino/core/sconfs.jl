@@ -1,4 +1,5 @@
 export SConfs
+export EncodeConfb, DecodeConfb, GetSConfId
 
 
 """
@@ -126,7 +127,7 @@ function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}
         num_th :: Ref{Int64}, (disp_std ? 1 : 0) :: Ref{Int64}
     ) :: Nothing
     ncf = ref_ncf[]
-    rid = Vector{Int64}(undef, 2 ^ norf * (binom[nebm + 1, nob - norb + 1] + 1))
+    rid = Vector{Int64}(undef, 2 ^ norf * (binom[nebm + 1, norb + 1] + 1) + 1)
     conff = Vector{Int64}(undef, ncf)
     confb = Vector{Int64}(undef, ncf)
     @ccall Libpathino.__scfs_MOD_generate_scfs(
@@ -139,3 +140,90 @@ function SConfs(nof :: Int64, nob :: Int64, nebm :: Int64, secd :: Vector{Int64}
         
     return SConfs(nof, nob, norf, norb, nebm, ncf, conff, confb, lid, rid)
 end
+
+
+"""
+    EncodeConfb(nocc_b :: AbstractVector{Int64}, nebm :: Int64) :: Int64
+
+encodes the occupation `nocc_b[o], o = 1 : nob` of the bosonic sites into the number `confb` used by `SConfs`. It reproduces the combinatorial index `encode_nb` of `scfs.f90`,
+```math
+    \\mathtt{confb}=∑_a C^{n^{(a)}_{eb}+o_a-1}_{n^{(a)}_{eb}}
+```
+where the bosons ``a=1,…,N_{eb}`` are taken from the last site to the first, ``o_a`` is the site of the ``a``-th boson and ``n^{(a)}_{eb}=\\mathtt{nebm}-a+1``.
+
+_N.b._, the doc-string of [SConfs](@ref) still describes the older bit-string encoding ; the binary of `FuzzifiED_jll` in use implements the combinatorial index above.
+"""
+function EncodeConfb(nocc_b :: AbstractVector{Int64}, nebm :: Int64)
+    (sum(nocc_b) ≤ nebm) || error("the number of bosons exceeds nebm")
+    cfb = 0
+    pos = length(nocc_b)
+    neb1 = nebm
+    nb1 = collect(nocc_b)
+    while pos > 0
+        if (nb1[pos] == 0)
+            pos -= 1
+            continue
+        end
+        cfb += binomial(neb1 + pos - 1, neb1)
+        nb1[pos] -= 1
+        neb1 -= 1
+    end
+    return cfb
+end
+
+
+"""
+    DecodeConfb(cfb :: Int64, nob :: Int64, nebm :: Int64) :: Vector{Int64}
+
+decodes the number `confb` used by `SConfs` back into the occupation `nocc_b[o], o = 1 : nob` of the bosonic sites, inverting [EncodeConfb](@ref). It reproduces `decode_nb` of `scfs.f90` : the largest ``C^{n_{eb}+o-1}_{n_{eb}}`` that fits into the remaining index is subtracted, which places one boson at the site ``o``.
+"""
+function DecodeConfb(cfb :: Int64, nob :: Int64, nebm :: Int64)
+    nocc_b = zeros(Int64, nob)
+    pos = nob
+    neb1 = nebm
+    cfb1 = cfb
+    while cfb1 > 0
+        (pos == 0 || neb1 == 0) && error("$cfb is not a valid confb for nob = $nob and nebm = $nebm")
+        if (cfb1 < binomial(neb1 + pos - 1, neb1))
+            pos -= 1
+            continue
+        end
+        cfb1 -= binomial(neb1 + pos - 1, neb1)
+        nocc_b[pos] += 1
+        neb1 -= 1
+    end
+    return nocc_b
+end
+
+
+"""
+    GetSConfId(cfs :: SConfs, cff :: Int64, nocc_b :: AbstractVector{Int64}) :: Int64
+    GetSConfId(cfs :: SConfs, cff :: Int64, cfb :: Int64) :: Int64
+
+inversely look up the index from the configuration, in analogy with [GetConfId](@ref) for `Confs`. It reproduces the Lin-table search `search_scf` of `scfs.f90` : the configuration is split into the `norf` least significant fermionic sites together with the bosonic sites `1 : norb` on the one hand, and the remaining fermionic sites and the bosonic sites `norb + 1 : nob` on the other,
+```math
+    \\mathtt{id}=\\mathtt{lid}[l]+\\mathtt{rid}[r]
+```
+```math
+    l=2^{N_{of}-\\mathtt{norf}}\\,\\mathtt{cfb}_{>\\mathtt{norb}}+⌊\\mathtt{cff}/2^{\\mathtt{norf}}⌋+1,\\qquad
+    r=2^{\\mathtt{norf}}\\,\\mathtt{cfb}_{≤\\mathtt{norb}}+(\\mathtt{cff}\\bmod 2^{\\mathtt{norf}})+1
+```
+where ``\\mathtt{cfb}_{≤\\mathtt{norb}}`` and ``\\mathtt{cfb}_{>\\mathtt{norb}}`` are the indices of [EncodeConfb](@ref) restricted to the two halves of the bosonic sites, both taken with the same `nebm`.
+
+# Arguments
+
+* `cfs :: SConfs` stores the configurations.
+* `cff :: Int64` is the fermionic configuration to be looked-up expressed in a binary number, as in [GetConfId](@ref).
+* `nocc_b :: AbstractVector{Int64}` is the occupation `nocc_b[o], o = 1 : cfs.nob` of the bosonic sites ; alternatively `cfb :: Int64`, the bosonic configuration already encoded by [EncodeConfb](@ref), which is then decoded by [DecodeConfb](@ref).
+
+# Output
+
+* `id :: Int64` is the id of the configuration such that `cfs.conff[id] == cff` and `cfs.confb[id] == cfb`. As for [GetConfId](@ref), the Lin table does not know whether the configuration belongs to the sector, so a configuration that is absent from `cfs` returns a meaningless index and it is up to the caller to check `cfs.conff[id]` and `cfs.confb[id]`.
+"""
+function GetSConfId(cfs :: SConfs, cff :: Int64, nocc_b :: AbstractVector{Int64})
+    (length(nocc_b) == cfs.nob) || error("nocc_b must be an occupation vector of length cfs.nob")
+    id_l = (EncodeConfb(view(nocc_b, cfs.norb + 1 : cfs.nob), cfs.nebm) << (cfs.nof - cfs.norf)) + (cff >> cfs.norf) + 1
+    id_r = (EncodeConfb(view(nocc_b, 1 : cfs.norb), cfs.nebm) << cfs.norf) + (cff & (1 << cfs.norf - 1)) + 1
+    return cfs.lid[id_l] + cfs.rid[id_r]
+end
+GetSConfId(cfs :: SConfs, cff :: Int64, cfb :: Int64) = GetSConfId(cfs, cff, DecodeConfb(cfb, cfs.nob, cfs.nebm))

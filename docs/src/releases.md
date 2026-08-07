@@ -2,6 +2,12 @@
 
 ## Version 1.x
 
+### Version 1.3 
+
+#### Version 1.3.0 (Under construction)
+
+- Add Jack Tool-kit.
+
 ### Version 1.2
 
 #### Version 1.2.4 (4th August 2026)

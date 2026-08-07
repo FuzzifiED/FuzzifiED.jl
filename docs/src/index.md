@@ -69,6 +69,7 @@ Pages = [
     "extension.md",
     "fuzzifino.md",
     "manifolds.md",
+    "jack.md",
     "releases.md"
 ]
 Depth = 2
@@ -123,7 +124,9 @@ Depth = 2
 
 ## Acknowledgement
 
-Zheng Zhou extend his deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Andrew Liam Fitzpatrick, Wenhan Guo, Liangdong Hu, Xiang Li, Christian Voinea, Kay Jörg Wiese, Shuai Yang, Matthew Yusef, and Wei Zhu for their suggestions and contributions to the package.
+Zheng Zhou extends his deepest gratitude to Yin-Chen He, who provided meticulous testing, unwavering support, and invaluable guidance throughout the development of the package. We also thank Andrew Liam Fitzpatrick, Wenhan Guo, Liangdong Hu, Xiang Li, Christian Voinea, Kay Jörg Wiese, Shuai Yang, Matthew Yusef, and Wei Zhu for their suggestions and contributions to the package.
+
+Zheng Zhou endeavors to minimize the compromise to artificial intelligence. Although ChatGPT and Claude have offered counselling, every line of the package is reviewed and approved by men unless otherwise specified, and is writing with the intention to be maintained by men. 
 
 ## Index 
 
@@ -134,6 +137,7 @@ Pages = [
     "itensors.md",
     "extension.md",
     "fuzzifino.md",
-    "manifolds.md"
+    "manifolds.md",
+    "jack.md"
 ]
 ```
