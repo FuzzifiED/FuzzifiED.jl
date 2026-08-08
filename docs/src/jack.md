@@ -1,6 +1,6 @@
 # Jack Tool-Kit
 
-JackToolkit is a module that generates Jack states — fractional quantum Hall wave-functions such as Laughlin, Moore-Read, Read-Rezayi, and the quasi-hole states with zero energy under the parent Hamiltonian.
+JackToolkit is a module that generates Jack states — fractional quantum Hall wave-functions such as Laughlin, Moore-Read, Read-Rezayi, and their quasi-hole states with zero energy under the parent Hamiltonian.
 
 The module first generates a $(k,r)$-admissible root partition satisfying
 ```math
@@ -8,7 +8,7 @@ The module first generates a $(k,r)$-admissible root partition satisfying
 ```
 and expand it in the squeezed configurations below it. 
 
-The $(k,r)$ values for various quantumHall states are 
+The $(k,r)$ values for various quantum Hall states are 
 
 | State                          | Statistics | ``(k,r)`` | ``\nu`` | Root               |
 | :----------------------------- | :--------: | :-------: | :-----: | :----------------- |
