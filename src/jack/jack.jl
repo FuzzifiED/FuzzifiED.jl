@@ -325,7 +325,7 @@ takes in the Jack states generated from `GetJackStates`, orthonomalizes them and
 """
 function OrganizeJackStates(sts :: Matrix{T}, l2_mat :: OpMat{T}) where T <: Union{Float64, ComplexF64}
     sts1 = Matrix(qr(sts).Q) 
-    l2_st = sts1' * (l2_mat * sts1)
+    l2_st = sts1' * l2_mat * sts1
     l2_val, Λ = eigen(Hermitian(l2_st))
     sts2 = sts1 * Λ 
     return l2_val, sts2

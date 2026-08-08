@@ -196,18 +196,6 @@ function Base.:*(st_fp :: LinearAlgebra.Adjoint{Float64, Vector{Float64}}, mat :
     @ccall Libpath.__diag_re_MOD_scal_prod_re(mat.dimd :: Ref{Int64}, mat.dimf :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{Float64}, st_d :: Ref{Float64}, st_fp' :: Ref{Float64}, ovl_ref :: Ref{Float64}, num_th :: Ref{Int64}) :: Nothing
     return ovl_ref[]
 end
-
-function Base.:*(st_fp :: LinearAlgebra.Adjoint{ComplexF64, Matrix{ComplexF64}}, mat :: OpMat{ComplexF64}, st_d :: Matrix{ComplexF64} ; num_th = NumThreads)
-    nst_d = size(st_d, 2)
-    nst_f = size(st_fp', 2)
-    ovl = Matrix{ComplexF64}(undef, nst_f, nst_d)
-    @ccall Libpath.__diag_MOD_scal_mat_prod(mat.dimd :: Ref{Int64}, nst_d :: Ref{Int64}, mat.dimf :: Ref{Int64}, nst_f :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{ComplexF64}, st_d :: Ref{ComplexF64}, st_fp' :: Ref{ComplexF64}, ovl :: Ref{ComplexF64}, num_th :: Ref{Int64}) :: Nothing
-    return ovl
-end
-function Base.:*(st_fp :: LinearAlgebra.Adjoint{Float64, Matrix{Float64}}, mat :: OpMat{Float64}, st_d :: Matrix{Float64} ; num_th = NumThreads)
-    nst_d = size(st_d, 2)
-    nst_f = size(st_fp', 2)
-    ovl = Matrix{Float64}(undef, nst_f, nst_d)
-    @ccall Libpath.__diag_re_MOD_scal_mat_prod_re(mat.dimd :: Ref{Int64}, nst_d :: Ref{Int64}, mat.dimf :: Ref{Int64}, nst_f :: Ref{Int64}, mat.sym_q :: Ref{Int64}, mat.nel :: Ref{Int64}, mat.colptr :: Ref{Int64}, mat.rowid :: Ref{Int64}, mat.elval :: Ref{Float64}, st_d :: Ref{Float64}, st_fp' :: Ref{Float64}, ovl :: Ref{Float64}, num_th :: Ref{Int64}) :: Nothing
-    return ovl
+function Base.:*(st_fp :: LinearAlgebra.Adjoint{T, Matrix{T}}, mat :: OpMat{T}, st_d :: Matrix{T} ; num_th = NumThreads) where T <: Union{Float64, ComplexF64}
+    return st_fp * (mat * st_d)
 end
