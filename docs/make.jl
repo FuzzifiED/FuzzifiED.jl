@@ -1,5 +1,5 @@
 #=
-julia -O3 --color=yes make.jl && mv -f publish/so3lver/* tmp && rm -r publish/*/* && mv -f build/* publish && mv -f tmp/* publish/so3lver && rm -r build && cd publish && git commit -a -m "a" && git push && cd ..
+julia -O3 make.jl && rm -r publish/*/* && mv -f build/* publish && rm -r build && cd publish && git commit -a -m "a" && git push && cd ..
 =#
 push!(LOAD_PATH,"../src/")
 push!(LOAD_PATH,"../ext/")
@@ -28,7 +28,7 @@ makedocs(sitename = "FuzzifiED.jl",
         "Other Extensions" => "extension.md", 
         "Fuzzifino" => "fuzzifino.md",
         "Fuzzy Manifolds" => "manifolds.md",
-        "Jack Tool-Kit" => "jack.md",
+        "Jack Tool Kit" => "jack.md",
         "Releases" => "releases.md"],
     format = Documenter.HTML(
         assets = ["assets/serif.css", "assets/favicon.ico"], 

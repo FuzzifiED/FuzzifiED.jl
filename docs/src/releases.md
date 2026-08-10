@@ -4,9 +4,10 @@
 
 ### Version 1.3 
 
-#### Version 1.3.0 (Under construction)
+#### Version 1.3.0 (10th August 2026)
 
-- Add Jack Tool-kit.
+- Add Jack Tool Kit for generating Jack roots and states on the sphere.
+- Fix minor bugs. 
 
 ### Version 1.2
 

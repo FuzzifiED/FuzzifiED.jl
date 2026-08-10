@@ -1,4 +1,4 @@
-# Jack Tool-Kit
+# Jack Tool Kit
 
 JackToolkit is a module that generates Jack states — fractional quantum Hall wave-functions such as Laughlin, Moore-Read, Read-Rezayi, and their quasi-hole states with zero energy under the parent Hamiltonian.
 
