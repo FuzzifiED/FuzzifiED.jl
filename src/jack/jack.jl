@@ -6,13 +6,29 @@ using FuzzifiED
 using FuzzifiED.Fuzzifino
 using LinearAlgebra
 
-export GetJackRoots, GetSqueezedParts, GetJackCoefficients, GetJackState, GetJackStates, OrganizeJackStates
+export OccToPart, PartToOcc, GetJackRoots, GetSqueezedParts, GetJackCoefficients, GetJackState, GetJackStates, OrganizeJackStates
 
-ConfToPart(nocc :: Vector{Int64}) = reduce(vcat, [ fill(m - 1, nocc[m]) for m = length(nocc) : -1 : 1 ] ; init = Int64[])
-function PartToConf(part :: Vector{Int64}, nm :: Int64)
-    nocc = zeros(Int64, nm)
-    for j in part ; nocc[j + 1] += 1 end
-    return nocc
+"""
+    OccToPart(occ :: Vector{Int64}) :: Vector{Int64}
+    PartToOcc(part :: Vector{Int64}, nm :: Int64) :: Vector{Int64}
+
+These two functions converts between the two representations of a configuration : 
+
+1. The occupation number of each orbital 
+```math
+    \\{n_m\\}=\\{n_{m=-s},n_{m=-s+1},⋯,n_{m=s}\\}
+```
+2. The partition, _i. e._ the ``L^z`` quantum number of each particles in descending order
+```math
+    μ=\\{m_1,m_2,⋯,\\}
+```
+in practice, the partition is stores as ``m+s``.
+"""
+OccToPart(occ :: Vector{Int64}) = reduce(vcat, [ fill(m - 1, occ[m]) for m = length(occ) : -1 : 1 ] ; init = Int64[])
+function PartToOcc(part :: Vector{Int64}, nm :: Int64)
+    occ = zeros(Int64, nm)
+    for j in part ; occ[j + 1] += 1 end
+    return occ
 end
 function SortPart!(part :: Vector{Int64}, fermion :: Bool)
     sgn = 1
@@ -45,7 +61,7 @@ enumerates the ``(k,r)``-admissible roots with `nm` orbitals ``N_m``, `ne` parti
 ```math
     n_j+n_{j+1}+⋯+n_{j+r-1}≤k
 ```
-together with ``n_j≤1`` for fermions and ``n_j≤k`` for bosons. Each root generates one Jack state. Returns the occupation vectors `nocc[m], m = 1 : nm` in decreasing lexicographic order.
+together with ``n_j≤1`` for fermions and ``n_j≤k`` for bosons. Each root generates one Jack state. Returns the occupation vectors `occ[m], m = 1 : nm` in decreasing lexicographic order.
 """
 function GetJackRoots(nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, lz2 :: Int64 = 0 ; fermion :: Bool = true) :: Vector{Vector{Int64}}
     roots = Vector{Int64}[]
@@ -85,21 +101,21 @@ function GetJackRoots(nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, lz2 :: I
         end
     end
 
-    nocc = zeros(Int64, nm)
+    occ = zeros(Int64, nm)
     function AddOrb!(m :: Int64, n_rest :: Int64, lz2_rest :: Int64)
         if (m > nm)
-            (n_rest == 0 && lz2_rest == 0) && push!(roots, copy(nocc))
+            (n_rest == 0 && lz2_rest == 0) && push!(roots, copy(occ))
             return
         end
         psb[m, n_rest + 1] || return
         (lz2_rest > lz2_hi[m, n_rest + 1] || lz2_rest < lz2_lo[m, n_rest + 1]) && return
         # the (k,r) exclusion rule : the window of r orbitals ending at m
-        n_win = sum(nocc[max(1, m - r + 1) : m - 1] ; init = 0)
+        n_win = sum(occ[max(1, m - r + 1) : m - 1] ; init = 0)
         for nocp = min(nocp_cap, k - n_win, n_rest) : -1 : 0
-            nocc[m] = nocp
+            occ[m] = nocp
             AddOrb!(m + 1, n_rest - nocp, lz2_rest - nocp * (2 * m - nm - 1))
         end
-        nocc[m] = 0
+        occ[m] = 0
     end
     AddOrb!(1, ne, lz2)
     return roots
@@ -109,7 +125,7 @@ end
 """
     GetSqueezedParts(part_rt :: Vector{Int64} ; fermion :: Bool = true) :: Vector{Vector{Int64}}
 
-returns the partitions squeezed from the root `part_rt`, _i.e._, dominated by it, ``∑_{i≤t}μ_i≤∑_{i≤t}λ_i`` for every `t`, in decreasing lexicographic order — a refinement of the dominance order, so that `part_rt` comes first and every partition follows those that dominate it. For fermions the partitions are strictly decreasing, obtained from the bosonic ones through the dominance-preserving bijection ``μ↦μ+δ``, ``δ=(N_e-1,…,1,0)``.
+returns the partitions squeezed from the root `part_rt` in decreasing lexicographic order.
 """
 function GetSqueezedParts(part_rt :: Vector{Int64} ; fermion :: Bool = true)
     ne = length(part_rt)
@@ -143,25 +159,7 @@ end
 """
     GetJackCoefficients(part_rt :: Vector{Int64}, k :: Int64, r :: Int64 ; fermion :: Bool = true) :: Tuple{Vector{Vector{Int64}}, Vector{Float64}}
 
-returns the expansion of the ``(k,r)`` model state — Laughlin ``(1,q)``, Moore-Read ``(2,2q)``, Read-Rezayi ``(k,r)`` — with root partition `part_rt` in the monomials (bosons) or the Slater determinants (fermions) of the squeezed partitions.
-
-For bosons the state is the Jack polynomial at ``α=-(k+1)/(r-1)``, ``J^α_λ=∑_{μ≤λ}c_{λμ}m_μ`` with ``c_{λλ}=1``, whose coefficients follow from the recursion of the Laplace–Beltrami operator
-```math
-    c_{λμ}=\\frac{1}{E_λ-E_μ}∑_{ν}(ν_i-ν_j)c_{λν},\\qquad E_μ=∑_i\\left[\\frac{α}{2}μ_i(μ_i-1)-(i-1)μ_i\\right]
-```
-``ν`` running over the partitions obtained by un-squeezing a pair of ``μ``, ``(μ_i,μ_j)↦(μ_i+s,μ_j-s)`` with ``i<j`` and ``s≥1``, reordered decreasingly. For ``r=1``, ``α=∞`` and the Jack degenerates to the single monomial ``m_λ``.
-
-For fermions the state is _not_ the Jack of the fermionic partition, but the bosonic Jack of the ``(k,r-k)`` root ``λ-δ`` times the Vandermonde determinant ``Δ=∏_{i<j}(z_i-z_j)``,
-```math
-    Ψ^{(k,r)}_λ=Δ(z)\\,J^{α}_{λ-δ}(z),\\qquad δ=(N_e-1,…,1,0),\\qquad α=-\\frac{k+1}{r-k-1}
-```
-which is the construction that gives the model states as the zero modes of the clustering Hamiltonians. The product is taken monomial by monomial into the Slater determinants ``\\mathrm{sl}_ν=\\det z_i^{ν_j}``,
-```math
-    Δ\\,m_μ=\\frac{1}{|\\mathrm{Aut}\\,μ|}∑_{w∈S_{N_e}}\\mathrm{sgn}(w)\\,\\det z_i^{μ_j+w_j}
-```
-summing over the assignments of the ``N_e`` distinct staircase powers ``w_j∈\\{0,…,N_e-1\\}`` to the parts of ``μ``, dropping those that give two equal powers ``μ_j+w_j`` and keeping one assignment per block of equal parts, which cancels ``1/|\\mathrm{Aut}\\,μ|``. _N. b._, this last step costs up to ``N_e!`` per squeezed partition and is the bottleneck for large ``N_e``.
-
-Returns the squeezed partitions `parts`, with `parts[1] == part_rt`, and the coefficients `coeff`, with `coeff[1] == 1`.
+calculates the expansion of the state with root partition `part_rt` in the monomials (bosons) or the Slater determinants (fermions) of the squeezed partitions. Returns the squeezed partitions `parts` and their respective weight. The first entry is the root itself whose weight is ``1``.
 """
 function GetJackCoefficients(part_rt :: Vector{Int64}, k :: Int64, r :: Int64 ; fermion :: Bool = true)
     ne = length(part_rt)
@@ -248,12 +246,23 @@ end
     GetJackState(bs :: Basis, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, root :: Vector{Int64}) :: Vector{Float64}
     GetJackState(bs :: SBasis, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, root :: Vector{Int64}) :: Vector{Float64}
 
-returns the normalised ``(k,r)`` model state generated by the root configuration `root` — an occupation vector of length `nm`, _e. g._, an element of [GetJackRoots](@ref) — as a vector of length `bs.dim`, _cf._ [GetJackCoefficients](@ref). The particles are fermions for a `Basis` and bosons for an `SBasis`. If `bs` carries QNOffds, the projection of the state onto the sector is returned.
+returns the normalized state generated by a ``(k,r)``-admissible root configuration.
+
+# Input 
+
+* `bs :: Basis` and `bs :: SBasis` is the basis in the type of `Basis` for fermions and `SBasis` for bosons.
+* `nm :: Int64` and `ne :: Int64` specifies the number of orbitals and the number of particles.
+* `k :: Int64` and `r :: Int64` specifies the admissibility condition. 
+* `root :: Vector{Int64}` is a vector of occupation numbers of length `nm`
+
+# Output
+
+* `st :: Vector{Float64}` is the normalized state in the basis `bs` given by a vector of length ``bs.dim``.
 """
 function GetJackState(bs :: Basis, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, root :: Vector{Int64} )
     (length(root) == nm) || error("the root must be an occupation vector of length nm")
     (sum(root) == ne) || error("the root must contain ne particles")
-    parts, coeff = GetJackCoefficients(ConfToPart(root), k, r ; fermion = true)
+    parts, coeff = GetJackCoefficients(OccToPart(root), k, r ; fermion = true)
     lnbn = LogBinomials(nm - 1)
     st = zeros(Float64, bs.dim)
     for iμ in eachindex(parts)
@@ -276,22 +285,22 @@ end
 function GetJackState(bs :: SBasis, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, root :: Vector{Int64})
     (length(root) == nm) || error("the root must be an occupation vector of length nm")
     (sum(root) == ne) || error("the root must contain ne particles")
-    parts, coeff = GetJackCoefficients(ConfToPart(root), k, r ; fermion = false)
+    parts, coeff = GetJackCoefficients(OccToPart(root), k, r ; fermion = false)
     lnbn = LogBinomials(nm - 1)
     lnfct = [0.0 ; cumsum(log.(1.0 : ne))]
     st = zeros(Float64, bs.dim)
     for iμ in eachindex(parts)
         (abs(coeff[iμ]) < 1E-13) && continue
-        nocc = PartToConf(parts[iμ], nm)
+        occ = PartToOcc(parts[iμ], nm)
         lnnm = 0.0
         for m = 1 : nm
-            (nocc[m] == 0) && continue
+            (occ[m] == 0) && continue
             # ∏_j C_j^{n_j / 2} √(n_j !) relating m_μ to the normalised Fock state
-            lnnm += .5 * (nocc[m] * lnbn[m] + lnfct[nocc[m] + 1])
+            lnnm += .5 * (occ[m] * lnbn[m] + lnfct[occ[m] + 1])
         end
         amp = coeff[iμ] * exp(-lnnm)
-        cfb = EncodeConfb(nocc, bs.cfs.nebm)
-        id = GetSConfId(bs.cfs, 0, nocc)
+        cfb = EncodeConfb(occ, bs.cfs.nebm)
+        id = GetSConfId(bs.cfs, 0, occ)
         (id ≤ 0 || id > bs.cfs.ncf || bs.cfs.conff[id] ≠ 0 || bs.cfs.confb[id] ≠ cfb) &&
             error("the configuration $(parts[iμ]) is not in the basis ; check ne, lz2 and nebm")
         igr = bs.cfgr[id]
@@ -306,7 +315,18 @@ end
     GetJackStates(bs :: Basis, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, lz2 :: Int64 = 0) :: Matrix{Float64}
     GetJackStates(bs :: SBasis, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, lz2 :: Int64 = 0) :: Matrix{Float64}
 
-returns the normalised Jack states generated by all the ``(k,r)``-admissible roots in the sector `(ne, lz2)`, _cf._ [GetJackRoots](@ref) and [GetJackState](@ref), as the columns of a `bs.dim`×`nroot` matrix. _N. b._, they are neither orthogonal nor eigenstates of the total angular momentum.
+returns the normalised Jack states generated by all the ``(k,r)``-admissible roots. _N. b._, they are neither orthogonal nor eigenstates of the total angular momentum.
+
+# Input 
+
+* `bs :: Basis` and `bs :: SBasis` is the basis in the type of `Basis` for fermions and `SBasis` for bosons.
+* `nm :: Int64` and `ne :: Int64` specifies the number of orbitals and the number of particles.
+* `k :: Int64` and `r :: Int64` specifies the admissibility condition. 
+* `root :: Vector{Int64}` is a vector of occupation numbers of length `nm`
+
+# Output
+
+* `st :: Matrix{Float64}` is the normalized states in the basis `bs` given by a ``\\dim ×#_{\\text{root}}`` matrix where each column specifies a state.
 """
 function GetJackStates(bs :: Union{SBasis, Basis}, nm :: Int64, ne :: Int64, k :: Int64, r :: Int64, lz2 :: Int64 = 0)
     roots = GetJackRoots(nm, ne, k, r, lz2 ; fermion = (typeof(bs) == Basis))
