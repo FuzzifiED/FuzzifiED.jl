@@ -13,7 +13,7 @@ or
 ```math
 Q=∑_{o=1}^{N_{of}}q_{f,o}n_{f,o}+∑_{o=1}^{N_{ob}}q_{b,o}n_{b,o}\\ \\mathrm{mod}\\ p
 ```
-where ``i=1,…,N_U`` is the index of quantum number, ``o`` is the index of site, ``N_{of}`` and ``N_{ob}`` are the number of fermionic and bosonic sites, ``n_{f,o}=f^†_of_o``, ``n_{b,o}=b^†_ob_o``, and ``q_{f,o},q_{b,o}`` are a set of symmetry charges that must be integer valued.
+where ``i=1,…,N_{\\text{QN}}`` is the index of quantum number, ``o`` is the index of site, ``N_{of}`` and ``N_{ob}`` are the number of fermionic and bosonic sites, ``n_{f,o}=f^†_of_o``, ``n_{b,o}=b^†_ob_o``, and ``q_{f,o},q_{b,o}`` are a set of symmetry charges that must be integer valued.
 
 # Fields 
 

@@ -236,7 +236,7 @@ returns the modes of electron annihilation operator with angular momentum ``s=(N
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetElectronMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
     if mom_incr
@@ -261,7 +261,7 @@ returns the modes of two electrons superposed in the rule of CG coefficients. It
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetPairingMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
     el = [ StoreComps(GetElectronMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
@@ -287,7 +287,7 @@ returns the modes of electron creation and annihilation superposed in the rule o
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetDensityMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
     el = [ StoreComps(GetElectronMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]

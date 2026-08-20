@@ -61,11 +61,11 @@ end
 """
     TruncateQNDiag(qnd :: Vector{QNDiag} ; trunc_lth :: Int64, trunc_wt :: Vector{Int64}) :: Vector{QNDiag}
 
-truncates the list of ``N_U`` QNDiags from to a number ``N'_U`` acceptable by ITensors. The new quantum numbers are 
+truncates the list of ``N_{\\text{QN}}`` QNDiags from to a number ``N'_{\\text{QN}}`` acceptable by ITensors. The new quantum numbers are 
 ```math
 \\begin{aligned}
-    &Q'_1=Q_1,\\ Q'_2=Q_2,\\ …,\\ Q'_{N'_U-1}=Q_{N'_U-1}\\\\
-    &Q'_{N'_U}=λ_{N'_U}Q_{N'_U}+λ_{N'_U+1}Q_{N'_U+1}+…+λ_{N_U}Q_{N_U}
+    &Q'_1=Q_1,\\ Q'_2=Q_2,\\ …,\\ Q'_{N'_{\\text{QN}}-1}=Q_{N'_{\\text{QN}}-1}\\\\
+    &Q'_{N'_{\\text{QN}}}=λ_{N'_{\\text{QN}}}Q_{N'_{\\text{QN}}}+λ_{N'_{\\text{QN}}+1}Q_{N'_{\\text{QN}}+1}+…+λ_{N_{\\text{QN}}}Q_{N_{\\text{QN}}}
 \\end{aligned}
 ```
 
@@ -73,7 +73,7 @@ truncates the list of ``N_U`` QNDiags from to a number ``N'_U`` acceptable by IT
 
 * `qnd :: Vector{QNDiag}` stores the set of QNDiags. 
 * `trunc_lth :: Int64` stores the truncated numbers of QNDiags. Facultative, 3 by default. 
-* `trunc_wt :: Vecotr{Int64}` stores the ``N_U-N'_U+1`` coefficients ``λ``. Facultative, ``1,10,100,1000,…`` by default. 
+* `trunc_wt :: Vecotr{Int64}` stores the ``N_{\\text{QN}}-N'_{\\text{QN}}+1`` coefficients ``λ``. Facultative, ``1,10,100,1000,…`` by default. 
 """
 function TruncateQNDiag(qnd :: Vector{QNDiag} ; trunc_lth :: Int64 = 3, trunc_wt :: Vector{Int64} = [ 10 ^ (i - trunc_lth) for i = trunc_lth : length(qnd)]) 
     return [ qnd[1 : trunc_lth - 1]..., sum(qnd[trunc_lth : end]) .* trunc_wt ]

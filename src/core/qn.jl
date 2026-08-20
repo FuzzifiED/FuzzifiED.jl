@@ -12,7 +12,7 @@ or
 ```math
 Q=∑_{o=1}^{N_o}q_on_o\\ \\mathrm{mod}\\ p
 ```
-where ``i=1,…,N_U`` is the index of quantum number, ``o`` is the index of site, ``n_o=c^†_oc_o``, and ``q_o`` is a set of coefficients that must be integer valued.
+where ``i=1,…,N_{\\text{QN}}`` is the index of quantum number, ``o`` is the index of site, ``n_o=c^†_oc_o``, and ``q_o`` is a set of coefficients that must be integer valued.
 
 # Fields 
 

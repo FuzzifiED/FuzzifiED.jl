@@ -265,7 +265,7 @@ returns the modes of fermion annihilation operator ``f_m``, with angular momentu
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetFermionSMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
     if mom_incr
@@ -287,7 +287,7 @@ returns the modes of electron boson operator ``b_m``, with angular momentum ``s=
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `f :: Int64` is the index of the flavour to be taken.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetBosonSMod(nm :: Int64, nf :: Int64, f :: Int64 ; mom_incr :: Bool = ObsMomIncr)
     if mom_incr
@@ -312,7 +312,7 @@ returns the modes of two fermions superposed in the rule of CG coefficients. Its
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetFerPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
     el = [ StoreComps(GetFermionSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
@@ -338,7 +338,7 @@ returns the modes of two bosons superposed in the rule of CG coefficients. Its a
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetBosPairingSMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
     el = [ StoreComps(GetBosonSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
@@ -364,7 +364,7 @@ returns the modes of electron creation and annihilation superposed in the rule o
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetFerDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
     el = [ StoreComps(GetFermionSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
@@ -391,7 +391,7 @@ returns the modes of boson creation and annihilation superposed in the rule of C
 * `nf :: Int64` is the number of flavours.
 * `nm :: Int64` is the number of orbitals.
 * `mat :: Int64` is the matrix ``M_{ff'}``. Facultative, identity matrix ``𝕀`` by default.
-* `mom_incr :: Bool` controls whether the observable increases or decreases `L^z`. Facultative, `ObsMomIncr` by default. 
+* `mom_incr :: Bool` controls whether the observable increases or decreases ``L^Z``. Facultative, `ObsMomIncr` by default. 
 """
 function GetBosDensitySMod(nm :: Int64, nf :: Int64, mat :: Matrix{<:Number} ; mom_incr :: Bool = ObsMomIncr)
     el = [ StoreComps(GetBosonSMod(nm, nf, f ; mom_incr)) for f = 1 : nf ]
