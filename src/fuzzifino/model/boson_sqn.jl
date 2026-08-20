@@ -2,25 +2,25 @@ export GetBosonNeSQNDiag, GetNeSQNDiag, GetBosonLz2SQNDiag, GetBosonFlavSQNDiag
 export GetBosonFlavPermSQNOffd, GetBosonRotySQNOffd
 
 """ 
-    GetBosonNeSQNDiag(nof :: Int64, nob :: Int64) :: SQNDiag 
+    GetBosonNeSQNDiag(nof :: Int64, nob :: Int64[, modul :: Int64 = 1]) :: SQNDiag 
 
 Return the SQNDiag of the number of particles, implemented as 
 ```julia
-SQNDiag("Neb", fill(0, nof), fill(1, nob))
+SQNDiag("Neb", fill(0, nof), fill(1, nob), modul)
 ```
 """
-GetBosonNeSQNDiag(nof :: Int64, nob :: Int64) = SQNDiag("Neb", fill(0, nof), fill(1, nob))
+GetBosonNeSQNDiag(nof :: Int64, nob :: Int64, modul :: Int64 = 1) = SQNDiag("Neb", fill(0, nof), fill(1, nob), modul)
 
 
 """ 
-    GetNeSQNDiag(nof :: Int64, nob :: Int64) :: SQNDiag 
+    GetNeSQNDiag(nof :: Int64, nob :: Int64[, modul :: Int64 = 1]) :: SQNDiag 
 
 Return the SQNDiag of the number of particles, implemented as 
 ```julia
-SQNDiag("Ne", fill(1, nof), fill(1, nob))
+SQNDiag("Ne", fill(1, nof), fill(1, nob), modul)
 ```
 """
-GetNeSQNDiag(nof :: Int64, nob :: Int64) = SQNDiag("Ne", fill(1, nof), fill(1, nob))
+GetNeSQNDiag(nof :: Int64, nob :: Int64, modul :: Int64 = 1) = SQNDiag("Ne", fill(1, nof), fill(1, nob), modul)
 
 
 """ 
