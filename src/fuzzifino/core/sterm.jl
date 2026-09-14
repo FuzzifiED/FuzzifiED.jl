@@ -249,7 +249,7 @@ end
 
 
 """
-    PadSTerm(tm :: STerm, nol :: Int64)
+    PadSTerm(tm :: STerm, nofl :: Int64, nobl :: Int64)
 
 adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index.
 """
@@ -257,7 +257,7 @@ PadSTerm(tm :: STerm, nofl :: Int64, nobl :: Int64) = STerm(tm.coeff, [ (isodd(i
 
 
 """
-    PadSTerms(tms :: STerms, nol :: Int64)
+    PadSTerms(tms :: STerms, nofl :: Int64, nobl :: Int64)
 
 adds `nofl` fermionic and `nobl` bosonic empty orbitals to the left by shifting each orbital index.
 """

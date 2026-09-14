@@ -4,9 +4,14 @@
 
 ### Version 2.0
 
+#### Version 2.0.1 (14th September 2026)
+
+- Fix bugs.
+- Add compatibility with the modified version of KrylovKit.
+
 #### Version 2.0.0 (10th September 2026)
 
-- Add SO(3)lver for the $\mathrm{SO}(3)$ resolving ED
+- Add SO(3)lver for the $\mathrm{SO}(3)$ resolving ED.
 
 ## Version 1.x
 

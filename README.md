@@ -1,6 +1,6 @@
 # FuzzifiED.jl
 
-[![Version](https://img.shields.io/badge/Version-2.0.0-orange)](https://juliahub.com/ui/Packages/General/FuzzifiED/2.0.0)
+[![Version](https://img.shields.io/badge/Version-2.0.1-orange)](https://juliahub.com/ui/Packages/General/FuzzifiED/2.0.1)
 [![Documentation online](https://img.shields.io/badge/Documentation-Online-8e8eff)](https://docs.fuzzified.world/)
 [![Documentation PDF](https://img.shields.io/badge/Documentation-PDF-8e8eff)](https://docs.fuzzified.world/assets/FuzzifiED_Documentation.pdf)
 [![Source GitHub](https://img.shields.io/badge/Source-GitHub-silver)](https://github.com/FuzzifiED/FuzzifiED.jl)

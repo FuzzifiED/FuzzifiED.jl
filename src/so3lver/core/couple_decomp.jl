@@ -382,7 +382,7 @@ function InsertSegment(np :: Int64, p_rng :: Vector{Int64}, ch :: Matrix{Int64})
 end
 InsertSegment(np :: Int64, p_rng :: Vector{Int64}, chs :: Vector{Matrix{Int64}}) = InsertSegment.(Ref(np), Ref(p_rng), chs)
 function InsertSegment(np :: Int64, p_rng :: Vector{Int64}, cpd :: CoupleDecomp)
-    amd1 = ones(AngModes, np)
+    amd1 = Union{AngModes, SAngModes, Symbol}[:Identity for _ = 1 : np]
     amd1[p_rng] = cpd.amd
     ch1 = InsertSegment(np, p_rng, cpd.ch)
     sec1 = zeros(Int64, size(cpd.sec, 1), np)

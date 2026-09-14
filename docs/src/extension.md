@@ -58,6 +58,17 @@ Besides Arpack in Fortran, we also provide an interface calling KrylovKit in Jul
 GetEigensystemKrylov(mat :: OpMat{ComplexF64}, nst :: Int64)
 ```
 
+### Modified Version of KrylovKit
+
+We have forked `KrylovKit` and made some modifications to better suit our need. To install the modified packages, please use 
+
+```julia
+using Pkg 
+Pkg.add(url="https://github.com/FuzzifiED/KrylovKit.jl.git")
+```
+
+We add an algorithm `LockedLanczos`. It is a hard-locking (deflated) variant of the Lanczos algorithm that is useful when large number of eigenvectors (_e. g._ in the order of 1000) are required, for use in `eigsolve` with a real symmetric or complex Hermitian linear operator. Whenever a Ritz pair has converged to within a tolerence, it is locked, _i. e._ removed from the active Krylov subspace, but retained in the set against which every subsequent Krylov vector is orthogonalized.
+
 ## CUDA Extension
 
 The CUDA extension supports the conversion between `OpMat` in FuzzifiED and the `CuSparseMatrixCSC` in `CUDA.CUSPARSE` as well as the acceleration of diagonalisation on GPU. This extension requires the packages `CUDA`, `KrylovKit` and `SparseArrays`. To use this extension, include at the heading 

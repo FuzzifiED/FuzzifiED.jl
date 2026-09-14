@@ -1,6 +1,6 @@
 # SO(3)lver Explained in a Tutorial
 
-To demonstrate the usage of SO(3)lver interfaces, in this section, we use a tutorial that calculates the eigen-states in the $l=0$ sector and the OPE coefficient $f_{\sigma\sigma\epsilon}=\langle \sigma|n^z_{00}|\epsilon\rangle/\langle \sigma|n^z_{00}|0\rangle$ for the Ising model on the fuzzy sphere. The tutorial can be found at [`tutorial_ising.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/tutorial_ising.jl). In this tutorial, the flavour $\mathbb{Z}_2$ is not resolved. A version resolving the $\mathbb{Z}_2$ is [given](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/ising_spectrum.jl) by using the $XX-Z$ basis.
+To demonstrate the usage of SO(3)lver interfaces, in this section, we use a tutorial that calculates the eigen-states in the $l=0$ sector and the OPE coefficient $f_{\sigma\sigma\epsilon}=\langle \sigma|n^z_{00}|\epsilon\rangle/\langle \sigma|n^z_{00}|0\rangle$ for the Ising model on the fuzzy sphere. The tutorial can be found at [`tutorial_ising.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/tutorial_ising.jl). In this tutorial, the flavour $\mathbb{Z}_2$ is not resolved. A version resolving the $\mathbb{Z}_2$ is [given](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/ising_spectrum.jl) by using the $XX-Z$ basis.
 
 Practically, the ED calculation can be divided into 3 steps.
 
@@ -8,7 +8,7 @@ Practically, the ED calculation can be divided into 3 steps.
 * Build the segment operators of the decompositions and assemble them into the composite operator for the Hamiltonian,
 * Find the lowest eigen-states and make measurements.
 
-The examples can be found in the directory [`examples`](https://github.com/FuzzifiED/SO3lver.jl/tree/main/examples). We also append [a list of given examples](@ref Examples-Using-SO(3)lver) at the end of the page. 
+The examples can be found in the directory [`examples/so3lver`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver). We also append [a list of given examples](@ref Examples-Using-SO(3)lver) at the end of the page. 
 
 ## Set-up
 
@@ -163,10 +163,10 @@ end
 
 We offer a series of examples that reproduce various fuzzy-sphere calculations with the full $\mathrm{SO}(3)$ symmetry resolved.
 
-* [`ising_spectrum.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/ising_spectrum.jl) calculates the spectrum of the 3D Ising model on the fuzzy sphere at $N_m = 12$ in the sectors with total angular momentum $l = 0,1,2$. It resolves the $\mathbb{Z}_2$ symmetry as a QNDiag by using the $XX - Z$ basis.
-* [`ising_benchmark.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/ising_benchmark.jl) provides a benchmark for the package at its best performance. It calculates the 10 lowest $\mathbb{Z}_2$-even states with $l = 0$.
-* [`ising_generator.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/ising_generator.jl) constructs the conformal generator $\Lambda = P + K$ and compare the states $\Lambda|\Phi\rangle$ with $|\partial\Phi\rangle$ where $\Phi=\sigma,\epsilon$.
-* [`so5_dqcp_spectrum.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/so5_dqcp_spectrum.jl) calculates the spectrum of the $\mathrm{SO}(5)$ deconfined quantum critical point. It uses a bi-partition into two segments each of two flavours. The implemented symmetry is $\mathrm{SU}(2)×\mathrm{SU}(2)⊃\mathrm{SO}(5)$ and the $\mathrm{SO}(5)$ representation is resolved by measuring flavour Casimir.
-* [`sp3_spectrum.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/sp3_spectrum.jl) calculates the spectrum of the $\mathrm{Sp}(3)$ CFT. It uses a tri-partition, each with two flavours and a $\mathrm{SU}(2)$ symmetry.
-* [`majorana_spectrum.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/majorana_spectrum.jl) calculates the spectrum of a free Majorana fermion.
-* [`u1_2_higgs_spectrum.jl`](https://github.com/FuzzifiED/SO3lver.jl/blob/main/examples/u1_2_higgs_spectrum.jl) calculates the spectrum of the $\mathrm{U}(1)_2$-Higgs theory realized as a transition between a $ν=1/2$ bosonic Laughlin state and a $ν=2$ fIQH state.
+* [`ising_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/ising_spectrum.jl) calculates the spectrum of the 3D Ising model on the fuzzy sphere at $N_m = 12$ in the sectors with total angular momentum $l = 0,1,2$. It resolves the $\mathbb{Z}_2$ symmetry as a QNDiag by using the $XX - Z$ basis.
+* [`ising_benchmark.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/ising_benchmark.jl) provides a benchmark for the package at its best performance. It calculates the 10 lowest $\mathbb{Z}_2$-even states with $l = 0$.
+* [`ising_generator.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/ising_generator.jl) constructs the conformal generator $\Lambda = P + K$ and compare the states $\Lambda|\Phi\rangle$ with $|\partial\Phi\rangle$ where $\Phi=\sigma,\epsilon$.
+* [`so5_dqcp_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/so5_dqcp_spectrum.jl) calculates the spectrum of the $\mathrm{SO}(5)$ deconfined quantum critical point. It uses a bi-partition into two segments each of two flavours. The implemented symmetry is $\mathrm{SU}(2)×\mathrm{SU}(2)⊃\mathrm{SO}(5)$ and the $\mathrm{SO}(5)$ representation is resolved by measuring flavour Casimir.
+* [`sp3_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/sp3_spectrum.jl) calculates the spectrum of the $\mathrm{Sp}(3)$ CFT. It uses a tri-partition, each with two flavours and a $\mathrm{SU}(2)$ symmetry.
+* [`majorana_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/majorana_spectrum.jl) calculates the spectrum of a free Majorana fermion.
+* [`u1_2_higgs_spectrum.jl`](https://github.com/FuzzifiED/FuzzifiED.jl/tree/main/examples/so3lver/u1_2_higgs_spectrum.jl) calculates the spectrum of the $\mathrm{U}(1)_2$-Higgs theory realized as a transition between a $ν=1/2$ bosonic Laughlin state and a $ν=2$ fIQH state.

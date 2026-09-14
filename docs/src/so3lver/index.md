@@ -6,22 +6,15 @@ The implementation of $\mathrm{SO}(3)$ symmetry greatly reduces the demand for t
 
 SO(3)lver can apply to a lot of current fuzzy-sphere research. Its flexible design also makes it straightforward to adapt to new models. We provide [a collection of examples](@ref Examples-Using-SO(3)lver).
 
-## Installation
-
-If you have the permission to the package, you first need to authenticate GitHub CLI by running the following command in the terminal
-```bash
-gh auth login
-```
-and then run the following command in the Julia REPL (read-eval-print loop) (To enter Julia REPL, simply type `julia` in the command line) 
-```julia
-using Pkg
-Pkg.add(url="https://github.com/FuzzifiED/SO3lver.jl")
-```
 To use the package, include at the start of the Julia script
 ```julia
 using FuzzifiED
 using FuzzifiED.SO3lver
 ```
+
+If this module is helpful in your research, please cite : 
+
+> Implementing Full $\mathrm{SO}(3)$ Rotation Symmetry for Exact Diagonalization on the Fuzzy Sphere, Zheng Zhou and Yin-Chen He, arXiv:2509.xxxxx (_to appear_).
 
 ## Outline 
 

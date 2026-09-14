@@ -338,7 +338,7 @@ end
 
 
 """
-    GetEigensystem(cpop :: CompOperator{T}, nst :: Int64 ; tol :: Float64, ncv :: Int64, initvec :: Vector{T}, full_mat :: Bool, proj_sym :: Function, num_th :: Int64, kwargs...) :: Tuple{Vector{T}, Matrix{T}}
+    GetEigensystem(cpop :: CompOperator{T}, nst :: Int64[, alg :: Type{<:KrylovKit.KrylovAlgorithm}] ; tol :: Float64, ncv :: Int64, initvec :: Vector{T}, full_mat :: Bool, proj_sym :: Function, num_th :: Int64, kwargs...) :: Tuple{Vector{T}, Matrix{T}}
 
 computes the lowest `nst` eigen-values and eigen-states of the composite operator `cpop` through `KrylovKit.eigsolve`. 
 
@@ -346,9 +346,10 @@ computes the lowest `nst` eigen-values and eigen-states of the composite operato
 
 * `cpop :: CompOperator{T}` is the composite operator (usually the Hamiltonian).
 * `nst :: Int64` is the number of eigen-states to compute.
+* `alg :: Type{<:KrylovKit.KrylovAlgorithm}`. Facultative. It specifies an algorithm that is directly fed into `KrylovKit.eigsolve`. _E. g._ `LockedLanczos` in the [modified version of KrylovKit].
 * `tol :: Float64` is the tolerance of the eigen-solver. Facultative, `1E-8` by default.
 * `ncv :: Int64` is the dimension of the Krylov subspace. Facultative, `max(2 * nst, nst + 10)` by default.
-* `initvec :: Vector{T}` is the initial vector. Facultative, a random vector by default.
+* `initvec :: Vector{T}` is the initial vector. Facultative, a random vector after projection by default.
 * `full_mat :: Bool`, whether the operator is first materialized into a dense matrix and this matrix is handed to `eigsolve`. Facultative, `false` by default.
 * `proj_sym :: Function`. To implement a off-diagonal symmetry, feed in a function from a vector to a vector that projects it to the desired sector. Facultative, `identity` by default. Only supported when `full_mat` is `false`. _N. b._, some unphysical null states may appear. _E. g._, to target the sector that is even under the permutation of the first two segments, feed in `st -> (st .+ PermFirstSecondSegs(cpsp, st)) ./ 2`. 
 * `num_th :: Int64` is the number of threads used in matrix multiplication. Facultative, `NumThreads` by default.
@@ -359,7 +360,7 @@ computes the lowest `nst` eigen-values and eigen-states of the composite operato
 * `eigval :: Vector{T}` is the vector of the `nst` lowest eigen-values.
 * `eigvec :: Matrix{T}` is the matrix whose columns are the corresponding eigen-states.
 """
-function FuzzifiED.GetEigensystem(cpop :: CompOperator{T}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), initvec = rand(T, cpop.cpspd.dim), proj_sym :: Function = identity, full_mat :: Bool = false, num_th = FuzzifiED.NumThreads, disp_std = !FuzzifiED.SilentStd, kwargs...) where T <: Union{ComplexF64,Float64}
+function FuzzifiED.GetEigensystem(cpop :: CompOperator{T}, nst :: Int64 ; tol :: Float64 = 1E-8, ncv :: Int64 = max(2 * nst, nst + 10), proj_sym :: Function = identity, initvec = proj_sym(rand(T, cpop.cpspd.dim)), full_mat :: Bool = false, num_th = FuzzifiED.NumThreads, disp_std = !FuzzifiED.SilentStd, kwargs...) where T <: Union{ComplexF64,Float64}
     verbosity = disp_std ? 3 : 0
     if full_mat
         fmul = Matrix(cpop ; disp_std)
@@ -367,5 +368,16 @@ function FuzzifiED.GetEigensystem(cpop :: CompOperator{T}, nst :: Int64 ; tol ::
         fmul = x -> *(cpop, proj_sym(x) ; num_th)
     end
     eigval, eigvec, info = eigsolve(fmul, initvec, nst, :SR ; tol, krylovdim = ncv, verbosity, kwargs...)
+    return Vector{T}(eigval), Matrix{T}(hcat(eigvec...))
+end
+
+function FuzzifiED.GetEigensystem(cpop :: CompOperator{T}, nst :: Int64, alg :: Type{<:KrylovKit.KrylovAlgorithm} ; tol :: Float64 = 1E-8, ncv :: Int64 = min(max(2 * nst, nst + 10), 100), proj_sym :: Function = identity, initvec = proj_sym(rand(T, cpop.cpspd.dim)), full_mat :: Bool = false, num_th = FuzzifiED.NumThreads, disp_std = !FuzzifiED.SilentStd, kwargs...) where T <: Union{ComplexF64,Float64}
+    verbosity = disp_std ? 3 : 0
+    if full_mat
+        fmul = Matrix(cpop ; disp_std)
+    else
+        fmul = x -> *(cpop, proj_sym(x) ; num_th)
+    end
+    eigval, eigvec, info = eigsolve(fmul, initvec, nst, :SR, alg(; tol, krylovdim = ncv, verbosity, kwargs...))
     return Vector{T}(eigval), Matrix{T}(hcat(eigvec...))
 end
