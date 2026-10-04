@@ -1,6 +1,6 @@
 # This example calculates the spectrum of O(2) Wilson-Fisher CFT.
-# This example reproduces Figure 3, upper panel in arXiv:2512.02234.
-# On my table computer, this calculation takes 5.854 s
+# This example reproduces Table 1, etc. in arXiv:2604.18705.
+# On my table computer, this calculation takes 8.823 s
 
 using FuzzifiED
 using LinearAlgebra
@@ -21,27 +21,17 @@ qnf = [
     GetFlavPermQNOffd(nm, nf, Dict([1 => 2, 2 => 1]))
 ] 
 
-mat_0 = diagm([0, 0, 1])
-mat_V = [
-    [0 0  1 ; 0 0 1 ; 1  1 0] /√2, 
-    [0 0 -1 ; 0 0 1 ; 1 -1 0] * im /√2
-] 
-
-FuzzifiED.ObsNormRadSq = nm 
-obs_ne = GetDensityObs(nm, nf)
-obs_V = GetDensityObs.(nm, nf, mat_V)
-
+tms_hmt = SimplifyTerms(
+    GetDenIntTerms(nm, nf, [4.0, 1.0])
+    - GetDenIntTerms(nm, nf, [4.0, 1.0], [0 0 1 ; 0 0 0 ; 0 1 0])
+    - 5.796 * GetPolTerms(nm, nf, diagm([0, 0, 1])) 
+) # The D factor is different from the paper due to normal ordering
 tms_l2 = GetL2Terms(nm, nf)
 
 cfs = Dict{Int64, Confs}()
 for s = 0 : 3 
     cfs[s] = Confs(no, [nm, 0, s], qnd)
 end
-tms_hmt = SimplifyTerms(
-    GetIntegral(obs_ne' * obs_ne)
-    - 0.270 * GetIntegral(obs_V' * Laplacian.(obs_V))
-    - 0.08344 * GetPolTerms(nm, nf, mat_0)
-)
 
 result = []
 for (Sz, X) in [(0, 1), (0,-1), (1, 0), (2, 0), (3, 0)], R in [1, -1]
@@ -61,6 +51,6 @@ end
 
 sort!(result, by = st -> real(st[1]))
 enrg_0 = result[1][1]
-enrg_T = filter(st -> st[2] ≈ 6 && st[3] ≈ 0, result)[1][1]
-spec = [ round.([ 3 * (st[1] - enrg_0) / (enrg_T - enrg_0) ; st] .+ √eps(Float64), digits = 6) for st in result ]
+enrg_σ = filter(st -> st[2] ≈ 0 && st[3] ≈ 1, result)[1][1]
+spec = [ round.([ 0.519088 * (st[1] - enrg_0) / (enrg_σ - enrg_0) ; st] .+ √eps(Float64), digits = 6) for st in result ]
 display(permutedims(hcat(spec...)))
